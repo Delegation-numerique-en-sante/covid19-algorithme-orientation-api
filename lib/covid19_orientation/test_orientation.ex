@@ -139,7 +139,7 @@ defmodule Covid19Orientation.TestOrientation do
           }
         }
       ) do
-    fievre(orientation) || (toux && mal_de_gorge) || (toux && anosmie) ||
+    (fievre(orientation) && !toux) || (toux && mal_de_gorge) || (toux && anosmie) ||
       (fievre(orientation) && diarrhee)
   end
 
