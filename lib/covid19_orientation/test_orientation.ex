@@ -62,68 +62,68 @@ defmodule Covid19Orientation.TestOrientation do
   def arbre do
     [
       %Tree{key: &fin1/1, operation: &moins_de_15_ans/1},
+      %Tree{key: &fin9/1, operation: &symptomes4/1},
       %Tree{
         operation: &symptomes1/1,
         children: [
-          %Tree{
-            operation: &(facteurs_pronostique(&1) == 0),
-            children: [
-              %Tree{
-                operation: &(facteurs_gravite(&1) == 0),
-                children: [
-                  %Tree{key: &fin2/1, operation: &moins_de_50_ans(&1)},
-                  %Tree{key: &fin3/1, operation: &entre_50_et_69_ans(&1)}
-                ]
-              },
-              %Tree{key: &fin3/1, operation: &(facteurs_gravite_mineurs(&1) == 1)}
-            ]
-          },
+          %Tree{key: &fin5/1, operation: &(facteurs_gravite_majeurs(&1) >= 1)},
           %Tree{
             operation: &(facteurs_pronostique(&1) >= 1),
             children: [
-              %Tree{key: &fin3/1, operation: &(facteurs_gravite(&1) == 0)},
+              %Tree{key: &fin4/1, operation: &(facteurs_gravite_mineurs(&1) == 2)},
               %Tree{key: &fin3/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
-              %Tree{key: &fin4/1, operation: &(facteurs_gravite_mineurs(&1) == 2)}
+              %Tree{key: &fin3/1, operation: &(facteurs_gravite(&1) == 0)}
             ]
           },
-          %Tree{key: &fin5/1, operation: &(facteurs_gravite_majeurs(&1) >= 1)}
+          %Tree{
+            operation: &(facteurs_pronostique(&1) == 0),
+            children: [
+              %Tree{key: &fin3/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
+              %Tree{
+                operation: &(facteurs_gravite(&1) == 0),
+                children: [
+                  %Tree{key: &fin3/1, operation: &entre_50_et_69_ans(&1)},
+                  %Tree{key: &fin2/1, operation: &moins_de_50_ans(&1)}
+                ]
+              }
+            ]
+          }
         ]
       },
       %Tree{
         operation: &symptomes2/1,
         children: [
+          %Tree{key: &fin5/1, operation: &(facteurs_gravite_majeurs(&1) >= 1)},
+          %Tree{
+            operation: &(facteurs_pronostique(&1) >= 1),
+            children: [
+              %Tree{key: &fin4/1, operation: &(facteurs_gravite_mineurs(&1) == 2)},
+              %Tree{key: &fin6/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
+              %Tree{key: &fin6/1, operation: &(facteurs_gravite(&1) == 0)}
+            ]
+          },
           %Tree{
             operation: &(facteurs_pronostique(&1) == 0),
             children: [
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite(&1) == 0)},
               %Tree{
                 operation: &(facteurs_gravite_mineurs(&1) >= 1),
                 children: [
                   %Tree{key: &fin6/1, operation: &(facteurs_gravite_majeurs(&1) == 0)}
                 ]
-              }
+              },
+              %Tree{key: &fin6/1, operation: &(facteurs_gravite(&1) == 0)}
             ]
-          },
-          %Tree{
-            operation: &(facteurs_pronostique(&1) >= 1),
-            children: [
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite(&1) == 0)},
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
-              %Tree{key: &fin4/1, operation: &(facteurs_gravite_mineurs(&1) == 2)}
-            ]
-          },
-          %Tree{key: &fin5/1, operation: &(facteurs_gravite_majeurs(&1) >= 1)}
+          }
         ]
       },
       %Tree{
         operation: &symptomes3/1,
         children: [
-          %Tree{key: &fin7/1, operation: &(facteurs_gravite(&1) == 0)},
+          %Tree{key: &fin8/1, operation: &(facteurs_pronostique(&1) >= 1)},
           %Tree{key: &fin8/1, operation: &(facteurs_gravite(&1) >= 1)},
-          %Tree{key: &fin8/1, operation: &(facteurs_pronostique(&1) >= 1)}
+          %Tree{key: &fin7/1, operation: &(facteurs_gravite(&1) == 0)}
         ]
-      },
-      %Tree{key: &fin9/1, operation: &symptomes4/1}
+      }
     ]
   end
 
