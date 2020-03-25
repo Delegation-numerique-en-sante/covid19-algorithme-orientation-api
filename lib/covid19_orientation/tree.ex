@@ -11,5 +11,5 @@ defmodule Covid19Orientation.Tree do
   @type type() :: :fork | :branch | :leaf
   @type depth() :: integer
   @type operation() :: (any -> boolean)
-  @type t :: %Tree{key: nil, type: type, operation: operation, children: [t]}
+  @type t :: %Tree{key: nil, type: type, depth: depth, operation: operation, children: [t]}
 end

@@ -42,9 +42,9 @@ defmodule Covid19Orientation.TreeTraversal do
     result = tree.operation.(value)
 
     cond do
-      prev_depth < depth && not prev_result -> traverse(stack, value, {prev_depth, prev_result})
+      prev_depth < depth && !prev_result -> traverse(stack, value, {prev_depth, prev_result})
       tree.type != :leaf -> traverse(stack, value, {depth, result})
-      not result -> traverse(stack, value, {depth, result})
+      !result -> traverse(stack, value, {depth, result})
       true -> {:ok, tree}
     end
   end
