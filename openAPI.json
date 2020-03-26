@@ -388,7 +388,7 @@
             "type": "boolean"
           },
           "entre_50_et_69_ans": {
-            "description": "Si la personne a entre 50 et 60 ans",
+            "description": "Si la personne a entre 50 et 69 ans",
             "type": "boolean"
           },
           "facteurs_gravite": {
