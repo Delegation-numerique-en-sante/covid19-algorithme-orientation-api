@@ -1,6 +1,6 @@
 defmodule Covid19OrientationWeb.Schemas.Orientation do
   @moduledoc """
-  Schéma de l'algorithme d’orientation COVID19.
+  Schéma de l'algorithme d’orientation du Covid-19.
   """
 
   require OpenApiSpex
@@ -14,9 +14,9 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
   }
 
   OpenApiSpex.schema(%{
-    title: "Algorithme d’orientation COVID19",
+    title: "Orientation",
     description:
-      "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19",
+      "[Algorithme d’orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19)",
     type: :object,
     properties: %{
       symptomes: Symptomes,

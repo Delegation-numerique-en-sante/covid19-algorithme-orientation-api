@@ -2,8 +2,37 @@
   "components": {
     "responses": {},
     "schemas": {
-      "Algorithme d’orientation COVID19": {
-        "description": "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19",
+      "Conclusion": {
+        "description": "[Conclusion de l'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles)",
+        "example": {
+          "code": "FIN1"
+        },
+        "properties": {
+          "code": {
+            "description": "[Conclusions possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles)",
+            "enum": [
+              "FIN1",
+              "FIN2",
+              "FIN3",
+              "FIN4",
+              "FIN5",
+              "FIN6",
+              "FIN7",
+              "FIN8",
+              "FIN9"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "title": "Conclusion",
+        "type": "object",
+        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Conclusion"
+      },
+      "Orientation": {
+        "description": "[Algorithme d’orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19)",
         "example": {
           "conclusion": {
             "code": "FIN1"
@@ -53,19 +82,19 @@
         },
         "properties": {
           "conclusion": {
-            "$ref": "#/components/schemas/Conclusions possibles"
+            "$ref": "#/components/schemas/Conclusion"
           },
           "pronostiques": {
-            "$ref": "#/components/schemas/Questions sur les facteurs pronostiques défavorables au terrain"
+            "$ref": "#/components/schemas/Pronostiques"
           },
           "statistiques": {
             "$ref": "#/components/schemas/Statistiques"
           },
           "supplementaires": {
-            "$ref": "#/components/schemas/Questions supplémentaires"
+            "$ref": "#/components/schemas/Supplementaires"
           },
           "symptomes": {
-            "$ref": "#/components/schemas/Questions sur les symptômes"
+            "$ref": "#/components/schemas/Symptomes"
           }
         },
         "required": [
@@ -73,38 +102,9 @@
           "pronostiques",
           "supplementaires"
         ],
-        "title": "Algorithme d’orientation COVID19",
+        "title": "Orientation",
         "type": "object",
         "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Orientation"
-      },
-      "Conclusions possibles": {
-        "description": "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles",
-        "example": {
-          "code": "FIN1"
-        },
-        "properties": {
-          "code": {
-            "description": "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles",
-            "enum": [
-              "FIN1",
-              "FIN2",
-              "FIN3",
-              "FIN4",
-              "FIN5",
-              "FIN6",
-              "FIN7",
-              "FIN8",
-              "FIN9"
-            ],
-            "type": "string"
-          }
-        },
-        "required": [
-          "code"
-        ],
-        "title": "Conclusions possibles",
-        "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Conclusion"
       },
       "OrientationRequest": {
         "description": "Corps de la requête POST pour lancer l'algorithme d'orientation",
@@ -143,7 +143,7 @@
           "orientation": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Algorithme d’orientation COVID19"
+                "$ref": "#/components/schemas/Orientation"
               }
             ]
           }
@@ -208,31 +208,15 @@
         },
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Algorithme d’orientation COVID19"
+            "$ref": "#/components/schemas/Orientation"
           }
         },
         "title": "OrientationResponse",
         "type": "object",
         "x-struct": "Elixir.Covid19OrientationWeb.Schemas.OrientationResponse"
       },
-      "Questions supplémentaires": {
-        "description": "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#question-suppl%C3%A9mentaire",
-        "example": {
-          "code_postal": "75000"
-        },
-        "properties": {
-          "code_postal": {
-            "description": "Code postal",
-            "type": "string"
-          }
-        },
-        "required": [],
-        "title": "Questions supplémentaires",
-        "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Supplementaires"
-      },
-      "Questions sur les facteurs pronostiques défavorables au terrain": {
-        "description": "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain",
+      "Pronostiques": {
+        "description": "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
         "example": {
           "age": 70,
           "cancer": true,
@@ -297,64 +281,12 @@
             "type": "boolean"
           }
         },
-        "required": [],
-        "title": "Questions sur les facteurs pronostiques défavorables au terrain",
+        "title": "Pronostiques",
         "type": "object",
         "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Pronostiques"
       },
-      "Questions sur les symptômes": {
-        "description": "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes",
-        "example": {
-          "anosmie": true,
-          "diarrhee": true,
-          "diffs_alim_boire": true,
-          "essoufle": true,
-          "fatigue": true,
-          "mal_de_gorge": true,
-          "temperature": 37.5,
-          "toux": true
-        },
-        "properties": {
-          "anosmie": {
-            "description": "Avez-vous noté une forte diminution de votre goût ou de l’odorat ces derniers jours ?",
-            "type": "boolean"
-          },
-          "diarrhee": {
-            "description": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
-            "type": "boolean"
-          },
-          "diffs_alim_boire": {
-            "description": "Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
-            "type": "boolean"
-          },
-          "essoufle": {
-            "description": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
-            "type": "boolean"
-          },
-          "fatigue": {
-            "description": "Avez-vous une fatigue inhabituelle ces derniers jours ? Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
-            "type": "boolean"
-          },
-          "mal_de_gorge": {
-            "description": "Avez-vous un mal de gorge apparu ces derniers jours ?",
-            "type": "boolean"
-          },
-          "temperature": {
-            "description": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ? Quelle est votre température ?",
-            "type": "number"
-          },
-          "toux": {
-            "description": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
-            "type": "boolean"
-          }
-        },
-        "required": [],
-        "title": "Questions sur les symptômes",
-        "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Symptomes"
-      },
       "Statistiques": {
-        "description": "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme",
+        "description": "[Statistiques](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
         "example": {
           "au_moins_30_imc": true,
           "au_moins_39_de_temperature": true,
@@ -424,15 +356,95 @@
             "type": "boolean"
           }
         },
-        "required": [],
+        "required": [
+          "moins_de_15_ans",
+          "moins_de_50_ans",
+          "entre_50_et_69_ans",
+          "moins_de_70_ans",
+          "au_moins_70_ans",
+          "au_moins_30_imc",
+          "fievre",
+          "au_moins_39_de_temperature",
+          "cardiaque",
+          "facteurs_gravite",
+          "facteurs_gravite_mineurs",
+          "facteurs_gravite_majeurs",
+          "facteurs_pronostique"
+        ],
         "title": "Statistiques",
         "type": "object",
         "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Statistiques"
+      },
+      "Supplementaires": {
+        "description": "[Questions supplémentaires](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#question-suppl%C3%A9mentaire)",
+        "example": {
+          "code_postal": "75000"
+        },
+        "properties": {
+          "code_postal": {
+            "description": "Code postal",
+            "type": "string"
+          }
+        },
+        "title": "Supplementaires",
+        "type": "object",
+        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Supplementaires"
+      },
+      "Symptomes": {
+        "description": "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",
+        "example": {
+          "anosmie": true,
+          "diarrhee": true,
+          "diffs_alim_boire": true,
+          "essoufle": true,
+          "fatigue": true,
+          "mal_de_gorge": true,
+          "temperature": 37.5,
+          "toux": true
+        },
+        "properties": {
+          "anosmie": {
+            "description": "Avez-vous noté une forte diminution de votre goût ou de l’odorat ces derniers jours ?",
+            "type": "boolean"
+          },
+          "diarrhee": {
+            "description": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
+            "type": "boolean"
+          },
+          "diffs_alim_boire": {
+            "description": "Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
+            "type": "boolean"
+          },
+          "essoufle": {
+            "description": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
+            "type": "boolean"
+          },
+          "fatigue": {
+            "description": "Avez-vous une fatigue inhabituelle ces derniers jours ? Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
+            "type": "boolean"
+          },
+          "mal_de_gorge": {
+            "description": "Avez-vous un mal de gorge apparu ces derniers jours ?",
+            "type": "boolean"
+          },
+          "temperature": {
+            "description": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ? Quelle est votre température ?",
+            "type": "number"
+          },
+          "toux": {
+            "description": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
+            "type": "boolean"
+          }
+        },
+        "title": "Symptomes",
+        "type": "object",
+        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Symptomes"
       }
     }
   },
   "info": {
-    "title": "API d'orientation du Covid-19"
+    "title": "API d'orientation du Covid-19",
+    "version": "2"
   },
   "openapi": "3.0.0",
   "paths": {

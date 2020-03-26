@@ -13,7 +13,7 @@ defmodule Covid19OrientationWeb.ApiSpec do
     %OpenApi{
       info: %Info{
         title: "API d'orientation du Covid-19",
-        version: Application.spec(:covid19_orientation, :vsn)
+        version: "2"
       },
       paths: Paths.from_router(Router),
       servers: [Server.from_endpoint(Endpoint)]

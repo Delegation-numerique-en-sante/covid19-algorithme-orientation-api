@@ -9,8 +9,7 @@ defmodule Covid19Orientation.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      deps: deps(),
-      aliases: aliases()
+      deps: deps()
     ]
   end
 
@@ -39,13 +38,6 @@ defmodule Covid19Orientation.MixProject do
       {:phoenix_pubsub, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
       {:credo, "~> 1.3.1", only: [:dev, :test], runtime: false}
-    ]
-  end
-
-  defp aliases do
-    [
-      spec: ["covid19_orientation.open_api.generate_spec"],
-      test: ["test", "format", "credo --strict"]
     ]
   end
 end

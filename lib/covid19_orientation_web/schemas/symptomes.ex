@@ -7,9 +7,9 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
   alias OpenApiSpex.Schema
 
   OpenApiSpex.schema(%{
-    title: "Questions sur les symptômes",
+    title: "Symptomes",
     description:
-      "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes",
+      "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",
     type: :object,
     properties: %{
       temperature: %Schema{
@@ -52,7 +52,6 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
           "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?"
       }
     },
-    required: [],
     example: %{
       "temperature" => 37.5,
       "toux" => true,
