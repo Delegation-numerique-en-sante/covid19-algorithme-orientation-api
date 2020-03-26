@@ -62,7 +62,6 @@ defmodule Covid19Orientation.TestOrientation do
   def arbre do
     [
       %Tree{key: &fin1/1, operation: &moins_de_15_ans/1},
-      %Tree{key: &fin9/1, operation: &symptomes4/1},
       %Tree{
         operation: &symptomes1/1,
         children: [
@@ -156,16 +155,6 @@ defmodule Covid19Orientation.TestOrientation do
     |> Enum.filter(fn symptome -> symptome end)
     |> Enum.count()
     |> Kernel.==(1)
-  end
-
-  @spec symptomes4(%Orientation{}) :: boolean
-
-  def symptomes4(orientation = %{symptomes: symptomes}) do
-    symptomes
-    |> Map.from_struct()
-    |> Map.put(:fievre, fievre(orientation))
-    |> Enum.reduce(0, &count/2)
-    |> Kernel.==(0)
   end
 
   ## Statistiques
