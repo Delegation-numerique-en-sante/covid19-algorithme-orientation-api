@@ -17,15 +17,17 @@ defmodule Covid19Orientation.TreeTraversal do
 
   def flatten(trees), do: flatten(trees, [], 0) |> Enum.reverse()
 
-  @spec flatten(trees, stack, depth) :: stack
+  @spec flatten(trees, stack) :: stack
 
-  def flatten([], stack, _), do: stack
+  def flatten([], stack), do: stack
+
+  @spec flatten(trees, stack, depth) :: stack
 
   def flatten(trees, stack, depth) do
     Enum.reduce(trees, stack, fn tree, acc ->
       case tree.children do
         [] ->
-          flatten([], [%Tree{tree | depth: depth, type: :leaf} | acc], depth)
+          flatten([], [%Tree{tree | depth: depth, type: :leaf} | acc])
 
         children ->
           flatten(children, [%Tree{tree | depth: depth, type: :branch} | acc], depth + 1)
