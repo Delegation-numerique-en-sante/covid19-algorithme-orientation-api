@@ -9,7 +9,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
   OpenApiSpex.schema(%{
     title: "Statistiques",
     description:
-      "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme",
+      "[Statistiques](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
     type: :object,
     properties: %{
       moins_de_15_ans: %Schema{type: :boolean, description: "Si la personne a moins de 15 ans"},
@@ -59,7 +59,21 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
         description: "Facteurs pronostique défavorables liés au terrain"
       }
     },
-    required: [],
+    required: [
+      :moins_de_15_ans,
+      :moins_de_50_ans,
+      :entre_50_et_69_ans,
+      :moins_de_70_ans,
+      :au_moins_70_ans,
+      :au_moins_30_imc,
+      :fievre,
+      :au_moins_39_de_temperature,
+      :cardiaque,
+      :facteurs_gravite,
+      :facteurs_gravite_mineurs,
+      :facteurs_gravite_majeurs,
+      :facteurs_pronostique
+    ],
     example: %{
       "moins_de_15_ans" => false,
       "moins_de_50_ans" => false,

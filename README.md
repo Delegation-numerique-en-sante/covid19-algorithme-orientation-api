@@ -1,14 +1,18 @@
-# Covid19-Orientation
+# Covid19-Algorithme-Orientation
 
 ## Introduction
 
-Covid19-Orientation est une implémentation en Elixir/Phoenix de l'[algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation).
+Covid19-Orientation est une implémentation en Elixir de l'[algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation) officiellement publié par le ministère des Solidarités et de la Santé.
 
-Ce paquet inclut :
+L'algorithme est défini par un comité scientifique, appelé CovidTélé, réunissant des médecins et co-piloté par l'AP-HP et l'Institut Pasteur.
 
-- [l'implémentation de l'algorithme](https://github.com/Delegation-numerique-en-sante/covid-19-orientation-elixir/blob/master/lib/covid19_orientation/test_orientation.ex)
-- [une API Web](https://github.com/Delegation-numerique-en-sante/covid-19-orientation-elixir/blob/master/test/covid19_orientation_web/controllers/orientation_controller/create_test.exs)
-- [le schéma des données](https://github.com/Delegation-numerique-en-sante/covid-19-orientation-elixir/blob/master/openAPI.json)
+Afin que toutes les initiatives qui participent à la gestion de la crise sanitaire s'appuient sur les mêmes recommendations, le ministère des Solidarités et de la Santé conseille la réutilisation de cet algorithme.
+
+## Ce que contient ce dépôt
+
+- une implémentation de l'algorithme
+- une API Web
+- le schéma de données en format OpenAPI 3.0 (OAS 3.0)
 
 ## Installation
 
@@ -16,104 +20,54 @@ Ce paquet requiert Erlang et Elixir.
 
 Plateformes supportées :
 
-- distributions GNU/Linux (en particulier Debian and Ubuntu) ;
-- Mac OS X ;
+- distributions GNU/Linux (en particulier Debian and Ubuntu)
+- Mac OS X
 
 Nous recommandons l'utilisation de Kerl pour Erlang et Kiex pour Elixir.
 
 Une fois installés :
 
 ```sh
-git clone git@github.com:Delegation-numerique-en-sante/covid-19-orientation-elixir.git
-cd covid19-orientation-elixir
-mix deps.get
+git clone git@github.com:Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir.git
+cd covid19-algorithme-orientation-elixir
+make install
 ```
 
-## Lancer l'API
+## Pour lancer l'API
 
 ```sh
-mix phx.server
+make serve
 ```
 
-Visitez http://localhost:4000/openapi
-Visitez http://localhost:4000/swagger
+Visitez http://localhost:4000/openapi pour avoir le json brut
 
-[Screenshot du Swagger](https://github.com/Delegation-numerique-en-sante/covid-19-orientation-elixir/blob/master/swagger.png)
+Visitez http://localhost:4000/swagger pour Swagger
 
-## Générer le schéma de données OpenAPI
+### Instance de test
+
+Une instance de test est disponible.
+
+Visitez https://covid19-orientation.herokuapp.com/swagger
+
+## Lancer les tests
 
 ```sh
-mix spec
+make test
 ```
 
-## Lancer les test
+## Générer le fichier de spécification OpenAPI 3.0
 
 ```sh
-mix test
+make gen-spec
 ```
 
-# Example d'appel à l'API
+# Contribuer
 
-```sh
-curl -X POST "http://localhost:4000/orientation" -H "accept: application/json" -H "Content-Type: application/json" -H "x-csrf-token: LzNwkByMKJyAPKWkwblAFDipbWjQAIl1gkAhngbceq-iXhUvH4ngM" -d "{\"orientation\":{\"pronostiques\":{\"age\":70,\"cancer\":true,\"cardiaque\":true,\"diabetique\":true,\"enceinte\":true,\"immunodeprime\":true,\"insuffisance_renale\":true,\"maladie_chronique_foie\":true,\"poids\":65.5,\"respiratoire\":true,\"taille\":1.73,\"traitement_immunosuppresseur\":true},\"supplementaires\":{\"code_postal\":\"75000\"},\"symptomes\":{\"anosmie\":true,\"diarrhee\":true,\"diffs_alim_boire\":true,\"essoufle\":true,\"fatigue\":true,\"mal_de_gorge\":true,\"temperature\":37.5,\"toux\":true}}}" | jq "."
-
-...
-
-{
-  "data": {
-    "conclusion": {
-      "code": "FIN3"
-    },
-    "pronostiques": {
-      "age": 70,
-      "cancer": true,
-      "cardiaque": true,
-      "diabetique": true,
-      "enceinte": true,
-      "immunodeprime": true,
-      "insuffisance_renale": true,
-      "maladie_chronique_foie": true,
-      "poids": 65.5,
-      "respiratoire": true,
-      "taille": 1.73,
-      "traitement_immunosuppresseur": true
-    },
-    "statistiques": {
-      "au_moins_30_imc": false,
-      "au_moins_39_de_temperature": false,
-      "au_moins_70_ans": true,
-      "cardiaque": true,
-      "entre_50_et_69_ans": false,
-      "facteurs_gravite": 3,
-      "facteurs_gravite_majeurs": 2,
-      "facteurs_gravite_mineurs": 1,
-      "facteurs_pronostique": 10,
-      "fievre": false,
-      "moins_de_15_ans": false,
-      "moins_de_50_ans": false,
-      "moins_de_70_ans": false
-    },
-    "supplementaires": {
-      "code_postal": "75000"
-    },
-    "symptomes": {
-      "anosmie": true,
-      "diarrhee": true,
-      "diffs_alim_boire": true,
-      "essoufle": true,
-      "fatigue": true,
-      "mal_de_gorge": true,
-      "temperature": 37.5,
-      "toux": true
-    }
-  }
-}
-```
-
-# Contribution
-
-N'hésitez pas à ouvrir une issue ou à proposer une pull request.
+Les contributions sont les bienvenues, sous forme d'/issues/ ou de /pull
+requests/.
 
 # Licence
 
-AGPL-3.0
+2020 Délégation ministérielle du numérique en santé et les contributeurs du dépôt.
+
+Le code source de cette application est publié sous licence AGPL-3.0.

@@ -7,9 +7,9 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
   alias OpenApiSpex.Schema
 
   OpenApiSpex.schema(%{
-    title: "Questions sur les facteurs pronostiques défavorables au terrain",
+    title: "Pronostiques",
     description:
-      "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain",
+      "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
     type: :object,
     properties: %{
       age: %Schema{type: :integer, description: "Quel est votre âge ?"},
@@ -45,7 +45,6 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
         description: "Prenez-vous un traitement immunosuppresseur ?"
       }
     },
-    required: [],
     example: %{
       "age" => 70,
       "poids" => 65.5,
