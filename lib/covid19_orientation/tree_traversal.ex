@@ -45,13 +45,10 @@ defmodule Covid19Orientation.TreeTraversal do
         prev_depth < tree.depth && !prev_result ->
           traverse(stack, value, {prev_depth, prev_result})
 
-        tree.type != :leaf ->
+        tree.type != :leaf || !result ->
           traverse(stack, value, {tree.depth, result})
 
-        !result ->
-          traverse(stack, value, {tree.depth, result})
-
-        true ->
+        result ->
           {:ok, tree}
       end
     end
