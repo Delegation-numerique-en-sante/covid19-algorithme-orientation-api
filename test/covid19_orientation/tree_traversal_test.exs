@@ -25,15 +25,7 @@ defmodule Covid19Orientation.TreeTraversalTest do
            }
          ]
        },
-       %Tree{
-         operation: operation,
-         children: [
-           %Tree{
-             operation: operation,
-             children: [%Tree{operation: operation}]
-           }
-         ]
-       }
+       %Tree{operation: operation}
      ]}
   end
 
@@ -43,7 +35,7 @@ defmodule Covid19Orientation.TreeTraversalTest do
       |> TreeTraversal.flatten()
       |> Enum.map(& &1.type)
 
-    assert types == [:fork, :branch, :leaf, :branch, :branch, :leaf, :branch, :branch, :leaf]
+    assert types == [:branch, :branch, :leaf, :branch, :branch, :leaf, :leaf]
   end
 
   describe "traverse l'arbre" do

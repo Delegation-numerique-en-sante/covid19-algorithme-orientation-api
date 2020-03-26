@@ -15,7 +15,6 @@ defmodule Covid19Orientation.TestOrientation.AucunSymptomeTest do
       }
       |> TestOrientation.evaluate()
 
-    assert TestOrientation.symptomes4(orientation)
     assert orientation.conclusion.code == "FIN9"
   end
 end

@@ -19,7 +19,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
       },
       entre_50_et_69_ans: %Schema{
         type: :boolean,
-        description: "Si la personne a entre 50 et 60 ans"
+        description: "Si la personne a entre 50 et 69 ans"
       },
       moins_de_70_ans: %Schema{
         type: :boolean,

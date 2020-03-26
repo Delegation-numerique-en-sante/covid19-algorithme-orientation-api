@@ -4,13 +4,14 @@ defmodule Covid19Orientation.TreeTraversal do
   """
 
   alias Covid19Orientation.Tree
+  alias Covid19OrientationWeb.Schemas.Orientation
 
   @type tree() :: Tree.t()
-  @type trees() :: [tree] | []
-  @type stack() :: [tree] | []
+  @type trees() :: [trees] | []
+  @type stack() :: stack
   @type depth() :: integer
-  @type value() :: any
-  @type history() :: tuple
+  @type value() :: Orientation.t()
+  @type previous() :: {depth, boolean}
 
   @spec flatten(trees) :: stack
 
@@ -23,29 +24,36 @@ defmodule Covid19Orientation.TreeTraversal do
   def flatten(trees, stack, depth) do
     Enum.reduce(trees, stack, fn tree, acc ->
       case tree.children do
-        [] -> flatten([], [%Tree{tree | depth: depth, type: :leaf} | acc], depth - 1)
-        [child] -> flatten([child], [%Tree{tree | depth: depth, type: :branch} | acc], depth)
-        children -> flatten(children, [%Tree{tree | depth: depth, type: :fork} | acc], depth + 1)
+        [] ->
+          flatten([], [%Tree{tree | depth: depth, type: :leaf} | acc], depth)
+
+        children ->
+          flatten(children, [%Tree{tree | depth: depth, type: :branch} | acc], depth + 1)
       end
     end)
   end
 
-  @spec traverse(stack, value, history) :: {:ok, tree} | {}
+  @spec traverse(stack, value, previous) :: {:ok, tree} | {:ok, :done}
 
-  def traverse(stack, value, history \\ {0, true})
+  def traverse(stack, value, previous \\ {0, true})
 
   def traverse([], _, _), do: {:ok, :done}
 
-  def traverse([tree | stack], value, history) do
-    {prev_depth, prev_result} = history
-    depth = tree.depth
-    result = tree.operation.(value)
+  def traverse([tree | stack], value, {prev_depth, prev_result}) do
+    with result <- tree.operation.(value) do
+      cond do
+        prev_depth < tree.depth && !prev_result ->
+          traverse(stack, value, {prev_depth, prev_result})
 
-    cond do
-      prev_depth < depth && !prev_result -> traverse(stack, value, {prev_depth, prev_result})
-      tree.type != :leaf -> traverse(stack, value, {depth, result})
-      !result -> traverse(stack, value, {depth, result})
-      true -> {:ok, tree}
+        tree.type != :leaf ->
+          traverse(stack, value, {tree.depth, result})
+
+        !result ->
+          traverse(stack, value, {tree.depth, result})
+
+        true ->
+          {:ok, tree}
+      end
     end
   end
 end
