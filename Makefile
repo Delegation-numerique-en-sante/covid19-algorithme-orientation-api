@@ -4,7 +4,7 @@ clean:
 	rm -rf _build
 	rm -rf deps
 
-compile:
+deps:
 	mix local.hex --force
 	mix local.rebar --force
 
@@ -12,8 +12,11 @@ install:
 	mix do deps.get, compile
 	npm install -g api-spec-converter
 
+compile:
+	mix compile
+
 serve:
-	mix phx.server
+	iex --erl "+A 64 +K true +Q 65536 +stbt db +zdntgc 10" -S mix phx.server
 
 format:
 	mix format
@@ -23,6 +26,9 @@ lint:
 
 test: format lint
 	mix test
+
+release:
+	MIX_ENV=prod mix release
 
 gen-spec:
 	mix covid19_orientation.open_api_3.gen_spec

@@ -2,21 +2,27 @@
 # from environment variables. You can also hardcode secrets,
 # although such is generally not recommended and you have to
 # remember to add this file to your .gitignore.
-use Mix.Config
-
-secret_key_base =
-  System.get_env("SECRET_KEY_BASE") ||
-    raise """
-    environment variable SECRET_KEY_BASE is missing.
-    You can generate one by calling: mix phx.gen.secret
-    """
+import Config
 
 config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   http: [
-    port: String.to_integer(System.get_env("PORT") || "4000"),
-    transport_options: [socket_opts: [:inet6]]
+    port: {:system, "PORT"},
+    transport_options: [
+      {:num_acceptors, 2500},
+      {:max_connections, :infinity},
+      {:socket_opts, [:inet6]}
+    ],
+    protocol_options: [{:max_keepalive, 20_000_000}, {:timeout, 2000}]
   ],
-  secret_key_base: secret_key_base
+  url: [scheme: "https", host: "covid19-orientation.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  server: true
+
+# Do not print debug messages in production
+config :logger,
+  level: :error,
+  compile_time_purge_matching: [[level_lower_than: :error]]
 
 # ## Using releases (Elixir v1.9+)
 #

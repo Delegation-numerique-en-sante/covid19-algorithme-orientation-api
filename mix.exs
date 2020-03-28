@@ -9,7 +9,13 @@ defmodule Covid19Orientation.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      releases: [
+        covid19_orientation: [
+          include_executables_for: [:unix],
+          steps: [:assemble, :tar]
+        ]
+      ]
     ]
   end
 

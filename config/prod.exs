@@ -10,14 +10,22 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :covid19_orientation, Covid19OrientationWeb.Endpoint,
-  http: [port: {:system, "PORT"}],
+  http: [
+    port: {:system, "PORT"},
+    transport_options: [
+      {:num_acceptors, 2500},
+      {:max_connections, :infinity}
+    ],
+    protocol_options: [{:max_keepalive, 20_000_000}, {:timeout, 2000}]
+  ],
   url: [scheme: "https", host: "covid19-orientation.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Do not print debug messages in production
-config :logger, level: :info
+config :logger,
+  level: :error,
+  compile_time_purge_matching: [[level_lower_than: :error]]
 
 # ## SSL Support
 #

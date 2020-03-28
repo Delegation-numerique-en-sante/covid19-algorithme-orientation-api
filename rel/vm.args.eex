@@ -1,0 +1,20 @@
+## Customize flags given to the VM: http://erlang.org/doc/man/erl.html
+## -mode/-name/-sname/-setcookie are configured via env vars, do not set them here
+
+## Number of dirty schedulers doing IO work (file, sockets, and others)
+##+SDio 5
+
+## Sets the number of threads in async thread pool
++A 64
+
+## Enable the kernel poll functionality if the emulator supports it
++K true
+
+## Increase number of concurrent ports/sockets
++Q 65536
+
+## Set scheduler bind type
++stbt db
+
+## Tweak GC to run more often
++zdntgc 10
