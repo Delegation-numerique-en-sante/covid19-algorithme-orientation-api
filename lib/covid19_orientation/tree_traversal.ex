@@ -7,7 +7,7 @@ defmodule Covid19Orientation.TreeTraversal do
   alias Covid19OrientationWeb.Schemas.Orientation
 
   @type tree() :: Tree.t()
-  @type trees() :: [trees] | []
+  @type trees() :: [tree] | []
   @type stack() :: stack
   @type depth() :: integer
   @type value() :: Orientation.t()

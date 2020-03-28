@@ -3,11 +3,10 @@ defmodule Covid19OrientationWeb.ApiSpec do
   Définittion du schéma de données d'auprès la spécification OpenAPI 3.0
   """
 
-  @behaviour OpenApi
-
   alias Covid19OrientationWeb.{Endpoint, Router}
   alias OpenApiSpex.{Info, OpenApi, Paths, Server}
 
+  @behaviour OpenApi
   @impl OpenApi
   def spec do
     %OpenApi{

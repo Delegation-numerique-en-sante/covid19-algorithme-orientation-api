@@ -12,6 +12,10 @@ defmodule Covid19Orientation.TestOrientation do
     Statistiques
   }
 
+  @type orientation() :: Orientation.t()
+  @type tree() :: Tree.t()
+  @type trees() :: [trees] | []
+
   @codes ~w|fin1 fin2 fin3 fin4 fin5 fin6 fin7 fin8 fin9|a
 
   @seuil_moins_de_15_ans 15
@@ -24,21 +28,21 @@ defmodule Covid19Orientation.TestOrientation do
 
   ## Opérations
 
-  @spec evaluate(%Orientation{}) :: %Orientation{}
+  @spec evaluate(orientation) :: orientation
 
-  def evaluate(orientation = %Orientation{}) do
+  def evaluate(orientation = orientation) do
     arbre()
     |> TreeTraversal.flatten()
     |> TreeTraversal.traverse(orientation)
     |> case do
-      {:ok, :done} -> {:ok, fin9(orientation) |> populate_statistiques()}
-      {:ok, %{key: key}} -> {:ok, key.(orientation) |> populate_statistiques()}
+      {:ok, :done} -> {:ok, fin9(orientation)}
+      {:ok, %{key: key}} -> {:ok, key.(orientation)}
     end
   end
 
-  @spec populate_statistiques(%Orientation{}) :: %Orientation{}
+  @spec populate_statistiques(orientation) :: orientation
 
-  def populate_statistiques(orientation = %Orientation{}) do
+  def populate_statistiques(orientation = orientation) do
     Map.put(
       orientation,
       :statistiques,
@@ -57,7 +61,7 @@ defmodule Covid19Orientation.TestOrientation do
   @doc """
   Arbre de décision de l'algorithme d'orientation du Covid-19.
   """
-  @spec arbre() :: [Tree.t()]
+  @spec arbre() :: trees
 
   def arbre do
     [
@@ -126,7 +130,7 @@ defmodule Covid19Orientation.TestOrientation do
     ]
   end
 
-  @spec symptomes1(%Orientation{}) :: boolean
+  @spec symptomes1(orientation) :: boolean
 
   def symptomes1(
         orientation = %{
@@ -142,13 +146,13 @@ defmodule Covid19Orientation.TestOrientation do
       (fievre(orientation) && diarrhee)
   end
 
-  @spec symptomes2(%Orientation{}) :: boolean
+  @spec symptomes2(orientation) :: boolean
 
   def symptomes2(orientation = %{symptomes: %{toux: toux}}) do
     fievre(orientation) && toux
   end
 
-  @spec symptomes3(%Orientation{}) :: boolean
+  @spec symptomes3(orientation) :: boolean
 
   def symptomes3(%{symptomes: %{toux: toux, mal_de_gorge: mal_de_gorge, anosmie: anosmie}}) do
     [toux, mal_de_gorge, anosmie]
@@ -159,7 +163,7 @@ defmodule Covid19Orientation.TestOrientation do
 
   ## Statistiques
 
-  @spec moins_de_15_ans(%Orientation{}) :: boolean
+  @spec moins_de_15_ans(orientation) :: boolean
 
   def moins_de_15_ans(%Orientation{pronostiques: %{age: nil}}), do: false
 
@@ -167,7 +171,7 @@ defmodule Covid19Orientation.TestOrientation do
     age < @seuil_moins_de_15_ans
   end
 
-  @spec moins_de_50_ans(%Orientation{}) :: boolean
+  @spec moins_de_50_ans(orientation) :: boolean
 
   def moins_de_50_ans(%Orientation{pronostiques: %{age: nil}}), do: false
 
@@ -175,7 +179,7 @@ defmodule Covid19Orientation.TestOrientation do
     age < @seuil_moins_de_50_ans
   end
 
-  @spec entre_50_et_69_ans(%Orientation{}) :: boolean
+  @spec entre_50_et_69_ans(orientation) :: boolean
 
   def entre_50_et_69_ans(%Orientation{pronostiques: %{age: nil}}), do: false
 
@@ -183,7 +187,7 @@ defmodule Covid19Orientation.TestOrientation do
     age >= @seuil_moins_de_50_ans && age < @seuil_moins_de_70_ans
   end
 
-  @spec moins_de_70_ans(%Orientation{}) :: boolean
+  @spec moins_de_70_ans(orientation) :: boolean
 
   def moins_de_70_ans(%Orientation{pronostiques: %{age: nil}}), do: false
 
@@ -191,7 +195,7 @@ defmodule Covid19Orientation.TestOrientation do
     age < @seuil_moins_de_70_ans
   end
 
-  @spec au_moins_70_ans(%Orientation{}) :: boolean
+  @spec au_moins_70_ans(orientation) :: boolean
 
   def au_moins_70_ans(%Orientation{pronostiques: %{age: nil}}), do: false
 
@@ -199,7 +203,7 @@ defmodule Covid19Orientation.TestOrientation do
     age >= @seuil_au_moins_70_ans
   end
 
-  @spec au_moins_30_imc(%Orientation{}) :: boolean
+  @spec au_moins_30_imc(orientation) :: boolean
 
   def au_moins_30_imc(%{pronostiques: %{poids: nil}}), do: false
 
@@ -211,7 +215,7 @@ defmodule Covid19Orientation.TestOrientation do
     |> Kernel.>=(@seuil_imc)
   end
 
-  @spec fievre(%Orientation{}) :: boolean
+  @spec fievre(orientation) :: boolean
 
   def fievre(%{symptomes: %{temperature: nil}}), do: true
 
@@ -219,7 +223,7 @@ defmodule Covid19Orientation.TestOrientation do
     temperature >= @seuil_fievre
   end
 
-  @spec au_moins_39_de_temperature(%Orientation{}) :: boolean
+  @spec au_moins_39_de_temperature(orientation) :: boolean
 
   def au_moins_39_de_temperature(%{symptomes: %{temperature: nil}}), do: false
 
@@ -227,7 +231,7 @@ defmodule Covid19Orientation.TestOrientation do
     temperature >= @seuil_au_moins_39_de_temperature
   end
 
-  @spec cardiaque(%Orientation{}) :: boolean
+  @spec cardiaque(orientation) :: boolean
 
   def cardiaque(%{pronostiques: %{cardiaque: nil}}), do: true
 
@@ -236,9 +240,9 @@ defmodule Covid19Orientation.TestOrientation do
   @doc """
   Facteurs de gravité mineurs + majeurs.
   """
-  @spec facteurs_gravite(%Orientation{}) :: integer
+  @spec facteurs_gravite(orientation) :: integer
 
-  def facteurs_gravite(orientation = %Orientation{}) do
+  def facteurs_gravite(orientation = orientation) do
     facteurs_gravite_mineurs(orientation) + facteurs_gravite_majeurs(orientation)
   end
 
@@ -248,7 +252,7 @@ defmodule Covid19Orientation.TestOrientation do
   - Fièvre >= 39°C
   - Fatigue : alitement > 50% du temps diurne
   """
-  @spec facteurs_gravite_mineurs(%Orientation{}) :: integer
+  @spec facteurs_gravite_mineurs(orientation) :: integer
 
   def facteurs_gravite_mineurs(orientation = %{symptomes: symptomes}) do
     symptomes
@@ -263,7 +267,7 @@ defmodule Covid19Orientation.TestOrientation do
   - Gêne respiratoire
   - Difficultés importantes pour s’alimenter ou boire depuis plus de 24h
   """
-  @spec facteurs_gravite_majeurs(%Orientation{}) :: integer
+  @spec facteurs_gravite_majeurs(orientation) :: integer
 
   def facteurs_gravite_majeurs(%{symptomes: symptomes}) do
     symptomes
@@ -286,7 +290,7 @@ defmodule Covid19Orientation.TestOrientation do
   - Si OUI pour maladie qui diminue les défenses immunitaires
   - Si OUI pour traitement immunosuppresseur
   """
-  @spec facteurs_pronostique(%Orientation{}) :: integer
+  @spec facteurs_pronostique(orientation) :: integer
 
   def facteurs_pronostique(orientation = %{pronostiques: pronostiques}) do
     pronostiques
@@ -308,8 +312,8 @@ defmodule Covid19Orientation.TestOrientation do
 
   @codes
   |> Enum.each(fn function ->
-    @spec unquote(function)(%Orientation{}) :: %Orientation{}
-    def unquote(function)(orientation = %Orientation{}) do
+    @spec unquote(function)(orientation) :: orientation
+    def unquote(function)(orientation = orientation) do
       %{
         orientation
         | conclusion: %Conclusion{code: unquote(function) |> Atom.to_string() |> String.upcase()}
