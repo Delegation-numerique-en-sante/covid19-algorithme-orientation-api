@@ -1,7 +1,7 @@
 defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
   use Covid19OrientationWeb.ConnCase, async: true
 
-  test "donne un résultat à partir des paramètres" do
+  test "donne un résultat à partir des paramètres", %{conn: conn, spec: spec} do
     payload = %{
       "orientation" => %{
         "symptomes" => %{
@@ -34,14 +34,14 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
       }
     }
 
-    conn =
-      build_conn()
+    body =
+      conn
       |> put_req_header("content-type", "application/json")
       |> post("/orientation", payload)
+      |> response(201)
+      |> Jason.decode!()
 
-    body = conn |> response(201) |> Jason.decode!()
-
+    assert_schema(body, "OrientationResponse", spec)
     assert body["data"]["conclusion"]["code"] == "FIN5"
-    assert body["data"]["statistiques"]["moins_de_15_ans"] == false
   end
 end

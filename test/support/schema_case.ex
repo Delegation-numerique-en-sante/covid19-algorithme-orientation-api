@@ -14,6 +14,6 @@ defmodule Covid19OrientationWeb.SchemaCase do
   end
 
   setup _tags do
-    :ok
+    {:ok, spec: Covid19OrientationWeb.ApiSpec.spec()}
   end
 end

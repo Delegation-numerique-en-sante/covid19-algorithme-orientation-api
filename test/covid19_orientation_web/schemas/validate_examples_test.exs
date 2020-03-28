@@ -1,10 +1,5 @@
 defmodule Covid19OrientationWeb.Schemas.ValidateExamplesTest do
   use Covid19OrientationWeb.SchemaCase, async: true
-  alias Covid19OrientationWeb.ApiSpec
-
-  setup do
-    {:ok, spec: ApiSpec.spec()}
-  end
 
   with {:ok, list} <- :application.get_key(:covid19_orientation, :modules) do
     list

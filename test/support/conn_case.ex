@@ -22,6 +22,7 @@ defmodule Covid19OrientationWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       alias Covid19OrientationWeb.Router.Helpers, as: Routes
+      import OpenApiSpex.TestAssertions
 
       # The default endpoint for testing
       @endpoint Covid19OrientationWeb.Endpoint
@@ -29,6 +30,6 @@ defmodule Covid19OrientationWeb.ConnCase do
   end
 
   setup _tags do
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    {:ok, conn: Phoenix.ConnTest.build_conn(), spec: Covid19OrientationWeb.ApiSpec.spec()}
   end
 end
