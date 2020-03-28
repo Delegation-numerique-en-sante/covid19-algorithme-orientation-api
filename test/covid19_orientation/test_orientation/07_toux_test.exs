@@ -3,7 +3,7 @@ defmodule Covid19Orientation.TestOrientation.TouxTest do
   Patient avec seulement toux.
   """
 
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias Covid19Orientation.TestOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 

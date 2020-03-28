@@ -3,7 +3,7 @@ defmodule Covid19Orientation.TestOrientation.L15AnsTest do
   STOP si < 15 ans
   """
 
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias Covid19Orientation.TestOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 

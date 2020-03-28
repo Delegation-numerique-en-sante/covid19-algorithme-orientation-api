@@ -3,7 +3,7 @@ defmodule Covid19Orientation.TestOrientation.AnosmieTest do
   Patient avec seulement anosmie.
   """
 
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias Covid19Orientation.TestOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 

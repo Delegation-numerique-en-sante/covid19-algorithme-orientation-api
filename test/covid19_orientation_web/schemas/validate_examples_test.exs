@@ -1,5 +1,5 @@
 defmodule Covid19OrientationWeb.Schemas.ValidateExamplesTest do
-  use Covid19OrientationWeb.SchemaCase
+  use Covid19OrientationWeb.SchemaCase, async: true
   alias Covid19OrientationWeb.ApiSpec
 
   setup do

@@ -1,5 +1,5 @@
 defmodule Covid19Orientation.TreeTraversalTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias Covid19Orientation.{Tree, TreeTraversal}
 
   setup do

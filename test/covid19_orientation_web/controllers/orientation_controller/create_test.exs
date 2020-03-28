@@ -1,5 +1,5 @@
 defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
-  use Covid19OrientationWeb.ConnCase
+  use Covid19OrientationWeb.ConnCase, async: true
 
   test "donne un résultat à partir des paramètres" do
     payload = %{

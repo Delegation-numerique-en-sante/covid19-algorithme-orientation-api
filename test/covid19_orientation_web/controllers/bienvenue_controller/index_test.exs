@@ -1,5 +1,5 @@
 defmodule Covid19OrientationWeb.BienvenueController.IndexOrientation do
-  use Covid19OrientationWeb.ConnCase
+  use Covid19OrientationWeb.ConnCase, async: true
 
   test "bienvenue" do
     conn =

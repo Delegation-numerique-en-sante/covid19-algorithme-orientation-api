@@ -1,6 +1,6 @@
-defmodule Covid19Orientation.TestOrientation.FievreTest do
+defmodule Covid19Orientation.TestOrientation.FievrePasTouxTest do
   @moduledoc """
-  Patient avec fièvre.
+  Patient avec fièvre et pas toux.
   """
 
   use ExUnit.Case
