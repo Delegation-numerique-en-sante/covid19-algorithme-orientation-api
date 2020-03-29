@@ -13,6 +13,13 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   check_origin: false,
   watchers: []
 
+# Configure Redis
+config :covid19_orientation, Covid19Orientation.Data.Store,
+  conn_opts: [
+    host: "127.0.0.1",
+    port: 6379
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

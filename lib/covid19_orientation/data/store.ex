@@ -3,7 +3,7 @@ defmodule Covid19Orientation.Data.Store do
   Store and retrive data.
   """
 
-  use Nebulex.Cache, otp_app: :nebulex, adapter: NebulexRedisAdapter
+  use Nebulex.Cache, otp_app: :covid19_orientation, adapter: NebulexRedisAdapter
 
   def write({timestamp, id}, data) do
     set("#{timestamp}:#{id}", data)

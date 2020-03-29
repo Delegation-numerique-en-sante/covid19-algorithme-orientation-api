@@ -22,6 +22,12 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
+# Configure Redis
+config :covid19_orientation, Covid19Orientation.Data.Store,
+  conn_opts: [
+    url: System.get_env("REDIS_URL")
+  ]
+
 # Do not print debug messages in production
 config :logger,
   level: :error,

@@ -15,13 +15,6 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   pubsub: [name: Covid19Orientation.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "l4VrGh9y"]
 
-# Configure Redis
-config :covid19_orientation, Covid19Orientation.Data.Store,
-  conn_opts: [
-    host: "127.0.0.1",
-    port: 6379
-  ]
-
 # Use Poison for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
