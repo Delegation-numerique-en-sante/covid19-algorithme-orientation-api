@@ -22,14 +22,22 @@ defmodule Covid19OrientationWeb.OrientationController do
       params
       |> EvaluateOrientation.call()
 
-    {:ok, orientation} =
+    orientation =
+      %{id: id, timestamp: timestamp} =
       orientation
       |> SetId.call()
       |> SetTimestamp.call()
-      |> Store.set()
+
+    conn =
+      conn
+      |> put_status(:created)
+      |> render("create.json", orientation: orientation)
+
+    {:ok, _data} =
+      conn
+      |> Map.get(:resp_body)
+      |> Store.set({id, timestamp})
 
     conn
-    |> put_status(:created)
-    |> render("create.json", orientation: orientation)
   end
 end

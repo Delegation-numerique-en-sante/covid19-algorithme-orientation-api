@@ -12,16 +12,16 @@ defmodule Covid19Orientation.Data.Store do
     GenServer.start_link(__MODULE__, [{:file_name, @file_name}, {:table_name, @table_name}], opts)
   end
 
-  def get(id, timestamp) do
+  def get({id, timestamp}) do
     case GenServer.call(__MODULE__, {:get, {id, timestamp}}) do
       [] -> {:not_found}
-      [{{_id, _timestamp}, orientation}] -> {:found, orientation}
+      [{{_id, _timestamp}, data}] -> {:found, data}
     end
   end
 
-  def set(orientation = %{id: id, timestamp: timestamp}) do
-    GenServer.call(__MODULE__, {:set, {id, timestamp}, orientation})
-    {:ok, orientation}
+  def set(data, {id, timestamp}) do
+    GenServer.call(__MODULE__, {:set, {id, timestamp}, data})
+    {:ok, data}
   end
 
   # GenServer callbacks
