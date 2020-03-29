@@ -1,10 +1,11 @@
-defmodule Covid19Orientation.TestOrientation.TouxTest do
+defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxTest do
   @moduledoc """
   Patient avec seulement toux.
   """
 
-  use ExUnit.Case
-  alias Covid19Orientation.TestOrientation
+  use ExUnit.Case, async: true
+  alias Covid19Orientation.Tests.Conditions
+  alias Covid19OrientationWeb.Operations.EvaluateOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
   setup do
@@ -21,10 +22,10 @@ defmodule Covid19Orientation.TestOrientation.TouxTest do
   test "sans facteur de gravité", %{orientation: orientation} do
     {:ok, orientation} =
       orientation
-      |> TestOrientation.evaluate()
+      |> EvaluateOrientation.call()
 
-    assert TestOrientation.symptomes3(orientation)
-    assert TestOrientation.facteurs_gravite(orientation) == 0
+    assert Conditions.symptomes3(orientation)
+    assert Conditions.facteurs_gravite(orientation) == 0
     assert orientation.conclusion.code == "FIN7"
   end
 
@@ -34,10 +35,10 @@ defmodule Covid19Orientation.TestOrientation.TouxTest do
         orientation
         | symptomes: %Symptomes{orientation.symptomes | essoufle: true}
       }
-      |> TestOrientation.evaluate()
+      |> EvaluateOrientation.call()
 
-    assert TestOrientation.symptomes3(orientation)
-    assert TestOrientation.facteurs_gravite(orientation) >= 1
+    assert Conditions.symptomes3(orientation)
+    assert Conditions.facteurs_gravite(orientation) >= 1
     assert orientation.conclusion.code == "FIN8"
   end
 
@@ -47,11 +48,11 @@ defmodule Covid19Orientation.TestOrientation.TouxTest do
         orientation
         | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
       }
-      |> TestOrientation.evaluate()
+      |> EvaluateOrientation.call()
 
-    assert TestOrientation.symptomes3(orientation)
-    assert TestOrientation.facteurs_gravite(orientation) == 0
-    assert TestOrientation.facteurs_pronostique(orientation) >= 1
+    assert Conditions.symptomes3(orientation)
+    assert Conditions.facteurs_gravite(orientation) == 0
+    assert Conditions.facteurs_pronostique(orientation) >= 1
     assert orientation.conclusion.code == "FIN8"
   end
 end

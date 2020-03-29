@@ -1,6 +1,6 @@
 defmodule Covid19OrientationWeb.ApiSpec do
   @moduledoc """
-  Définittion du schéma de données d'auprès la spécification OpenAPI 3.0
+  Définittion du schéma des données d'auprès la spécification OpenAPI 3.0
   """
 
   alias Covid19OrientationWeb.{Endpoint, Router}

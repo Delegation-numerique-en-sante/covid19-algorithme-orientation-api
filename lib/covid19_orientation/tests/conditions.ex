@@ -1,22 +1,18 @@
-defmodule Covid19Orientation.TestOrientation do
+defmodule Covid19Orientation.Tests.Conditions do
   @moduledoc """
-  Test d’orientation du Covid-19.
+  Conditions du test d’orientation du Covid-19.
   """
 
   alias __MODULE__
-  alias Covid19Orientation.{Tree, TreeTraversal}
 
-  alias Covid19OrientationWeb.Schemas.{
-    Conclusion,
-    Orientation,
-    Statistiques
-  }
-
-  @type orientation() :: Orientation.t()
-  @type tree() :: Tree.t()
-  @type trees() :: [trees] | []
-
-  @codes ~w|fin1 fin2 fin3 fin4 fin5 fin6 fin7 fin8 fin9|a
+  @type symptomes :: struct
+  @type pronostiques :: struct
+  @type orientation :: %{
+          :__struct__ => atom(),
+          :symptome => symptomes,
+          :pronostiques => pronostiques,
+          optional(atom()) => any()
+        }
 
   @seuil_moins_de_15_ans 15
   @seuil_moins_de_50_ans 50
@@ -25,110 +21,6 @@ defmodule Covid19Orientation.TestOrientation do
   @seuil_imc 30.0
   @seuil_fievre 37.8
   @seuil_au_moins_39_de_temperature 39.0
-
-  ## Opérations
-
-  @spec evaluate(orientation) :: orientation
-
-  def evaluate(orientation = orientation) do
-    arbre()
-    |> TreeTraversal.flatten()
-    |> TreeTraversal.traverse(orientation)
-    |> case do
-      {:ok, :done} -> {:ok, fin9(orientation)}
-      {:ok, %{key: key}} -> {:ok, key.(orientation)}
-    end
-  end
-
-  @spec populate_statistiques(orientation) :: orientation
-
-  def populate_statistiques(orientation = orientation) do
-    Map.put(
-      orientation,
-      :statistiques,
-      %Statistiques{}
-      |> Map.from_struct()
-      |> Map.keys()
-      |> Enum.reduce(%Statistiques{}, fn key, statistiques ->
-        statistiques
-        |> Map.put(key, apply(TestOrientation, key, [orientation]))
-      end)
-    )
-  end
-
-  ## Algorithme
-
-  @doc """
-  Arbre de décision de l'algorithme d'orientation du Covid-19.
-  """
-  @spec arbre() :: trees
-
-  def arbre do
-    [
-      %Tree{key: &fin1/1, operation: &moins_de_15_ans/1},
-      %Tree{
-        operation: &symptomes1/1,
-        children: [
-          %Tree{key: &fin5/1, operation: &(facteurs_gravite_majeurs(&1) >= 1)},
-          %Tree{
-            operation: &(facteurs_pronostique(&1) >= 1),
-            children: [
-              %Tree{key: &fin4/1, operation: &(facteurs_gravite_mineurs(&1) == 2)},
-              %Tree{key: &fin3/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
-              %Tree{key: &fin3/1, operation: &(facteurs_gravite(&1) == 0)}
-            ]
-          },
-          %Tree{
-            operation: &(facteurs_pronostique(&1) == 0),
-            children: [
-              %Tree{key: &fin3/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
-              %Tree{
-                operation: &(facteurs_gravite(&1) == 0),
-                children: [
-                  %Tree{key: &fin3/1, operation: &entre_50_et_69_ans(&1)},
-                  %Tree{key: &fin2/1, operation: &moins_de_50_ans(&1)}
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      %Tree{
-        operation: &symptomes2/1,
-        children: [
-          %Tree{key: &fin5/1, operation: &(facteurs_gravite_majeurs(&1) >= 1)},
-          %Tree{
-            operation: &(facteurs_pronostique(&1) >= 1),
-            children: [
-              %Tree{key: &fin4/1, operation: &(facteurs_gravite_mineurs(&1) == 2)},
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite(&1) == 0)}
-            ]
-          },
-          %Tree{
-            operation: &(facteurs_pronostique(&1) == 0),
-            children: [
-              %Tree{
-                operation: &(facteurs_gravite_mineurs(&1) >= 1),
-                children: [
-                  %Tree{key: &fin6/1, operation: &(facteurs_gravite_majeurs(&1) == 0)}
-                ]
-              },
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite(&1) == 0)}
-            ]
-          }
-        ]
-      },
-      %Tree{
-        operation: &symptomes3/1,
-        children: [
-          %Tree{key: &fin8/1, operation: &(facteurs_pronostique(&1) >= 1)},
-          %Tree{key: &fin8/1, operation: &(facteurs_gravite(&1) >= 1)},
-          %Tree{key: &fin7/1, operation: &(facteurs_gravite(&1) == 0)}
-        ]
-      }
-    ]
-  end
 
   @spec symptomes1(orientation) :: boolean
 
@@ -165,41 +57,41 @@ defmodule Covid19Orientation.TestOrientation do
 
   @spec moins_de_15_ans(orientation) :: boolean
 
-  def moins_de_15_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def moins_de_15_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def moins_de_15_ans(%Orientation{pronostiques: %{age: age}}) do
+  def moins_de_15_ans(%{pronostiques: %{age: age}}) do
     age < @seuil_moins_de_15_ans
   end
 
   @spec moins_de_50_ans(orientation) :: boolean
 
-  def moins_de_50_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def moins_de_50_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def moins_de_50_ans(%Orientation{pronostiques: %{age: age}}) do
+  def moins_de_50_ans(%{pronostiques: %{age: age}}) do
     age < @seuil_moins_de_50_ans
   end
 
   @spec entre_50_et_69_ans(orientation) :: boolean
 
-  def entre_50_et_69_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def entre_50_et_69_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def entre_50_et_69_ans(%Orientation{pronostiques: %{age: age}}) do
+  def entre_50_et_69_ans(%{pronostiques: %{age: age}}) do
     age >= @seuil_moins_de_50_ans && age < @seuil_moins_de_70_ans
   end
 
   @spec moins_de_70_ans(orientation) :: boolean
 
-  def moins_de_70_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def moins_de_70_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def moins_de_70_ans(%Orientation{pronostiques: %{age: age}}) do
+  def moins_de_70_ans(%{pronostiques: %{age: age}}) do
     age < @seuil_moins_de_70_ans
   end
 
   @spec au_moins_70_ans(orientation) :: boolean
 
-  def au_moins_70_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def au_moins_70_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def au_moins_70_ans(%Orientation{pronostiques: %{age: age}}) do
+  def au_moins_70_ans(%{pronostiques: %{age: age}}) do
     age >= @seuil_au_moins_70_ans
   end
 
@@ -307,17 +199,4 @@ defmodule Covid19Orientation.TestOrientation do
       _ -> acc
     end
   end
-
-  ## Conclusions possibles
-
-  @codes
-  |> Enum.each(fn function ->
-    @spec unquote(function)(orientation) :: orientation
-    def unquote(function)(orientation = orientation) do
-      %{
-        orientation
-        | conclusion: %Conclusion{code: unquote(function) |> Atom.to_string() |> String.upcase()}
-      }
-    end
-  end)
 end
