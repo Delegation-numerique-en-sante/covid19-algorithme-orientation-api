@@ -1,7 +1,7 @@
 defmodule Covid19OrientationWeb.OrientationController do
   use Covid19OrientationWeb, :controller
   alias Covid19Orientation.Tests.Test
-  alias Covid19OrientationWeb.Operations.OpenApi.CreateOrientation
+  alias Covid19OrientationWeb.Operations.{CreateOrientation, EvaluateOrientation}
   alias Covid19OrientationWeb.Schemas.OrientationRequest
   alias OpenApiSpex.Plug.CastAndValidate
 
@@ -13,7 +13,7 @@ defmodule Covid19OrientationWeb.OrientationController do
     {:ok, orientation} =
       params
       |> Test.populate_statistiques()
-      |> Test.evaluate()
+      |> EvaluateOrientation.call()
 
     conn
     |> put_status(:created)

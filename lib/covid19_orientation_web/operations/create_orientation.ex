@@ -1,4 +1,4 @@
-defmodule Covid19OrientationWeb.Operations.OpenApi.CreateOrientation do
+defmodule Covid19OrientationWeb.Operations.CreateOrientation do
   @moduledoc """
   Open API CreateOrientation operation.
   """

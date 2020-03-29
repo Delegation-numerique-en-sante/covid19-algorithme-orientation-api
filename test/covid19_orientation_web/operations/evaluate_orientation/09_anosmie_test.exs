@@ -1,10 +1,11 @@
-defmodule Covid19Orientation.Tests.Test.TouxTest do
+defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AnosmieTest do
   @moduledoc """
-  Patient avec seulement toux.
+  Patient avec seulement anosmie.
   """
 
   use ExUnit.Case, async: true
   alias Covid19Orientation.Tests.Test
+  alias Covid19OrientationWeb.Operations.EvaluateOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
   setup do
@@ -12,7 +13,7 @@ defmodule Covid19Orientation.Tests.Test.TouxTest do
      orientation: %Orientation{
        symptomes: %Symptomes{
          temperature: 36.6,
-         toux: true
+         anosmie: true
        },
        pronostiques: %Pronostiques{cardiaque: false}
      }}
@@ -21,7 +22,7 @@ defmodule Covid19Orientation.Tests.Test.TouxTest do
   test "sans facteur de gravité", %{orientation: orientation} do
     {:ok, orientation} =
       orientation
-      |> Test.evaluate()
+      |> EvaluateOrientation.call()
 
     assert Test.symptomes3(orientation)
     assert Test.facteurs_gravite(orientation) == 0
@@ -32,12 +33,12 @@ defmodule Covid19Orientation.Tests.Test.TouxTest do
     {:ok, orientation} =
       %Orientation{
         orientation
-        | symptomes: %Symptomes{orientation.symptomes | essoufle: true}
+        | symptomes: %Symptomes{orientation.symptomes | fatigue: true}
       }
-      |> Test.evaluate()
+      |> EvaluateOrientation.call()
 
     assert Test.symptomes3(orientation)
-    assert Test.facteurs_gravite(orientation) >= 1
+    assert Test.facteurs_gravite_mineurs(orientation) >= 1
     assert orientation.conclusion.code == "FIN8"
   end
 
@@ -47,10 +48,9 @@ defmodule Covid19Orientation.Tests.Test.TouxTest do
         orientation
         | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
       }
-      |> Test.evaluate()
+      |> EvaluateOrientation.call()
 
     assert Test.symptomes3(orientation)
-    assert Test.facteurs_gravite(orientation) == 0
     assert Test.facteurs_pronostique(orientation) >= 1
     assert orientation.conclusion.code == "FIN8"
   end

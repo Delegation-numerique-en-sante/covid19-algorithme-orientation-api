@@ -1,10 +1,11 @@
-defmodule Covid19Orientation.Tests.Test.AnosmieTest do
+defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.MalDeGorgeTest do
   @moduledoc """
-  Patient avec seulement anosmie.
+  Patient avec seulement mal de gorge.
   """
 
   use ExUnit.Case, async: true
   alias Covid19Orientation.Tests.Test
+  alias Covid19OrientationWeb.Operations.EvaluateOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
   setup do
@@ -12,7 +13,7 @@ defmodule Covid19Orientation.Tests.Test.AnosmieTest do
      orientation: %Orientation{
        symptomes: %Symptomes{
          temperature: 36.6,
-         anosmie: true
+         mal_de_gorge: true
        },
        pronostiques: %Pronostiques{cardiaque: false}
      }}
@@ -21,7 +22,7 @@ defmodule Covid19Orientation.Tests.Test.AnosmieTest do
   test "sans facteur de gravité", %{orientation: orientation} do
     {:ok, orientation} =
       orientation
-      |> Test.evaluate()
+      |> EvaluateOrientation.call()
 
     assert Test.symptomes3(orientation)
     assert Test.facteurs_gravite(orientation) == 0
@@ -34,7 +35,7 @@ defmodule Covid19Orientation.Tests.Test.AnosmieTest do
         orientation
         | symptomes: %Symptomes{orientation.symptomes | fatigue: true}
       }
-      |> Test.evaluate()
+      |> EvaluateOrientation.call()
 
     assert Test.symptomes3(orientation)
     assert Test.facteurs_gravite_mineurs(orientation) >= 1
@@ -47,7 +48,7 @@ defmodule Covid19Orientation.Tests.Test.AnosmieTest do
         orientation
         | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
       }
-      |> Test.evaluate()
+      |> EvaluateOrientation.call()
 
     assert Test.symptomes3(orientation)
     assert Test.facteurs_pronostique(orientation) >= 1

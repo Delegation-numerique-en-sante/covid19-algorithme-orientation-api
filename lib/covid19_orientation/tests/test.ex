@@ -4,6 +4,7 @@ defmodule Covid19Orientation.Tests.Test do
   """
 
   alias __MODULE__
+  alias Covid19Orientation.Tests.Algorithme
   alias Covid19Orientation.Trees.{Tree, TreeTraversal}
 
   alias Covid19OrientationWeb.Schemas.{
@@ -16,6 +17,8 @@ defmodule Covid19Orientation.Tests.Test do
   @type tree() :: Tree.t()
   @type trees() :: [trees] | []
 
+  defdelegate algorithme(module), to: Algorithme, as: :call
+
   @codes ~w|fin1 fin2 fin3 fin4 fin5 fin6 fin7 fin8 fin9|a
 
   @seuil_moins_de_15_ans 15
@@ -27,18 +30,6 @@ defmodule Covid19Orientation.Tests.Test do
   @seuil_au_moins_39_de_temperature 39.0
 
   ## Opérations
-
-  @spec evaluate(orientation) :: orientation
-
-  def evaluate(orientation = orientation) do
-    arbre()
-    |> Tree.flatten()
-    |> Tree.traverse(orientation)
-    |> case do
-      {:ok, :done} -> {:ok, fin9(orientation)}
-      {:ok, %{key: key}} -> {:ok, key.(orientation)}
-    end
-  end
 
   @spec populate_statistiques(orientation) :: orientation
 
@@ -54,80 +45,6 @@ defmodule Covid19Orientation.Tests.Test do
         |> Map.put(key, apply(Test, key, [orientation]))
       end)
     )
-  end
-
-  ## Algorithme
-
-  @doc """
-  Arbre de décision de l'algorithme d'orientation du Covid-19.
-  """
-  @spec arbre() :: trees
-
-  def arbre do
-    [
-      %Tree{key: &fin1/1, operation: &moins_de_15_ans/1},
-      %Tree{
-        operation: &symptomes1/1,
-        children: [
-          %Tree{key: &fin5/1, operation: &(facteurs_gravite_majeurs(&1) >= 1)},
-          %Tree{
-            operation: &(facteurs_pronostique(&1) >= 1),
-            children: [
-              %Tree{key: &fin4/1, operation: &(facteurs_gravite_mineurs(&1) == 2)},
-              %Tree{key: &fin3/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
-              %Tree{key: &fin3/1, operation: &(facteurs_gravite(&1) == 0)}
-            ]
-          },
-          %Tree{
-            operation: &(facteurs_pronostique(&1) == 0),
-            children: [
-              %Tree{key: &fin3/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
-              %Tree{
-                operation: &(facteurs_gravite(&1) == 0),
-                children: [
-                  %Tree{key: &fin3/1, operation: &entre_50_et_69_ans(&1)},
-                  %Tree{key: &fin2/1, operation: &moins_de_50_ans(&1)}
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      %Tree{
-        operation: &symptomes2/1,
-        children: [
-          %Tree{key: &fin5/1, operation: &(facteurs_gravite_majeurs(&1) >= 1)},
-          %Tree{
-            operation: &(facteurs_pronostique(&1) >= 1),
-            children: [
-              %Tree{key: &fin4/1, operation: &(facteurs_gravite_mineurs(&1) == 2)},
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite_mineurs(&1) == 1)},
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite(&1) == 0)}
-            ]
-          },
-          %Tree{
-            operation: &(facteurs_pronostique(&1) == 0),
-            children: [
-              %Tree{
-                operation: &(facteurs_gravite_mineurs(&1) >= 1),
-                children: [
-                  %Tree{key: &fin6/1, operation: &(facteurs_gravite_majeurs(&1) == 0)}
-                ]
-              },
-              %Tree{key: &fin6/1, operation: &(facteurs_gravite(&1) == 0)}
-            ]
-          }
-        ]
-      },
-      %Tree{
-        operation: &symptomes3/1,
-        children: [
-          %Tree{key: &fin8/1, operation: &(facteurs_pronostique(&1) >= 1)},
-          %Tree{key: &fin8/1, operation: &(facteurs_gravite(&1) >= 1)},
-          %Tree{key: &fin7/1, operation: &(facteurs_gravite(&1) == 0)}
-        ]
-      }
-    ]
   end
 
   @spec symptomes1(orientation) :: boolean

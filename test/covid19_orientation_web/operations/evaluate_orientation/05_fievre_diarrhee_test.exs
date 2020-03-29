@@ -1,19 +1,19 @@
-defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
+defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreDiarrheeTest do
   @moduledoc """
-  Patient avec toux + mal de gorge.
+  Patient avec fièvre + diarrhée.
   """
 
   use ExUnit.Case, async: true
   alias Covid19Orientation.Tests.Test
+  alias Covid19OrientationWeb.Operations.EvaluateOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
   setup do
     {:ok,
      orientation: %Orientation{
        symptomes: %Symptomes{
-         temperature: 36.6,
-         toux: true,
-         mal_de_gorge: true
+         temperature: 37.8,
+         diarrhee: true
        },
        pronostiques: %Pronostiques{cardiaque: false}
      }}
@@ -26,7 +26,7 @@ defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
           orientation
           | pronostiques: %Pronostiques{orientation.pronostiques | age: 49}
         }
-        |> Test.evaluate()
+        |> EvaluateOrientation.call()
 
       assert Test.symptomes1(orientation)
       assert Test.facteurs_pronostique(orientation) == 0
@@ -40,7 +40,7 @@ defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
           orientation
           | pronostiques: %Pronostiques{orientation.pronostiques | age: 50}
         }
-        |> Test.evaluate()
+        |> EvaluateOrientation.call()
 
       assert Test.symptomes1(orientation)
       assert Test.facteurs_pronostique(orientation) == 0
@@ -54,7 +54,7 @@ defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
           orientation
           | symptomes: %Symptomes{orientation.symptomes | fatigue: true}
         }
-        |> Test.evaluate()
+        |> EvaluateOrientation.call()
 
       assert Test.symptomes1(orientation)
       assert Test.facteurs_pronostique(orientation) == 0
@@ -70,7 +70,7 @@ defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
           orientation
           | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
         }
-        |> Test.evaluate()
+        |> EvaluateOrientation.call()
 
       assert Test.symptomes1(orientation)
       assert Test.facteurs_pronostique(orientation) >= 1
@@ -85,7 +85,7 @@ defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
           | symptomes: %Symptomes{orientation.symptomes | fatigue: true},
             pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
         }
-        |> Test.evaluate()
+        |> EvaluateOrientation.call()
 
       assert Test.symptomes1(orientation)
       assert Test.facteurs_pronostique(orientation) >= 1
@@ -100,7 +100,7 @@ defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
           | symptomes: %Symptomes{orientation.symptomes | temperature: 39.0, fatigue: true},
             pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
         }
-        |> Test.evaluate()
+        |> EvaluateOrientation.call()
 
       assert Test.symptomes1(orientation)
       assert Test.facteurs_pronostique(orientation) >= 1
@@ -116,7 +116,7 @@ defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
         orientation
         | symptomes: %Symptomes{orientation.symptomes | essoufle: true}
       }
-      |> Test.evaluate()
+      |> EvaluateOrientation.call()
 
     assert Test.symptomes1(orientation)
     assert Test.facteurs_gravite_majeurs(orientation) >= 1
