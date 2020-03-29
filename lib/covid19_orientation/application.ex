@@ -9,7 +9,8 @@ defmodule Covid19Orientation.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      Covid19OrientationWeb.Endpoint
+      Covid19OrientationWeb.Endpoint,
+      Covid19Orientation.Data.Supervisor
       # Starts a worker by calling: Covid19Orientation.Worker.start_link(arg)
       # {Covid19Orientation.Worker, arg},
     ]
