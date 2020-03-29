@@ -1,41 +1,46 @@
 FROM elixir:1.10.2-alpine AS build
 
-# install build dependencies
-RUN apk add --update git
+# Set environment variables for building the application
+ENV MIX_ENV=prod
 
-# prepare build dir
-RUN mkdir /app
-WORKDIR /app
+# Install build dependencies
+RUN apk add --update build-base gcc git && \
+    rm -rf /var/cache/apk/*
 
-# install hex + rebar
+# Install hex + rebar
 RUN mix local.hex --force && \
     mix local.rebar --force
 
-# set build ENV
-ENV MIX_ENV=prod
+# Create the application build directory
+RUN mkdir /app
+WORKDIR /app
 
-# install mix dependencies
+# Install mix dependencies
 COPY mix.exs mix.lock ./
 COPY config config
 RUN mix do deps.get, compile
 
-# build project
+# Build project
 COPY lib lib
 RUN mix compile
 
-# build release
+# Build release
 COPY rel rel
 RUN mix release
 
-# prepare release image
-FROM alpine:3.9
-RUN apk add --update bash openssl
+# Prepare release image
+FROM alpine:3.9 AS app
 
-RUN mkdir /app
-WORKDIR /app
+# Install openssl
+RUN apk add --update bash openssl && \
+    rm -rf /var/cache/apk/*
 
-COPY --from=build /app/_build/prod/rel/covid19_orientation ./
-RUN chown -R nobody: /app
-USER nobody
+# Copy over the build artifact from the previous step and create a non root user
+RUN adduser -D -h /home/app app
+WORKDIR /home/app
 
-ENV HOME=/app
+COPY --from=build /app/_build/prod/rel/covid19_orientation .
+RUN chown -R app: .
+USER app
+
+ENV HOME=/home/app
