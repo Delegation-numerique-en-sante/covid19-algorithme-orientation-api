@@ -3,21 +3,32 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation do
   Evaluate orientation test.
   """
 
-  alias Covid19Orientation.Tests.{Algorithme, Test}
-  alias Covid19Orientation.Trees.Tree
+  alias Covid19Orientation.Tests.{Algorithme, Codes}
+  alias Covid19Orientation.Trees.{FlattenTree, TraverseTree, Tree}
+  alias Covid19OrientationWeb.Operations.{PopulateConclusion, PopulateStatistics}
+  alias Covid19OrientationWeb.Schemas.Orientation
 
   @type orientation() :: Orientation.t()
+  @type code() :: String.t()
 
   @spec call(orientation) :: {:ok, orientation}
 
-  def call(orientation) do
+  def call(orientation = %Orientation{}) do
     Tree
-    |> Test.algorithme()
-    |> Tree.flatten()
-    |> Tree.traverse(orientation)
+    |> Algorithme.call()
+    |> FlattenTree.call()
+    |> TraverseTree.call(orientation)
     |> case do
-      {:ok, :done} -> {:ok, Test.fin9(orientation)}
-      {:ok, %{key: key}} -> {:ok, key.(orientation)}
+      {:ok, %{key: key}} -> {:ok, populate(orientation, key.())}
+      {:error, :done} -> {:ok, populate(orientation, Codes.fin9())}
     end
+  end
+
+  @spec populate(orientation, code) :: orientation
+
+  defp populate(orientation = %Orientation{}, code) do
+    orientation
+    |> PopulateConclusion.call(code)
+    |> PopulateStatistics.call()
   end
 end

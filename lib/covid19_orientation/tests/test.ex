@@ -29,24 +29,6 @@ defmodule Covid19Orientation.Tests.Test do
   @seuil_fievre 37.8
   @seuil_au_moins_39_de_temperature 39.0
 
-  ## Opérations
-
-  @spec populate_statistiques(orientation) :: orientation
-
-  def populate_statistiques(orientation = orientation) do
-    Map.put(
-      orientation,
-      :statistiques,
-      %Statistiques{}
-      |> Map.from_struct()
-      |> Map.keys()
-      |> Enum.reduce(%Statistiques{}, fn key, statistiques ->
-        statistiques
-        |> Map.put(key, apply(Test, key, [orientation]))
-      end)
-    )
-  end
-
   @spec symptomes1(orientation) :: boolean
 
   def symptomes1(

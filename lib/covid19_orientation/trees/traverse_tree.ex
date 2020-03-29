@@ -12,11 +12,11 @@ defmodule Covid19Orientation.Trees.TraverseTree do
   @type value() :: any
   @type previous() :: {depth, boolean}
 
-  @spec call(stack, value, previous) :: {:ok, tree} | {:ok, :done}
+  @spec call(stack, value, previous) :: {:ok, tree} | {:error, :done}
 
   def call(stack, value, previous \\ {0, true})
 
-  def call([], _, _), do: {:ok, :done}
+  def call([], _, _), do: {:error, :done}
 
   def call([tree | stack], value, {prev_depth, prev_result}) do
     with result <- tree.operation.(value) do

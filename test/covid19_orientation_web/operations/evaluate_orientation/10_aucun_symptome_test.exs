@@ -4,7 +4,6 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AucunSymptomeTest
   """
 
   use ExUnit.Case, async: true
-  alias Covid19Orientation.Tests.Test
   alias Covid19OrientationWeb.Operations.EvaluateOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 

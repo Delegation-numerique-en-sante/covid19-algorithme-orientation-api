@@ -40,12 +40,12 @@ defmodule Covid19Orientation.Trees.TraverseTreeTest do
     end
 
     test "s'arrête à la fin du chemin, s'il n'y a pas de feuille vraie", %{trees: trees} do
-      {:ok, ok} =
+      {:error, error} =
         trees
         |> FlattenTree.call()
         |> TraverseTree.call(1.0)
 
-      assert ok == :done
+      assert error == :done
     end
   end
 end
