@@ -4,7 +4,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxTest do
   """
 
   use ExUnit.Case, async: true
-  alias Covid19Orientation.Tests.Test
+  alias Covid19Orientation.Tests.Conditions
   alias Covid19OrientationWeb.Operations.EvaluateOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
@@ -24,8 +24,8 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxTest do
       orientation
       |> EvaluateOrientation.call()
 
-    assert Test.symptomes3(orientation)
-    assert Test.facteurs_gravite(orientation) == 0
+    assert Conditions.symptomes3(orientation)
+    assert Conditions.facteurs_gravite(orientation) == 0
     assert orientation.conclusion.code == "FIN7"
   end
 
@@ -37,8 +37,8 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxTest do
       }
       |> EvaluateOrientation.call()
 
-    assert Test.symptomes3(orientation)
-    assert Test.facteurs_gravite(orientation) >= 1
+    assert Conditions.symptomes3(orientation)
+    assert Conditions.facteurs_gravite(orientation) >= 1
     assert orientation.conclusion.code == "FIN8"
   end
 
@@ -50,9 +50,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxTest do
       }
       |> EvaluateOrientation.call()
 
-    assert Test.symptomes3(orientation)
-    assert Test.facteurs_gravite(orientation) == 0
-    assert Test.facteurs_pronostique(orientation) >= 1
+    assert Conditions.symptomes3(orientation)
+    assert Conditions.facteurs_gravite(orientation) == 0
+    assert Conditions.facteurs_pronostique(orientation) >= 1
     assert orientation.conclusion.code == "FIN8"
   end
 end

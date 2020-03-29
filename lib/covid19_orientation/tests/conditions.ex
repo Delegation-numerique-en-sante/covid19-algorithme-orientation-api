@@ -1,25 +1,18 @@
-defmodule Covid19Orientation.Tests.Test do
+defmodule Covid19Orientation.Tests.Conditions do
   @moduledoc """
-  Test d’orientation du Covid-19.
+  Conditions du test d’orientation du Covid-19.
   """
 
   alias __MODULE__
-  alias Covid19Orientation.Tests.Algorithme
-  alias Covid19Orientation.Trees.{Tree, TreeTraversal}
 
-  alias Covid19OrientationWeb.Schemas.{
-    Conclusion,
-    Orientation,
-    Statistiques
-  }
-
-  @type orientation() :: Orientation.t()
-  @type tree() :: Tree.t()
-  @type trees() :: [trees] | []
-
-  defdelegate algorithme(module), to: Algorithme, as: :call
-
-  @codes ~w|fin1 fin2 fin3 fin4 fin5 fin6 fin7 fin8 fin9|a
+  @type symptomes :: struct
+  @type pronostiques :: struct
+  @type orientation :: %{
+          :__struct__ => atom(),
+          :symptome => symptomes,
+          :pronostiques => pronostiques,
+          optional(atom()) => any()
+        }
 
   @seuil_moins_de_15_ans 15
   @seuil_moins_de_50_ans 50
@@ -64,41 +57,41 @@ defmodule Covid19Orientation.Tests.Test do
 
   @spec moins_de_15_ans(orientation) :: boolean
 
-  def moins_de_15_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def moins_de_15_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def moins_de_15_ans(%Orientation{pronostiques: %{age: age}}) do
+  def moins_de_15_ans(%{pronostiques: %{age: age}}) do
     age < @seuil_moins_de_15_ans
   end
 
   @spec moins_de_50_ans(orientation) :: boolean
 
-  def moins_de_50_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def moins_de_50_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def moins_de_50_ans(%Orientation{pronostiques: %{age: age}}) do
+  def moins_de_50_ans(%{pronostiques: %{age: age}}) do
     age < @seuil_moins_de_50_ans
   end
 
   @spec entre_50_et_69_ans(orientation) :: boolean
 
-  def entre_50_et_69_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def entre_50_et_69_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def entre_50_et_69_ans(%Orientation{pronostiques: %{age: age}}) do
+  def entre_50_et_69_ans(%{pronostiques: %{age: age}}) do
     age >= @seuil_moins_de_50_ans && age < @seuil_moins_de_70_ans
   end
 
   @spec moins_de_70_ans(orientation) :: boolean
 
-  def moins_de_70_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def moins_de_70_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def moins_de_70_ans(%Orientation{pronostiques: %{age: age}}) do
+  def moins_de_70_ans(%{pronostiques: %{age: age}}) do
     age < @seuil_moins_de_70_ans
   end
 
   @spec au_moins_70_ans(orientation) :: boolean
 
-  def au_moins_70_ans(%Orientation{pronostiques: %{age: nil}}), do: false
+  def au_moins_70_ans(%{pronostiques: %{age: nil}}), do: false
 
-  def au_moins_70_ans(%Orientation{pronostiques: %{age: age}}) do
+  def au_moins_70_ans(%{pronostiques: %{age: age}}) do
     age >= @seuil_au_moins_70_ans
   end
 
@@ -206,17 +199,4 @@ defmodule Covid19Orientation.Tests.Test do
       _ -> acc
     end
   end
-
-  ## Conclusions possibles
-
-  @codes
-  |> Enum.each(fn function ->
-    @spec unquote(function)(orientation) :: orientation
-    def unquote(function)(orientation = orientation) do
-      %{
-        orientation
-        | conclusion: %Conclusion{code: unquote(function) |> Atom.to_string() |> String.upcase()}
-      }
-    end
-  end)
 end

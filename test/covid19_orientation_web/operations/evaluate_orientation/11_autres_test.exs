@@ -4,7 +4,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
   """
 
   use ExUnit.Case, async: true
-  alias Covid19Orientation.Tests.Test
+  alias Covid19Orientation.Tests.Conditions
   alias Covid19OrientationWeb.Operations.EvaluateOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
@@ -16,9 +16,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
       }
       |> EvaluateOrientation.call()
 
-    assert Test.facteurs_pronostique(orientation) == 0
-    assert Test.facteurs_gravite_mineurs(orientation) == 1
-    assert Test.facteurs_gravite_majeurs(orientation) == 0
+    assert Conditions.facteurs_pronostique(orientation) == 0
+    assert Conditions.facteurs_gravite_mineurs(orientation) == 1
+    assert Conditions.facteurs_gravite_majeurs(orientation) == 0
     assert orientation.conclusion.code == "FIN8"
   end
 
@@ -30,9 +30,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
       }
       |> EvaluateOrientation.call()
 
-    assert Test.facteurs_pronostique(orientation) == 1
-    assert Test.facteurs_gravite_mineurs(orientation) == 1
-    assert Test.facteurs_gravite_majeurs(orientation) == 0
+    assert Conditions.facteurs_pronostique(orientation) == 1
+    assert Conditions.facteurs_gravite_mineurs(orientation) == 1
+    assert Conditions.facteurs_gravite_majeurs(orientation) == 0
     assert orientation.conclusion.code == "FIN8"
   end
 
@@ -44,9 +44,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
       }
       |> EvaluateOrientation.call()
 
-    assert Test.facteurs_pronostique(orientation) == 0
-    assert Test.facteurs_gravite_mineurs(orientation) == 1
-    assert Test.facteurs_gravite_majeurs(orientation) == 0
+    assert Conditions.facteurs_pronostique(orientation) == 0
+    assert Conditions.facteurs_gravite_mineurs(orientation) == 1
+    assert Conditions.facteurs_gravite_majeurs(orientation) == 0
     assert orientation.conclusion.code == "FIN9"
   end
 end

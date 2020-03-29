@@ -4,7 +4,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
   """
 
   use ExUnit.Case, async: true
-  alias Covid19Orientation.Tests.Test
+  alias Covid19Orientation.Tests.Conditions
   alias Covid19OrientationWeb.Operations.EvaluateOrientation
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
@@ -25,9 +25,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
         orientation
         |> EvaluateOrientation.call()
 
-      assert Test.symptomes2(orientation)
-      assert Test.facteurs_pronostique(orientation) == 0
-      assert Test.facteurs_gravite(orientation) == 0
+      assert Conditions.symptomes2(orientation)
+      assert Conditions.facteurs_pronostique(orientation) == 0
+      assert Conditions.facteurs_gravite(orientation) == 0
       assert orientation.conclusion.code == "FIN6"
     end
 
@@ -41,10 +41,10 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Test.symptomes2(orientation)
-      assert Test.facteurs_pronostique(orientation) == 0
-      assert Test.facteurs_gravite_mineurs(orientation) >= 1
-      assert Test.facteurs_gravite_majeurs(orientation) == 0
+      assert Conditions.symptomes2(orientation)
+      assert Conditions.facteurs_pronostique(orientation) == 0
+      assert Conditions.facteurs_gravite_mineurs(orientation) >= 1
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN6"
     end
   end
@@ -58,9 +58,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Test.symptomes2(orientation)
-      assert Test.facteurs_pronostique(orientation) >= 1
-      assert Test.facteurs_gravite(orientation) == 0
+      assert Conditions.symptomes2(orientation)
+      assert Conditions.facteurs_pronostique(orientation) >= 1
+      assert Conditions.facteurs_gravite(orientation) == 0
       assert orientation.conclusion.code == "FIN6"
     end
 
@@ -73,9 +73,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Test.symptomes2(orientation)
-      assert Test.facteurs_pronostique(orientation) >= 1
-      assert Test.facteurs_gravite_mineurs(orientation) == 1
+      assert Conditions.symptomes2(orientation)
+      assert Conditions.facteurs_pronostique(orientation) >= 1
+      assert Conditions.facteurs_gravite_mineurs(orientation) == 1
       assert orientation.conclusion.code == "FIN6"
     end
 
@@ -88,9 +88,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Test.symptomes2(orientation)
-      assert Test.facteurs_pronostique(orientation) >= 1
-      assert Test.facteurs_gravite_mineurs(orientation) == 2
+      assert Conditions.symptomes2(orientation)
+      assert Conditions.facteurs_pronostique(orientation) >= 1
+      assert Conditions.facteurs_gravite_mineurs(orientation) == 2
       assert orientation.conclusion.code == "FIN4"
     end
   end
@@ -104,8 +104,8 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
       }
       |> EvaluateOrientation.call()
 
-    assert Test.symptomes2(orientation)
-    assert Test.facteurs_gravite_majeurs(orientation) >= 1
+    assert Conditions.symptomes2(orientation)
+    assert Conditions.facteurs_gravite_majeurs(orientation) >= 1
     assert orientation.conclusion.code == "FIN5"
   end
 end

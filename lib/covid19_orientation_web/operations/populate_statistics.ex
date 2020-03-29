@@ -3,7 +3,7 @@ defmodule Covid19OrientationWeb.Operations.PopulateStatistics do
   Populate statistics.
   """
 
-  alias Covid19Orientation.Tests.Test
+  alias Covid19Orientation.Tests.Conditions
   alias Covid19OrientationWeb.Schemas.{Orientation, Statistiques}
 
   @type orientation :: Orientation.t()
@@ -19,7 +19,7 @@ defmodule Covid19OrientationWeb.Operations.PopulateStatistics do
       |> Map.keys()
       |> Enum.reduce(%Statistiques{}, fn key, statistiques ->
         statistiques
-        |> Map.put(key, apply(Test, key, [orientation]))
+        |> Map.put(key, apply(Conditions, key, [orientation]))
       end)
     )
   end
