@@ -1,11 +1,11 @@
 defmodule Covid19OrientationWeb.OrientationController do
   use Covid19OrientationWeb, :controller
   alias Covid19Orientation.Tests.Test
-  alias Covid19OrientationWeb.OrientationOperation
+  alias Covid19OrientationWeb.Operations.OpenApi.CreateOrientation
   alias Covid19OrientationWeb.Schemas.OrientationRequest
   alias OpenApiSpex.Plug.CastAndValidate
 
-  defdelegate open_api_operation(action), to: OrientationOperation
+  defdelegate open_api_operation(action), to: CreateOrientation
 
   plug CastAndValidate
 

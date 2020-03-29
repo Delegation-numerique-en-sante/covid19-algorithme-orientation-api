@@ -1,6 +1,6 @@
-defmodule Covid19OrientationWeb.OrientationOperation do
+defmodule Covid19OrientationWeb.Operations.OpenApi.CreateOrientation do
   @moduledoc """
-  Open API Spex operations.
+  Open API CreateOrientation operation.
   """
 
   import OpenApiSpex.Operation, only: [request_body: 4, response: 3]
@@ -13,12 +13,12 @@ defmodule Covid19OrientationWeb.OrientationOperation do
   @spec open_api_operation(action) :: operation
 
   def open_api_operation(:create) do
-    create_operation()
+    call()
   end
 
-  @spec create_operation() :: operation
+  @spec call() :: operation
 
-  def create_operation do
+  def call do
     %Operation{
       summary: "Évaluer le test d'orientation du Covid-19",
       description: "Évaluer le test d'orientation du Covid-19",
