@@ -19,20 +19,16 @@ defmodule Covid19Orientation.Data.Store do
     )
   end
 
-  def get(timestamp) do
-    case GenServer.call(__MODULE__, {:get, timestamp}) do
+  def get(id, timestamp) do
+    case GenServer.call(__MODULE__, {:get, {id, timestamp}}) do
       [] -> {:not_found}
-      [{_timestamp, orientation}] -> {:found, orientation}
+      [{{_id, _timestamp}, orientation}] -> {:found, orientation}
     end
   end
 
-  def set(orientation) do
-    GenServer.call(__MODULE__, {:set, timestamp(), orientation})
-    {:ok, timestamp}
-  end
-
-  defp timestamp do
-    :os.system_time(:millisecond)
+  def set(orientation = %{id: id, timestamp: timestamp}) do
+    GenServer.call(__MODULE__, {:set, {id, timestamp}, orientation})
+    {:ok, orientation}
   end
 
   # GenServer callbacks

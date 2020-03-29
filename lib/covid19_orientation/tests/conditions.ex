@@ -3,8 +3,6 @@ defmodule Covid19Orientation.Tests.Conditions do
   Conditions du test d’orientation du Covid-19.
   """
 
-  alias __MODULE__
-
   @type symptomes :: struct
   @type pronostiques :: struct
   @type orientation :: %{

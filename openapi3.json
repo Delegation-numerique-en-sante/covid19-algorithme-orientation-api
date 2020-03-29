@@ -37,6 +37,7 @@
           "conclusion": {
             "code": "FIN1"
           },
+          "id": "fcfe5f21-8a08-4c9a-9f97-29d2fd6a27b9",
           "pronostiques": {
             "age": 70,
             "cancer": true,
@@ -78,11 +79,17 @@
             "mal_de_gorge": true,
             "temperature": 37.5,
             "toux": true
-          }
+          },
+          "timestamp": "2020-03-29 15:20:11.875767Z"
         },
         "properties": {
           "conclusion": {
             "$ref": "#/components/schemas/Conclusion"
+          },
+          "id": {
+            "description": "ID du test d'orientation",
+            "format": "uuid4",
+            "type": "string"
           },
           "pronostiques": {
             "$ref": "#/components/schemas/Pronostiques"
@@ -95,6 +102,11 @@
           },
           "symptomes": {
             "$ref": "#/components/schemas/Symptomes"
+          },
+          "timestamp": {
+            "description": "Date du test d'orientation",
+            "format": "date-time",
+            "type": "string"
           }
         },
         "required": [
@@ -162,6 +174,7 @@
             "conclusion": {
               "code": "FIN1"
             },
+            "id": "fcfe5f21-8a08-4c9a-9f97-29d2fd6a27b9",
             "pronostiques": {
               "age": 70,
               "cancer": true,
@@ -203,7 +216,8 @@
               "mal_de_gorge": true,
               "temperature": 37.5,
               "toux": true
-            }
+            },
+            "timestamp": "2020-03-29 15:20:11.875767Z"
           }
         },
         "properties": {

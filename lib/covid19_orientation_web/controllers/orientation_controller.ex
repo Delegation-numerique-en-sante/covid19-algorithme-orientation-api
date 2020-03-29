@@ -1,10 +1,13 @@
 defmodule Covid19OrientationWeb.OrientationController do
   use Covid19OrientationWeb, :controller
 
+  alias Covid19Orientation.Data.Store
+
   alias Covid19OrientationWeb.Operations.{
     CreateOrientation,
     EvaluateOrientation,
-    PopulateStatistics
+    SetId,
+    SetTimestamp
   }
 
   alias Covid19OrientationWeb.Schemas.OrientationRequest
@@ -18,6 +21,12 @@ defmodule Covid19OrientationWeb.OrientationController do
     {:ok, orientation} =
       params
       |> EvaluateOrientation.call()
+
+    {:ok, orientation} =
+      orientation
+      |> SetId.call()
+      |> SetTimestamp.call()
+      |> Store.set()
 
     conn
     |> put_status(:created)

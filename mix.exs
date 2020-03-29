@@ -38,6 +38,7 @@ defmodule Covid19Orientation.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:elixir_uuid, "~> 1.2"},
       {:jason, "~> 1.2.0"},
       {:open_api_spex, "~> 3.6"},
       {:phoenix, "~> 1.4.16"},

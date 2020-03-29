@@ -15,6 +15,8 @@ defmodule Covid19OrientationWeb.Schemas.OrientationResponse do
     },
     example: %{
       "data" => %{
+        "id" => "fcfe5f21-8a08-4c9a-9f97-29d2fd6a27b9",
+        "timestamp" => "2020-03-29 15:20:11.875767Z",
         "symptomes" => %{
           "temperature" => 37.5,
           "toux" => true,

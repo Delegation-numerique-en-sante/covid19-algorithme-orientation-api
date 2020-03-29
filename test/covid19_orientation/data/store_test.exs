@@ -2,7 +2,11 @@ defmodule Covid19Orientation.Data.StoreTest do
   use ExUnit.Case, async: true
   alias Covid19Orientation.Data.Store
 
-  alias Covid19OrientationWeb.Operations.EvaluateOrientation
+  alias Covid19OrientationWeb.Operations.{
+    EvaluateOrientation,
+    SetId,
+    SetTimestamp
+  }
 
   alias Covid19OrientationWeb.Schemas.{
     Orientation,
@@ -20,8 +24,12 @@ defmodule Covid19Orientation.Data.StoreTest do
       }
       |> EvaluateOrientation.call()
 
-    {:ok, timestamp} = Store.set(orientation)
+    {:ok, orientation = %{id: id, timestamp: timestamp}} =
+      orientation
+      |> SetId.call()
+      |> SetTimestamp.call()
+      |> Store.set()
 
-    assert {:found, orientation} == Store.get(timestamp)
+    assert {:found, orientation} == Store.get(id, timestamp)
   end
 end
