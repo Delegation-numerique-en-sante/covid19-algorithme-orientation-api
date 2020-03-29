@@ -1,6 +1,6 @@
-defmodule Covid19Orientation.TestOrientationTest do
+defmodule Covid19Orientation.Tests.TestTest do
   use ExUnit.Case, async: true
-  alias Covid19Orientation.TestOrientation
+  alias Covid19Orientation.Tests.Test
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
   setup do
@@ -14,7 +14,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 14}
       }
 
-      assert TestOrientation.moins_de_15_ans(orientation)
+      assert Test.moins_de_15_ans(orientation)
     end
 
     test "a au moins 15 ans", %{orientation: orientation} do
@@ -23,7 +23,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 15}
       }
 
-      assert !TestOrientation.moins_de_15_ans(orientation)
+      assert !Test.moins_de_15_ans(orientation)
     end
   end
 
@@ -34,7 +34,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 49}
       }
 
-      assert TestOrientation.moins_de_50_ans(orientation)
+      assert Test.moins_de_50_ans(orientation)
     end
 
     test "a au moins 50 ans", %{orientation: orientation} do
@@ -43,7 +43,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 50}
       }
 
-      assert !TestOrientation.moins_de_50_ans(orientation)
+      assert !Test.moins_de_50_ans(orientation)
     end
   end
 
@@ -54,7 +54,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 49}
       }
 
-      assert !TestOrientation.entre_50_et_69_ans(orientation)
+      assert !Test.entre_50_et_69_ans(orientation)
     end
 
     test "a au moins 50 ans", %{orientation: orientation} do
@@ -63,7 +63,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 50}
       }
 
-      assert TestOrientation.entre_50_et_69_ans(orientation)
+      assert Test.entre_50_et_69_ans(orientation)
     end
 
     test "a au plus 69 ans", %{orientation: orientation} do
@@ -72,7 +72,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 69}
       }
 
-      assert TestOrientation.entre_50_et_69_ans(orientation)
+      assert Test.entre_50_et_69_ans(orientation)
     end
 
     test "a plus de 69 ans", %{orientation: orientation} do
@@ -81,7 +81,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 70}
       }
 
-      assert !TestOrientation.entre_50_et_69_ans(orientation)
+      assert !Test.entre_50_et_69_ans(orientation)
     end
   end
 
@@ -92,7 +92,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 69}
       }
 
-      assert TestOrientation.moins_de_70_ans(orientation)
+      assert Test.moins_de_70_ans(orientation)
     end
 
     test "a au moins 70 ans", %{orientation: orientation} do
@@ -101,7 +101,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 70}
       }
 
-      assert !TestOrientation.moins_de_70_ans(orientation)
+      assert !Test.moins_de_70_ans(orientation)
     end
   end
 
@@ -112,7 +112,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 70}
       }
 
-      assert TestOrientation.au_moins_70_ans(orientation)
+      assert Test.au_moins_70_ans(orientation)
     end
 
     test "a moins de 70 ans", %{orientation: orientation} do
@@ -121,7 +121,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | age: 69}
       }
 
-      assert !TestOrientation.au_moins_70_ans(orientation)
+      assert !Test.au_moins_70_ans(orientation)
     end
   end
 
@@ -132,7 +132,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | poids: 67.5, taille: 1.5}
       }
 
-      assert TestOrientation.au_moins_30_imc(orientation)
+      assert Test.au_moins_30_imc(orientation)
     end
 
     test "si IMC moins 30 non", %{orientation: orientation} do
@@ -141,7 +141,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | poids: 67.4, taille: 1.5}
       }
 
-      assert !TestOrientation.au_moins_30_imc(orientation)
+      assert !Test.au_moins_30_imc(orientation)
     end
   end
 
@@ -152,7 +152,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: nil}
       }
 
-      assert TestOrientation.fievre(orientation)
+      assert Test.fievre(orientation)
     end
 
     test "si la température est >= 37,8 la personne a fièvre", %{orientation: orientation} do
@@ -161,7 +161,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: 37.8}
       }
 
-      assert TestOrientation.fievre(orientation)
+      assert Test.fievre(orientation)
     end
 
     test "si la température est < 37,8 la personne n'a pas fièvre", %{orientation: orientation} do
@@ -170,7 +170,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: 37.7}
       }
 
-      assert !TestOrientation.fievre(orientation)
+      assert !Test.fievre(orientation)
     end
   end
 
@@ -181,7 +181,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: nil}
       }
 
-      assert !TestOrientation.au_moins_39_de_temperature(orientation)
+      assert !Test.au_moins_39_de_temperature(orientation)
     end
 
     test "si la température est < 39,0°C non", %{orientation: orientation} do
@@ -190,7 +190,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: 38.9}
       }
 
-      assert !TestOrientation.au_moins_39_de_temperature(orientation)
+      assert !Test.au_moins_39_de_temperature(orientation)
     end
 
     test "si la température est >= 39,8°C oui", %{orientation: orientation} do
@@ -199,7 +199,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: 39.0}
       }
 
-      assert TestOrientation.au_moins_39_de_temperature(orientation)
+      assert Test.au_moins_39_de_temperature(orientation)
     end
   end
 
@@ -210,7 +210,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: false}
       }
 
-      assert !TestOrientation.cardiaque(orientation)
+      assert !Test.cardiaque(orientation)
     end
 
     test "si ce n'est pas renseignée, on considère que oui", %{orientation: orientation} do
@@ -219,7 +219,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: nil}
       }
 
-      assert TestOrientation.cardiaque(orientation)
+      assert Test.cardiaque(orientation)
     end
   end
 
@@ -234,7 +234,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         }
     }
 
-    assert TestOrientation.facteurs_gravite(orientation) == 3
+    assert Test.facteurs_gravite(orientation) == 3
   end
 
   test "calcule le nombre de facteurs de gravité mineurs", %{orientation: orientation} do
@@ -248,7 +248,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         }
     }
 
-    assert TestOrientation.facteurs_gravite_mineurs(orientation) == 1
+    assert Test.facteurs_gravite_mineurs(orientation) == 1
   end
 
   test "calcule le nombre de facteurs de gravité majeurs", %{orientation: orientation} do
@@ -262,7 +262,7 @@ defmodule Covid19Orientation.TestOrientationTest do
         }
     }
 
-    assert TestOrientation.facteurs_gravite_majeurs(orientation) == 2
+    assert Test.facteurs_gravite_majeurs(orientation) == 2
   end
 
   test "calcule le nombre de facteurs pronostique", %{orientation: orientation} do
@@ -280,6 +280,6 @@ defmodule Covid19Orientation.TestOrientationTest do
         }
     }
 
-    assert TestOrientation.facteurs_pronostique(orientation) == 4
+    assert Test.facteurs_pronostique(orientation) == 4
   end
 end

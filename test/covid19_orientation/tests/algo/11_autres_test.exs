@@ -1,10 +1,10 @@
-defmodule Covid19Orientation.TestOrientation.AutresTest do
+defmodule Covid19Orientation.Tests.Test.AutresTest do
   @moduledoc """
   Autres.
   """
 
   use ExUnit.Case, async: true
-  alias Covid19Orientation.TestOrientation
+  alias Covid19Orientation.Tests.Test
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
   test "Bastien Guerry #1" do
@@ -13,11 +13,11 @@ defmodule Covid19Orientation.TestOrientation.AutresTest do
         symptomes: %Symptomes{temperature: 36.6, anosmie: true, fatigue: true},
         pronostiques: %Pronostiques{age: 50, cardiaque: false, taille: 1.2, poids: 40.0}
       }
-      |> TestOrientation.evaluate()
+      |> Test.evaluate()
 
-    assert TestOrientation.facteurs_pronostique(orientation) == 0
-    assert TestOrientation.facteurs_gravite_mineurs(orientation) == 1
-    assert TestOrientation.facteurs_gravite_majeurs(orientation) == 0
+    assert Test.facteurs_pronostique(orientation) == 0
+    assert Test.facteurs_gravite_mineurs(orientation) == 1
+    assert Test.facteurs_gravite_majeurs(orientation) == 0
     assert orientation.conclusion.code == "FIN8"
   end
 
@@ -27,11 +27,11 @@ defmodule Covid19Orientation.TestOrientation.AutresTest do
         symptomes: %Symptomes{temperature: 36.6, toux: true, fatigue: true},
         pronostiques: %Pronostiques{age: 50, cardiaque: true, taille: 1.2, poids: 40.0}
       }
-      |> TestOrientation.evaluate()
+      |> Test.evaluate()
 
-    assert TestOrientation.facteurs_pronostique(orientation) == 1
-    assert TestOrientation.facteurs_gravite_mineurs(orientation) == 1
-    assert TestOrientation.facteurs_gravite_majeurs(orientation) == 0
+    assert Test.facteurs_pronostique(orientation) == 1
+    assert Test.facteurs_gravite_mineurs(orientation) == 1
+    assert Test.facteurs_gravite_majeurs(orientation) == 0
     assert orientation.conclusion.code == "FIN8"
   end
 
@@ -41,11 +41,11 @@ defmodule Covid19Orientation.TestOrientation.AutresTest do
         symptomes: %Symptomes{temperature: 36.6, fatigue: true},
         pronostiques: %Pronostiques{age: 50, cardiaque: false, taille: 1.2, poids: 40.0}
       }
-      |> TestOrientation.evaluate()
+      |> Test.evaluate()
 
-    assert TestOrientation.facteurs_pronostique(orientation) == 0
-    assert TestOrientation.facteurs_gravite_mineurs(orientation) == 1
-    assert TestOrientation.facteurs_gravite_majeurs(orientation) == 0
+    assert Test.facteurs_pronostique(orientation) == 0
+    assert Test.facteurs_gravite_mineurs(orientation) == 1
+    assert Test.facteurs_gravite_majeurs(orientation) == 0
     assert orientation.conclusion.code == "FIN9"
   end
 end

@@ -1,10 +1,10 @@
-defmodule Covid19Orientation.TestOrientation do
+defmodule Covid19Orientation.Tests.Test do
   @moduledoc """
   Test d’orientation du Covid-19.
   """
 
   alias __MODULE__
-  alias Covid19Orientation.{Tree, TreeTraversal}
+  alias Covid19Orientation.Trees.{Tree, TreeTraversal}
 
   alias Covid19OrientationWeb.Schemas.{
     Conclusion,
@@ -32,8 +32,8 @@ defmodule Covid19Orientation.TestOrientation do
 
   def evaluate(orientation = orientation) do
     arbre()
-    |> TreeTraversal.flatten()
-    |> TreeTraversal.traverse(orientation)
+    |> Tree.flatten()
+    |> Tree.traverse(orientation)
     |> case do
       {:ok, :done} -> {:ok, fin9(orientation)}
       {:ok, %{key: key}} -> {:ok, key.(orientation)}
@@ -51,7 +51,7 @@ defmodule Covid19Orientation.TestOrientation do
       |> Map.keys()
       |> Enum.reduce(%Statistiques{}, fn key, statistiques ->
         statistiques
-        |> Map.put(key, apply(TestOrientation, key, [orientation]))
+        |> Map.put(key, apply(Test, key, [orientation]))
       end)
     )
   end

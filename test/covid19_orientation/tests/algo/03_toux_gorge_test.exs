@@ -1,10 +1,10 @@
-defmodule Covid19Orientation.TestOrientation.TouxGorgeTest do
+defmodule Covid19Orientation.Tests.Test.TouxGorgeTest do
   @moduledoc """
   Patient avec toux + mal de gorge.
   """
 
   use ExUnit.Case, async: true
-  alias Covid19Orientation.TestOrientation
+  alias Covid19Orientation.Tests.Test
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
   setup do
@@ -26,11 +26,11 @@ defmodule Covid19Orientation.TestOrientation.TouxGorgeTest do
           orientation
           | pronostiques: %Pronostiques{orientation.pronostiques | age: 49}
         }
-        |> TestOrientation.evaluate()
+        |> Test.evaluate()
 
-      assert TestOrientation.symptomes1(orientation)
-      assert TestOrientation.facteurs_pronostique(orientation) == 0
-      assert TestOrientation.facteurs_gravite(orientation) == 0
+      assert Test.symptomes1(orientation)
+      assert Test.facteurs_pronostique(orientation) == 0
+      assert Test.facteurs_gravite(orientation) == 0
       assert orientation.conclusion.code == "FIN2"
     end
 
@@ -40,11 +40,11 @@ defmodule Covid19Orientation.TestOrientation.TouxGorgeTest do
           orientation
           | pronostiques: %Pronostiques{orientation.pronostiques | age: 50}
         }
-        |> TestOrientation.evaluate()
+        |> Test.evaluate()
 
-      assert TestOrientation.symptomes1(orientation)
-      assert TestOrientation.facteurs_pronostique(orientation) == 0
-      assert TestOrientation.facteurs_gravite(orientation) == 0
+      assert Test.symptomes1(orientation)
+      assert Test.facteurs_pronostique(orientation) == 0
+      assert Test.facteurs_gravite(orientation) == 0
       assert orientation.conclusion.code == "FIN3"
     end
 
@@ -54,11 +54,11 @@ defmodule Covid19Orientation.TestOrientation.TouxGorgeTest do
           orientation
           | symptomes: %Symptomes{orientation.symptomes | fatigue: true}
         }
-        |> TestOrientation.evaluate()
+        |> Test.evaluate()
 
-      assert TestOrientation.symptomes1(orientation)
-      assert TestOrientation.facteurs_pronostique(orientation) == 0
-      assert TestOrientation.facteurs_gravite_mineurs(orientation) == 1
+      assert Test.symptomes1(orientation)
+      assert Test.facteurs_pronostique(orientation) == 0
+      assert Test.facteurs_gravite_mineurs(orientation) == 1
       assert orientation.conclusion.code == "FIN3"
     end
   end
@@ -70,11 +70,11 @@ defmodule Covid19Orientation.TestOrientation.TouxGorgeTest do
           orientation
           | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
         }
-        |> TestOrientation.evaluate()
+        |> Test.evaluate()
 
-      assert TestOrientation.symptomes1(orientation)
-      assert TestOrientation.facteurs_pronostique(orientation) >= 1
-      assert TestOrientation.facteurs_gravite(orientation) == 0
+      assert Test.symptomes1(orientation)
+      assert Test.facteurs_pronostique(orientation) >= 1
+      assert Test.facteurs_gravite(orientation) == 0
       assert orientation.conclusion.code == "FIN3"
     end
 
@@ -85,11 +85,11 @@ defmodule Covid19Orientation.TestOrientation.TouxGorgeTest do
           | symptomes: %Symptomes{orientation.symptomes | fatigue: true},
             pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
         }
-        |> TestOrientation.evaluate()
+        |> Test.evaluate()
 
-      assert TestOrientation.symptomes1(orientation)
-      assert TestOrientation.facteurs_pronostique(orientation) >= 1
-      assert TestOrientation.facteurs_gravite_mineurs(orientation) == 1
+      assert Test.symptomes1(orientation)
+      assert Test.facteurs_pronostique(orientation) >= 1
+      assert Test.facteurs_gravite_mineurs(orientation) == 1
       assert orientation.conclusion.code == "FIN3"
     end
 
@@ -100,11 +100,11 @@ defmodule Covid19Orientation.TestOrientation.TouxGorgeTest do
           | symptomes: %Symptomes{orientation.symptomes | temperature: 39.0, fatigue: true},
             pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
         }
-        |> TestOrientation.evaluate()
+        |> Test.evaluate()
 
-      assert TestOrientation.symptomes1(orientation)
-      assert TestOrientation.facteurs_pronostique(orientation) >= 1
-      assert TestOrientation.facteurs_gravite_mineurs(orientation) == 2
+      assert Test.symptomes1(orientation)
+      assert Test.facteurs_pronostique(orientation) >= 1
+      assert Test.facteurs_gravite_mineurs(orientation) == 2
       assert orientation.conclusion.code == "FIN4"
     end
   end
@@ -116,10 +116,10 @@ defmodule Covid19Orientation.TestOrientation.TouxGorgeTest do
         orientation
         | symptomes: %Symptomes{orientation.symptomes | essoufle: true}
       }
-      |> TestOrientation.evaluate()
+      |> Test.evaluate()
 
-    assert TestOrientation.symptomes1(orientation)
-    assert TestOrientation.facteurs_gravite_majeurs(orientation) >= 1
+    assert Test.symptomes1(orientation)
+    assert Test.facteurs_gravite_majeurs(orientation) >= 1
     assert orientation.conclusion.code == "FIN5"
   end
 end

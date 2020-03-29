@@ -1,6 +1,6 @@
 defmodule Covid19OrientationWeb.OrientationController do
   use Covid19OrientationWeb, :controller
-  alias Covid19Orientation.TestOrientation
+  alias Covid19Orientation.Tests.Test
   alias Covid19OrientationWeb.OrientationOperation
   alias Covid19OrientationWeb.Schemas.OrientationRequest
   alias OpenApiSpex.Plug.CastAndValidate
@@ -12,8 +12,8 @@ defmodule Covid19OrientationWeb.OrientationController do
   def create(conn = %{body_params: %OrientationRequest{orientation: params}}, _params) do
     {:ok, orientation} =
       params
-      |> TestOrientation.populate_statistiques()
-      |> TestOrientation.evaluate()
+      |> Test.populate_statistiques()
+      |> Test.evaluate()
 
     conn
     |> put_status(:created)

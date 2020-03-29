@@ -1,10 +1,10 @@
-defmodule Covid19Orientation.TestOrientation.MalDeGorgeTest do
+defmodule Covid19Orientation.Tests.Test.MalDeGorgeTest do
   @moduledoc """
   Patient avec seulement mal de gorge.
   """
 
   use ExUnit.Case, async: true
-  alias Covid19Orientation.TestOrientation
+  alias Covid19Orientation.Tests.Test
   alias Covid19OrientationWeb.Schemas.{Orientation, Pronostiques, Symptomes}
 
   setup do
@@ -21,10 +21,10 @@ defmodule Covid19Orientation.TestOrientation.MalDeGorgeTest do
   test "sans facteur de gravité", %{orientation: orientation} do
     {:ok, orientation} =
       orientation
-      |> TestOrientation.evaluate()
+      |> Test.evaluate()
 
-    assert TestOrientation.symptomes3(orientation)
-    assert TestOrientation.facteurs_gravite(orientation) == 0
+    assert Test.symptomes3(orientation)
+    assert Test.facteurs_gravite(orientation) == 0
     assert orientation.conclusion.code == "FIN7"
   end
 
@@ -34,10 +34,10 @@ defmodule Covid19Orientation.TestOrientation.MalDeGorgeTest do
         orientation
         | symptomes: %Symptomes{orientation.symptomes | fatigue: true}
       }
-      |> TestOrientation.evaluate()
+      |> Test.evaluate()
 
-    assert TestOrientation.symptomes3(orientation)
-    assert TestOrientation.facteurs_gravite_mineurs(orientation) >= 1
+    assert Test.symptomes3(orientation)
+    assert Test.facteurs_gravite_mineurs(orientation) >= 1
     assert orientation.conclusion.code == "FIN8"
   end
 
@@ -47,10 +47,10 @@ defmodule Covid19Orientation.TestOrientation.MalDeGorgeTest do
         orientation
         | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
       }
-      |> TestOrientation.evaluate()
+      |> Test.evaluate()
 
-    assert TestOrientation.symptomes3(orientation)
-    assert TestOrientation.facteurs_pronostique(orientation) >= 1
+    assert Test.symptomes3(orientation)
+    assert Test.facteurs_pronostique(orientation) >= 1
     assert orientation.conclusion.code == "FIN8"
   end
 end
