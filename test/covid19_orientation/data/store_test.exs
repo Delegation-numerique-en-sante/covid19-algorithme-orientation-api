@@ -25,15 +25,13 @@ defmodule Covid19Orientation.Data.StoreTest do
       |> EvaluateOrientation.call()
 
     orientation =
-      %{id: id, timestamp: timestamp} =
       orientation
       |> SetId.call()
       |> SetTimestamp.call()
 
-    {:ok, data} =
-      orientation
-      |> Store.set({id, timestamp})
+    %{timestamp: timestamp, id: id} = orientation
+    Store.write({timestamp, id}, orientation)
 
-    assert {:found, data} == Store.get({id, timestamp})
+    assert orientation == Store.read({timestamp, id})
   end
 end

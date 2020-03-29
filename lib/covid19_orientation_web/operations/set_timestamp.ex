@@ -14,6 +14,6 @@ defmodule Covid19OrientationWeb.Operations.SetTimestamp do
   end
 
   defp timestamp do
-    DateTime.utc_now()
+    DateTime.utc_now() |> DateTime.to_string()
   end
 end

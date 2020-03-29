@@ -40,8 +40,8 @@ defmodule Covid19Orientation.MixProject do
     [
       {:elixir_uuid, "~> 1.2"},
       {:jason, "~> 1.2.0"},
+      {:nebulex_redis_adapter, "~> 1.1"},
       {:open_api_spex, "~> 3.6"},
-      {:persistent_ets, "~> 0.2.1"},
       {:phoenix, "~> 1.4.16"},
       {:phoenix_pubsub, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
