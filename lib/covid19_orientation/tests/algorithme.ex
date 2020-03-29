@@ -3,7 +3,7 @@ defmodule Covid19Orientation.Tests.Algorithme do
   Crée l'algorithme d'orientation du Covid-19.
   """
 
-  alias Covid19Orientation.Tests.{Codes, Conditions}
+  import Covid19Orientation.Tests.{Codes, Conditions}
 
   @type tree :: module
   @type trees() :: [struct] | []
@@ -12,43 +12,43 @@ defmodule Covid19Orientation.Tests.Algorithme do
 
   def call(module) do
     [
-      struct(module, key: &Codes.fin1/0, operation: &Conditions.moins_de_15_ans/1),
+      struct(module, key: &fin1/0, operation: &moins_de_15_ans/1),
       struct(module,
-        operation: &Conditions.symptomes1/1,
+        operation: &symptomes1/1,
         children: [
           struct(module,
-            key: &Codes.fin5/0,
-            operation: &(Conditions.facteurs_gravite_majeurs(&1) >= 1)
+            key: &fin5/0,
+            operation: &(facteurs_gravite_majeurs(&1) >= 1)
           ),
           struct(module,
-            operation: &(Conditions.facteurs_pronostique(&1) >= 1),
+            operation: &(facteurs_pronostique(&1) >= 1),
             children: [
               struct(module,
-                key: &Codes.fin4/0,
-                operation: &(Conditions.facteurs_gravite_mineurs(&1) == 2)
+                key: &fin4/0,
+                operation: &(facteurs_gravite_mineurs(&1) == 2)
               ),
               struct(module,
-                key: &Codes.fin3/0,
-                operation: &(Conditions.facteurs_gravite_mineurs(&1) == 1)
+                key: &fin3/0,
+                operation: &(facteurs_gravite_mineurs(&1) == 1)
               ),
               struct(module,
-                key: &Codes.fin3/0,
-                operation: &(Conditions.facteurs_gravite(&1) == 0)
+                key: &fin3/0,
+                operation: &(facteurs_gravite(&1) == 0)
               )
             ]
           ),
           struct(module,
-            operation: &(Conditions.facteurs_pronostique(&1) == 0),
+            operation: &(facteurs_pronostique(&1) == 0),
             children: [
               struct(module,
-                key: &Codes.fin3/0,
-                operation: &(Conditions.facteurs_gravite_mineurs(&1) == 1)
+                key: &fin3/0,
+                operation: &(facteurs_gravite_mineurs(&1) == 1)
               ),
               struct(module,
-                operation: &(Conditions.facteurs_gravite(&1) == 0),
+                operation: &(facteurs_gravite(&1) == 0),
                 children: [
-                  struct(module, key: &Codes.fin3/0, operation: &Conditions.entre_50_et_69_ans(&1)),
-                  struct(module, key: &Codes.fin2/0, operation: &Conditions.moins_de_50_ans(&1))
+                  struct(module, key: &fin3/0, operation: &entre_50_et_69_ans(&1)),
+                  struct(module, key: &fin2/0, operation: &moins_de_50_ans(&1))
                 ]
               )
             ]
@@ -56,61 +56,61 @@ defmodule Covid19Orientation.Tests.Algorithme do
         ]
       ),
       struct(module,
-        operation: &Conditions.symptomes2/1,
+        operation: &symptomes2/1,
         children: [
           struct(module,
-            key: &Codes.fin5/0,
-            operation: &(Conditions.facteurs_gravite_majeurs(&1) >= 1)
+            key: &fin5/0,
+            operation: &(facteurs_gravite_majeurs(&1) >= 1)
           ),
           struct(module,
-            operation: &(Conditions.facteurs_pronostique(&1) >= 1),
+            operation: &(facteurs_pronostique(&1) >= 1),
             children: [
               struct(module,
-                key: &Codes.fin4/0,
-                operation: &(Conditions.facteurs_gravite_mineurs(&1) == 2)
+                key: &fin4/0,
+                operation: &(facteurs_gravite_mineurs(&1) == 2)
               ),
               struct(module,
-                key: &Codes.fin6/0,
-                operation: &(Conditions.facteurs_gravite_mineurs(&1) == 1)
+                key: &fin6/0,
+                operation: &(facteurs_gravite_mineurs(&1) == 1)
               ),
               struct(module,
-                key: &Codes.fin6/0,
-                operation: &(Conditions.facteurs_gravite(&1) == 0)
+                key: &fin6/0,
+                operation: &(facteurs_gravite(&1) == 0)
               )
             ]
           ),
           struct(module,
-            operation: &(Conditions.facteurs_pronostique(&1) == 0),
+            operation: &(facteurs_pronostique(&1) == 0),
             children: [
               struct(module,
-                operation: &(Conditions.facteurs_gravite_mineurs(&1) >= 1),
+                operation: &(facteurs_gravite_mineurs(&1) >= 1),
                 children: [
                   struct(module,
-                    key: &Codes.fin6/0,
-                    operation: &(Conditions.facteurs_gravite_majeurs(&1) == 0)
+                    key: &fin6/0,
+                    operation: &(facteurs_gravite_majeurs(&1) == 0)
                   )
                 ]
               ),
               struct(module,
-                key: &Codes.fin6/0,
-                operation: &(Conditions.facteurs_gravite(&1) == 0)
+                key: &fin6/0,
+                operation: &(facteurs_gravite(&1) == 0)
               )
             ]
           )
         ]
       ),
       struct(module,
-        operation: &Conditions.symptomes3/1,
+        operation: &symptomes3/1,
         children: [
           struct(module,
-            key: &Codes.fin8/0,
-            operation: &(Conditions.facteurs_pronostique(&1) >= 1)
+            key: &fin8/0,
+            operation: &(facteurs_pronostique(&1) >= 1)
           ),
-          struct(module, key: &Codes.fin8/0, operation: &(Conditions.facteurs_gravite(&1) >= 1)),
-          struct(module, key: &Codes.fin7/0, operation: &(Conditions.facteurs_gravite(&1) == 0))
+          struct(module, key: &fin8/0, operation: &(facteurs_gravite(&1) >= 1)),
+          struct(module, key: &fin7/0, operation: &(facteurs_gravite(&1) == 0))
         ]
       ),
-      struct(module, key: &Codes.fin9/0, operation: &(!!&1))
+      struct(module, key: &fin9/0, operation: &(!!&1))
     ]
   end
 end
