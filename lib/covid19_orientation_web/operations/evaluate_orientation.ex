@@ -5,7 +5,12 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation do
 
   alias Covid19Orientation.Tests.{Algorithme, Codes}
   alias Covid19Orientation.Trees.{FlattenTree, TraverseTree, Tree}
-  alias Covid19OrientationWeb.Operations.{PopulateConclusion, PopulateStatistics}
+
+  alias Covid19OrientationWeb.Operations.{
+    PopulateConclusion,
+    PopulateStatistics
+  }
+
   alias Covid19OrientationWeb.Schemas.Orientation
 
   @type orientation() :: Orientation.t()

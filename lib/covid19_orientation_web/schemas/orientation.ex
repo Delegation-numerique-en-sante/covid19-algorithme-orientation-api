@@ -13,12 +13,20 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
     Symptomes
   }
 
+  alias OpenApiSpex.Schema
+
   OpenApiSpex.schema(%{
     title: "Orientation",
     description:
       "[Algorithme d’orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19)",
     type: :object,
     properties: %{
+      id: %Schema{type: :string, description: "ID du test d'orientation", format: :uuid4},
+      timestamp: %Schema{
+        type: :string,
+        description: "Date du test d'orientation",
+        format: :"date-time"
+      },
       symptomes: Symptomes,
       pronostiques: Pronostiques,
       supplementaires: Supplementaires,
@@ -27,6 +35,8 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
     },
     required: [:symptomes, :pronostiques, :supplementaires],
     example: %{
+      "id" => "fcfe5f21-8a08-4c9a-9f97-29d2fd6a27b9",
+      "timestamp" => "2020-03-29 15:20:11.875767Z",
       "symptomes" => %{
         "temperature" => 37.5,
         "toux" => true,
