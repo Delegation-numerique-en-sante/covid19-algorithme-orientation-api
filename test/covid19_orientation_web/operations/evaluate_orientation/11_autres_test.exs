@@ -16,10 +16,11 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
       }
       |> EvaluateOrientation.call()
 
+    assert Conditions.symptomes3(orientation)
     assert Conditions.facteurs_pronostique(orientation) == 0
     assert Conditions.facteurs_gravite_mineurs(orientation) == 1
     assert Conditions.facteurs_gravite_majeurs(orientation) == 0
-    assert orientation.conclusion.code == "FIN8"
+    assert orientation.conclusion.code == "FIN2"
   end
 
   test "Bastien Guerry #2" do
@@ -30,10 +31,11 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
       }
       |> EvaluateOrientation.call()
 
+    assert Conditions.symptomes3(orientation)
     assert Conditions.facteurs_pronostique(orientation) == 1
     assert Conditions.facteurs_gravite_mineurs(orientation) == 1
     assert Conditions.facteurs_gravite_majeurs(orientation) == 0
-    assert orientation.conclusion.code == "FIN8"
+    assert orientation.conclusion.code == "FIN7"
   end
 
   test "Mauko Quiroga #1" do
@@ -44,6 +46,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
       }
       |> EvaluateOrientation.call()
 
+    assert Conditions.symptomes4(orientation)
     assert Conditions.facteurs_pronostique(orientation) == 0
     assert Conditions.facteurs_gravite_mineurs(orientation) == 1
     assert Conditions.facteurs_gravite_majeurs(orientation) == 0

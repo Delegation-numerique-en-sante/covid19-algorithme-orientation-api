@@ -29,9 +29,10 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Conditions.symptomes1(orientation)
+      assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) == 0
-      assert Conditions.facteurs_gravite(orientation) == 0
+      assert Conditions.facteurs_gravite_mineurs(orientation) == 0
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN2"
     end
 
@@ -43,9 +44,10 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Conditions.symptomes1(orientation)
+      assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) == 0
-      assert Conditions.facteurs_gravite(orientation) == 0
+      assert Conditions.facteurs_gravite_mineurs(orientation) == 0
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN3"
     end
 
@@ -57,9 +59,10 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Conditions.symptomes1(orientation)
+      assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) == 0
       assert Conditions.facteurs_gravite_mineurs(orientation) == 1
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN3"
     end
   end
@@ -73,9 +76,10 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Conditions.symptomes1(orientation)
+      assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) >= 1
-      assert Conditions.facteurs_gravite(orientation) == 0
+      assert Conditions.facteurs_gravite_mineurs(orientation) == 0
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN3"
     end
 
@@ -88,9 +92,10 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Conditions.symptomes1(orientation)
+      assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) >= 1
       assert Conditions.facteurs_gravite_mineurs(orientation) == 1
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN3"
     end
 
@@ -103,9 +108,10 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
         }
         |> EvaluateOrientation.call()
 
-      assert Conditions.symptomes1(orientation)
+      assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) >= 1
       assert Conditions.facteurs_gravite_mineurs(orientation) == 2
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN4"
     end
   end
@@ -119,7 +125,8 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
       }
       |> EvaluateOrientation.call()
 
-    assert Conditions.symptomes1(orientation)
+    assert Conditions.symptomes2(orientation)
+    assert Conditions.facteurs_gravite_mineurs(orientation) == 0
     assert Conditions.facteurs_gravite_majeurs(orientation) >= 1
     assert orientation.conclusion.code == "FIN5"
   end

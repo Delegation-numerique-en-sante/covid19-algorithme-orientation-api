@@ -17,6 +17,10 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
         type: :boolean,
         description: "Si la personne a moins de 50 ans"
       },
+      au_moins_50_ans: %Schema{
+        type: :boolean,
+        description: "Si la personne a au moins 50 ans"
+      },
       entre_50_et_69_ans: %Schema{
         type: :boolean,
         description: "Si la personne a entre 50 et 69 ans"
@@ -62,6 +66,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
     required: [
       :moins_de_15_ans,
       :moins_de_50_ans,
+      :au_moins_50_ans,
       :entre_50_et_69_ans,
       :moins_de_70_ans,
       :au_moins_70_ans,
@@ -77,6 +82,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
     example: %{
       "moins_de_15_ans" => false,
       "moins_de_50_ans" => false,
+      "au_moins_50_ans" => false,
       "entre_50_et_69_ans" => false,
       "moins_de_70_ans" => false,
       "au_moins_70_ans" => true,

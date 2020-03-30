@@ -25,21 +25,25 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxTest do
       |> EvaluateOrientation.call()
 
     assert Conditions.symptomes3(orientation)
-    assert Conditions.facteurs_gravite(orientation) == 0
-    assert orientation.conclusion.code == "FIN7"
+    assert Conditions.facteurs_pronostique(orientation) == 0
+    assert Conditions.facteurs_gravite_mineurs(orientation) == 0
+    assert Conditions.facteurs_gravite_majeurs(orientation) == 0
+    assert orientation.conclusion.code == "FIN2"
   end
 
   test "avec au moins un facteur de gravité", %{orientation: orientation} do
     {:ok, orientation} =
       %Orientation{
         orientation
-        | symptomes: %Symptomes{orientation.symptomes | essoufle: true}
+        | symptomes: %Symptomes{orientation.symptomes | fatigue: true}
       }
       |> EvaluateOrientation.call()
 
     assert Conditions.symptomes3(orientation)
-    assert Conditions.facteurs_gravite(orientation) >= 1
-    assert orientation.conclusion.code == "FIN8"
+    assert Conditions.facteurs_pronostique(orientation) == 0
+    assert Conditions.facteurs_gravite_mineurs(orientation) >= 1
+    assert Conditions.facteurs_gravite_majeurs(orientation) == 0
+    assert orientation.conclusion.code == "FIN2"
   end
 
   test "avec au moins un facteur pronostique", %{orientation: orientation} do
@@ -51,8 +55,9 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxTest do
       |> EvaluateOrientation.call()
 
     assert Conditions.symptomes3(orientation)
-    assert Conditions.facteurs_gravite(orientation) == 0
     assert Conditions.facteurs_pronostique(orientation) >= 1
-    assert orientation.conclusion.code == "FIN8"
+    assert Conditions.facteurs_gravite_mineurs(orientation) == 0
+    assert Conditions.facteurs_gravite_majeurs(orientation) == 0
+    assert orientation.conclusion.code == "FIN7"
   end
 end
