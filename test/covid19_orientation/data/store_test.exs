@@ -30,8 +30,8 @@ defmodule Covid19Orientation.Data.StoreTest do
       |> SetTimestamp.call()
 
     %{timestamp: timestamp, id: id} = orientation
-    Store.write({timestamp, id}, orientation)
+    data = Store.write({timestamp, id}, %{data: orientation} |> Jason.encode!)
 
-    assert orientation == Store.read({timestamp, id})
+    assert data == Store.read({timestamp, id})
   end
 end
