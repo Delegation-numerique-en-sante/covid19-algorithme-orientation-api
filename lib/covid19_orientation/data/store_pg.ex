@@ -16,16 +16,15 @@ defmodule Covid19Orientation.Data.PgStore do
 
   """
 
+  require Logger
   use Agent
 
   def start_link(_initial) do
     Agent.start_link(
       fn ->
-        {:ok, pid} =
-          Postgrex.start_link(
-            Application.fetch_env!(:covid19_orientation, __MODULE__)[:conn_opts]
-          )
-
+        settings = Application.fetch_env!(:covid19_orientation, __MODULE__)[:conn_opts]
+        {:ok, pid} = Postgrex.start_link(settings)
+        Logger.info("Started Postgres link with settings #{inspect(settings)}")
         %{pg: pid}
       end,
       name: __MODULE__
