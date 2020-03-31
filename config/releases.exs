@@ -27,12 +27,12 @@ config :covid19_orientation, Covid19Orientation.Data.Store,
 
 # Configure PostGreSQL
 config :covid19_orientation, Covid19Orientation.Data.PgStore,
-   conn_opts: [
-     hostname: System.get_env("PG_HOST"),
-     port: System.get_env("PG_PORT"),
-     username: System.get_env("PG_USER"),
-     password: System.get_env("PG_PASSWORD"),
-     database: System.get_env("PG_DATABASE")
+  conn_opts: [
+    hostname: System.get_env("PG_HOST"),
+    port: System.get_env("PG_PORT"),
+    username: System.get_env("PG_USER"),
+    password: System.get_env("PG_PASSWORD"),
+    database: System.get_env("PG_DATABASE")
   ]
 
 # Do not print debug messages in production

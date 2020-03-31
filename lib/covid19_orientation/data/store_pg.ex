@@ -20,14 +20,24 @@ defmodule Covid19Orientation.Data.PgStore do
 
   def start_link(_initial) do
     Agent.start_link(
-        fn -> 
-            {:ok, pid} = Postgrex.start_link(Application.fetch_env!(:covid19_orientation, __MODULE__)[:conn_opts])
-            %{pg: pid}
-        end, name: __MODULE__)
+      fn ->
+        {:ok, pid} =
+          Postgrex.start_link(
+            Application.fetch_env!(:covid19_orientation, __MODULE__)[:conn_opts]
+          )
+
+        %{pg: pid}
+      end,
+      name: __MODULE__
+    )
   end
 
   def write({timestamp, id}, data) when is_map(data) do
-    Agent.update(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data); state) end)
+    Agent.update(__MODULE__, fn state ->
+      write_to_pg(state.pg, timestamp, id, data)
+      state
+    end)
+
     # Tip: Use cast for even more speed
     # Agent.cast(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data); state) end)
     data
@@ -38,7 +48,10 @@ defmodule Covid19Orientation.Data.PgStore do
   end
 
   def write_to_pg(pid, timestamp, id, data) do
-    Postgrex.query!(pid, "INSERT INTO journal (id, timestamp, data) VALUES($1, $2, $3)", [id, timestamp, data])
+    Postgrex.query!(pid, "INSERT INTO journal (id, timestamp, data) VALUES($1, $2, $3)", [
+      id,
+      timestamp,
+      data
+    ])
   end
-
 end

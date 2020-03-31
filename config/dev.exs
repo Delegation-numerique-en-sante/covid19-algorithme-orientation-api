@@ -22,12 +22,12 @@ config :covid19_orientation, Covid19Orientation.Data.Store,
 
 # Configure PostGreSQL
 config :covid19_orientation, Covid19Orientation.Data.PgStore,
-   conn_opts: [
-     hostname: "127.0.0.1",
-     port: 5432,
-     username: "test",
-     password: "test",
-     database: "test"
+  conn_opts: [
+    hostname: "127.0.0.1",
+    port: 5432,
+    username: "test",
+    password: "test",
+    database: "test"
   ]
 
 # ## SSL Support
