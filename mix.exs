@@ -45,7 +45,8 @@ defmodule Covid19Orientation.MixProject do
       {:phoenix, "~> 1.4.16"},
       {:phoenix_pubsub, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
-      {:credo, "~> 1.3.1", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.3.1", only: [:dev, :test], runtime: false},
+      {:postgrex, "~> 0.15.3"},
     ]
   end
 end
