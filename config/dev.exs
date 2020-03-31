@@ -23,7 +23,7 @@ config :covid19_orientation, Covid19Orientation.Data.Store,
 # Configure PostGreSQL
 config :covid19_orientation, Covid19Orientation.Data.PgStore,
    conn_opts: [
-     host: "127.0.0.1",
+     hostname: "127.0.0.1",
      port: 5432,
      username: "test",
      password: "test",
