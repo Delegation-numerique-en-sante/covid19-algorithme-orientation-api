@@ -30,9 +30,9 @@ defmodule Covid19OrientationWeb.OrientationController do
       |> SetTimestamp.call()
 
     %{data: orientation}
+    |> (&PgStore.write({timestamp, id}, &1)).()
     |> Jason.encode!()
     # |> (&Store.write({timestamp, id}, &1)).()
-    |> (&PgStore.write({timestamp, id}, &1)).()
     |> (&send_resp(conn, 201, &1)).()
   end
 end
