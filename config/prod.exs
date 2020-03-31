@@ -28,6 +28,16 @@ config :covid19_orientation, Covid19Orientation.Data.Store,
     url: System.get_env("REDIS_URL")
   ]
 
+# Configure PostGreSQL
+config :covid19_orientation, Covid19Orientation.Data.PgStore,
+   conn_opts: [
+     host: System.get_env("PG_URL"),
+     port: System.get_env("PG_PORT"),
+     username: System.get_env("PG_USER"),
+     password: System.get_env("PG_PASSWORD"),
+     database: System.get_env("PG_DATABASE")
+  ]
+
 # Do not print debug messages in production
 config :logger,
   level: :error,
