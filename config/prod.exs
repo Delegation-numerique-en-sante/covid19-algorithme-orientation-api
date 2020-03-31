@@ -35,7 +35,8 @@ config :covid19_orientation, Covid19Orientation.Data.PgStore,
     port: System.get_env("PG_PORT"),
     username: System.get_env("PG_USER"),
     password: System.get_env("PG_PASSWORD"),
-    database: System.get_env("PG_DATABASE")
+    database: System.get_env("PG_DATABASE"),
+    pool_size: System.get_env("PG_POOL_SIZE") |> String.trim |> String.to_integer
   ]
 
 # Do not print debug messages in production
