@@ -18,6 +18,9 @@ compile:
 serve:
 	iex --erl "+A 64 +K true +Q 65536 +stbt db +zdntgc 10" -S mix phx.server
 
+start:
+	MIX_ENV=prod _build/prod/rel/covid19_orientation/bin/covid19_orientation start
+
 format:
 	mix format
 
@@ -28,7 +31,7 @@ test: format lint
 	mix test
 
 release:
-	MIX_ENV=prod mix release
+	MIX_ENV=prod mix release --overwrite
 
 gen-spec:
 	mix covid19_orientation.open_api_3.gen_spec
