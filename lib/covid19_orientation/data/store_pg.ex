@@ -6,6 +6,7 @@ defmodule Covid19Orientation.Data.PgStore do
   ```sql
   DROP TABLE IF EXISTS journal;
   CREATE TABLE journal (
+      id_internal SERIAL PRIMARY KEY,
       id VARCHAR,
       timestamp TIMESTAMP WITH TIME ZONE,
       data JSONB,
@@ -28,7 +29,7 @@ defmodule Covid19Orientation.Data.PgStore do
   def write({timestamp, id}, data) when is_map(data) do
     Agent.update(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data); state) end)
     # Tip: Use cast for even more speed
-    # Agent.cast(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data)) end)
+    # Agent.cast(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data); state) end)
     data
   end
 
