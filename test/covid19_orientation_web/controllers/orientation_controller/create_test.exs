@@ -1,6 +1,6 @@
 defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
   use Covid19OrientationWeb.ConnCase, async: true
-  alias Covid19Orientation.Data.Store
+  alias Covid19Orientation.Data.PgStore
 
   test "donne un résultat à partir des paramètres", %{conn: conn, spec: spec} do
     payload = %{
@@ -44,6 +44,6 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
 
     assert_schema(body, "OrientationResponse", spec)
     assert body["data"]["conclusion"]["code"] == "FIN5"
-    assert Store.read({body["data"]["timestamp"], body["data"]["id"]}) =~ "data"
+    assert PgStore.read({body["data"]["timestamp"], body["data"]["id"]}) =~ "data"
   end
 end

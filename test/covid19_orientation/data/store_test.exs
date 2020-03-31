@@ -1,6 +1,6 @@
 defmodule Covid19Orientation.Data.StoreTest do
   use ExUnit.Case, async: true
-  alias Covid19Orientation.Data.Store
+  alias Covid19Orientation.Data.PgStore
 
   alias Covid19OrientationWeb.Operations.{
     EvaluateOrientation,
@@ -30,8 +30,9 @@ defmodule Covid19Orientation.Data.StoreTest do
       |> SetTimestamp.call()
 
     %{timestamp: timestamp, id: id} = orientation
-    data = Store.write({timestamp, id}, %{data: orientation} |> Jason.encode!())
+    data = PgStore.write({timestamp, id}, %{data: orientation})
 
-    assert data == Store.read({timestamp, id})
+    assert data == %{data: orientation}
+    assert data == PgStore.read({timestamp, id})
   end
 end
