@@ -27,6 +27,7 @@ defmodule Covid19Orientation.Data.PgStore do
 
   def write({timestamp, id}, data) do
     Agent.update(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data); state) end)
+    data
   end
 
   def write_to_pg(pid, timestamp, id, data) do
