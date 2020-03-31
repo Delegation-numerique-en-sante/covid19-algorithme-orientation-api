@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: API d'orientation du Covid-19
-  version: '2'
+  title: Test d'orientation du Covid-19
+  version: '2020-03-30 20:01:39.836837Z'
 servers:
   - url: 'http://localhost:4000'
     variables: {}
@@ -83,6 +83,7 @@ components:
         statistiques:
           au_moins_30_imc: true
           au_moins_39_de_temperature: true
+          au_moins_50_ans: false
           au_moins_70_ans: true
           cardiaque: true
           entre_50_et_69_ans: false
@@ -192,6 +193,7 @@ components:
           statistiques:
             au_moins_30_imc: true
             au_moins_39_de_temperature: true
+            au_moins_50_ans: false
             au_moins_70_ans: true
             cardiaque: true
             entre_50_et_69_ans: false
@@ -291,6 +293,7 @@ components:
       example:
         au_moins_30_imc: true
         au_moins_39_de_temperature: true
+        au_moins_50_ans: false
         au_moins_70_ans: true
         cardiaque: true
         entre_50_et_69_ans: false
@@ -308,6 +311,9 @@ components:
           type: boolean
         au_moins_39_de_temperature:
           description: Si la personne a au moins 39°C de température
+          type: boolean
+        au_moins_50_ans:
+          description: Si la personne a au moins 50 ans
           type: boolean
         au_moins_70_ans:
           description: Si la personne a au moins de 70 ans
@@ -345,6 +351,7 @@ components:
       required:
         - moins_de_15_ans
         - moins_de_50_ans
+        - au_moins_50_ans
         - entre_50_et_69_ans
         - moins_de_70_ans
         - au_moins_70_ans

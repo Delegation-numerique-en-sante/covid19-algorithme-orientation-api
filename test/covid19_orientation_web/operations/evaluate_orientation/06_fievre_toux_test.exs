@@ -27,7 +27,8 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
 
       assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) == 0
-      assert Conditions.facteurs_gravite(orientation) == 0
+      assert Conditions.facteurs_gravite_mineurs(orientation) == 0
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN6"
     end
 
@@ -60,7 +61,8 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
 
       assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) >= 1
-      assert Conditions.facteurs_gravite(orientation) == 0
+      assert Conditions.facteurs_gravite_mineurs(orientation) == 0
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN6"
     end
 
@@ -76,6 +78,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
       assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) >= 1
       assert Conditions.facteurs_gravite_mineurs(orientation) == 1
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN6"
     end
 
@@ -91,6 +94,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
       assert Conditions.symptomes2(orientation)
       assert Conditions.facteurs_pronostique(orientation) >= 1
       assert Conditions.facteurs_gravite_mineurs(orientation) == 2
+      assert Conditions.facteurs_gravite_majeurs(orientation) == 0
       assert orientation.conclusion.code == "FIN4"
     end
   end
@@ -105,6 +109,8 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
       |> EvaluateOrientation.call()
 
     assert Conditions.symptomes2(orientation)
+    assert Conditions.facteurs_pronostique(orientation) == 0
+    assert Conditions.facteurs_gravite_mineurs(orientation) == 0
     assert Conditions.facteurs_gravite_majeurs(orientation) >= 1
     assert orientation.conclusion.code == "FIN5"
   end

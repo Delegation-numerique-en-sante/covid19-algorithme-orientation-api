@@ -7,7 +7,7 @@ defmodule Covid19Orientation.Tests.Conditions do
   @type pronostiques :: struct
   @type orientation :: %{
           :__struct__ => atom(),
-          :symptome => symptomes,
+          :symptomes => symptomes,
           :pronostiques => pronostiques,
           optional(atom()) => any()
         }
@@ -15,14 +15,25 @@ defmodule Covid19Orientation.Tests.Conditions do
   @seuil_moins_de_15_ans 15
   @seuil_moins_de_50_ans 50
   @seuil_moins_de_70_ans 70
-  @seuil_au_moins_70_ans 70
   @seuil_imc 30.0
   @seuil_fievre 37.8
   @seuil_au_moins_39_de_temperature 39.0
 
   @spec symptomes1(orientation) :: boolean
 
-  def symptomes1(
+  @doc """
+  Fièvre ET toux.
+  """
+  def symptomes1(orientation = %{symptomes: %{toux: toux}}) do
+    fievre(orientation) && toux
+  end
+
+  @spec symptomes2(orientation) :: boolean
+
+  @doc """
+  Fièvre OU (pas de fièvre et (diarrhée OU (toux ET douleurs) OU (toux ET anosmie)).
+  """
+  def symptomes2(
         orientation = %{
           symptomes: %{
             toux: toux,
@@ -32,24 +43,25 @@ defmodule Covid19Orientation.Tests.Conditions do
           }
         }
       ) do
-    (fievre(orientation) && !toux) || (toux && mal_de_gorge) || (toux && anosmie) ||
-      (fievre(orientation) && diarrhee)
+    fievre(orientation) ||
+      (!fievre(orientation) && (diarrhee || (toux && mal_de_gorge) || (toux && anosmie)))
   end
 
-  @spec symptomes2(orientation) :: boolean
-
-  def symptomes2(orientation = %{symptomes: %{toux: toux}}) do
-    fievre(orientation) && toux
-  end
-
+  @doc """
+  Toux OU douleurs OU anosmie.
+  """
   @spec symptomes3(orientation) :: boolean
 
   def symptomes3(%{symptomes: %{toux: toux, mal_de_gorge: mal_de_gorge, anosmie: anosmie}}) do
-    [toux, mal_de_gorge, anosmie]
-    |> Enum.filter(fn symptome -> symptome end)
-    |> Enum.count()
-    |> Kernel.==(1)
+    toux || mal_de_gorge || anosmie
   end
+
+  @doc """
+  NI toux NI douleurs NI anosmie.
+  """
+  @spec symptomes4(orientation) :: boolean
+
+  def symptomes4(orientation), do: !symptomes3(orientation)
 
   ## Statistiques
 
@@ -67,6 +79,14 @@ defmodule Covid19Orientation.Tests.Conditions do
 
   def moins_de_50_ans(%{pronostiques: %{age: age}}) do
     age < @seuil_moins_de_50_ans
+  end
+
+  @spec au_moins_50_ans(orientation) :: boolean
+
+  def au_moins_50_ans(%{pronostiques: %{age: nil}}), do: false
+
+  def au_moins_50_ans(%{pronostiques: %{age: age}}) do
+    age >= @seuil_moins_de_50_ans
   end
 
   @spec entre_50_et_69_ans(orientation) :: boolean
@@ -90,7 +110,7 @@ defmodule Covid19Orientation.Tests.Conditions do
   def au_moins_70_ans(%{pronostiques: %{age: nil}}), do: false
 
   def au_moins_70_ans(%{pronostiques: %{age: age}}) do
-    age >= @seuil_au_moins_70_ans
+    age >= @seuil_moins_de_70_ans
   end
 
   @spec au_moins_30_imc(orientation) :: boolean
@@ -132,7 +152,7 @@ defmodule Covid19Orientation.Tests.Conditions do
   """
   @spec facteurs_gravite(orientation) :: integer
 
-  def facteurs_gravite(orientation = orientation) do
+  def facteurs_gravite(orientation) do
     facteurs_gravite_mineurs(orientation) + facteurs_gravite_majeurs(orientation)
   end
 

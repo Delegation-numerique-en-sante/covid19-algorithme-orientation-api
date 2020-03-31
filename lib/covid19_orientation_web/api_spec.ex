@@ -11,8 +11,8 @@ defmodule Covid19OrientationWeb.ApiSpec do
   def spec do
     %OpenApi{
       info: %Info{
-        title: "API d'orientation du Covid-19",
-        version: "2"
+        title: "Test d'orientation du Covid-19",
+        version: "2020-03-30 20:01:39.836837Z"
       },
       paths: Paths.from_router(Router),
       servers: [Server.from_endpoint(Endpoint)]
