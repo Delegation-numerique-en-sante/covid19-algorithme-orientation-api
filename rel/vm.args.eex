@@ -5,13 +5,13 @@
 ##+SDio 5
 
 ## Sets the number of threads in async thread pool
-+A 64
++A 1
 
 ## Enable the kernel poll functionality if the emulator supports it
 +K true
 
 ## Increase number of concurrent ports/sockets
-+Q 65536
++Q 8192
 
 ## Set scheduler bind type
 +stbt db
