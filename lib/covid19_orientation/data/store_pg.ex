@@ -27,6 +27,8 @@ defmodule Covid19Orientation.Data.PgStore do
 
   def write({timestamp, id}, data) when is_map(data) do
     Agent.update(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data); state) end)
+    # Tip: Use cast for even more speed
+    # Agent.cast(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data)) end)
     data
   end
 
