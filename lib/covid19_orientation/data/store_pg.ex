@@ -1,9 +1,9 @@
-defmodule Covid19Orientation.Data.StorePg do
+defmodule Covid19Orientation.Data.PgStore do
   @moduledoc """
   Store data in PostgreSQL
 
   Test table:
-
+  ```sql
   DROP TABLE IF EXISTS journal;
   CREATE TABLE journal (
       id VARCHAR,
@@ -11,6 +11,7 @@ defmodule Covid19Orientation.Data.StorePg do
       data JSONB,
       date_created TIMESTAMP WITH TIME ZONE DEFAULT now()
   );
+  ```
 
   """
 
@@ -19,7 +20,7 @@ defmodule Covid19Orientation.Data.StorePg do
   def start_link(_initial) do
     Agent.start_link(
         fn -> 
-            {:ok, pid} = Postgrex.start_link(hostname: "localhost", username: "test", password: "test", database: "test")
+            {:ok, pid} = Postgrex.start_link(Application.fetch_env!(:covid19_orientation, __MODULE__)[:conn_opts])
             %{pg: pid}
         end, name: __MODULE__)
   end

@@ -2,7 +2,7 @@ defmodule Covid19OrientationWeb.OrientationController do
   use Covid19OrientationWeb, :controller
 
   # alias Covid19Orientation.Data.Store
-  alias Covid19Orientation.Data.StorePg
+  alias Covid19Orientation.Data.PgStore
 
   alias Covid19OrientationWeb.Operations.{
     CreateOrientation,
@@ -31,7 +31,8 @@ defmodule Covid19OrientationWeb.OrientationController do
 
     %{data: orientation}
     |> Jason.encode!()
-    |> (&StorePg.write({timestamp, id}, &1)).()
+    # |> (&Store.write({timestamp, id}, &1)).()
+    |> (&PgStore.write({timestamp, id}, &1)).()
     |> (&send_resp(conn, 201, &1)).()
   end
 end

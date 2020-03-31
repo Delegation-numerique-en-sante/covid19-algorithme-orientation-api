@@ -14,7 +14,7 @@ defmodule Covid19Orientation.Data.Supervisor do
   def init(:ok) do
     children = [
       {Data.Store, [name: Data.Store]},
-      {Data.StorePg, [name: Data.StorePg]}
+      {Data.PgStore, [name: Data.PgStore]}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)

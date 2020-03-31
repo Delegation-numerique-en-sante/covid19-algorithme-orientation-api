@@ -20,6 +20,16 @@ config :covid19_orientation, Covid19Orientation.Data.Store,
     port: 6379
   ]
 
+# Configure PostGreSQL
+config :covid19_orientation, Covid19Orientation.Data.PgStore,
+   conn_opts: [
+     host: "127.0.0.1",
+     port: 5432,
+     username: "test",
+     password: "test",
+     database: "test"
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
