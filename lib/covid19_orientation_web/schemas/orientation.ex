@@ -64,6 +64,7 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
       "statistiques" => %{
         "moins_de_15_ans" => false,
         "moins_de_50_ans" => false,
+        "au_moins_50_ans" => false,
         "entre_50_et_69_ans" => false,
         "moins_de_70_ans" => false,
         "au_moins_70_ans" => true,
