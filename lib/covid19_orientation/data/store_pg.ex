@@ -24,7 +24,6 @@ defmodule Covid19Orientation.Data.PgStore do
       fn ->
         settings = Application.fetch_env!(:covid19_orientation, __MODULE__)[:conn_opts]
         {:ok, pid} = Postgrex.start_link(settings)
-        Logger.info("Started Postgres link with settings #{inspect(settings)}")
         %{pg: pid}
       end,
       name: __MODULE__
