@@ -18,7 +18,7 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
     ],
     protocol_options: [{:max_keepalive, 20_000_000}, {:timeout, 2000}]
   ],
-  url: [scheme: "https", host: "covid19-orientation.herokuapp.com", port: 443],
+  url: [scheme: "https", host: "covid19-algorithme-orientation.osc-fr1.scalingo.io", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
