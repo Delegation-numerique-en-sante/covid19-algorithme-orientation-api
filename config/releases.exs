@@ -28,7 +28,7 @@ config :covid19_orientation, Covid19Orientation.Data.Store,
 # Configure PostGreSQL
 config :covid19_orientation, Covid19Orientation.Data.PgStore,
   conn_opts: [
-    hostname: System.get_env("PG_HOST"),
+    hostname: System.get_env("PG_HOSTNAME"),
     port: System.get_env("PG_PORT"),
     username: System.get_env("PG_USER"),
     password: System.get_env("PG_PASSWORD"),
