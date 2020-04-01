@@ -122,12 +122,12 @@ defmodule Covid19Orientation.Tests.Conditions do
 
   @spec au_moins_30_imc(orientation) :: boolean
 
-  def au_moins_30_imc(%{pronostiques: %{poids: nil}}), do: false
+  def au_moins_30_imc(%{pronostiques: %{weight: nil}}), do: false
 
   def au_moins_30_imc(%{pronostiques: %{taille: nil}}), do: false
 
-  def au_moins_30_imc(%{pronostiques: %{poids: poids, taille: taille}}) do
-    poids
+  def au_moins_30_imc(%{pronostiques: %{weight: weight, taille: taille}}) do
+    weight
     |> Kernel./(:math.pow(taille, 2))
     |> Kernel.>=(@seuil_imc)
   end
