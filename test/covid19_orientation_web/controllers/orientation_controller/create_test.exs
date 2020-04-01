@@ -13,7 +13,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "diarrhee" => true,
           "tiredness" => true,
           "diffs_alim_boire" => true,
-          "essoufle" => true
+          "breathlessness" => true
         },
         "pronostiques" => %{
           "age" => 70,

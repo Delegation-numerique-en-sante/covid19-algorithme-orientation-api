@@ -188,7 +188,7 @@ defmodule Covid19Orientation.Tests.Conditions do
 
   def facteurs_gravite_majeurs(%{symptomes: symptomes}) do
     symptomes
-    |> Map.take([:essoufle, :diffs_alim_boire])
+    |> Map.take([:breathlessness, :diffs_alim_boire])
     |> Enum.reduce(0, &count/2)
   end
 

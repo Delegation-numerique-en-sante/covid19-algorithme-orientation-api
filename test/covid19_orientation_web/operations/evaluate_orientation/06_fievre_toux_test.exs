@@ -104,7 +104,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreTouxTest do
     {:ok, orientation} =
       %Orientation{
         orientation
-        | symptomes: %Symptomes{orientation.symptomes | essoufle: true}
+        | symptomes: %Symptomes{orientation.symptomes | breathlessness: true}
       }
       |> EvaluateOrientation.call()
 
