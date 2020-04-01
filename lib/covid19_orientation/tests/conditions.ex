@@ -38,13 +38,14 @@ defmodule Covid19Orientation.Tests.Conditions do
           symptomes: %{
             cough: cough,
             sore_throat_aches: sore_throat_aches,
-            anosmie: anosmie,
+            agueusia_anosmia: agueusia_anosmia,
             diarrhee: diarrhee
           }
         }
       ) do
     fievre(orientation) ||
-      (!fievre(orientation) && (diarrhee || (cough && sore_throat_aches) || (cough && anosmie)))
+      (!fievre(orientation) &&
+         (diarrhee || (cough && sore_throat_aches) || (cough && agueusia_anosmia)))
   end
 
   @doc """
@@ -52,8 +53,14 @@ defmodule Covid19Orientation.Tests.Conditions do
   """
   @spec symptomes3(orientation) :: boolean
 
-  def symptomes3(%{symptomes: %{cough: cough, sore_throat_aches: sore_throat_aches, anosmie: anosmie}}) do
-    cough || sore_throat_aches || anosmie
+  def symptomes3(%{
+        symptomes: %{
+          cough: cough,
+          sore_throat_aches: sore_throat_aches,
+          agueusia_anosmia: agueusia_anosmia
+        }
+      }) do
+    cough || sore_throat_aches || agueusia_anosmia
   end
 
   @doc """

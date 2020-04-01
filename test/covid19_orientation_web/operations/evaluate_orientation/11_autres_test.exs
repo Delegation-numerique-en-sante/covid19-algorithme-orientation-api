@@ -11,7 +11,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
   test "Bastien Guerry #1" do
     {:ok, orientation} =
       %Orientation{
-        symptomes: %Symptomes{temperature: 36.6, anosmie: true, fatigue: true},
+        symptomes: %Symptomes{temperature: 36.6, agueusia_anosmia: true, fatigue: true},
         pronostiques: %Pronostiques{age: 50, heart_disease: false, taille: 1.2, poids: 40.0}
       }
       |> EvaluateOrientation.call()

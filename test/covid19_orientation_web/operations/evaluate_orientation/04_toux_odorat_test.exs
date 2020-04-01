@@ -14,7 +14,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
        symptomes: %Symptomes{
          temperature: 36.6,
          cough: true,
-         anosmie: true
+         agueusia_anosmia: true
        },
        pronostiques: %Pronostiques{heart_disease: false}
      }}

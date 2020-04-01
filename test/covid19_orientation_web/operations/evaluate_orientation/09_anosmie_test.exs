@@ -13,7 +13,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AnosmieTest do
      orientation: %Orientation{
        symptomes: %Symptomes{
          temperature: 36.6,
-         anosmie: true
+         agueusia_anosmia: true
        },
        pronostiques: %Pronostiques{heart_disease: false}
      }}

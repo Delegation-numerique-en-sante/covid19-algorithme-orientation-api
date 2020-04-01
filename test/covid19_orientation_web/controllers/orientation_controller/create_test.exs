@@ -8,7 +8,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
         "symptomes" => %{
           "temperature" => 39.0,
           "cough" => true,
-          "anosmie" => true,
+          "agueusia_anosmia" => true,
           "sore_throat_aches" => true,
           "diarrhee" => true,
           "fatigue" => true,
