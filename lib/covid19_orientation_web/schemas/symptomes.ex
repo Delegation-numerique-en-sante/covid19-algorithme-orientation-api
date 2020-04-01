@@ -27,7 +27,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
         description:
           "Avez-vous noté une forte diminution de votre goût ou de l’odorat ces derniers jours ?"
       },
-      mal_de_gorge: %Schema{
+      sore_throat_aches: %Schema{
         type: :boolean,
         description: "Avez-vous un mal de gorge apparu ces derniers jours ?"
       },
@@ -56,7 +56,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
       "temperature" => 37.5,
       "cough" => true,
       "anosmia" => true,
-      "mal_de_gorge" => true,
+      "sore_throat_aches" => true,
       "diarrhee" => true,
       "fatigue" => true,
       "diffs_alim_boire" => true,

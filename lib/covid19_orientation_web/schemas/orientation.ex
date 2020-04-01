@@ -41,7 +41,7 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
         "temperature" => 37.5,
         "cough" => true,
         "anosmia" => true,
-        "mal_de_gorge" => true,
+        "sore_throat_aches" => true,
         "diarrhee" => true,
         "fatigue" => true,
         "diffs_alim_boire" => true,
