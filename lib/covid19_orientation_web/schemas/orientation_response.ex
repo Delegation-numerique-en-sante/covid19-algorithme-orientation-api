@@ -30,7 +30,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationResponse do
         "pronostiques" => %{
           "age" => 70,
           "weight" => 65.5,
-          "taille" => 1.73,
+          "height" => 1.73,
           "cardiaque" => true,
           "diabetique" => true,
           "cancer" => true,
