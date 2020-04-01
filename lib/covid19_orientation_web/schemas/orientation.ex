@@ -52,7 +52,7 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
         "weight" => 65.5,
         "height" => 1.73,
         "heart_disease" => true,
-        "diabetique" => true,
+        "diabetes" => true,
         "cancer" => true,
         "breathing_disease" => true,
         "kidney_disease" => true,

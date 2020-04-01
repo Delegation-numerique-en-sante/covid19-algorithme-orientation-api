@@ -20,7 +20,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
         description:
           "Avez-vous une tension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?"
       },
-      diabetique: %Schema{type: :boolean, description: "Êtes-vous diabétique ?"},
+      diabetes: %Schema{type: :boolean, description: "Êtes-vous diabétique ?"},
       cancer: %Schema{type: :boolean, description: "Avez-vous ou avez-vous eu un cancer ?"},
       breathing_disease: %Schema{
         type: :boolean,
@@ -50,7 +50,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       "weight" => 65.5,
       "height" => 1.73,
       "heart_disease" => true,
-      "diabetique" => true,
+      "diabetes" => true,
       "cancer" => true,
       "breathing_disease" => true,
       "kidney_disease" => true,
