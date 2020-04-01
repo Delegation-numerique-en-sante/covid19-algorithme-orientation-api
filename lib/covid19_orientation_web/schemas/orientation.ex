@@ -40,7 +40,7 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
       "symptomes" => %{
         "temperature" => 37.5,
         "cough" => true,
-        "anosmia" => true,
+        "agueusia_anosmia" => true,
         "sore_throat_aches" => true,
         "diarrhee" => true,
         "fatigue" => true,
