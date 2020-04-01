@@ -124,11 +124,11 @@ defmodule Covid19Orientation.Tests.Conditions do
 
   def au_moins_30_imc(%{pronostiques: %{weight: nil}}), do: false
 
-  def au_moins_30_imc(%{pronostiques: %{taille: nil}}), do: false
+  def au_moins_30_imc(%{pronostiques: %{height: nil}}), do: false
 
-  def au_moins_30_imc(%{pronostiques: %{weight: weight, taille: taille}}) do
+  def au_moins_30_imc(%{pronostiques: %{weight: weight, height: height}}) do
     weight
-    |> Kernel./(:math.pow(taille, 2))
+    |> Kernel./(:math.pow(height, 2))
     |> Kernel.>=(@seuil_imc)
   end
 

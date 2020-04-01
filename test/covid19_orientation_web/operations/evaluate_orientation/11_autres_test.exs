@@ -12,7 +12,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
     {:ok, orientation} =
       %Orientation{
         symptomes: %Symptomes{temperature: 36.6, agueusia_anosmia: true, tiredness: true},
-        pronostiques: %Pronostiques{age: 50, heart_disease: false, taille: 1.2, weight: 40.0}
+        pronostiques: %Pronostiques{age: 50, heart_disease: false, height: 1.2, weight: 40.0}
       }
       |> EvaluateOrientation.call()
 
@@ -27,7 +27,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
     {:ok, orientation} =
       %Orientation{
         symptomes: %Symptomes{temperature: 36.6, cough: true, tiredness: true},
-        pronostiques: %Pronostiques{age: 50, heart_disease: true, taille: 1.2, weight: 40.0}
+        pronostiques: %Pronostiques{age: 50, heart_disease: true, height: 1.2, weight: 40.0}
       }
       |> EvaluateOrientation.call()
 
@@ -42,7 +42,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AutresTest do
     {:ok, orientation} =
       %Orientation{
         symptomes: %Symptomes{temperature: 36.6, tiredness: true},
-        pronostiques: %Pronostiques{age: 50, heart_disease: false, taille: 1.2, weight: 40.0}
+        pronostiques: %Pronostiques{age: 50, heart_disease: false, height: 1.2, weight: 40.0}
       }
       |> EvaluateOrientation.call()
 

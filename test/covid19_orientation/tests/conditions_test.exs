@@ -129,7 +129,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
     test "si IMC au moins 30 oui", %{orientation: orientation} do
       orientation = %Orientation{
         orientation
-        | pronostiques: %Pronostiques{orientation.pronostiques | weight: 67.5, taille: 1.5}
+        | pronostiques: %Pronostiques{orientation.pronostiques | weight: 67.5, height: 1.5}
       }
 
       assert Conditions.au_moins_30_imc(orientation)
@@ -138,7 +138,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
     test "si IMC moins 30 non", %{orientation: orientation} do
       orientation = %Orientation{
         orientation
-        | pronostiques: %Pronostiques{orientation.pronostiques | weight: 67.4, taille: 1.5}
+        | pronostiques: %Pronostiques{orientation.pronostiques | weight: 67.4, height: 1.5}
       }
 
       assert !Conditions.au_moins_30_imc(orientation)
@@ -272,7 +272,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
           orientation.pronostiques
           | age: 70,
             weight: 67.5,
-            taille: 1.5,
+            height: 1.5,
             heart_disease: nil,
             cancer: nil,
             enceinte: false,
