@@ -27,7 +27,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "maladie_chronique_foie" => true,
           "pregnant" => true,
           "immunodeprime" => true,
-          "traitement_immunosuppresseur" => true
+          "immunosuppressant_drug" => true
         },
         "supplementaires" => %{
           "postal_code" => "75000"
