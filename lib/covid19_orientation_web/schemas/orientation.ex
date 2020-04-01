@@ -55,7 +55,7 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
         "diabetique" => true,
         "cancer" => true,
         "breathing_disease" => true,
-        "insuffisance_renale" => true,
+        "kidney_disease" => true,
         "liver_disease" => true,
         "enceinte" => true,
         "immunodeprime" => true,

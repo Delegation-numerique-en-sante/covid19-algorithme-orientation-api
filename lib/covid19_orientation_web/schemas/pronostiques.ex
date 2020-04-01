@@ -27,7 +27,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
         description:
           "Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?"
       },
-      insuffisance_renale: %Schema{
+      kidney_disease: %Schema{
         type: :boolean,
         description: "Avez-vous une insuffisance rénale chronique dialysée ?"
       },
@@ -53,7 +53,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       "diabetique" => true,
       "cancer" => true,
       "breathing_disease" => true,
-      "insuffisance_renale" => true,
+      "kidney_disease" => true,
       "liver_disease" => true,
       "enceinte" => true,
       "immunodeprime" => true,
