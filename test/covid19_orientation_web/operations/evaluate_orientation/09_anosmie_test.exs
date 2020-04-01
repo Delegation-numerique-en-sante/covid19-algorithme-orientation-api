@@ -15,7 +15,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AnosmieTest do
          temperature: 36.6,
          anosmie: true
        },
-       pronostiques: %Pronostiques{cardiaque: false}
+       pronostiques: %Pronostiques{heart_disease: false}
      }}
   end
 
@@ -50,7 +50,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AnosmieTest do
     {:ok, orientation} =
       %Orientation{
         orientation
-        | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
+        | pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
       }
       |> EvaluateOrientation.call()
 

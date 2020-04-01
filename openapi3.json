@@ -361,7 +361,7 @@
             "type": "boolean"
           },
           "heart_disease": {
-            "description": "Si la personne a des problèms hypertension / cardiaques",
+            "description": "Si la personne a des problèmes d'hypertension / cardiaques",
             "type": "boolean"
           },
           "moins_de_15_ans": {

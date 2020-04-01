@@ -44,7 +44,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
       },
       heart_disease: %Schema{
         type: :boolean,
-        description: "Si la personne a des problèms hypertension / cardiaques"
+        description: "Si la personne a des problèmes d'hypertension / cardiaques"
       },
       facteurs_gravite: %Schema{
         type: :integer,

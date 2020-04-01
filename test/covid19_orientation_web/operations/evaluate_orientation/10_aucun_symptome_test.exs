@@ -12,7 +12,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AucunSymptomeTest
     {:ok, orientation} =
       %Orientation{
         symptomes: %Symptomes{temperature: 36.6},
-        pronostiques: %Pronostiques{cardiaque: false}
+        pronostiques: %Pronostiques{heart_disease: false}
       }
       |> EvaluateOrientation.call()
 

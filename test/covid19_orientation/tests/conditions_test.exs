@@ -207,19 +207,19 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
     test "si c'est renseignée, on prend cette information", %{orientation: orientation} do
       orientation = %Orientation{
         orientation
-        | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: false}
+        | pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: false}
       }
 
-      assert !Conditions.cardiaque(orientation)
+      assert !Conditions.heart_disease(orientation)
     end
 
     test "si ce n'est pas renseignée, on considère que oui", %{orientation: orientation} do
       orientation = %Orientation{
         orientation
-        | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: nil}
+        | pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: nil}
       }
 
-      assert Conditions.cardiaque(orientation)
+      assert Conditions.heart_disease(orientation)
     end
   end
 
@@ -273,7 +273,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
           | age: 70,
             poids: 67.5,
             taille: 1.5,
-            cardiaque: nil,
+            heart_disease: nil,
             cancer: nil,
             enceinte: false,
             immunodeprime: true

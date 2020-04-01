@@ -19,7 +19,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "age" => 70,
           "poids" => 100,
           "taille" => 1.5,
-          "cardiaque" => true,
+          "heart_disease" => true,
           "diabetique" => true,
           "cancer" => true,
           "respiratoire" => true,

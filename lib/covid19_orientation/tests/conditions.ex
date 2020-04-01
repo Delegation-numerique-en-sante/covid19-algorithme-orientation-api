@@ -141,11 +141,11 @@ defmodule Covid19Orientation.Tests.Conditions do
     temperature >= @seuil_au_moins_39_de_temperature
   end
 
-  @spec cardiaque(orientation) :: boolean
+  @spec heart_disease(orientation) :: boolean
 
-  def cardiaque(%{pronostiques: %{cardiaque: nil}}), do: true
+  def heart_disease(%{pronostiques: %{heart_disease: nil}}), do: true
 
-  def cardiaque(%{pronostiques: %{cardiaque: cardiaque}}), do: cardiaque
+  def heart_disease(%{pronostiques: %{heart_disease: heart_disease}}), do: heart_disease
 
   @doc """
   Facteurs de gravité mineurs + majeurs.
@@ -190,7 +190,7 @@ defmodule Covid19Orientation.Tests.Conditions do
 
   - Si son âge est supérieur ou égal à 70 ans
   - Si son indice de masse corporelle est supérieur à 30 kg/m²
-  - Si OUI ou Ne sait pas à la question sur l’hypertension / cardiaque
+  - Si OUI ou Ne sait pas à la question sur l’hypertension / heart_disease
   - Si OUI pour diabétique
   - Si OUI pour a ou a eu un cancer
   - Si OUI pour maladie respiratoire ou suivi pneumologique
@@ -207,7 +207,7 @@ defmodule Covid19Orientation.Tests.Conditions do
     |> Map.from_struct()
     |> Map.put(:au_moins_70_ans, au_moins_70_ans(orientation))
     |> Map.put(:au_moins_30_imc, au_moins_30_imc(orientation))
-    |> Map.put(:cardiaque, cardiaque(orientation))
+    |> Map.put(:heart_disease, heart_disease(orientation))
     |> Enum.reduce(0, &count/2)
   end
 

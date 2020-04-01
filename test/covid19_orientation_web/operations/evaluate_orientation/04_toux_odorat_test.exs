@@ -16,7 +16,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
          toux: true,
          anosmie: true
        },
-       pronostiques: %Pronostiques{cardiaque: false}
+       pronostiques: %Pronostiques{heart_disease: false}
      }}
   end
 
@@ -72,7 +72,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
       {:ok, orientation} =
         %Orientation{
           orientation
-          | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
+          | pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
         }
         |> EvaluateOrientation.call()
 
@@ -88,7 +88,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
         %Orientation{
           orientation
           | symptomes: %Symptomes{orientation.symptomes | fatigue: true},
-            pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
+            pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
         }
         |> EvaluateOrientation.call()
 
@@ -104,7 +104,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxOdoratTest do
         %Orientation{
           orientation
           | symptomes: %Symptomes{orientation.symptomes | temperature: 39.0, fatigue: true},
-            pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
+            pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
         }
         |> EvaluateOrientation.call()
 

@@ -14,7 +14,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievrePasTouxTest
        symptomes: %Symptomes{
          temperature: 37.8
        },
-       pronostiques: %Pronostiques{cardiaque: false}
+       pronostiques: %Pronostiques{heart_disease: false}
      }}
   end
 
@@ -70,7 +70,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievrePasTouxTest
       {:ok, orientation} =
         %Orientation{
           orientation
-          | pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
+          | pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
         }
         |> EvaluateOrientation.call()
 
@@ -86,7 +86,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievrePasTouxTest
         %Orientation{
           orientation
           | symptomes: %Symptomes{orientation.symptomes | fatigue: true},
-            pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
+            pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
         }
         |> EvaluateOrientation.call()
 
@@ -102,7 +102,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievrePasTouxTest
         %Orientation{
           orientation
           | symptomes: %Symptomes{orientation.symptomes | temperature: 39.0, fatigue: true},
-            pronostiques: %Pronostiques{orientation.pronostiques | cardiaque: true}
+            pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
         }
         |> EvaluateOrientation.call()
 
