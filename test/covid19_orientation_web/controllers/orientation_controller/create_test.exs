@@ -20,7 +20,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "weight" => 100,
           "height" => 1.5,
           "heart_disease" => true,
-          "diabetique" => true,
+          "diabetes" => true,
           "cancer" => true,
           "breathing_disease" => true,
           "insuffisance_renale" => true,
