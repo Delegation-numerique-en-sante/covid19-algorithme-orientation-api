@@ -14,14 +14,12 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   watchers: []
 
 # Configure PostgreSQL
-config :covid19_orientation, Covid19Orientation.Data.Store,
-  conn_opts: [
-    hostname: "127.0.0.1",
-    port: 5432,
-    username: "test",
-    password: "test",
-    database: "test"
-  ]
+config :covid19_orientation, Covid19Orientation.Data.Repo,
+  hostname: "127.0.0.1",
+  port: 5432,
+  username: "apitaxi",
+  password: "vincent",
+  database: "test_covid"
 
 # ## SSL Support
 #
