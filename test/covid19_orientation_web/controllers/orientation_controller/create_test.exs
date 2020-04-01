@@ -24,7 +24,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "cancer" => true,
           "breathing_disease" => true,
           "kidney_disease" => true,
-          "maladie_chronique_foie" => true,
+          "liver_disease" => true,
           "pregnant" => true,
           "immunodeprime" => true,
           "immunosuppressant_drug" => true
