@@ -173,7 +173,7 @@ defmodule Covid19Orientation.Tests.Conditions do
 
   def facteurs_gravite_mineurs(orientation = %{symptomes: symptomes}) do
     symptomes
-    |> Map.take([:fatigue])
+    |> Map.take([:tiredness])
     |> Map.put(:au_moins_39_de_temperature, au_moins_39_de_temperature(orientation))
     |> Enum.reduce(0, &count/2)
   end

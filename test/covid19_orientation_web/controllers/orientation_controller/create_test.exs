@@ -11,7 +11,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "agueusia_anosmia" => true,
           "sore_throat_aches" => true,
           "diarrhee" => true,
-          "fatigue" => true,
+          "tiredness" => true,
           "diffs_alim_boire" => true,
           "essoufle" => true
         },

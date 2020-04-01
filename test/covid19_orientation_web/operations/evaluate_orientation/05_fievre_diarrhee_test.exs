@@ -54,7 +54,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreDiarrheeTes
       {:ok, orientation} =
         %Orientation{
           orientation
-          | symptomes: %Symptomes{orientation.symptomes | fatigue: true}
+          | symptomes: %Symptomes{orientation.symptomes | tiredness: true}
         }
         |> EvaluateOrientation.call()
 
@@ -86,7 +86,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreDiarrheeTes
       {:ok, orientation} =
         %Orientation{
           orientation
-          | symptomes: %Symptomes{orientation.symptomes | fatigue: true},
+          | symptomes: %Symptomes{orientation.symptomes | tiredness: true},
             pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
         }
         |> EvaluateOrientation.call()
@@ -102,7 +102,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreDiarrheeTes
       {:ok, orientation} =
         %Orientation{
           orientation
-          | symptomes: %Symptomes{orientation.symptomes | temperature: 39.0, fatigue: true},
+          | symptomes: %Symptomes{orientation.symptomes | temperature: 39.0, tiredness: true},
             pronostiques: %Pronostiques{orientation.pronostiques | heart_disease: true}
         }
         |> EvaluateOrientation.call()

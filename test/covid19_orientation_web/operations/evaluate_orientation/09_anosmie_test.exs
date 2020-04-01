@@ -35,7 +35,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.AnosmieTest do
     {:ok, orientation} =
       %Orientation{
         orientation
-        | symptomes: %Symptomes{orientation.symptomes | fatigue: true}
+        | symptomes: %Symptomes{orientation.symptomes | tiredness: true}
       }
       |> EvaluateOrientation.call()
 
