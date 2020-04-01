@@ -28,15 +28,12 @@ defmodule Covid19Orientation.Data.Store do
   end
 
   def write({date, uuid}, data = %{}) do
-    Agent.update(__MODULE__, fn state ->
+    Agent.cast(__MODULE__, fn state ->
       insert(state, date, uuid, data)
       state
     end)
 
     data
-
-    # Tip: Use cast for even more speed
-    # Agent.cast(__MODULE__, fn(state) -> (write_to_pg(state.pg, timestamp, id, data); state) end)
   end
 
   @spec read(tuple) :: {:ok, map} | {:error, any}
