@@ -229,7 +229,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
       | symptomes: %Symptomes{
           orientation.symptomes
           | temperature: 39.0,
-            diffs_alim_boire: true,
+            feeding: true,
             breathlessness: true
         }
     }
@@ -243,7 +243,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
       | symptomes: %Symptomes{
           orientation.symptomes
           | temperature: 39.0,
-            diffs_alim_boire: true,
+            feeding: true,
             breathlessness: true
         }
     }
@@ -257,7 +257,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
       | symptomes: %Symptomes{
           orientation.symptomes
           | temperature: 39.0,
-            diffs_alim_boire: true,
+            feeding: true,
             breathlessness: true
         }
     }
