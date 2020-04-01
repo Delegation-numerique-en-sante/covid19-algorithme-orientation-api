@@ -24,8 +24,8 @@ defmodule Covid19Orientation.Tests.Conditions do
   @doc """
   Fièvre ET toux.
   """
-  def symptomes1(orientation = %{symptomes: %{toux: toux}}) do
-    fievre(orientation) && toux
+  def symptomes1(orientation = %{symptomes: %{cough: cough}}) do
+    fievre(orientation) && cough
   end
 
   @spec symptomes2(orientation) :: boolean
@@ -36,7 +36,7 @@ defmodule Covid19Orientation.Tests.Conditions do
   def symptomes2(
         orientation = %{
           symptomes: %{
-            toux: toux,
+            cough: cough,
             mal_de_gorge: mal_de_gorge,
             anosmie: anosmie,
             diarrhee: diarrhee
@@ -44,7 +44,7 @@ defmodule Covid19Orientation.Tests.Conditions do
         }
       ) do
     fievre(orientation) ||
-      (!fievre(orientation) && (diarrhee || (toux && mal_de_gorge) || (toux && anosmie)))
+      (!fievre(orientation) && (diarrhee || (cough && mal_de_gorge) || (cough && anosmie)))
   end
 
   @doc """
@@ -52,8 +52,8 @@ defmodule Covid19Orientation.Tests.Conditions do
   """
   @spec symptomes3(orientation) :: boolean
 
-  def symptomes3(%{symptomes: %{toux: toux, mal_de_gorge: mal_de_gorge, anosmie: anosmie}}) do
-    toux || mal_de_gorge || anosmie
+  def symptomes3(%{symptomes: %{cough: cough, mal_de_gorge: mal_de_gorge, anosmie: anosmie}}) do
+    cough || mal_de_gorge || anosmie
   end
 
   @doc """
