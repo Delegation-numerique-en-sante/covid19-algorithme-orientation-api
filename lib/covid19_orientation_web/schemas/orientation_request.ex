@@ -42,7 +42,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationRequest do
           "immunosuppressant_drug" => true
         },
         "supplementaires" => %{
-          "code_postal" => "75000"
+          "postal_code" => "75000"
         }
       }
     }

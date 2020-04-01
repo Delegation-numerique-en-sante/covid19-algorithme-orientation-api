@@ -78,7 +78,7 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
         "facteurs_pronostique" => 1
       },
       "supplementaires" => %{
-        "code_postal" => "75000"
+        "postal_code" => "75000"
       },
       "conclusion" => %{
         "code" => "orientation_SAMU"
