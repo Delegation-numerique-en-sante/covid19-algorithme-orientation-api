@@ -13,7 +13,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.FievreDiarrheeTes
      orientation: %Orientation{
        symptomes: %Symptomes{
          temperature: 37.8,
-         diarrhee: true
+         diarrhea: true
        },
        pronostiques: %Pronostiques{heart_disease: false}
      }}

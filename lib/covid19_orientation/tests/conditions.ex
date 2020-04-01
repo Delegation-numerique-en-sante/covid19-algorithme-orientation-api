@@ -39,13 +39,13 @@ defmodule Covid19Orientation.Tests.Conditions do
             cough: cough,
             sore_throat_aches: sore_throat_aches,
             agueusia_anosmia: agueusia_anosmia,
-            diarrhee: diarrhee
+            diarrhea: diarrhea
           }
         }
       ) do
     fievre(orientation) ||
       (!fievre(orientation) &&
-         (diarrhee || (cough && sore_throat_aches) || (cough && agueusia_anosmia)))
+         (diarrhea || (cough && sore_throat_aches) || (cough && agueusia_anosmia)))
   end
 
   @doc """
