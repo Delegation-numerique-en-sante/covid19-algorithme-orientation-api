@@ -1,4 +1,4 @@
-defmodule Covid19Orientation.Data.Repo.Migrations.AddToken do
+defmodule Covid19Questionnaire.Data.Repo.Migrations.AddToken do
   use Ecto.Migration
 
   def change do

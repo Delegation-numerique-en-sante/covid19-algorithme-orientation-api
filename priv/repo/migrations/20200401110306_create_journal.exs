@@ -1,9 +1,9 @@
-defmodule Covid19Orientation.Data.Repo.Migrations.CreateJournal do
+defmodule Covid19Questionnaire.Data.Repo.Migrations.CreateJournal do
   use Ecto.Migration
 
   def up do
     execute "DROP TABLE IF EXISTS journal;"
-    
+
     execute """
     CREATE TABLE journal (
         date TIMESTAMP WITHOUT TIME ZONE NOT NULL,

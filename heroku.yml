@@ -5,4 +5,4 @@ build:
     MIX_ENV: prod
     SECRET_KEY_BASE: $SECRET_KEY_BASE
 run:
-  web: bin/covid19_orientation start
+  web: bin/covid19_questionnaire start

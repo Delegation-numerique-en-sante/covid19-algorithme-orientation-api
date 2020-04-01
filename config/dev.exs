@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :covid19_orientation, Covid19OrientationWeb.Endpoint,
+config :covid19_questionnaire, Covid19QuestionnaireWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -14,12 +14,12 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   watchers: []
 
 # Configure PostgreSQL
-config :covid19_orientation, Covid19Orientation.Data.Repo,
+config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
   hostname: "127.0.0.1",
   port: 5432,
-  username: "apitaxi",
-  password: "vincent",
-  database: "test_covid"
+  username: "test",
+  password: "test",
+  database: "test"
 
 # ## SSL Support
 #

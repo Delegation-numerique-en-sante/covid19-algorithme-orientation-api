@@ -3,15 +3,15 @@
     "responses": {},
     "schemas": {
       "Conclusion": {
-        "description": "[Conclusion de l'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles)",
+        "description": "[Conclusion de l'questionnaire du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
         "example": {
-          "code": "orientation_SAMU"
+          "code": "questionnaire_SAMU"
         },
         "properties": {
           "code": {
-            "description": "[Conclusions possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles)",
+            "description": "[Conclusions possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
             "enum": [
-              "orientation_SAMU",
+              "questionnaire_SAMU",
               "FIN2",
               "FIN3",
               "FIN4",
@@ -29,13 +29,13 @@
         ],
         "title": "Conclusion",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Conclusion"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Conclusion"
       },
-      "Orientation": {
-        "description": "[Algorithme d’orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19)",
+      "Questionnaire": {
+        "description": "[Algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
         "example": {
           "conclusion": {
-            "code": "orientation_SAMU"
+            "code": "questionnaire_SAMU"
           },
           "date": "2020-03-29 15:20:11.875767Z",
           "pronostiques": {
@@ -115,14 +115,14 @@
           "pronostiques",
           "supplementaires"
         ],
-        "title": "Orientation",
+        "title": "Questionnaire",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Orientation"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Questionnaire"
       },
-      "OrientationRequest": {
+      "QuestionnaireRequest": {
         "description": "Corps de la requête POST pour lancer l'algorithme d'orientation",
         "example": {
-          "orientation": {
+          "questionnaire": {
             "pronostiques": {
               "age": 70,
               "breathing_disease": true,
@@ -153,27 +153,27 @@
           }
         },
         "properties": {
-          "orientation": {
+          "questionnaire": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Orientation"
+                "$ref": "#/components/schemas/Questionnaire"
               }
             ]
           }
         },
         "required": [
-          "orientation"
+          "questionnaire"
         ],
-        "title": "OrientationRequest",
+        "title": "QuestionnaireRequest",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.OrientationRequest"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest"
       },
-      "OrientationResponse": {
+      "QuestionnaireResponse": {
         "description": "Réponse de l'algorithme d'orientation",
         "example": {
           "data": {
             "conclusion": {
-              "code": "orientation_SAMU"
+              "code": "questionnaire_SAMU"
             },
             "date": "2020-03-29 15:20:11.875767Z",
             "pronostiques": {
@@ -224,15 +224,15 @@
         },
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Orientation"
+            "$ref": "#/components/schemas/Questionnaire"
           }
         },
-        "title": "OrientationResponse",
+        "title": "QuestionnaireResponse",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.OrientationResponse"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse"
       },
       "Pronostiques": {
-        "description": "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
+        "description": "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
         "example": {
           "age": 70,
           "breathing_disease": true,
@@ -299,10 +299,10 @@
         },
         "title": "Pronostiques",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Pronostiques"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Pronostiques"
       },
       "Statistiques": {
-        "description": "[Statistiques](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
+        "description": "[Statistiques](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
         "example": {
           "au_moins_30_imc": true,
           "au_moins_39_de_temperature": true,
@@ -395,10 +395,10 @@
         ],
         "title": "Statistiques",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Statistiques"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Statistiques"
       },
       "Supplementaires": {
-        "description": "[Questions supplémentaires](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#question-suppl%C3%A9mentaire)",
+        "description": "[Questions supplémentaires](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#question-suppl%C3%A9mentaire)",
         "example": {
           "postal_code": "75000"
         },
@@ -410,10 +410,10 @@
         },
         "title": "Supplementaires",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Supplementaires"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Supplementaires"
       },
       "Symptomes": {
-        "description": "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",
+        "description": "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",
         "example": {
           "agueusia_anosmia": true,
           "breathlessness": true,
@@ -460,7 +460,7 @@
         },
         "title": "Symptomes",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Symptomes"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Symptomes"
       }
     }
   },
@@ -470,18 +470,18 @@
   },
   "openapi": "3.0.0",
   "paths": {
-    "/orientation": {
+    "/questionnaire": {
       "post": {
         "callbacks": {},
         "deprecated": false,
         "description": "Évaluer le test d'orientation du Covid-19",
-        "operationId": "OrientationController.create",
+        "operationId": "QuestionnaireController.create",
         "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OrientationRequest"
+                "$ref": "#/components/schemas/QuestionnaireRequest"
               }
             }
           },
@@ -493,11 +493,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrientationResponse"
+                  "$ref": "#/components/schemas/QuestionnaireResponse"
                 }
               }
             },
-            "description": "Orientation"
+            "description": "Questionnaire"
           }
         },
         "summary": "Évaluer le test d'orientation du Covid-19",

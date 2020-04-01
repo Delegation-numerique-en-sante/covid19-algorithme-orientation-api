@@ -39,7 +39,7 @@ RUN apk add --update bash openssl && \
 RUN adduser -D -h /home/app app
 WORKDIR /home/app
 
-COPY --from=build /app/_build/prod/rel/covid19_orientation .
+COPY --from=build /app/_build/prod/rel/covid19_questionnaire .
 RUN chown -R app: .
 USER app
 

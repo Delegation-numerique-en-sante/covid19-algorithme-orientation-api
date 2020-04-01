@@ -1,8 +1,8 @@
-# Covid19-Algorithme-Orientation
+# Covid19-Algorithme-Questionnaire
 
 ## Introduction
 
-Covid19-Orientation est une implémentation en Elixir de l'[algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation) officiellement publié par le ministère des Solidarités et de la Santé.
+Covid19-Questionnaire est une implémentation en Elixir de l'[algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire) officiellement publié par le ministère des Solidarités et de la Santé.
 
 L'algorithme est défini par un comité scientifique, appelé CovidTélé, réunissant des médecins et co-piloté par l'AP-HP et l'Institut Pasteur.
 
@@ -28,8 +28,8 @@ Nous recommandons l'utilisation de Kerl pour Erlang et Kiex pour Elixir.
 Une fois installés :
 
 ```sh
-git clone git@github.com:Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir.git
-cd covid19-algorithme-orientation-elixir
+git clone git@github.com:Delegation-numerique-en-sante/covid19-algorithme-questionnaire-elixir.git
+cd covid19-algorithme-questionnaire-elixir
 make install
 ```
 
@@ -47,7 +47,7 @@ Visitez http://localhost:4000/swagger pour Swagger
 
 Une instance de test est disponible.
 
-Visitez https://covid19-orientation.herokuapp.com/swagger
+Visitez https://covid19-questionnaire.herokuapp.com/swagger
 
 ## Lancer les tests
 
