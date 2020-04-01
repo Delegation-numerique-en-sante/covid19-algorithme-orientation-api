@@ -22,7 +22,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "heart_disease" => true,
           "diabetique" => true,
           "cancer" => true,
-          "respiratoire" => true,
+          "breathing_disease" => true,
           "insuffisance_renale" => true,
           "maladie_chronique_foie" => true,
           "pregnant" => true,
