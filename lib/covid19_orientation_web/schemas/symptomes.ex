@@ -46,7 +46,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
         description:
           "Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?"
       },
-      essoufle: %Schema{
+      breathlessness: %Schema{
         type: :boolean,
         description:
           "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?"
@@ -60,7 +60,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
       "diarrhee" => true,
       "fatigue" => true,
       "diffs_alim_boire" => true,
-      "essoufle" => true
+      "breathlessness" => true
     }
   })
 end

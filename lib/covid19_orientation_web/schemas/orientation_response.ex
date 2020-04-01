@@ -25,7 +25,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationResponse do
           "diarrhee" => true,
           "fatigue" => true,
           "diffs_alim_boire" => true,
-          "essoufle" => true
+          "breathlessness" => true
         },
         "pronostiques" => %{
           "age" => 70,
