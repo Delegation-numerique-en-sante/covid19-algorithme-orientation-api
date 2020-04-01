@@ -34,7 +34,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationResponse do
           "cardiaque" => true,
           "diabetique" => true,
           "cancer" => true,
-          "respiratoire" => true,
+          "breathing_disease" => true,
           "insuffisance_renale" => true,
           "maladie_chronique_foie" => true,
           "enceinte" => true,

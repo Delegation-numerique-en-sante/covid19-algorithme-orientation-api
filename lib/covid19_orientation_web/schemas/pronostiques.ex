@@ -22,7 +22,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       },
       diabetique: %Schema{type: :boolean, description: "Êtes-vous diabétique ?"},
       cancer: %Schema{type: :boolean, description: "Avez-vous ou avez-vous eu un cancer ?"},
-      respiratoire: %Schema{
+      breathing_disease: %Schema{
         type: :boolean,
         description:
           "Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?"
@@ -52,7 +52,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       "cardiaque" => true,
       "diabetique" => true,
       "cancer" => true,
-      "respiratoire" => true,
+      "breathing_disease" => true,
       "insuffisance_renale" => true,
       "maladie_chronique_foie" => true,
       "enceinte" => true,
