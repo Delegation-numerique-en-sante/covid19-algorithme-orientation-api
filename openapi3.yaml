@@ -37,14 +37,14 @@ components:
         [Conclusion de l'orientation du
         Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles)
       example:
-        code: FIN1
+        code: orientation_SAMU
       properties:
         code:
           description: >-
             [Conclusions
             possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles)
           enum:
-            - FIN1
+            - orientation_SAMU
             - FIN2
             - FIN3
             - FIN4
@@ -65,47 +65,47 @@ components:
         Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19)
       example:
         conclusion:
-          code: FIN1
+          code: orientation_SAMU
         date: '2020-03-29 15:20:11.875767Z'
         pronostiques:
           age: 70
+          breathing_disease: true
           cancer: true
-          cardiaque: true
-          diabetique: true
-          enceinte: true
+          diabetes: true
+          heart_disease: true
+          height: 1.73
           immunodeprime: true
-          insuffisance_renale: true
-          maladie_chronique_foie: true
-          poids: 65.5
-          respiratoire: true
-          taille: 1.73
-          traitement_immunosuppresseur: true
+          immunosuppressant_drug: true
+          kidney_disease: true
+          liver_disease: true
+          pregnant: true
+          weight: 65.5
         statistiques:
           au_moins_30_imc: true
           au_moins_39_de_temperature: true
           au_moins_50_ans: false
           au_moins_70_ans: true
-          cardiaque: true
           entre_50_et_69_ans: false
           facteurs_gravite: 3
           facteurs_gravite_majeurs: 1
           facteurs_gravite_mineurs: 2
           facteurs_pronostique: 1
-          fievre: true
+          fever: true
+          heart_disease: true
           moins_de_15_ans: false
           moins_de_50_ans: false
           moins_de_70_ans: false
         supplementaires:
-          code_postal: '75000'
+          postal_code: '75000'
         symptomes:
-          anosmie: true
-          diarrhee: true
-          diffs_alim_boire: true
-          essoufle: true
-          fatigue: true
-          mal_de_gorge: true
+          agueusia_anosmia: true
+          breathlessness: true
+          cough: true
+          diarrhea: true
+          feeding: true
+          sore_throat_aches: true
           temperature: 37.5
-          toux: true
+          tiredness: true
         uuid: 5976423a-ee35-11e3-8569-14109ff1a304
       properties:
         conclusion:
@@ -139,28 +139,28 @@ components:
         orientation:
           pronostiques:
             age: 70
+            breathing_disease: true
             cancer: true
-            cardiaque: true
-            diabetique: true
-            enceinte: true
+            diabetes: true
+            heart_disease: true
+            height: 1.73
             immunodeprime: true
-            insuffisance_renale: true
-            maladie_chronique_foie: true
-            poids: 65.5
-            respiratoire: true
-            taille: 1.73
-            traitement_immunosuppresseur: true
+            immunosuppressant_drug: true
+            kidney_disease: true
+            liver_disease: true
+            pregnant: true
+            weight: 65.5
           supplementaires:
-            code_postal: '75000'
+            postal_code: '75000'
           symptomes:
-            anosmie: true
-            diarrhee: true
-            diffs_alim_boire: true
-            essoufle: true
-            fatigue: true
-            mal_de_gorge: true
+            agueusia_anosmia: true
+            breathlessness: true
+            cough: true
+            diarrhea: true
+            feeding: true
+            sore_throat_aches: true
             temperature: 37.5
-            toux: true
+            tiredness: true
       properties:
         orientation:
           anyOf:
@@ -175,47 +175,47 @@ components:
       example:
         data:
           conclusion:
-            code: FIN1
+            code: orientation_SAMU
           date: '2020-03-29 15:20:11.875767Z'
           pronostiques:
             age: 70
+            breathing_disease: true
             cancer: true
-            cardiaque: true
-            diabetique: true
-            enceinte: true
+            diabetes: true
+            heart_disease: true
+            height: 1.73
             immunodeprime: true
-            insuffisance_renale: true
-            maladie_chronique_foie: true
-            poids: 65.5
-            respiratoire: true
-            taille: 1.73
-            traitement_immunosuppresseur: true
+            immunosuppressant_drug: true
+            kidney_disease: true
+            liver_disease: true
+            pregnant: true
+            weight: 65.5
           statistiques:
             au_moins_30_imc: true
             au_moins_39_de_temperature: true
             au_moins_50_ans: false
             au_moins_70_ans: true
-            cardiaque: true
             entre_50_et_69_ans: false
             facteurs_gravite: 3
             facteurs_gravite_majeurs: 1
             facteurs_gravite_mineurs: 2
             facteurs_pronostique: 1
-            fievre: true
+            fever: true
+            heart_disease: true
             moins_de_15_ans: false
             moins_de_50_ans: false
             moins_de_70_ans: false
           supplementaires:
-            code_postal: '75000'
+            postal_code: '75000'
           symptomes:
-            anosmie: true
-            diarrhee: true
-            diffs_alim_boire: true
-            essoufle: true
-            fatigue: true
-            mal_de_gorge: true
+            agueusia_anosmia: true
+            breathlessness: true
+            cough: true
+            diarrhea: true
+            feeding: true
+            sore_throat_aches: true
             temperature: 37.5
-            toux: true
+            tiredness: true
           uuid: 5976423a-ee35-11e3-8569-14109ff1a304
       properties:
         data:
@@ -229,61 +229,61 @@ components:
         terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)
       example:
         age: 70
+        breathing_disease: true
         cancer: true
-        cardiaque: true
-        diabetique: true
-        enceinte: true
+        diabetes: true
+        heart_disease: true
+        height: 1.73
         immunodeprime: true
-        insuffisance_renale: true
-        maladie_chronique_foie: true
-        poids: 65.5
-        respiratoire: true
-        taille: 1.73
-        traitement_immunosuppresseur: true
+        immunosuppressant_drug: true
+        kidney_disease: true
+        liver_disease: true
+        pregnant: true
+        weight: 65.5
       properties:
         age:
           description: Quel est votre âge ?
           type: integer
+        breathing_disease:
+          description: >-
+            Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un
+            pneumologue ?
+          type: boolean
         cancer:
           description: Avez-vous ou avez-vous eu un cancer ?
           type: boolean
-        cardiaque:
+        diabetes:
+          description: Êtes-vous diabétique ?
+          type: boolean
+        heart_disease:
           description: >-
             Avez-vous une tension artérielle mal équilibrée ? Ou une maladie
             cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée
             cardiologique ?
           type: boolean
-        diabetique:
-          description: Êtes-vous diabétique ?
-          type: boolean
-        enceinte:
-          description: Êtes-vous enceinte ?
-          type: boolean
+        height:
+          description: Quelle est votre taille en mètres ?
+          type: number
         immunodeprime:
           description: >-
             Avez-vous une maladie connue pour diminuer vos défenses immunitaires
             ?
           type: boolean
-        insuffisance_renale:
-          description: Avez-vous une insuffisance rénale chronique dialysée ?
-          type: boolean
-        maladie_chronique_foie:
-          description: Avez-vous une maladie chronique du foie ?
-          type: boolean
-        poids:
-          description: Quel est votre poids en kilogrammes ?
-          type: number
-        respiratoire:
-          description: >-
-            Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un
-            pneumologue ?
-          type: boolean
-        taille:
-          description: Quelle est votre taille en mètres ?
-          type: number
-        traitement_immunosuppresseur:
+        immunosuppressant_drug:
           description: Prenez-vous un traitement immunosuppresseur ?
           type: boolean
+        kidney_disease:
+          description: Avez-vous une insuffisance rénale chronique dialysée ?
+          type: boolean
+        liver_disease:
+          description: Avez-vous une maladie chronique du foie ?
+          type: boolean
+        pregnant:
+          description: Êtes-vous enceinte ?
+          type: boolean
+        weight:
+          description: Quel est votre poids en kilogrammes ?
+          type: number
       title: Pronostiques
       type: object
       x-struct: Elixir.Covid19OrientationWeb.Schemas.Pronostiques
@@ -295,13 +295,13 @@ components:
         au_moins_39_de_temperature: true
         au_moins_50_ans: false
         au_moins_70_ans: true
-        cardiaque: true
         entre_50_et_69_ans: false
         facteurs_gravite: 3
         facteurs_gravite_majeurs: 1
         facteurs_gravite_mineurs: 2
         facteurs_pronostique: 1
-        fievre: true
+        fever: true
+        heart_disease: true
         moins_de_15_ans: false
         moins_de_50_ans: false
         moins_de_70_ans: false
@@ -318,9 +318,6 @@ components:
         au_moins_70_ans:
           description: Si la personne a au moins de 70 ans
           type: boolean
-        cardiaque:
-          description: Si la personne a des problèms hypertension / cardiaques
-          type: boolean
         entre_50_et_69_ans:
           description: Si la personne a entre 50 et 69 ans
           type: boolean
@@ -336,8 +333,11 @@ components:
         facteurs_pronostique:
           description: Facteurs pronostique défavorables liés au terrain
           type: integer
-        fievre:
+        fever:
           description: Indicateur de fièvre
+          type: boolean
+        heart_disease:
+          description: Si la personne a des problèms hypertension / cardiaques
           type: boolean
         moins_de_15_ans:
           description: Si la personne a moins de 15 ans
@@ -356,9 +356,9 @@ components:
         - moins_de_70_ans
         - au_moins_70_ans
         - au_moins_30_imc
-        - fievre
+        - fever
         - au_moins_39_de_temperature
-        - cardiaque
+        - heart_disease
         - facteurs_gravite
         - facteurs_gravite_mineurs
         - facteurs_gravite_majeurs
@@ -371,9 +371,9 @@ components:
         [Questions
         supplémentaires](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#question-suppl%C3%A9mentaire)
       example:
-        code_postal: '75000'
+        postal_code: '75000'
       properties:
-        code_postal:
+        postal_code:
           description: Code postal
           type: string
       title: Supplementaires
@@ -384,42 +384,41 @@ components:
         [Questions sur les
         symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)
       example:
-        anosmie: true
-        diarrhee: true
-        diffs_alim_boire: true
-        essoufle: true
-        fatigue: true
-        mal_de_gorge: true
+        agueusia_anosmia: true
+        breathlessness: true
+        cough: true
+        diarrhea: true
+        feeding: true
+        sore_throat_aches: true
         temperature: 37.5
-        toux: true
+        tiredness: true
       properties:
-        anosmie:
+        agueusia_anosmia:
           description: >-
             Avez-vous noté une forte diminution de votre goût ou de l’odorat ces
             derniers jours ?
           type: boolean
-        diarrhee:
-          description: >-
-            Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles
-            molles) ?
-          type: boolean
-        diffs_alim_boire:
-          description: >-
-            Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24
-            HEURES OU PLUS ?
-          type: boolean
-        essoufle:
+        breathlessness:
           description: >-
             Dans les dernières 24 heures, avez-vous noté un manque de souffle
             INHABITUEL lorsque vous parlez ou faites un petit effort ?
           type: boolean
-        fatigue:
+        cough:
           description: >-
-            Avez-vous une fatigue inhabituelle ces derniers jours ? Cette
-            fatigue vous oblige-t-elle à vous reposer plus de la moitié de la
-            journée ?
+            Avez-vous une toux ou une augmentation de votre toux habituelle ces
+            derniers jours ?
           type: boolean
-        mal_de_gorge:
+        diarrhea:
+          description: >-
+            Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles
+            molles) ?
+          type: boolean
+        feeding:
+          description: >-
+            Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24
+            HEURES OU PLUS ?
+          type: boolean
+        sore_throat_aches:
           description: Avez-vous un mal de gorge apparu ces derniers jours ?
           type: boolean
         temperature:
@@ -427,10 +426,11 @@ components:
             Pensez-vous avoir eu de la fièvre ces derniers jours (frissons,
             sueurs) ? Quelle est votre température ?
           type: number
-        toux:
+        tiredness:
           description: >-
-            Avez-vous une toux ou une augmentation de votre toux habituelle ces
-            derniers jours ?
+            Avez-vous une fatigue inhabituelle ces derniers jours ? Cette
+            fatigue vous oblige-t-elle à vous reposer plus de la moitié de la
+            journée ?
           type: boolean
       title: Symptomes
       type: object
