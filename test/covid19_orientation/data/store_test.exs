@@ -18,7 +18,7 @@ defmodule Covid19Orientation.Data.StoreTest do
       %Orientation{
         symptomes: %Symptomes{temperature: 39.0},
         pronostiques: %Pronostiques{age: 70},
-        supplementaires: %Supplementaires{code_postal: "75000"}
+        supplementaires: %Supplementaires{postal_code: "75000"}
       }
       |> EvaluateOrientation.call()
 

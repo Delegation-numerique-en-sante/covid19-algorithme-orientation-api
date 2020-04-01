@@ -30,7 +30,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "traitement_immunosuppresseur" => true
         },
         "supplementaires" => %{
-          "code_postal" => "75000"
+          "postal_code" => "75000"
         }
       }
     }
