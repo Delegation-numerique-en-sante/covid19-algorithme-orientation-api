@@ -19,21 +19,15 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   server: true
 
-# Configure Redis
+# Configure PostgreSQL
 config :covid19_orientation, Covid19Orientation.Data.Store,
-  conn_opts: [
-    url: System.get_env("REDIS_URL")
-  ]
-
-# Configure PostGreSQL
-config :covid19_orientation, Covid19Orientation.Data.PgStore,
   conn_opts: [
     hostname: System.get_env("PG_HOSTNAME"),
     port: System.get_env("PG_PORT"),
     username: System.get_env("PG_USER"),
     password: System.get_env("PG_PASSWORD"),
     database: System.get_env("PG_DATABASE"),
-    pool_size: System.get_env("PG_POOL_SIZE") |> String.trim |> String.to_integer
+    pool_size: System.get_env("PG_POOL_SIZE") |> String.trim() |> String.to_integer()
   ]
 
 # Do not print debug messages in production

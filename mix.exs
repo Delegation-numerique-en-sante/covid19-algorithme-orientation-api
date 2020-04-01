@@ -40,13 +40,12 @@ defmodule Covid19Orientation.MixProject do
     [
       {:elixir_uuid, "~> 1.2"},
       {:jason, "~> 1.2.0"},
-      {:nebulex_redis_adapter, "~> 1.1"},
       {:open_api_spex, "~> 3.6"},
       {:phoenix, "~> 1.4.16"},
       {:phoenix_pubsub, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
-      {:credo, "~> 1.3.1", only: [:dev, :test], runtime: false},
-      {:postgrex, "~> 0.15.3"}
+      {:postgrex, "~> 0.15.3"},
+      {:credo, "~> 1.3.1", only: [:dev, :test], runtime: false}
     ]
   end
 end

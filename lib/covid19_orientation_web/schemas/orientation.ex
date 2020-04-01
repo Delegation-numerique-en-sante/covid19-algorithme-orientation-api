@@ -21,12 +21,12 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
       "[Algorithme d’orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19)",
     type: :object,
     properties: %{
-      id: %Schema{type: :string, description: "ID du test d'orientation", format: :uuid4},
-      timestamp: %Schema{
+      date: %Schema{
         type: :string,
         description: "Date du test d'orientation",
         format: :"date-time"
       },
+      uuid: %Schema{type: :string, description: "Id du test d'orientation", format: :uuid1},
       symptomes: Symptomes,
       pronostiques: Pronostiques,
       supplementaires: Supplementaires,
@@ -35,8 +35,8 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
     },
     required: [:symptomes, :pronostiques, :supplementaires],
     example: %{
-      "id" => "fcfe5f21-8a08-4c9a-9f97-29d2fd6a27b9",
-      "timestamp" => "2020-03-29 15:20:11.875767Z",
+      "date" => "2020-03-29 15:20:11.875767Z",
+      "uuid" => "5976423a-ee35-11e3-8569-14109ff1a304",
       "symptomes" => %{
         "temperature" => 37.5,
         "toux" => true,

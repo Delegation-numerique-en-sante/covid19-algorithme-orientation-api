@@ -1,4 +1,4 @@
-defmodule Covid19OrientationWeb.Operations.SetTimestamp do
+defmodule Covid19OrientationWeb.Operations.SetDate do
   @moduledoc """
   Set orientation timestamp.
   """
@@ -10,10 +10,10 @@ defmodule Covid19OrientationWeb.Operations.SetTimestamp do
   @spec call(orientation) :: orientation
 
   def call(orientation = %Orientation{}) do
-    %Orientation{orientation | timestamp: timestamp()}
+    %Orientation{orientation | date: date()}
   end
 
-  defp timestamp do
+  defp date do
     DateTime.utc_now()
   end
 end

@@ -1,14 +1,13 @@
 defmodule Covid19OrientationWeb.OrientationController do
   use Covid19OrientationWeb, :controller
 
-  # alias Covid19Orientation.Data.Store
-  alias Covid19Orientation.Data.PgStore
+  alias Covid19Orientation.Data.Store
 
   alias Covid19OrientationWeb.Operations.{
     CreateOrientation,
     EvaluateOrientation,
-    SetId,
-    SetTimestamp
+    SetDate,
+    SetUUID
   }
 
   alias Covid19OrientationWeb.Schemas.OrientationRequest
@@ -24,15 +23,15 @@ defmodule Covid19OrientationWeb.OrientationController do
       |> EvaluateOrientation.call()
 
     orientation =
-      %{timestamp: timestamp, id: id} =
+      %{date: date, uuid: uuid} =
       orientation
-      |> SetId.call()
-      |> SetTimestamp.call()
+      |> SetDate.call()
+      |> SetUUID.call()
 
-    %{data: orientation}
-    |> (&PgStore.write({timestamp, id}, &1)).()
-    |> Jason.encode!()
-    # |> (&Store.write({timestamp, id}, &1)).()
-    |> (&send_resp(conn, 201, &1)).()
+    body =
+      %{data: orientation}
+      |> (&Store.write({date, uuid}, &1)).()
+      |> Jason.encode!()
+      |> (&send_resp(conn, 201, &1)).()
   end
 end

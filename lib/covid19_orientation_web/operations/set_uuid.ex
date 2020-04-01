@@ -1,4 +1,4 @@
-defmodule Covid19OrientationWeb.Operations.SetId do
+defmodule Covid19OrientationWeb.Operations.SetUUID do
   @moduledoc """
   Set orientation ID.
   """
@@ -10,10 +10,10 @@ defmodule Covid19OrientationWeb.Operations.SetId do
   @spec call(orientation) :: orientation
 
   def call(orientation = %Orientation{}) do
-    %Orientation{orientation | id: id()}
+    %Orientation{orientation | uuid: uuid()}
   end
 
-  defp id do
-    UUID.uuid4()
+  defp uuid do
+    UUID.uuid1()
   end
 end

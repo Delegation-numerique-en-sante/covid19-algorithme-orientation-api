@@ -6,15 +6,8 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   http: [port: 4002],
   server: false
 
-# Configure Redis
+# Configure PostgreSQL
 config :covid19_orientation, Covid19Orientation.Data.Store,
-  conn_opts: [
-    host: "127.0.0.1",
-    port: 6379
-  ]
-
-# Configure PostGreSQL
-config :covid19_orientation, Covid19Orientation.Data.PgStore,
   conn_opts: [
     hostname: "127.0.0.1",
     port: 5432,
