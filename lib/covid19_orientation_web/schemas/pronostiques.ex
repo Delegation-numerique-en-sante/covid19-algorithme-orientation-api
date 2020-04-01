@@ -40,7 +40,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
         type: :boolean,
         description: "Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?"
       },
-      traitement_immunosuppresseur: %Schema{
+      immunosuppressant_drug: %Schema{
         type: :boolean,
         description: "Prenez-vous un traitement immunosuppresseur ?"
       }
@@ -57,7 +57,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       "liver_disease" => true,
       "pregnant" => true,
       "immunodeprime" => true,
-      "traitement_immunosuppresseur" => true
+      "immunosuppressant_drug" => true
     }
   })
 end

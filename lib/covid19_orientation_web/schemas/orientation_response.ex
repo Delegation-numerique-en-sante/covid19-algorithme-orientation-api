@@ -39,7 +39,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationResponse do
           "liver_disease" => true,
           "pregnant" => true,
           "immunodeprime" => true,
-          "traitement_immunosuppresseur" => true
+          "immunosuppressant_drug" => true
         },
         "statistiques" => %{
           "moins_de_15_ans" => false,

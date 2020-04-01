@@ -39,7 +39,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationRequest do
           "liver_disease" => true,
           "pregnant" => true,
           "immunodeprime" => true,
-          "traitement_immunosuppresseur" => true
+          "immunosuppressant_drug" => true
         },
         "supplementaires" => %{
           "code_postal" => "75000"
