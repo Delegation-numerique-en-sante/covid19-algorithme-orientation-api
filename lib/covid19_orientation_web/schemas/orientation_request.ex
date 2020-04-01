@@ -29,7 +29,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationRequest do
         },
         "pronostiques" => %{
           "age" => 70,
-          "poids" => 65.5,
+          "weight" => 65.5,
           "taille" => 1.73,
           "cardiaque" => true,
           "diabetique" => true,

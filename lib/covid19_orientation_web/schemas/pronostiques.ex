@@ -13,7 +13,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
     type: :object,
     properties: %{
       age: %Schema{type: :integer, description: "Quel est votre âge ?"},
-      poids: %Schema{type: :number, description: "Quel est votre poids en kilogrammes ?"},
+      weight: %Schema{type: :number, description: "Quel est votre poids en kilogrammes ?"},
       taille: %Schema{type: :number, description: "Quelle est votre taille en mètres ?"},
       cardiaque: %Schema{
         type: :boolean,
@@ -47,7 +47,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
     },
     example: %{
       "age" => 70,
-      "poids" => 65.5,
+      "weight" => 65.5,
       "taille" => 1.73,
       "cardiaque" => true,
       "diabetique" => true,
