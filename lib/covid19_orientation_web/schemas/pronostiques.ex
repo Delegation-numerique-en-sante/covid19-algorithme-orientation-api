@@ -31,7 +31,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
         type: :boolean,
         description: "Avez-vous une insuffisance rénale chronique dialysée ?"
       },
-      maladie_chronique_foie: %Schema{
+      liver_disease: %Schema{
         type: :boolean,
         description: "Avez-vous une maladie chronique du foie ?"
       },
@@ -54,7 +54,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       "cancer" => true,
       "breathing_disease" => true,
       "insuffisance_renale" => true,
-      "maladie_chronique_foie" => true,
+      "liver_disease" => true,
       "enceinte" => true,
       "immunodeprime" => true,
       "traitement_immunosuppresseur" => true
