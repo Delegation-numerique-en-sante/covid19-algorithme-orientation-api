@@ -22,7 +22,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
         description:
           "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?"
       },
-      anosmie: %Schema{
+      anosmia: %Schema{
         type: :boolean,
         description:
           "Avez-vous noté une forte diminution de votre goût ou de l’odorat ces derniers jours ?"
@@ -55,7 +55,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
     example: %{
       "temperature" => 37.5,
       "cough" => true,
-      "anosmie" => true,
+      "anosmia" => true,
       "mal_de_gorge" => true,
       "diarrhee" => true,
       "fatigue" => true,
