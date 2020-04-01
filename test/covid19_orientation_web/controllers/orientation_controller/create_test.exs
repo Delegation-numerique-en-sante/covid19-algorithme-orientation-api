@@ -25,7 +25,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "respiratoire" => true,
           "insuffisance_renale" => true,
           "maladie_chronique_foie" => true,
-          "enceinte" => true,
+          "pregnant" => true,
           "immunodeprime" => true,
           "traitement_immunosuppresseur" => true
         },

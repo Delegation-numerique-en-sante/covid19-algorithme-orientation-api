@@ -275,7 +275,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
             height: 1.5,
             heart_disease: nil,
             cancer: nil,
-            enceinte: false,
+            pregnant: false,
             immunodeprime: true
         }
     }
