@@ -14,7 +14,7 @@ defmodule Covid19OrientationWeb.Operations.EvaluateOrientation.TouxGorgeTest do
        symptomes: %Symptomes{
          temperature: 36.6,
          cough: true,
-         mal_de_gorge: true
+         sore_throat_aches: true
        },
        pronostiques: %Pronostiques{heart_disease: false}
      }}

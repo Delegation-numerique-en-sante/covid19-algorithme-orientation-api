@@ -9,7 +9,7 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
           "temperature" => 39.0,
           "cough" => true,
           "anosmie" => true,
-          "mal_de_gorge" => true,
+          "sore_throat_aches" => true,
           "diarrhee" => true,
           "fatigue" => true,
           "diffs_alim_boire" => true,
