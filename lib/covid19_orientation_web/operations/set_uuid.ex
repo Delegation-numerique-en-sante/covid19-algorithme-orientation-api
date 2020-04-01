@@ -1,6 +1,6 @@
-defmodule Covid19OrientationWeb.Operations.SetTimestamp do
+defmodule Covid19OrientationWeb.Operations.SetUUID do
   @moduledoc """
-  Set orientation timestamp.
+  Set orientation ID.
   """
 
   alias Covid19OrientationWeb.Schemas.Orientation
@@ -10,10 +10,10 @@ defmodule Covid19OrientationWeb.Operations.SetTimestamp do
   @spec call(orientation) :: orientation
 
   def call(orientation = %Orientation{}) do
-    %Orientation{orientation | timestamp: timestamp()}
+    %Orientation{orientation | uuid: uuid()}
   end
 
-  defp timestamp do
-    DateTime.utc_now() |> DateTime.to_string()
+  defp uuid do
+    UUID.uuid1()
   end
 end

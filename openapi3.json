@@ -37,7 +37,7 @@
           "conclusion": {
             "code": "FIN1"
           },
-          "id": "fcfe5f21-8a08-4c9a-9f97-29d2fd6a27b9",
+          "date": "2020-03-29 15:20:11.875767Z",
           "pronostiques": {
             "age": 70,
             "cancer": true,
@@ -81,15 +81,15 @@
             "temperature": 37.5,
             "toux": true
           },
-          "timestamp": "2020-03-29 15:20:11.875767Z"
+          "uuid": "5976423a-ee35-11e3-8569-14109ff1a304"
         },
         "properties": {
           "conclusion": {
             "$ref": "#/components/schemas/Conclusion"
           },
-          "id": {
-            "description": "ID du test d'orientation",
-            "format": "uuid4",
+          "date": {
+            "description": "Date du test d'orientation",
+            "format": "date-time",
             "type": "string"
           },
           "pronostiques": {
@@ -104,9 +104,9 @@
           "symptomes": {
             "$ref": "#/components/schemas/Symptomes"
           },
-          "timestamp": {
-            "description": "Date du test d'orientation",
-            "format": "date-time",
+          "uuid": {
+            "description": "Id du test d'orientation",
+            "format": "uuid1",
             "type": "string"
           }
         },
@@ -175,7 +175,7 @@
             "conclusion": {
               "code": "FIN1"
             },
-            "id": "fcfe5f21-8a08-4c9a-9f97-29d2fd6a27b9",
+            "date": "2020-03-29 15:20:11.875767Z",
             "pronostiques": {
               "age": 70,
               "cancer": true,
@@ -219,7 +219,7 @@
               "temperature": 37.5,
               "toux": true
             },
-            "timestamp": "2020-03-29 15:20:11.875767Z"
+            "uuid": "5976423a-ee35-11e3-8569-14109ff1a304"
           }
         },
         "properties": {

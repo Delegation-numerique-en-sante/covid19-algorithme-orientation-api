@@ -4,8 +4,8 @@ defmodule Covid19Orientation.Data.StoreTest do
 
   alias Covid19OrientationWeb.Operations.{
     EvaluateOrientation,
-    SetId,
-    SetTimestamp
+    SetDate,
+    SetUUID
   }
 
   alias Covid19OrientationWeb.Schemas.{
@@ -26,12 +26,12 @@ defmodule Covid19Orientation.Data.StoreTest do
 
     orientation =
       orientation
-      |> SetId.call()
-      |> SetTimestamp.call()
+      |> SetDate.call()
+      |> SetUUID.call()
 
-    %{timestamp: timestamp, id: id} = orientation
-    data = Store.write({timestamp, id}, %{data: orientation} |> Jason.encode!())
+    %{date: date, uuid: uuid} = orientation
+    data = Store.write({date, uuid}, %{data: orientation})
 
-    assert data == Store.read({timestamp, id})
+    assert [data |> Jason.encode!() |> Jason.decode!()] == Store.read({date, uuid})
   end
 end

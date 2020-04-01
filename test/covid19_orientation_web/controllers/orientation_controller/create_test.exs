@@ -44,6 +44,9 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
 
     assert_schema(body, "OrientationResponse", spec)
     assert body["data"]["conclusion"]["code"] == "FIN5"
-    assert Store.read({body["data"]["timestamp"], body["data"]["id"]}) =~ "data"
+
+    assert Store.read({body["data"]["date"], body["data"]["uuid"]})
+           |> List.first()
+           |> Map.has_key?("data")
   end
 end
