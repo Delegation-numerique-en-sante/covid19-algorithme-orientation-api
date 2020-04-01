@@ -16,7 +16,7 @@ defmodule Covid19Orientation.Tests.Conditions do
   @seuil_moins_de_50_ans 50
   @seuil_moins_de_70_ans 70
   @seuil_imc 30.0
-  @seuil_fievre 37.8
+  @seuil_fever 37.8
   @seuil_au_moins_39_de_temperature 39.0
 
   @spec symptomes1(orientation) :: boolean
@@ -25,7 +25,7 @@ defmodule Covid19Orientation.Tests.Conditions do
   Fièvre ET toux.
   """
   def symptomes1(orientation = %{symptomes: %{cough: cough}}) do
-    fievre(orientation) && cough
+    fever(orientation) && cough
   end
 
   @spec symptomes2(orientation) :: boolean
@@ -43,8 +43,8 @@ defmodule Covid19Orientation.Tests.Conditions do
           }
         }
       ) do
-    fievre(orientation) ||
-      (!fievre(orientation) &&
+    fever(orientation) ||
+      (!fever(orientation) &&
          (diarrhea || (cough && sore_throat_aches) || (cough && agueusia_anosmia)))
   end
 
@@ -132,12 +132,12 @@ defmodule Covid19Orientation.Tests.Conditions do
     |> Kernel.>=(@seuil_imc)
   end
 
-  @spec fievre(orientation) :: boolean
+  @spec fever(orientation) :: boolean
 
-  def fievre(%{symptomes: %{temperature: nil}}), do: true
+  def fever(%{symptomes: %{temperature: nil}}), do: true
 
-  def fievre(%{symptomes: %{temperature: temperature}}) do
-    temperature >= @seuil_fievre
+  def fever(%{symptomes: %{temperature: temperature}}) do
+    temperature >= @seuil_fever
   end
 
   @spec au_moins_39_de_temperature(orientation) :: boolean

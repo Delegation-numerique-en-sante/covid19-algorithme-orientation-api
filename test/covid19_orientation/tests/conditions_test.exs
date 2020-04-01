@@ -152,7 +152,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: nil}
       }
 
-      assert Conditions.fievre(orientation)
+      assert Conditions.fever(orientation)
     end
 
     test "si la température est >= 37,8 la personne a fièvre", %{orientation: orientation} do
@@ -161,7 +161,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: 37.8}
       }
 
-      assert Conditions.fievre(orientation)
+      assert Conditions.fever(orientation)
     end
 
     test "si la température est < 37,8 la personne n'a pas fièvre", %{orientation: orientation} do
@@ -170,7 +170,7 @@ defmodule Covid19Orientation.Tests.ConditionsTest do
         | symptomes: %Symptomes{orientation.symptomes | temperature: 37.7}
       }
 
-      assert !Conditions.fievre(orientation)
+      assert !Conditions.fever(orientation)
     end
   end
 
