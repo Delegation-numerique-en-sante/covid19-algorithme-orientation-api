@@ -36,7 +36,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
         description:
           "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"
       },
-      fatigue: %Schema{
+      tiredness: %Schema{
         type: :boolean,
         description:
           "Avez-vous une fatigue inhabituelle ces derniers jours ? Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?"
@@ -58,7 +58,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
       "agueusia_anosmia" => true,
       "sore_throat_aches" => true,
       "diarrhea" => true,
-      "fatigue" => true,
+      "tiredness" => true,
       "diffs_alim_boire" => true,
       "breathlessness" => true
     }

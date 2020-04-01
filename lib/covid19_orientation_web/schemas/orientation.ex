@@ -43,7 +43,7 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
         "agueusia_anosmia" => true,
         "sore_throat_aches" => true,
         "diarrhea" => true,
-        "fatigue" => true,
+        "tiredness" => true,
         "diffs_alim_boire" => true,
         "breathlessness" => true
       },
