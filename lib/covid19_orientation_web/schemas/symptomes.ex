@@ -17,7 +17,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
         description:
           "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ? Quelle est votre température ?"
       },
-      toux: %Schema{
+      cough: %Schema{
         type: :boolean,
         description:
           "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?"
@@ -54,7 +54,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
     },
     example: %{
       "temperature" => 37.5,
-      "toux" => true,
+      "cough" => true,
       "anosmie" => true,
       "mal_de_gorge" => true,
       "diarrhee" => true,

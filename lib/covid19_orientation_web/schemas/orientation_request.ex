@@ -19,7 +19,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationRequest do
       "orientation" => %{
         "symptomes" => %{
           "temperature" => 37.5,
-          "toux" => true,
+          "cough" => true,
           "anosmie" => true,
           "mal_de_gorge" => true,
           "diarrhee" => true,

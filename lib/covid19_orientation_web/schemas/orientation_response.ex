@@ -19,7 +19,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationResponse do
         "uuid" => "5976423a-ee35-11e3-8569-14109ff1a304",
         "symptomes" => %{
           "temperature" => 37.5,
-          "toux" => true,
+          "cough" => true,
           "anosmie" => true,
           "mal_de_gorge" => true,
           "diarrhee" => true,
