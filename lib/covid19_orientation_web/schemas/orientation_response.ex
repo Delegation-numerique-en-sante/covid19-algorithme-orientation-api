@@ -24,7 +24,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationResponse do
           "sore_throat_aches" => true,
           "diarrhea" => true,
           "tiredness" => true,
-          "diffs_alim_boire" => true,
+          "feeding" => true,
           "breathlessness" => true
         },
         "pronostiques" => %{

@@ -41,7 +41,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
         description:
           "Avez-vous une fatigue inhabituelle ces derniers jours ? Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?"
       },
-      diffs_alim_boire: %Schema{
+      feeding: %Schema{
         type: :boolean,
         description:
           "Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?"
@@ -59,7 +59,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
       "sore_throat_aches" => true,
       "diarrhea" => true,
       "tiredness" => true,
-      "diffs_alim_boire" => true,
+      "feeding" => true,
       "breathlessness" => true
     }
   })
