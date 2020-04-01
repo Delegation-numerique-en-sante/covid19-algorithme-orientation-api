@@ -37,7 +37,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationRequest do
           "breathing_disease" => true,
           "kidney_disease" => true,
           "liver_disease" => true,
-          "enceinte" => true,
+          "pregnant" => true,
           "immunodeprime" => true,
           "traitement_immunosuppresseur" => true
         },

@@ -35,7 +35,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
         type: :boolean,
         description: "Avez-vous une maladie chronique du foie ?"
       },
-      enceinte: %Schema{type: :boolean, description: "Êtes-vous enceinte ?"},
+      pregnant: %Schema{type: :boolean, description: "Êtes-vous enceinte ?"},
       immunodeprime: %Schema{
         type: :boolean,
         description: "Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?"
@@ -55,7 +55,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       "breathing_disease" => true,
       "kidney_disease" => true,
       "liver_disease" => true,
-      "enceinte" => true,
+      "pregnant" => true,
       "immunodeprime" => true,
       "traitement_immunosuppresseur" => true
     }
