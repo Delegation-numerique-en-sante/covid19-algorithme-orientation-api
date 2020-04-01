@@ -1,24 +1,67 @@
 defmodule Covid19Orientation.Data.Store do
-  alias Covid19Orientation.Data.Repo
-  alias Ecto.Adapters.SQL
   @moduledoc """
   Store data in PostgreSQL.
   """
 
-  def write({date, uuid}, data = %{}) do
-    SQL.query!(
-      Repo, 
-      "INSERT INTO journal (date, uuid, data) VALUES($1, $2, $3)",
-      [date, uuid, data]
-    )
+  use GenServer
 
+  alias Covid19Orientation.Data.{Journal, Repo}
+  alias Ecto.Adapters.SQL
+
+  @tick_interval 1000
+  @chunk_size 100
+
+  def write({date, uuid}, data = %{}) do
+    GenServer.cast(__MODULE__, {:write, %{date: date, uuid: uuid, data: data}})
     data
   end
 
-  @spec read(tuple) :: {:ok, map} | {:error, any}
   def read({date, uuid}) do
     select(date, uuid)
   end
+
+  def tick_interval, do: @tick_interval
+
+  #
+  # GenServer Part
+  #
+
+  def start_link(_) do
+    GenServer.start_link(__MODULE__, [to_write: []], name: __MODULE__)
+  end
+
+  @impl true
+  def init(_) do
+    tick()
+    {:ok, [to_write: []]}
+  end
+
+  @impl true
+  def handle_cast({:write, element}, [to_write: to_write]) when length(to_write) < @chunk_size do
+    new_state = [to_write: [element | to_write]]
+
+    {:noreply, new_state}
+  end
+
+  @impl true
+  def handle_cast({:write, element}, [to_write: to_write]) do
+    insert_many([element | to_write])
+
+    {:noreply, [to_write: []]}
+  end
+
+  @impl true
+  def handle_info(:tick, [to_write: to_write]) do
+    insert_many(to_write)
+
+    tick()
+    {:noreply, [to_write: []]}
+  end
+
+  #
+  # Private functions
+  #
+  defp tick, do: Process.send_after(__MODULE__, :tick, @tick_interval)
 
   defp select("" <> date, uuid) do
     date
@@ -34,5 +77,12 @@ defmodule Covid19Orientation.Data.Store do
     |> SQL.query!("SELECT data FROM journal WHERE date = $1 AND uuid = $2", [date, uuid])
     |> Map.get(:rows)
     |> Enum.find(&([_data] = &1))
+  end
+
+  defp insert_many(journals) do
+    Repo.insert_all(
+      Journal,
+      journals
+    )
   end
 end

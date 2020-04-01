@@ -32,6 +32,8 @@ defmodule Covid19Orientation.Data.StoreTest do
     %{date: date, uuid: uuid} = orientation
     data = Store.write({date, uuid}, %{data: orientation})
 
+    :timer.sleep(Store.tick_interval())
+
     assert [data |> Jason.encode!() |> Jason.decode!()] == Store.read({date, uuid})
   end
 end

@@ -10,7 +10,8 @@ defmodule Covid19Orientation.Application do
     children = [
       # Start the endpoint when the application starts
       Covid19OrientationWeb.Endpoint,
-      Covid19Orientation.Data.Repo
+      Covid19Orientation.Data.Repo,
+      Covid19Orientation.Data.Store
       # Starts a worker by calling: Covid19Orientation.Worker.start_link(arg)
       # {Covid19Orientation.Worker, arg},
     ]
