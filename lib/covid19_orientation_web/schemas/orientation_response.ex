@@ -49,7 +49,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationResponse do
           "entre_50_et_69_ans" => false,
           "au_moins_70_ans" => true,
           "au_moins_30_imc" => true,
-          "fievre" => true,
+          "fever" => true,
           "au_moins_39_de_temperature" => true,
           "cardiaque" => true,
           "facteurs_gravite" => 3,

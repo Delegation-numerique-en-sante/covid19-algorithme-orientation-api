@@ -37,7 +37,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
         type: :boolean,
         description: "Si la personne a au moins 30 d'IMC en kg/m2"
       },
-      fievre: %Schema{type: :boolean, description: "Indicateur de fièvre"},
+      fever: %Schema{type: :boolean, description: "Indicateur de fièvre"},
       au_moins_39_de_temperature: %Schema{
         type: :boolean,
         description: "Si la personne a au moins 39°C de température"
@@ -71,7 +71,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
       :moins_de_70_ans,
       :au_moins_70_ans,
       :au_moins_30_imc,
-      :fievre,
+      :fever,
       :au_moins_39_de_temperature,
       :cardiaque,
       :facteurs_gravite,
@@ -87,7 +87,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
       "moins_de_70_ans" => false,
       "au_moins_70_ans" => true,
       "au_moins_30_imc" => true,
-      "fievre" => true,
+      "fever" => true,
       "au_moins_39_de_temperature" => true,
       "cardiaque" => true,
       "facteurs_gravite" => 3,
