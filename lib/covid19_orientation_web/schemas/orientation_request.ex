@@ -31,7 +31,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationRequest do
           "age" => 70,
           "weight" => 65.5,
           "height" => 1.73,
-          "cardiaque" => true,
+          "heart_disease" => true,
           "diabetique" => true,
           "cancer" => true,
           "breathing_disease" => true,

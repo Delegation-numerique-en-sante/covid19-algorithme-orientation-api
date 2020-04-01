@@ -15,7 +15,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       age: %Schema{type: :integer, description: "Quel est votre âge ?"},
       weight: %Schema{type: :number, description: "Quel est votre poids en kilogrammes ?"},
       height: %Schema{type: :number, description: "Quelle est votre taille en mètres ?"},
-      cardiaque: %Schema{
+      heart_disease: %Schema{
         type: :boolean,
         description:
           "Avez-vous une tension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?"
@@ -49,7 +49,7 @@ defmodule Covid19OrientationWeb.Schemas.Pronostiques do
       "age" => 70,
       "weight" => 65.5,
       "height" => 1.73,
-      "cardiaque" => true,
+      "heart_disease" => true,
       "diabetique" => true,
       "cancer" => true,
       "breathing_disease" => true,

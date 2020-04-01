@@ -42,7 +42,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
         type: :boolean,
         description: "Si la personne a au moins 39°C de température"
       },
-      cardiaque: %Schema{
+      heart_disease: %Schema{
         type: :boolean,
         description: "Si la personne a des problèms hypertension / cardiaques"
       },
@@ -73,7 +73,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
       :au_moins_30_imc,
       :fever,
       :au_moins_39_de_temperature,
-      :cardiaque,
+      :heart_disease,
       :facteurs_gravite,
       :facteurs_gravite_mineurs,
       :facteurs_gravite_majeurs,
@@ -89,7 +89,7 @@ defmodule Covid19OrientationWeb.Schemas.Statistiques do
       "au_moins_30_imc" => true,
       "fever" => true,
       "au_moins_39_de_temperature" => true,
-      "cardiaque" => true,
+      "heart_disease" => true,
       "facteurs_gravite" => 3,
       "facteurs_gravite_mineurs" => 2,
       "facteurs_gravite_majeurs" => 1,
