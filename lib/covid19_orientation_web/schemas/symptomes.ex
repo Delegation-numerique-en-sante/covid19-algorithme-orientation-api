@@ -31,7 +31,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
         type: :boolean,
         description: "Avez-vous un mal de gorge apparu ces derniers jours ?"
       },
-      diarrhee: %Schema{
+      diarrhea: %Schema{
         type: :boolean,
         description:
           "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?"
@@ -57,7 +57,7 @@ defmodule Covid19OrientationWeb.Schemas.Symptomes do
       "cough" => true,
       "agueusia_anosmia" => true,
       "sore_throat_aches" => true,
-      "diarrhee" => true,
+      "diarrhea" => true,
       "fatigue" => true,
       "diffs_alim_boire" => true,
       "breathlessness" => true

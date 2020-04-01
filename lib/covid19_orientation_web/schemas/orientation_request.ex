@@ -22,7 +22,7 @@ defmodule Covid19OrientationWeb.Schemas.OrientationRequest do
           "cough" => true,
           "agueusia_anosmia" => true,
           "sore_throat_aches" => true,
-          "diarrhee" => true,
+          "diarrhea" => true,
           "fatigue" => true,
           "diffs_alim_boire" => true,
           "breathlessness" => true
