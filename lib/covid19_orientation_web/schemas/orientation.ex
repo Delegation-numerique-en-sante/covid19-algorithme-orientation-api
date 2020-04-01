@@ -81,7 +81,7 @@ defmodule Covid19OrientationWeb.Schemas.Orientation do
         "code_postal" => "75000"
       },
       "conclusion" => %{
-        "code" => "FIN1"
+        "code" => "orientation_SAMU"
       }
     }
   })
