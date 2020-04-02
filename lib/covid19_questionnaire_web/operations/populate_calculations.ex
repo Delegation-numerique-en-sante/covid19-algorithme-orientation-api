@@ -1,10 +1,10 @@
-defmodule Covid19QuestionnaireWeb.Operations.PopulateStatistics do
+defmodule Covid19QuestionnaireWeb.Operations.PopulateCalculations do
   @moduledoc """
-  Populate statistics.
+  Populate calculations.
   """
 
   alias Covid19Questionnaire.Tests.Conditions
-  alias Covid19QuestionnaireWeb.Schemas.{Questionnaire, Statistiques}
+  alias Covid19QuestionnaireWeb.Schemas.{Calculations, Questionnaire}
 
   @type questionnaire :: Questionnaire.t()
 
@@ -13,12 +13,12 @@ defmodule Covid19QuestionnaireWeb.Operations.PopulateStatistics do
   def call(questionnaire = %Questionnaire{}) do
     Map.put(
       questionnaire,
-      :statistiques,
-      %Statistiques{}
+      :calculations,
+      %Calculations{}
       |> Map.from_struct()
       |> Map.keys()
-      |> Enum.reduce(%Statistiques{}, fn key, statistiques ->
-        statistiques
+      |> Enum.reduce(%Calculations{}, fn key, calculations ->
+        calculations
         |> Map.put(key, apply(Conditions, key, [questionnaire]))
       end)
     )

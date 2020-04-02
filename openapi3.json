@@ -2,34 +2,53 @@
   "components": {
     "responses": {},
     "schemas": {
-      "Conclusion": {
-        "description": "[Conclusion de l'questionnaire du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
+      "Calculations": {
+        "description": "[Calculations](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
         "example": {
-          "code": "orientation_SAMU"
+          "bmi_more_30": true,
+          "fever": true,
+          "gravity_factors": 3,
+          "gravity_factors_major": 1,
+          "gravity_factors_minor": 2,
+          "risk_factors": 1
         },
         "properties": {
-          "code": {
-            "description": "[Conclusions possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
-            "enum": [
-              "orientation_SAMU",
-              "FIN2",
-              "FIN3",
-              "FIN4",
-              "FIN5",
-              "FIN6",
-              "FIN7",
-              "FIN8",
-              "FIN9"
-            ],
-            "type": "string"
+          "bmi_more_30": {
+            "description": "Si la personne a au moins 30 d'IMC en kg/(cm/100)2",
+            "type": "boolean"
+          },
+          "fever": {
+            "description": "Indicateur de fièvre",
+            "type": "boolean"
+          },
+          "gravity_factors": {
+            "description": "Facteurs de gravité mineurs + majeurs",
+            "type": "integer"
+          },
+          "gravity_factors_major": {
+            "description": "Facteurs de gravité majeurs",
+            "type": "integer"
+          },
+          "gravity_factors_minor": {
+            "description": "Facteurs de gravité mineurs",
+            "type": "integer"
+          },
+          "risk_factors": {
+            "description": "Facteurs pronostique défavorables liés au terrain",
+            "type": "integer"
           }
         },
         "required": [
-          "code"
+          "bmi_more_30",
+          "fever",
+          "gravity_factors",
+          "gravity_factors_minor",
+          "gravity_factors_major",
+          "risk_factors"
         ],
-        "title": "Conclusion",
+        "title": "Calculations",
         "type": "object",
-        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Conclusion"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Calculations"
       },
       "Metadata": {
         "description": "[Caractéristiques du questionnaire](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
@@ -66,6 +85,35 @@
         "title": "Metadata",
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Metadata"
+      },
+      "Orientation": {
+        "description": "[Orientation du questionnaire COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
+        "example": {
+          "code": "orientation_SAMU"
+        },
+        "properties": {
+          "code": {
+            "description": "[Orientations possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
+            "enum": [
+              "orientation_SAMU",
+              "FIN2",
+              "FIN3",
+              "FIN4",
+              "FIN5",
+              "FIN6",
+              "FIN7",
+              "FIN8",
+              "FIN9"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "title": "Orientation",
+        "type": "object",
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Orientation"
       },
       "Patient": {
         "description": "[Caractéristiques du patient](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
@@ -112,72 +160,25 @@
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Patient"
       },
-      "Pronostiques": {
-        "description": "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
-        "example": {
-          "breathing_disease": true,
-          "cancer": true,
-          "diabetes": true,
-          "heart_disease": true,
-          "immunodeprime": true,
-          "immunosuppressant_drug": true,
-          "kidney_disease": true,
-          "liver_disease": true,
-          "pregnant": true
-        },
-        "properties": {
-          "breathing_disease": {
-            "description": "Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?",
-            "type": "boolean"
-          },
-          "cancer": {
-            "description": "Avez-vous ou avez-vous eu un cancer ?",
-            "type": "boolean"
-          },
-          "diabetes": {
-            "description": "Êtes-vous diabétique ?",
-            "type": "boolean"
-          },
-          "heart_disease": {
-            "description": "Avez-vous une tension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?",
-            "type": "boolean"
-          },
-          "immunodeprime": {
-            "description": "Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?",
-            "type": "boolean"
-          },
-          "immunosuppressant_drug": {
-            "description": "Prenez-vous un traitement immunosuppresseur ?",
-            "type": "boolean"
-          },
-          "kidney_disease": {
-            "description": "Avez-vous une insuffisance rénale chronique dialysée ?",
-            "type": "boolean"
-          },
-          "liver_disease": {
-            "description": "Avez-vous une maladie chronique du foie ?",
-            "type": "boolean"
-          },
-          "pregnant": {
-            "description": "Êtes-vous enceinte ?",
-            "type": "boolean"
-          }
-        },
-        "title": "Pronostiques",
-        "type": "object",
-        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Pronostiques"
-      },
       "Questionnaire": {
-        "description": "[Algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
+        "description": "[Algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
         "example": {
-          "conclusion": {
-            "code": "orientation_SAMU"
+          "calculations": {
+            "bmi_more_30": true,
+            "fever": true,
+            "gravity_factors": 3,
+            "gravity_factors_major": 1,
+            "gravity_factors_minor": 2,
+            "risk_factors": 1
           },
           "metadata": {
             "algo_version": "2020-03-29 15:20:11.875767Z",
             "date": "2020-03-29 15:20:11.875767Z",
             "duration": 3600,
             "form_version": "2020-03-29 15:20:11.875767Z"
+          },
+          "orientation": {
+            "code": "orientation_SAMU"
           },
           "patient": {
             "age_less_15": false,
@@ -188,26 +189,16 @@
             "postal_code": "75000",
             "weight": 65.5
           },
-          "pronostiques": {
+          "risk_factors": {
             "breathing_disease": true,
             "cancer": true,
             "diabetes": true,
             "heart_disease": true,
-            "immunodeprime": true,
+            "immunosuppressant_disease": true,
             "immunosuppressant_drug": true,
             "kidney_disease": true,
             "liver_disease": true,
-            "pregnant": true
-          },
-          "statistiques": {
-            "au_moins_30_imc": true,
-            "au_moins_39_de_temperature": true,
-            "facteurs_gravite": 3,
-            "facteurs_gravite_majeurs": 1,
-            "facteurs_gravite_mineurs": 2,
-            "facteurs_pronostique": 1,
-            "fever": true,
-            "heart_disease": true
+            "pregnant": "1"
           },
           "symptoms": {
             "agueusia_anosmia": true,
@@ -223,20 +214,20 @@
           }
         },
         "properties": {
-          "conclusion": {
-            "$ref": "#/components/schemas/Conclusion"
+          "calculations": {
+            "$ref": "#/components/schemas/Calculations"
           },
           "metadata": {
             "$ref": "#/components/schemas/Metadata"
           },
+          "orientation": {
+            "$ref": "#/components/schemas/Orientation"
+          },
           "patient": {
             "$ref": "#/components/schemas/Patient"
           },
-          "pronostiques": {
-            "$ref": "#/components/schemas/Pronostiques"
-          },
-          "statistiques": {
-            "$ref": "#/components/schemas/Statistiques"
+          "risk_factors": {
+            "$ref": "#/components/schemas/RiskFactors"
           },
           "symptoms": {
             "$ref": "#/components/schemas/Symptoms"
@@ -246,7 +237,7 @@
           "metadata",
           "patient",
           "symptoms",
-          "pronostiques"
+          "risk_factors"
         ],
         "title": "Questionnaire",
         "type": "object",
@@ -268,16 +259,16 @@
               "postal_code": "75000",
               "weight": 65.5
             },
-            "pronostiques": {
+            "risk_factors": {
               "breathing_disease": true,
               "cancer": true,
               "diabetes": true,
               "heart_disease": true,
-              "immunodeprime": true,
+              "immunosuppressant_disease": true,
               "immunosuppressant_drug": true,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": true
+              "pregnant": "1"
             },
             "symptoms": {
               "agueusia_anosmia": true,
@@ -313,14 +304,22 @@
         "description": "Réponse de l'algorithme d'orientation",
         "example": {
           "data": {
-            "conclusion": {
-              "code": "FIN5"
+            "calculations": {
+              "bmi_more_30": true,
+              "fever": true,
+              "gravity_factors": 3,
+              "gravity_factors_major": 1,
+              "gravity_factors_minor": 2,
+              "risk_factors": 1
             },
             "metadata": {
               "algo_version": "2020-03-30 20:01:39.836837Z",
               "date": "2020-03-29 15:20:11.875767Z",
               "duration": 3600,
               "form_version": "2020-03-30 20:01:39.836837Z"
+            },
+            "orientation": {
+              "code": "FIN5"
             },
             "patient": {
               "age_less_15": false,
@@ -331,26 +330,16 @@
               "postal_code": "75000",
               "weight": 65.5
             },
-            "pronostiques": {
+            "risk_factors": {
               "breathing_disease": true,
               "cancer": true,
               "diabetes": true,
               "heart_disease": true,
-              "immunodeprime": true,
+              "immunosuppressant_disease": true,
               "immunosuppressant_drug": true,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": true
-            },
-            "statistiques": {
-              "au_moins_30_imc": false,
-              "au_moins_39_de_temperature": false,
-              "facteurs_gravite": 3,
-              "facteurs_gravite_majeurs": 2,
-              "facteurs_gravite_mineurs": 1,
-              "facteurs_pronostique": 10,
-              "fever": false,
-              "heart_disease": true
+              "pregnant": "1"
             },
             "symptoms": {
               "agueusia_anosmia": true,
@@ -375,63 +364,65 @@
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse"
       },
-      "Statistiques": {
-        "description": "[Statistiques](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
+      "RiskFactors": {
+        "description": "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
         "example": {
-          "au_moins_39_de_temperature": true,
-          "facteurs_gravite": 3,
-          "facteurs_gravite_majeurs": 1,
-          "facteurs_gravite_mineurs": 2,
-          "facteurs_pronostique": 1,
-          "fever": true,
-          "heart_disease": true
+          "breathing_disease": true,
+          "cancer": true,
+          "diabetes": true,
+          "heart_disease": true,
+          "immunosuppressant_disease": true,
+          "immunosuppressant_drug": true,
+          "kidney_disease": true,
+          "liver_disease": true,
+          "pregnant": "1"
         },
         "properties": {
-          "au_moins_30_imc": {
-            "description": "Si la personne a au moins 30 d'IMC en kg/m2",
+          "breathing_disease": {
+            "description": "Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?",
             "type": "boolean"
           },
-          "au_moins_39_de_temperature": {
-            "description": "Si la personne a au moins 39°C de température",
+          "cancer": {
+            "description": "Avez-vous ou avez-vous eu un cancer ?",
             "type": "boolean"
           },
-          "facteurs_gravite": {
-            "description": "Facteurs de gravité mineurs + majeurs",
-            "type": "integer"
-          },
-          "facteurs_gravite_majeurs": {
-            "description": "Facteurs de gravité majeurs",
-            "type": "integer"
-          },
-          "facteurs_gravite_mineurs": {
-            "description": "Facteurs de gravité mineurs",
-            "type": "integer"
-          },
-          "facteurs_pronostique": {
-            "description": "Facteurs pronostique défavorables liés au terrain",
-            "type": "integer"
-          },
-          "fever": {
-            "description": "Indicateur de fièvre",
+          "diabetes": {
+            "description": "Êtes-vous diabétique ?",
             "type": "boolean"
           },
           "heart_disease": {
-            "description": "Si la personne a des problèmes d'hypertension / cardiaques",
+            "description": "Avez-vous une tension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?",
             "type": "boolean"
+          },
+          "immunosuppressant_disease": {
+            "description": "Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?",
+            "type": "boolean"
+          },
+          "immunosuppressant_drug": {
+            "description": "Prenez-vous un traitement immunosuppresseur ?",
+            "type": "boolean"
+          },
+          "kidney_disease": {
+            "description": "Avez-vous une insuffisance rénale chronique dialysée ?",
+            "type": "boolean"
+          },
+          "liver_disease": {
+            "description": "Avez-vous une maladie chronique du foie ?",
+            "type": "boolean"
+          },
+          "pregnant": {
+            "description": "Êtes-vous enceinte ?",
+            "enum": [
+              "1",
+              "0",
+              "DNK"
+            ],
+            "type": "string"
           }
         },
-        "required": [
-          "fever",
-          "au_moins_39_de_temperature",
-          "heart_disease",
-          "facteurs_gravite",
-          "facteurs_gravite_mineurs",
-          "facteurs_gravite_majeurs",
-          "facteurs_pronostique"
-        ],
-        "title": "Statistiques",
+        "title": "RiskFactors",
         "type": "object",
-        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Statistiques"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.RiskFactors"
       },
       "Symptoms": {
         "description": "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",
@@ -503,7 +494,7 @@
     }
   },
   "info": {
-    "title": "Test d'orientation du Covid-19",
+    "title": "Test d'orientation du COVID19",
     "version": "2020-03-30 20:01:39.836837Z"
   },
   "openapi": "3.0.0",
@@ -512,7 +503,7 @@
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Évaluer le test d'orientation du Covid-19",
+        "description": "Évaluer le test d'orientation du COVID19",
         "operationId": "QuestionnaireController.create",
         "parameters": [],
         "requestBody": {
@@ -538,7 +529,7 @@
             "description": "Questionnaire"
           }
         },
-        "summary": "Évaluer le test d'orientation du Covid-19",
+        "summary": "Évaluer le test d'orientation du COVID19",
         "tags": []
       }
     }

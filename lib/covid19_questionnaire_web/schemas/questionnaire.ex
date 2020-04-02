@@ -1,33 +1,33 @@
 defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
   @moduledoc """
-  Schéma de l'algorithme d'orientation du Covid-19.
+  Schéma de l'algorithme d'orientation du COVID19.
   """
 
   require OpenApiSpex
 
   alias Covid19QuestionnaireWeb.Schemas.{
-    Conclusion,
+    Calculations,
     Metadata,
+    Orientation,
     Patient,
-    Pronostiques,
-    Statistiques,
+    RiskFactors,
     Symptoms
   }
 
   OpenApiSpex.schema(%{
     title: "Questionnaire",
     description:
-      "[Algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
+      "[Algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
     type: :object,
     properties: %{
       metadata: Metadata,
       patient: Patient,
       symptoms: Symptoms,
-      pronostiques: Pronostiques,
-      conclusion: Conclusion,
-      statistiques: Statistiques
+      risk_factors: RiskFactors,
+      calculations: Calculations,
+      orientation: Orientation,
     },
-    required: [:metadata, :patient, :symptoms, :pronostiques],
+    required: [:metadata, :patient, :symptoms, :risk_factors],
     example: %{
       "metadata" => %{
         "form_version" => "2020-03-29 15:20:11.875767Z",
@@ -56,28 +56,26 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "tiredness_details" => true,
         "feeding_day" => true
       },
-      "pronostiques" => %{
-        "heart_disease" => true,
-        "diabetes" => true,
-        "cancer" => true,
+      "risk_factors" => %{
         "breathing_disease" => true,
+        "heart_disease" => true,
         "kidney_disease" => true,
         "liver_disease" => true,
-        "pregnant" => true,
-        "immunodeprime" => true,
-        "immunosuppressant_drug" => true
+        "diabetes" => true,
+        "immunosuppressant_disease" => true,
+        "immunosuppressant_drug" => true,
+        "cancer" => true,
+        "pregnant" => "1",
       },
-      "statistiques" => %{
-        "au_moins_30_imc" => true,
+      "calculations" => %{
+        "bmi_more_30" => true,
         "fever" => true,
-        "au_moins_39_de_temperature" => true,
-        "heart_disease" => true,
-        "facteurs_gravite" => 3,
-        "facteurs_gravite_mineurs" => 2,
-        "facteurs_gravite_majeurs" => 1,
-        "facteurs_pronostique" => 1
+        "gravity_factors" => 3,
+        "gravity_factors_minor" => 2,
+        "gravity_factors_major" => 1,
+        "risk_factors" => 1
       },
-      "conclusion" => %{
+      "orientation" => %{
         "code" => "orientation_SAMU"
       }
     }

@@ -20,8 +20,8 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateQuestionnaire do
 
   def call do
     %Operation{
-      summary: "Évaluer le test d'orientation du Covid-19",
-      description: "Évaluer le test d'orientation du Covid-19",
+      summary: "Évaluer le test d'orientation du COVID19",
+      description: "Évaluer le test d'orientation du COVID19",
       operationId: "QuestionnaireController.create",
       requestBody:
         request_body(

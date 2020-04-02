@@ -1,6 +1,6 @@
 defmodule Covid19Questionnaire.Tests.Algorithm do
   @moduledoc """
-  Crée l'algorithme d'orientation du Covid-19.
+  Crée l'algorithme d'orientation du COVID19.
   """
 
   import Covid19Questionnaire.Tests.{Codes, Conditions}

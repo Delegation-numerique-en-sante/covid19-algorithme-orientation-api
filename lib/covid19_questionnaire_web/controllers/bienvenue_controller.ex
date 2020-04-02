@@ -5,7 +5,7 @@ defmodule Covid19QuestionnaireWeb.BienvenueController do
     {:ok, body} =
       %{
         bienvenue: """
-        Bienvenue à l'API d'orientation du Covid-19, \
+        Bienvenue à l'API d'orientation du COVID19, \
         consultez notre documentation interactive : \
         https://covid19-auto-evaluation.sante.gouv.fr/swagger.
         """

@@ -7,8 +7,8 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire do
   alias Covid19Questionnaire.Trees.{FlattenTree, TraverseTree, Tree}
 
   alias Covid19QuestionnaireWeb.Operations.{
-    PopulateConclusion,
-    PopulateStatistics
+    PopulateOrientation,
+    PopulateCalculations
   }
 
   alias Covid19QuestionnaireWeb.Schemas.Questionnaire
@@ -33,7 +33,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire do
 
   defp populate(questionnaire = %Questionnaire{}, code) do
     questionnaire
-    |> PopulateConclusion.call(code)
-    |> PopulateStatistics.call()
+    |> PopulateOrientation.call(code)
+    |> PopulateCalculations.call()
   end
 end

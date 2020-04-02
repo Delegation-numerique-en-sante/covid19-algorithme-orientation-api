@@ -1,6 +1,6 @@
 defmodule Covid19Questionnaire.Tests.Codes do
   @moduledoc """
-  Codes des résultats du test d'orientation du Covid-19.
+  Codes des résultats du test d'orientation du COVID19.
   """
 
   @type name :: atom

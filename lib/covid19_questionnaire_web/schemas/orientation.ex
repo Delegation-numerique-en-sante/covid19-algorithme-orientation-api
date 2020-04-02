@@ -1,15 +1,15 @@
-defmodule Covid19QuestionnaireWeb.Schemas.Conclusion do
+defmodule Covid19QuestionnaireWeb.Schemas.Orientation do
   @moduledoc """
-  Schéma des conclusions possibles.
+  Schéma des orientations possibles.
   """
 
   require OpenApiSpex
   alias OpenApiSpex.Schema
 
   OpenApiSpex.schema(%{
-    title: "Conclusion",
+    title: "Orientation",
     description:
-      "[Conclusion de l'questionnaire du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
+      "[Orientation du questionnaire COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
     type: :object,
     properties: %{
       code: %Schema{
@@ -26,7 +26,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Conclusion do
           "FIN9"
         ],
         description:
-          "[Conclusions possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)"
+          "[Orientations possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)"
       }
     },
     required: [:code],

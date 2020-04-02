@@ -1,6 +1,6 @@
 defmodule Covid19Questionnaire.Tests.Conditions do
   @moduledoc """
-  Conditions du test d'orientation du Covid-19.
+  Conditions du test d'orientation du COVID19.
   """
 
   @type symptomes :: struct

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Covid19-Questionnaire est une implémentation en Elixir de l'[algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire) officiellement publié par le ministère des Solidarités et de la Santé.
+Covid19-Questionnaire est une implémentation en Elixir de l'[algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire) officiellement publié par le ministère des Solidarités et de la Santé.
 
 L'algorithme est défini par un comité scientifique, appelé CovidTélé, réunissant des médecins et co-piloté par l'AP-HP et l'Institut Pasteur.
 

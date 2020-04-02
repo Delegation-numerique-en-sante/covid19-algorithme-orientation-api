@@ -1,9 +1,9 @@
-defmodule Covid19QuestionnaireWeb.Operations.PopulateConclusion do
+defmodule Covid19QuestionnaireWeb.Operations.PopulateOrientation do
   @moduledoc """
-  Populate conclusion.
+  Populate orientation.
   """
 
-  alias Covid19QuestionnaireWeb.Schemas.{Conclusion, Questionnaire}
+  alias Covid19QuestionnaireWeb.Schemas.{Orientation, Questionnaire}
 
   @type questionnaire :: Questionnaire.t()
   @type code :: String.t()
@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.Operations.PopulateConclusion do
   def call(questionnaire = %Questionnaire{}, code) do
     %Questionnaire{
       questionnaire
-      | conclusion: %Conclusion{code: code}
+      | orientation: %Orientation{code: code}
     }
   end
 end

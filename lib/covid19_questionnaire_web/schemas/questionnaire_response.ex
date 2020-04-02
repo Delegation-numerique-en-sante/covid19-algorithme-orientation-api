@@ -42,28 +42,26 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "tiredness_details" => true,
           "feeding_day" => true
         },
-        "pronostiques" => %{
-          "heart_disease" => true,
-          "diabetes" => true,
-          "cancer" => true,
+        "risk_factors" => %{
           "breathing_disease" => true,
+          "heart_disease" => true,
           "kidney_disease" => true,
           "liver_disease" => true,
-          "pregnant" => true,
-          "immunodeprime" => true,
-          "immunosuppressant_drug" => true
+          "diabetes" => true,
+          "immunosuppressant_disease" => true,
+          "immunosuppressant_drug" => true,
+          "cancer" => true,
+          "pregnant" => "1",
         },
-        "statistiques" => %{
-          "au_moins_30_imc" => false,
-          "fever" => false,
-          "au_moins_39_de_temperature" => false,
-          "heart_disease" => true,
-          "facteurs_gravite" => 3,
-          "facteurs_gravite_mineurs" => 1,
-          "facteurs_gravite_majeurs" => 2,
-          "facteurs_pronostique" => 10
+        "calculations" => %{
+          "bmi_more_30" => true,
+          "fever" => true,
+          "gravity_factors" => 3,
+          "gravity_factors_minor" => 2,
+          "gravity_factors_major" => 1,
+          "risk_factors" => 1
         },
-        "conclusion" => %{
+        "orientation" => %{
           "code" => "FIN5"
         }
       }

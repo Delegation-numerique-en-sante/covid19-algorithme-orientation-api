@@ -8,6 +8,6 @@ defmodule Covid19QuestionnaireWeb.BienvenueController.IndexQuestionnaire do
       |> response(200)
       |> Jason.decode!()
 
-    assert body["bienvenue"] =~ "Bienvenue à l'API d'orientation du Covid-19"
+    assert body["bienvenue"] =~ "Bienvenue à l'API d'orientation du COVID19"
   end
 end

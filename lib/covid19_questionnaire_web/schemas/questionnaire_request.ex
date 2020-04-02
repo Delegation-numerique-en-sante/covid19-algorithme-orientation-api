@@ -41,16 +41,16 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
           "tiredness_details" => true,
           "feeding_day" => true
         },
-        "pronostiques" => %{
-          "heart_disease" => true,
-          "diabetes" => true,
-          "cancer" => true,
+        "risk_factors" => %{
           "breathing_disease" => true,
+          "heart_disease" => true,
           "kidney_disease" => true,
           "liver_disease" => true,
-          "pregnant" => true,
-          "immunodeprime" => true,
-          "immunosuppressant_drug" => true
+          "diabetes" => true,
+          "immunosuppressant_disease" => true,
+          "immunosuppressant_drug" => true,
+          "cancer" => true,
+          "pregnant" => "1",
         }
       }
     }

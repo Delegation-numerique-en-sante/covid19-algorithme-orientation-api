@@ -11,7 +11,7 @@ defmodule Covid19QuestionnaireWeb.ApiSpec do
   def spec do
     %OpenApi{
       info: %Info{
-        title: "Test d'orientation du Covid-19",
+        title: "Test d'orientation du COVID19",
         version: "2020-03-30 20:01:39.836837Z"
       },
       paths: Paths.from_router(Router),
