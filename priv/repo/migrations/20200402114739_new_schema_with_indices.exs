@@ -6,6 +6,7 @@ defmodule Covid19Orientation.Data.Repo.Migrations.CreateJournal do
     execute "DROP TABLE IF EXISTS journal;"
     
     execute """
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
     CREATE TABLE journal (
         uuid UUID DEFAULT uuid_generate_v4(),
         date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
