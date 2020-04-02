@@ -21,6 +21,6 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AucunSymptome
     assert Conditions.facteurs_pronostique(questionnaire) == 0
     assert Conditions.facteurs_gravite_mineurs(questionnaire) == 0
     assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
-    assert questionnaire.conclusion.code == "FIN9"
+    assert questionnaire.conclusion.code == "FIN9" # FIXME
   end
 end
