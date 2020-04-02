@@ -6,13 +6,14 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
 
   test "Bastien Guerry #1" do
     {:ok, questionnaire} =
       %Questionnaire{
+        patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
         symptomes: %Symptomes{temperature: 36.6, agueusia_anosmia: true, tiredness: true},
-        pronostiques: %Pronostiques{age: 50, heart_disease: false, height: 1.2, weight: 40.0}
+        pronostiques: %Pronostiques{heart_disease: false}
       }
       |> EvaluateQuestionnaire.call()
 
@@ -26,8 +27,9 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   test "Bastien Guerry #2" do
     {:ok, questionnaire} =
       %Questionnaire{
+        patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
         symptomes: %Symptomes{temperature: 36.6, cough: true, tiredness: true},
-        pronostiques: %Pronostiques{age: 50, heart_disease: true, height: 1.2, weight: 40.0}
+        pronostiques: %Pronostiques{heart_disease: true}
       }
       |> EvaluateQuestionnaire.call()
 
@@ -41,8 +43,9 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   test "Mauko Quiroga #1" do
     {:ok, questionnaire} =
       %Questionnaire{
+        patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
         symptomes: %Symptomes{temperature: 36.6, tiredness: true},
-        pronostiques: %Pronostiques{age: 50, heart_disease: false, height: 1.2, weight: 40.0}
+        pronostiques: %Pronostiques{heart_disease: false}
       }
       |> EvaluateQuestionnaire.call()
 

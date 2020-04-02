@@ -6,9 +6,9 @@ defmodule Covid19Questionnaire.Data.StoreTest do
 
   alias Covid19QuestionnaireWeb.Schemas.{
     Metadata,
+    Patient,
     Pronostiques,
     Questionnaire,
-    Supplementaires,
     Symptomes
   }
 
@@ -16,9 +16,9 @@ defmodule Covid19Questionnaire.Data.StoreTest do
     {:ok, questionnaire} =
       %Questionnaire{
         metadata: %Metadata{},
+        patient: %Patient{age_more_70: true},
         symptomes: %Symptomes{temperature: 39.0},
-        pronostiques: %Pronostiques{age: 70},
-        supplementaires: %Supplementaires{postal_code: "75000"}
+        pronostiques: %Pronostiques{}
       }
       |> EvaluateQuestionnaire.call()
 

@@ -1,29 +1,34 @@
 defmodule Covid19Questionnaire.Tests.ConditionsTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
-  alias Covid19QuestionnaireWeb.Schemas.{Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
 
   setup do
-    {:ok, questionnaire: %Questionnaire{symptomes: %Symptomes{}, pronostiques: %Pronostiques{}}}
+    {:ok,
+     questionnaire: %Questionnaire{
+       patient: %Patient{},
+       symptomes: %Symptomes{},
+       pronostiques: %Pronostiques{}
+     }}
   end
 
   describe "calcule si la personne a moins de 15 ans ou pas" do
     test "a moins de 15 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 14}
+        | patient: %Patient{questionnaire.patient | age_less_15: true}
       }
 
-      assert Conditions.moins_de_15_ans(questionnaire)
+      assert Conditions.age_less_15(questionnaire)
     end
 
     test "a au moins 15 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 15}
+        | patient: %Patient{questionnaire.patient | age_less_15: false}
       }
 
-      assert !Conditions.moins_de_15_ans(questionnaire)
+      assert !Conditions.age_less_15(questionnaire)
     end
   end
 
@@ -31,97 +36,39 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a moins de 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 49}
+        | patient: %Patient{questionnaire.patient | age_less_50: true}
       }
 
-      assert Conditions.moins_de_50_ans(questionnaire)
+      assert Conditions.age_less_50(questionnaire)
     end
 
     test "a au moins 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 50}
+        | patient: %Patient{questionnaire.patient | age_less_50: false}
       }
 
-      assert !Conditions.moins_de_50_ans(questionnaire)
+      assert !Conditions.age_less_50(questionnaire)
     end
   end
 
-  describe "calcule si la personne a entre 50 et 69 ans" do
+  describe "calcule si la personne a au moins 50" do
     test "a moins de 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 49}
+        | patient: %Patient{questionnaire.patient | age_less_50: true}
       }
 
-      assert !Conditions.entre_50_et_69_ans(questionnaire)
+      assert !Conditions.age_more_50(questionnaire)
     end
 
     test "a au moins 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 50}
+        | patient: %Patient{questionnaire.patient | age_less_50: false}
       }
 
-      assert Conditions.entre_50_et_69_ans(questionnaire)
-    end
-
-    test "a au plus 69 ans", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 69}
-      }
-
-      assert Conditions.entre_50_et_69_ans(questionnaire)
-    end
-
-    test "a plus de 69 ans", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 70}
-      }
-
-      assert !Conditions.entre_50_et_69_ans(questionnaire)
-    end
-  end
-
-  describe "calcule si la personne a moins de 70 ans ou pas" do
-    test "a moins de 70 ans", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 69}
-      }
-
-      assert Conditions.moins_de_70_ans(questionnaire)
-    end
-
-    test "a au moins 70 ans", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 70}
-      }
-
-      assert !Conditions.moins_de_70_ans(questionnaire)
-    end
-  end
-
-  describe "calcule si la personne a au moins 70 ans ou pas" do
-    test "a au moins 70 ans", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 70}
-      }
-
-      assert Conditions.au_moins_70_ans(questionnaire)
-    end
-
-    test "a moins de 70 ans", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 69}
-      }
-
-      assert !Conditions.au_moins_70_ans(questionnaire)
+      assert Conditions.age_more_50(questionnaire)
     end
   end
 
@@ -129,7 +76,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si IMC au moins 30 oui", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | weight: 67.5, height: 1.5}
+        | patient: %Patient{questionnaire.patient | weight: 67.5, height: 150}
       }
 
       assert Conditions.au_moins_30_imc(questionnaire)
@@ -138,7 +85,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si IMC moins 30 non", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | weight: 67.4, height: 1.5}
+        | patient: %Patient{questionnaire.patient | weight: 67.4, height: 150}
       }
 
       assert !Conditions.au_moins_30_imc(questionnaire)
@@ -272,12 +219,10 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
   test "calcule le nombre de facteurs pronostique", %{questionnaire: questionnaire} do
     questionnaire = %Questionnaire{
       questionnaire
-      | pronostiques: %Pronostiques{
+      | patient: %Patient{questionnaire.patient | age_more_70: true, weight: 67.5, height: 150},
+        pronostiques: %Pronostiques{
           questionnaire.pronostiques
-          | age: 70,
-            weight: 67.5,
-            height: 1.5,
-            heart_disease: nil,
+          | heart_disease: nil,
             cancer: nil,
             pregnant: false,
             immunodeprime: true

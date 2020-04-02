@@ -3,7 +3,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire do
   Evaluate questionnaire test.
   """
 
-  alias Covid19Questionnaire.Tests.{Algorithme, Codes}
+  alias Covid19Questionnaire.Tests.{Algorithm, Codes}
   alias Covid19Questionnaire.Trees.{FlattenTree, TraverseTree, Tree}
 
   alias Covid19QuestionnaireWeb.Operations.{
@@ -20,7 +20,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire do
 
   def call(questionnaire = %Questionnaire{}) do
     Tree
-    |> Algorithme.call()
+    |> Algorithm.call()
     |> FlattenTree.call()
     |> TraverseTree.call(questionnaire)
     |> case do

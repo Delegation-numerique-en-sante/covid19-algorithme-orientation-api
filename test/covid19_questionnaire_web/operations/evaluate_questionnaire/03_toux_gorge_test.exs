@@ -6,11 +6,12 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
+       patient: %Patient{},
        symptomes: %Symptomes{
          temperature: 36.6,
          cough: true,
@@ -25,7 +26,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 49}
+          | patient: %Patient{questionnaire.patient | age_less_50: true}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -40,7 +41,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 50}
+          | patient: %Patient{questionnaire.patient | age_less_50: false}
         }
         |> EvaluateQuestionnaire.call()
 

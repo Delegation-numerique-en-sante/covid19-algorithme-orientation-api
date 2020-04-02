@@ -12,9 +12,6 @@ defmodule Covid19Questionnaire.Tests.Conditions do
           optional(atom()) => any()
         }
 
-  @seuil_moins_de_15_ans 15
-  @seuil_moins_de_50_ans 50
-  @seuil_moins_de_70_ans 70
   @seuil_imc 30.0
   @seuil_fever 37.8
   @seuil_au_moins_39_de_temperature 39.0
@@ -72,63 +69,29 @@ defmodule Covid19Questionnaire.Tests.Conditions do
 
   ## Statistiques
 
-  @spec moins_de_15_ans(questionnaire) :: boolean
+  @spec age_less_15(questionnaire) :: boolean
 
-  def moins_de_15_ans(%{pronostiques: %{age: nil}}), do: false
+  def age_less_15(%{patient: %{age_less_15: age_less_15}}), do: age_less_15
 
-  def moins_de_15_ans(%{pronostiques: %{age: age}}) do
-    age < @seuil_moins_de_15_ans
-  end
+  @spec age_less_50(questionnaire) :: boolean
 
-  @spec moins_de_50_ans(questionnaire) :: boolean
+  def age_less_50(%{patient: %{age_less_50: age_less_50}}), do: age_less_50
 
-  def moins_de_50_ans(%{pronostiques: %{age: nil}}), do: false
+  @spec age_more_50(questionnaire) :: boolean
 
-  def moins_de_50_ans(%{pronostiques: %{age: age}}) do
-    age < @seuil_moins_de_50_ans
-  end
-
-  @spec au_moins_50_ans(questionnaire) :: boolean
-
-  def au_moins_50_ans(%{pronostiques: %{age: nil}}), do: false
-
-  def au_moins_50_ans(%{pronostiques: %{age: age}}) do
-    age >= @seuil_moins_de_50_ans
-  end
-
-  @spec entre_50_et_69_ans(questionnaire) :: boolean
-
-  def entre_50_et_69_ans(%{pronostiques: %{age: nil}}), do: false
-
-  def entre_50_et_69_ans(%{pronostiques: %{age: age}}) do
-    age >= @seuil_moins_de_50_ans && age < @seuil_moins_de_70_ans
-  end
-
-  @spec moins_de_70_ans(questionnaire) :: boolean
-
-  def moins_de_70_ans(%{pronostiques: %{age: nil}}), do: false
-
-  def moins_de_70_ans(%{pronostiques: %{age: age}}) do
-    age < @seuil_moins_de_70_ans
-  end
-
-  @spec au_moins_70_ans(questionnaire) :: boolean
-
-  def au_moins_70_ans(%{pronostiques: %{age: nil}}), do: false
-
-  def au_moins_70_ans(%{pronostiques: %{age: age}}) do
-    age >= @seuil_moins_de_70_ans
+  def age_more_50(questionnaire) do
+    !age_less_50(questionnaire)
   end
 
   @spec au_moins_30_imc(questionnaire) :: boolean
 
-  def au_moins_30_imc(%{pronostiques: %{weight: nil}}), do: false
+  def au_moins_30_imc(%{patient: %{weight: nil}}), do: false
 
-  def au_moins_30_imc(%{pronostiques: %{height: nil}}), do: false
+  def au_moins_30_imc(%{patient: %{height: nil}}), do: false
 
-  def au_moins_30_imc(%{pronostiques: %{weight: weight, height: height}}) do
+  def au_moins_30_imc(%{patient: %{weight: weight, height: height}}) do
     weight
-    |> Kernel./(:math.pow(height, 2))
+    |> Kernel./(:math.pow(height / 100, 2))
     |> Kernel.>=(@seuil_imc)
   end
 
@@ -209,10 +172,12 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   """
   @spec facteurs_pronostique(questionnaire) :: integer
 
-  def facteurs_pronostique(questionnaire = %{pronostiques: pronostiques}) do
+  def facteurs_pronostique(
+        questionnaire = %{patient: %{age_more_70: age_more_70}, pronostiques: pronostiques}
+      ) do
     pronostiques
     |> Map.from_struct()
-    |> Map.put(:au_moins_70_ans, au_moins_70_ans(questionnaire))
+    |> Map.put(:age_more_70, age_more_70)
     |> Map.put(:au_moins_30_imc, au_moins_30_imc(questionnaire))
     |> Map.put(:heart_disease, heart_disease(questionnaire))
     |> Enum.reduce(0, &count/2)

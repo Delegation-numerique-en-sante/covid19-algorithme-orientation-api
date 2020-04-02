@@ -67,27 +67,65 @@
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Metadata"
       },
+      "Patient": {
+        "description": "[Caractéristiques du patient](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
+        "example": {
+          "age_less_15": false,
+          "age_less_50": false,
+          "age_less_70": false,
+          "age_more_70": true,
+          "height": 173,
+          "postal_code": "75000",
+          "weight": 65.5
+        },
+        "properties": {
+          "age_less_15": {
+            "description": "Si la personne a moins de 15 ans",
+            "type": "boolean"
+          },
+          "age_less_50": {
+            "description": "Si la personne a moins de 50 ans",
+            "type": "boolean"
+          },
+          "age_less_70": {
+            "description": "Si la personne a moins de 70 ans",
+            "type": "boolean"
+          },
+          "age_more_70": {
+            "description": "Si la personne a au moins 70 ans",
+            "type": "boolean"
+          },
+          "height": {
+            "description": "Quelle est votre taille en centimètres ?",
+            "type": "integer"
+          },
+          "postal_code": {
+            "description": "Code postal",
+            "type": "string"
+          },
+          "weight": {
+            "description": "Quel est votre poids en kilogrammes ?",
+            "type": "number"
+          }
+        },
+        "title": "Patient",
+        "type": "object",
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Patient"
+      },
       "Pronostiques": {
         "description": "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
         "example": {
-          "age": 70,
           "breathing_disease": true,
           "cancer": true,
           "diabetes": true,
           "heart_disease": true,
-          "height": 1.73,
           "immunodeprime": true,
           "immunosuppressant_drug": true,
           "kidney_disease": true,
           "liver_disease": true,
-          "pregnant": true,
-          "weight": 65.5
+          "pregnant": true
         },
         "properties": {
-          "age": {
-            "description": "Quel est votre âge ?",
-            "type": "integer"
-          },
           "breathing_disease": {
             "description": "Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?",
             "type": "boolean"
@@ -103,10 +141,6 @@
           "heart_disease": {
             "description": "Avez-vous une tension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?",
             "type": "boolean"
-          },
-          "height": {
-            "description": "Quelle est votre taille en mètres ?",
-            "type": "number"
           },
           "immunodeprime": {
             "description": "Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?",
@@ -127,10 +161,6 @@
           "pregnant": {
             "description": "Êtes-vous enceinte ?",
             "type": "boolean"
-          },
-          "weight": {
-            "description": "Quel est votre poids en kilogrammes ?",
-            "type": "number"
           }
         },
         "title": "Pronostiques",
@@ -149,38 +179,35 @@
             "duration": 3600,
             "form_version": "2020-03-29 15:20:11.875767Z"
           },
+          "patient": {
+            "age_less_15": false,
+            "age_less_50": false,
+            "age_less_70": false,
+            "age_more_70": true,
+            "height": 173,
+            "postal_code": "75000",
+            "weight": 65.5
+          },
           "pronostiques": {
-            "age": 70,
             "breathing_disease": true,
             "cancer": true,
             "diabetes": true,
             "heart_disease": true,
-            "height": 1.73,
             "immunodeprime": true,
             "immunosuppressant_drug": true,
             "kidney_disease": true,
             "liver_disease": true,
-            "pregnant": true,
-            "weight": 65.5
+            "pregnant": true
           },
           "statistiques": {
             "au_moins_30_imc": true,
             "au_moins_39_de_temperature": true,
-            "au_moins_50_ans": false,
-            "au_moins_70_ans": true,
-            "entre_50_et_69_ans": false,
             "facteurs_gravite": 3,
             "facteurs_gravite_majeurs": 1,
             "facteurs_gravite_mineurs": 2,
             "facteurs_pronostique": 1,
             "fever": true,
-            "heart_disease": true,
-            "moins_de_15_ans": false,
-            "moins_de_50_ans": false,
-            "moins_de_70_ans": false
-          },
-          "supplementaires": {
-            "postal_code": "75000"
+            "heart_disease": true
           },
           "symptomes": {
             "agueusia_anosmia": true,
@@ -200,14 +227,14 @@
           "metadata": {
             "$ref": "#/components/schemas/Metadata"
           },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
           "pronostiques": {
             "$ref": "#/components/schemas/Pronostiques"
           },
           "statistiques": {
             "$ref": "#/components/schemas/Statistiques"
-          },
-          "supplementaires": {
-            "$ref": "#/components/schemas/Supplementaires"
           },
           "symptomes": {
             "$ref": "#/components/schemas/Symptomes"
@@ -215,11 +242,9 @@
         },
         "required": [
           "metadata",
+          "patient",
           "symptomes",
-          "pronostiques",
-          "supplementaires",
-          "statistiques",
-          "conclusion"
+          "pronostiques"
         ],
         "title": "Questionnaire",
         "type": "object",
@@ -232,22 +257,25 @@
             "metadata": {
               "duration": 3600
             },
+            "patient": {
+              "age_less_15": false,
+              "age_less_50": false,
+              "age_less_70": false,
+              "age_more_70": true,
+              "height": 173,
+              "postal_code": "75000",
+              "weight": 65.5
+            },
             "pronostiques": {
-              "age": 70,
               "breathing_disease": true,
               "cancer": true,
               "diabetes": true,
               "heart_disease": true,
-              "height": 1.73,
               "immunodeprime": true,
               "immunosuppressant_drug": true,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": true,
-              "weight": 65.5
-            },
-            "supplementaires": {
-              "postal_code": "75000"
+              "pregnant": true
             },
             "symptomes": {
               "agueusia_anosmia": true,
@@ -282,46 +310,43 @@
         "example": {
           "data": {
             "conclusion": {
-              "code": "orientation_SAMU"
+              "code": "FIN5"
             },
             "metadata": {
-              "algo_version": "2020-03-29 15:20:11.875767Z",
+              "algo_version": "2020-03-30 20:01:39.836837Z",
               "date": "2020-03-29 15:20:11.875767Z",
               "duration": 3600,
-              "form_version": "2020-03-29 15:20:11.875767Z"
+              "form_version": "2020-03-30 20:01:39.836837Z"
+            },
+            "patient": {
+              "age_less_15": false,
+              "age_less_50": false,
+              "age_less_70": false,
+              "age_more_70": true,
+              "height": 173,
+              "postal_code": "75000",
+              "weight": 65.5
             },
             "pronostiques": {
-              "age": 70,
               "breathing_disease": true,
               "cancer": true,
               "diabetes": true,
               "heart_disease": true,
-              "height": 1.73,
               "immunodeprime": true,
               "immunosuppressant_drug": true,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": true,
-              "weight": 65.5
+              "pregnant": true
             },
             "statistiques": {
-              "au_moins_30_imc": true,
-              "au_moins_39_de_temperature": true,
-              "au_moins_50_ans": false,
-              "au_moins_70_ans": true,
-              "entre_50_et_69_ans": false,
+              "au_moins_30_imc": false,
+              "au_moins_39_de_temperature": false,
               "facteurs_gravite": 3,
-              "facteurs_gravite_majeurs": 1,
-              "facteurs_gravite_mineurs": 2,
-              "facteurs_pronostique": 1,
-              "fever": true,
-              "heart_disease": true,
-              "moins_de_15_ans": false,
-              "moins_de_50_ans": false,
-              "moins_de_70_ans": false
-            },
-            "supplementaires": {
-              "postal_code": "75000"
+              "facteurs_gravite_majeurs": 2,
+              "facteurs_gravite_mineurs": 1,
+              "facteurs_pronostique": 10,
+              "fever": false,
+              "heart_disease": true
             },
             "symptomes": {
               "agueusia_anosmia": true,
@@ -347,20 +372,13 @@
       "Statistiques": {
         "description": "[Statistiques](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
         "example": {
-          "au_moins_30_imc": true,
           "au_moins_39_de_temperature": true,
-          "au_moins_50_ans": false,
-          "au_moins_70_ans": true,
-          "entre_50_et_69_ans": false,
           "facteurs_gravite": 3,
           "facteurs_gravite_majeurs": 1,
           "facteurs_gravite_mineurs": 2,
           "facteurs_pronostique": 1,
           "fever": true,
-          "heart_disease": true,
-          "moins_de_15_ans": false,
-          "moins_de_50_ans": false,
-          "moins_de_70_ans": false
+          "heart_disease": true
         },
         "properties": {
           "au_moins_30_imc": {
@@ -369,18 +387,6 @@
           },
           "au_moins_39_de_temperature": {
             "description": "Si la personne a au moins 39°C de température",
-            "type": "boolean"
-          },
-          "au_moins_50_ans": {
-            "description": "Si la personne a au moins 50 ans",
-            "type": "boolean"
-          },
-          "au_moins_70_ans": {
-            "description": "Si la personne a au moins de 70 ans",
-            "type": "boolean"
-          },
-          "entre_50_et_69_ans": {
-            "description": "Si la personne a entre 50 et 69 ans",
             "type": "boolean"
           },
           "facteurs_gravite": {
@@ -406,28 +412,9 @@
           "heart_disease": {
             "description": "Si la personne a des problèmes d'hypertension / cardiaques",
             "type": "boolean"
-          },
-          "moins_de_15_ans": {
-            "description": "Si la personne a moins de 15 ans",
-            "type": "boolean"
-          },
-          "moins_de_50_ans": {
-            "description": "Si la personne a moins de 50 ans",
-            "type": "boolean"
-          },
-          "moins_de_70_ans": {
-            "description": "Si la personne a moins de 70 ans",
-            "type": "boolean"
           }
         },
         "required": [
-          "moins_de_15_ans",
-          "moins_de_50_ans",
-          "au_moins_50_ans",
-          "entre_50_et_69_ans",
-          "moins_de_70_ans",
-          "au_moins_70_ans",
-          "au_moins_30_imc",
           "fever",
           "au_moins_39_de_temperature",
           "heart_disease",
@@ -439,21 +426,6 @@
         "title": "Statistiques",
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Statistiques"
-      },
-      "Supplementaires": {
-        "description": "[Questions supplémentaires](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#question-suppl%C3%A9mentaire)",
-        "example": {
-          "postal_code": "75000"
-        },
-        "properties": {
-          "postal_code": {
-            "description": "Code postal",
-            "type": "string"
-          }
-        },
-        "title": "Supplementaires",
-        "type": "object",
-        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Supplementaires"
       },
       "Symptomes": {
         "description": "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",

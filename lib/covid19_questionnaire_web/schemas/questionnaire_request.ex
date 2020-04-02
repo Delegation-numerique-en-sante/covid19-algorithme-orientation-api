@@ -20,6 +20,15 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
         "metadata" => %{
           "duration" => 3600
         },
+        "patient" => %{
+          "age_less_15" => false,
+          "age_less_50" => false,
+          "age_less_70" => false,
+          "age_more_70" => true,
+          "height" => 173,
+          "weight" => 65.5,
+          "postal_code" => "75000"
+        },
         "symptomes" => %{
           "temperature" => 37.5,
           "cough" => true,
@@ -31,9 +40,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
           "breathlessness" => true
         },
         "pronostiques" => %{
-          "age" => 70,
-          "weight" => 65.5,
-          "height" => 1.73,
           "heart_disease" => true,
           "diabetes" => true,
           "cancer" => true,
@@ -43,9 +49,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
           "pregnant" => true,
           "immunodeprime" => true,
           "immunosuppressant_drug" => true
-        },
-        "supplementaires" => %{
-          "postal_code" => "75000"
         }
       }
     }

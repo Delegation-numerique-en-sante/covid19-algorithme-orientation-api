@@ -12,9 +12,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.Pronostiques do
       "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
     type: :object,
     properties: %{
-      age: %Schema{type: :integer, description: "Quel est votre âge ?"},
-      weight: %Schema{type: :number, description: "Quel est votre poids en kilogrammes ?"},
-      height: %Schema{type: :number, description: "Quelle est votre taille en mètres ?"},
       heart_disease: %Schema{
         type: :boolean,
         description:
@@ -46,9 +43,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.Pronostiques do
       }
     },
     example: %{
-      "age" => 70,
-      "weight" => 65.5,
-      "height" => 1.73,
       "heart_disease" => true,
       "diabetes" => true,
       "cancer" => true,

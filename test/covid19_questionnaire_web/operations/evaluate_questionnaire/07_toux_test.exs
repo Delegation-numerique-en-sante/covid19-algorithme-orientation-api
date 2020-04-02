@@ -6,11 +6,12 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
+       patient: %Patient{},
        symptomes: %Symptomes{
          temperature: 36.6,
          cough: true

@@ -21,6 +21,15 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "date" => "2020-03-29 15:20:11.875767Z",
           "duration" => 3600
         },
+        "patient" => %{
+          "age_less_15" => false,
+          "age_less_50" => false,
+          "age_less_70" => false,
+          "age_more_70" => true,
+          "height" => 173,
+          "weight" => 65.5,
+          "postal_code" => "75000"
+        },
         "symptomes" => %{
           "temperature" => 37.5,
           "cough" => true,
@@ -32,9 +41,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "breathlessness" => true
         },
         "pronostiques" => %{
-          "age" => 70,
-          "weight" => 65.5,
-          "height" => 1.73,
           "heart_disease" => true,
           "diabetes" => true,
           "cancer" => true,
@@ -46,12 +52,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "immunosuppressant_drug" => true
         },
         "statistiques" => %{
-          "moins_de_15_ans" => false,
-          "moins_de_50_ans" => false,
-          "au_moins_50_ans" => true,
-          "moins_de_70_ans" => false,
-          "entre_50_et_69_ans" => false,
-          "au_moins_70_ans" => true,
           "au_moins_30_imc" => false,
           "fever" => false,
           "au_moins_39_de_temperature" => false,
@@ -60,9 +60,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "facteurs_gravite_mineurs" => 1,
           "facteurs_gravite_majeurs" => 2,
           "facteurs_pronostique" => 10
-        },
-        "supplementaires" => %{
-          "postal_code" => "75000"
         },
         "conclusion" => %{
           "code" => "FIN5"

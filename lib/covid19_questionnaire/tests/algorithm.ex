@@ -1,4 +1,4 @@
-defmodule Covid19Questionnaire.Tests.Algorithme do
+defmodule Covid19Questionnaire.Tests.Algorithm do
   @moduledoc """
   Crée l'algorithme d'orientation du Covid-19.
   """
@@ -12,7 +12,7 @@ defmodule Covid19Questionnaire.Tests.Algorithme do
 
   def call(module) do
     [
-      struct(module, key: &fin1/0, operation: &moins_de_15_ans/1),
+      struct(module, key: &fin1/0, operation: &age_less_15/1),
       struct(module, key: &fin5/0, operation: &(facteurs_gravite_majeurs(&1) >= 1)),
       struct(module,
         operation: &symptomes1/1,
@@ -36,8 +36,8 @@ defmodule Covid19Questionnaire.Tests.Algorithme do
               struct(module,
                 operation: &(facteurs_gravite_mineurs(&1) == 0),
                 children: [
-                  struct(module, key: &fin2/0, operation: &moins_de_50_ans(&1)),
-                  struct(module, key: &fin3/0, operation: &au_moins_50_ans(&1))
+                  struct(module, key: &fin2/0, operation: &age_less_50/1),
+                  struct(module, key: &fin3/0, operation: &age_more_50/1)
                 ]
               ),
               struct(module, key: &fin3/0, operation: &(facteurs_gravite_mineurs(&1) >= 1))

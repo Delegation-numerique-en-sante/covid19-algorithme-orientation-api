@@ -6,11 +6,12 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievrePasToux
   use ExUnit.Case
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
+       patient: %Patient{},
        symptomes: %Symptomes{
          temperature: 37.8
        },
@@ -23,7 +24,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievrePasToux
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 49}
+          | patient: %Patient{questionnaire.patient | age_less_50: true}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -38,7 +39,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievrePasToux
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | pronostiques: %Pronostiques{questionnaire.pronostiques | age: 50}
+          | patient: %Patient{questionnaire.patient | age_less_50: false, age_less_70: true}
         }
         |> EvaluateQuestionnaire.call()
 
