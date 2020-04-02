@@ -11,7 +11,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
     Patient,
     Pronostiques,
     Statistiques,
-    Symptomes
+    Symptoms
   }
 
   OpenApiSpex.schema(%{
@@ -22,12 +22,12 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
     properties: %{
       metadata: Metadata,
       patient: Patient,
-      symptomes: Symptomes,
+      symptoms: Symptoms,
       pronostiques: Pronostiques,
       conclusion: Conclusion,
       statistiques: Statistiques
     },
-    required: [:metadata, :patient, :symptomes, :pronostiques],
+    required: [:metadata, :patient, :symptoms, :pronostiques],
     example: %{
       "metadata" => %{
         "form_version" => "2020-03-29 15:20:11.875767Z",
@@ -44,15 +44,17 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "weight" => 65.5,
         "postal_code" => "75000"
       },
-      "symptomes" => %{
-        "temperature" => 37.5,
-        "cough" => true,
-        "agueusia_anosmia" => true,
+      "symptoms" => %{
         "sore_throat_aches" => true,
+        "fever" => false,
+        "temperature_cat" => "[35.5, 35.7]",
+        "agueusia_anosmia" => true,
+        "breathlessness" => true,
+        "cough" => true,
         "diarrhea" => true,
         "tiredness" => true,
-        "feeding" => true,
-        "breathlessness" => true
+        "tiredness_details" => true,
+        "feeding_day" => true
       },
       "pronostiques" => %{
         "heart_disease" => true,

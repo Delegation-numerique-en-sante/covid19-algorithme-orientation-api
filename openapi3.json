@@ -209,15 +209,17 @@
             "fever": true,
             "heart_disease": true
           },
-          "symptomes": {
+          "symptoms": {
             "agueusia_anosmia": true,
             "breathlessness": true,
             "cough": true,
             "diarrhea": true,
-            "feeding": true,
+            "feeding_day": true,
+            "fever": false,
             "sore_throat_aches": true,
-            "temperature": 37.5,
-            "tiredness": true
+            "temperature_cat": "[35.5, 35.7]",
+            "tiredness": true,
+            "tiredness_details": true
           }
         },
         "properties": {
@@ -236,14 +238,14 @@
           "statistiques": {
             "$ref": "#/components/schemas/Statistiques"
           },
-          "symptomes": {
-            "$ref": "#/components/schemas/Symptomes"
+          "symptoms": {
+            "$ref": "#/components/schemas/Symptoms"
           }
         },
         "required": [
           "metadata",
           "patient",
-          "symptomes",
+          "symptoms",
           "pronostiques"
         ],
         "title": "Questionnaire",
@@ -277,15 +279,17 @@
               "liver_disease": true,
               "pregnant": true
             },
-            "symptomes": {
+            "symptoms": {
               "agueusia_anosmia": true,
               "breathlessness": true,
               "cough": true,
               "diarrhea": true,
-              "feeding": true,
+              "feeding_day": true,
+              "fever": false,
               "sore_throat_aches": true,
-              "temperature": 37.5,
-              "tiredness": true
+              "temperature_cat": "[35.5, 35.7]",
+              "tiredness": true,
+              "tiredness_details": true
             }
           }
         },
@@ -348,15 +352,17 @@
               "fever": false,
               "heart_disease": true
             },
-            "symptomes": {
+            "symptoms": {
               "agueusia_anosmia": true,
               "breathlessness": true,
               "cough": true,
               "diarrhea": true,
-              "feeding": true,
+              "feeding_day": true,
+              "fever": false,
               "sore_throat_aches": true,
-              "temperature": 37.5,
-              "tiredness": true
+              "temperature_cat": "[35.5, 35.7]",
+              "tiredness": true,
+              "tiredness_details": true
             }
           }
         },
@@ -427,17 +433,19 @@
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Statistiques"
       },
-      "Symptomes": {
+      "Symptoms": {
         "description": "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",
         "example": {
           "agueusia_anosmia": true,
           "breathlessness": true,
           "cough": true,
           "diarrhea": true,
-          "feeding": true,
+          "feeding_day": true,
+          "fever": false,
           "sore_throat_aches": true,
-          "temperature": 37.5,
-          "tiredness": true
+          "temperature_cat": "[35.5, 35.7]",
+          "tiredness": true,
+          "tiredness_details": true
         },
         "properties": {
           "agueusia_anosmia": {
@@ -456,26 +464,41 @@
             "description": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
             "type": "boolean"
           },
-          "feeding": {
+          "feeding_day": {
             "description": "Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
+            "type": "boolean"
+          },
+          "fever": {
+            "description": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?",
             "type": "boolean"
           },
           "sore_throat_aches": {
             "description": "Avez-vous un mal de gorge apparu ces derniers jours ?",
             "type": "boolean"
           },
-          "temperature": {
-            "description": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ? Quelle est votre température ?",
-            "type": "number"
+          "temperature_cat": {
+            "description": "Quelle est votre température ?",
+            "enum": [
+              "(−∞, 35.4]",
+              "[35.5, 35.7]",
+              "[37.8, 38.9]",
+              "[39, +∞)",
+              "DNK"
+            ],
+            "type": "string"
           },
           "tiredness": {
-            "description": "Avez-vous une fatigue inhabituelle ces derniers jours ? Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
+            "description": "Avez-vous une fatigue inhabituelle ces derniers jours ?",
+            "type": "boolean"
+          },
+          "tiredness_details": {
+            "description": "Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
             "type": "boolean"
           }
         },
-        "title": "Symptomes",
+        "title": "Symptoms",
         "type": "object",
-        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Symptomes"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Symptoms"
       }
     }
   },

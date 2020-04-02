@@ -217,15 +217,17 @@ components:
           facteurs_pronostique: 1
           fever: true
           heart_disease: true
-        symptomes:
+        symptoms:
           agueusia_anosmia: true
           breathlessness: true
           cough: true
           diarrhea: true
-          feeding: true
+          feeding_day: true
+          fever: false
           sore_throat_aches: true
-          temperature: 37.5
+          temperature_cat: '[35.5, 35.7]'
           tiredness: true
+          tiredness_details: true
       properties:
         conclusion:
           $ref: '#/components/schemas/Conclusion'
@@ -237,12 +239,12 @@ components:
           $ref: '#/components/schemas/Pronostiques'
         statistiques:
           $ref: '#/components/schemas/Statistiques'
-        symptomes:
-          $ref: '#/components/schemas/Symptomes'
+        symptoms:
+          $ref: '#/components/schemas/Symptoms'
       required:
         - metadata
         - patient
-        - symptomes
+        - symptoms
         - pronostiques
       title: Questionnaire
       type: object
@@ -271,15 +273,17 @@ components:
             kidney_disease: true
             liver_disease: true
             pregnant: true
-          symptomes:
+          symptoms:
             agueusia_anosmia: true
             breathlessness: true
             cough: true
             diarrhea: true
-            feeding: true
+            feeding_day: true
+            fever: false
             sore_throat_aches: true
-            temperature: 37.5
+            temperature_cat: '[35.5, 35.7]'
             tiredness: true
+            tiredness_details: true
       properties:
         questionnaire:
           anyOf:
@@ -327,15 +331,17 @@ components:
             facteurs_pronostique: 10
             fever: false
             heart_disease: true
-          symptomes:
+          symptoms:
             agueusia_anosmia: true
             breathlessness: true
             cough: true
             diarrhea: true
-            feeding: true
+            feeding_day: true
+            fever: false
             sore_throat_aches: true
-            temperature: 37.5
+            temperature_cat: '[35.5, 35.7]'
             tiredness: true
+            tiredness_details: true
       properties:
         data:
           $ref: '#/components/schemas/Questionnaire'
@@ -389,7 +395,7 @@ components:
       title: Statistiques
       type: object
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Statistiques
-    Symptomes:
+    Symptoms:
       description: >-
         [Questions sur les
         symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)
@@ -398,10 +404,12 @@ components:
         breathlessness: true
         cough: true
         diarrhea: true
-        feeding: true
+        feeding_day: true
+        fever: false
         sore_throat_aches: true
-        temperature: 37.5
+        temperature_cat: '[35.5, 35.7]'
         tiredness: true
+        tiredness_details: true
       properties:
         agueusia_anosmia:
           description: >-
@@ -423,28 +431,39 @@ components:
             Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles
             molles) ?
           type: boolean
-        feeding:
+        feeding_day:
           description: >-
             Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24
             HEURES OU PLUS ?
           type: boolean
+        fever:
+          description: >-
+            Pensez-vous avoir eu de la fièvre ces derniers jours (frissons,
+            sueurs) ?
+          type: boolean
         sore_throat_aches:
           description: Avez-vous un mal de gorge apparu ces derniers jours ?
           type: boolean
-        temperature:
-          description: >-
-            Pensez-vous avoir eu de la fièvre ces derniers jours (frissons,
-            sueurs) ? Quelle est votre température ?
-          type: number
+        temperature_cat:
+          description: Quelle est votre température ?
+          enum:
+            - '(−∞, 35.4]'
+            - '[35.5, 35.7]'
+            - '[37.8, 38.9]'
+            - '[39, +∞)'
+            - DNK
+          type: string
         tiredness:
-          description: >-
-            Avez-vous une fatigue inhabituelle ces derniers jours ? Cette
-            fatigue vous oblige-t-elle à vous reposer plus de la moitié de la
-            journée ?
+          description: Avez-vous une fatigue inhabituelle ces derniers jours ?
           type: boolean
-      title: Symptomes
+        tiredness_details:
+          description: >-
+            Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de
+            la journée ?
+          type: boolean
+      title: Symptoms
       type: object
-      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Symptomes
+      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Symptoms
 security: []
 tags: []
 
