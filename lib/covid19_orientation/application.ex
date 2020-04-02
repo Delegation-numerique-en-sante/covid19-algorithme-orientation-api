@@ -10,14 +10,15 @@ defmodule Covid19Orientation.Application do
     children = [
       # Start the endpoint when the application starts
       Covid19OrientationWeb.Endpoint,
-      Covid19Orientation.Data.Supervisor
+      Covid19Orientation.Data.Repo,
+      Covid19Orientation.Data.Store
       # Starts a worker by calling: Covid19Orientation.Worker.start_link(arg)
       # {Covid19Orientation.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Covid19Orientation.Supervisor]
+    opts = [strategy: :one_for_one]
     Supervisor.start_link(children, opts)
   end
 

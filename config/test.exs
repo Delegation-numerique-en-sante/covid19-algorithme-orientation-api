@@ -7,14 +7,12 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   server: false
 
 # Configure PostgreSQL
-config :covid19_orientation, Covid19Orientation.Data.Store,
-  conn_opts: [
-    hostname: "127.0.0.1",
-    port: 5432,
-    username: "test",
-    password: "test",
-    database: "test"
-  ]
+config :covid19_orientation, Covid19Orientation.Data.Repo,
+  hostname: "127.0.0.1",
+  port: 5432,
+  username: "apitaxi",
+  password: "vincent",
+  database: "test_covid"
 
 # Print only warnings and errors during test
 config :logger, level: :warn

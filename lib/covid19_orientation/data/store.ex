@@ -1,68 +1,88 @@
 defmodule Covid19Orientation.Data.Store do
   @moduledoc """
   Store data in PostgreSQL.
-
-  Test table:
-
-  ```sql
-  DROP TABLE IF EXISTS journal;
-  CREATE TABLE journal (
-      date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-      uuid VARCHAR NOT NULL,
-      data JSONB NOT NULL
-  );
-  ```
   """
 
-  use Agent
+  use GenServer
 
-  def start_link(_initial) do
-    Agent.start_link(
-      fn ->
-        settings = Application.fetch_env!(:covid19_orientation, __MODULE__)[:conn_opts]
-        {:ok, pid} = Postgrex.start_link(settings)
-        {:pid, pid}
-      end,
-      name: __MODULE__
-    )
-  end
+  alias Covid19Orientation.Data.{Journal, Repo}
+  alias Ecto.Adapters.SQL
+
+  @tick_interval 1000
+  @chunk_size 100
 
   def write({date, uuid}, data = %{}) do
-    Agent.cast(__MODULE__, fn state ->
-      insert(state, date, uuid, data)
-      state
-    end)
-
+    GenServer.cast(__MODULE__, {:write, %{date: date, uuid: uuid, data: data}})
     data
   end
 
-  @spec read(tuple) :: {:ok, map} | {:error, any}
-
   def read({date, uuid}) do
-    Agent.get(__MODULE__, &select(&1, date, uuid))
+    select(date, uuid)
   end
 
-  defp insert({:pid, pid}, date, uuid, data) do
-    Postgrex.query!(pid, "INSERT INTO journal (date, uuid, data) VALUES($1, $2, $3)", [
-      date,
-      uuid,
-      data
-    ])
+  def tick_interval, do: @tick_interval
+
+  #
+  # GenServer Part
+  #
+
+  def start_link(_) do
+    GenServer.start_link(__MODULE__, [to_write: []], name: __MODULE__)
   end
 
-  defp select({:pid, pid}, "" <> date, uuid) do
+  @impl true
+  def init(_) do
+    tick()
+    {:ok, [to_write: []]}
+  end
+
+  @impl true
+  def handle_cast({:write, element}, [to_write: to_write]) when length(to_write) < @chunk_size do
+    new_state = [to_write: [element | to_write]]
+
+    {:noreply, new_state}
+  end
+
+  @impl true
+  def handle_cast({:write, element}, [to_write: to_write]) do
+    insert_many([element | to_write])
+
+    {:noreply, [to_write: []]}
+  end
+
+  @impl true
+  def handle_info(:tick, [to_write: to_write]) do
+    insert_many(to_write)
+
+    tick()
+    {:noreply, [to_write: []]}
+  end
+
+  #
+  # Private functions
+  #
+  defp tick, do: Process.send_after(__MODULE__, :tick, @tick_interval)
+
+  defp select("" <> date, uuid) do
     date
     |> DateTime.from_iso8601()
     |> case do
-      {:ok, utc, _} -> select({:pid, pid}, utc, uuid)
+      {:ok, utc, _} -> select(utc, uuid)
       {:error, error} -> {:error, error}
     end
   end
 
-  defp select({:pid, pid}, date, uuid) do
-    pid
-    |> Postgrex.query!("SELECT data FROM journal WHERE date = $1 AND uuid = $2", [date, uuid])
+  defp select(date, uuid) do
+    Repo
+    |> SQL.query!("SELECT data FROM journal WHERE date = $1 AND uuid = $2", [date, uuid])
     |> Map.get(:rows)
     |> Enum.find(&([_data] = &1))
+  end
+
+  defp insert_many(journals) do
+    Repo.insert_all(
+      Journal,
+      journals
+    )
   end
 end

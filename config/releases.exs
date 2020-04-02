@@ -20,15 +20,14 @@ config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   server: true
 
 # Configure PostgreSQL
-config :covid19_orientation, Covid19Orientation.Data.Store,
-  conn_opts: [
-    hostname: System.get_env("PG_HOSTNAME"),
-    port: System.get_env("PG_PORT"),
-    username: System.get_env("PG_USER"),
-    password: System.get_env("PG_PASSWORD"),
-    database: System.get_env("PG_DATABASE"),
-    pool_size: System.get_env("PG_POOL_SIZE") |> String.trim() |> String.to_integer()
-  ]
+config :covid19_orientation, Covid19Orientation.Data.Repo,
+  hostname: System.get_env("PG_HOSTNAME"),
+  port: System.get_env("PG_PORT"),
+  username: System.get_env("PG_USER"),
+  password: System.get_env("PG_PASSWORD"),
+  database: System.get_env("PG_DATABASE"),
+  pool_size: System.get_env("PG_POOL_SIZE") |> String.trim() |> String.to_integer()
+
 
 # Do not print debug messages in production
 config :logger,

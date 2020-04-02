@@ -7,6 +7,12 @@
 # General application configuration
 use Mix.Config
 
+config :covid19_orientation, Covid19Orientation.Data.Repo,
+  database: "covid19_orientation_repo",
+  username: "user",
+  password: "pass",
+  hostname: "localhost"
+
 # Configures the endpoint
 config :covid19_orientation, Covid19OrientationWeb.Endpoint,
   url: [host: "localhost"],
@@ -22,6 +28,8 @@ config :phoenix, :json_library, Jason
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+config :covid19_orientation, ecto_repos: [Covid19Orientation.Data.Repo]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
