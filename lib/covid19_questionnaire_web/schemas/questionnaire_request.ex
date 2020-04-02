@@ -50,7 +50,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
           "immunosuppressant_disease" => true,
           "immunosuppressant_drug" => true,
           "cancer" => true,
-          "pregnant" => "1",
+          "pregnant" => "1"
         }
       }
     }

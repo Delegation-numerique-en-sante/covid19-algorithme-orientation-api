@@ -15,6 +15,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Orientation do
       code: %Schema{
         type: :string,
         enum: [
+          "FIN1",
           "FIN2",
           "FIN3",
           "FIN4",

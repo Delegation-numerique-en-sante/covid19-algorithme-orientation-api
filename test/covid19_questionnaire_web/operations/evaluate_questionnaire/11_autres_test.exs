@@ -6,13 +6,13 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptoms}
 
   test "Bastien Guerry #1" do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
-        symptomes: %Symptomes{temperature: 36.6, agueusia_anosmia: true, tiredness: true},
+        symptomes: %Symptoms{temperature: 36.6, agueusia_anosmia: true, tiredness: true},
         pronostiques: %Pronostiques{heart_disease: false}
       }
       |> EvaluateQuestionnaire.call()
@@ -28,7 +28,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
-        symptomes: %Symptomes{temperature: 36.6, cough: true, tiredness: true},
+        symptomes: %Symptoms{temperature: 36.6, cough: true, tiredness: true},
         pronostiques: %Pronostiques{heart_disease: true}
       }
       |> EvaluateQuestionnaire.call()
@@ -44,7 +44,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
-        symptomes: %Symptomes{temperature: 36.6, tiredness: true},
+        symptomes: %Symptoms{temperature: 36.6, tiredness: true},
         pronostiques: %Pronostiques{heart_disease: false}
       }
       |> EvaluateQuestionnaire.call()
@@ -53,6 +53,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
     assert Conditions.facteurs_pronostique(questionnaire) == 0
     assert Conditions.facteurs_gravite_mineurs(questionnaire) == 1
     assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
-    assert questionnaire.conclusion.code == "FIN9" # FIXME
+    # FIXME
+    assert questionnaire.conclusion.code == "FIN9"
   end
 end

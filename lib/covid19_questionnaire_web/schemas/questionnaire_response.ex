@@ -51,7 +51,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "immunosuppressant_disease" => true,
           "immunosuppressant_drug" => true,
           "cancer" => true,
-          "pregnant" => "1",
+          "pregnant" => "1"
         },
         "calculations" => %{
           "bmi_more_30" => true,
@@ -65,7 +65,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "code" => "FIN5"
         }
       }
-    },
-    "x-struct": __MODULE__
+    }
   })
 end

@@ -6,13 +6,13 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.MalDeGorgeTes
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
        patient: %Patient{},
-       symptomes: %Symptomes{
+       symptomes: %Symptoms{
          temperature: 36.6,
          sore_throat_aches: true
        },
@@ -36,7 +36,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.MalDeGorgeTes
     {:ok, questionnaire} =
       %Questionnaire{
         questionnaire
-        | symptomes: %Symptomes{questionnaire.symptomes | tiredness: true}
+        | symptomes: %Symptoms{questionnaire.symptomes | tiredness: true}
       }
       |> EvaluateQuestionnaire.call()
 

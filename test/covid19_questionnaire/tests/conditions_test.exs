@@ -1,13 +1,13 @@
 defmodule Covid19Questionnaire.Tests.ConditionsTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
        patient: %Patient{},
-       symptomes: %Symptomes{},
+       symptomes: %Symptoms{},
        pronostiques: %Pronostiques{}
      }}
   end
@@ -96,7 +96,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si la température n'est pas renseignée, alors fièvre", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptomes: %Symptomes{questionnaire.symptomes | temperature: nil}
+        | symptomes: %Symptoms{questionnaire.symptomes | temperature: nil}
       }
 
       assert Conditions.fever(questionnaire)
@@ -105,7 +105,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si la température est >= 37,8 la personne a fièvre", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptomes: %Symptomes{questionnaire.symptomes | temperature: 37.8}
+        | symptomes: %Symptoms{questionnaire.symptomes | temperature: 37.8}
       }
 
       assert Conditions.fever(questionnaire)
@@ -116,7 +116,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     } do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptomes: %Symptomes{questionnaire.symptomes | temperature: 37.7}
+        | symptomes: %Symptoms{questionnaire.symptomes | temperature: 37.7}
       }
 
       assert !Conditions.fever(questionnaire)
@@ -127,7 +127,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si la température n'est pas renseignée non", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptomes: %Symptomes{questionnaire.symptomes | temperature: nil}
+        | symptomes: %Symptoms{questionnaire.symptomes | temperature: nil}
       }
 
       assert !Conditions.au_moins_39_de_temperature(questionnaire)
@@ -136,7 +136,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si la température est < 39,0°C non", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptomes: %Symptomes{questionnaire.symptomes | temperature: 38.9}
+        | symptomes: %Symptoms{questionnaire.symptomes | temperature: 38.9}
       }
 
       assert !Conditions.au_moins_39_de_temperature(questionnaire)
@@ -145,7 +145,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si la température est >= 39,8°C oui", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptomes: %Symptomes{questionnaire.symptomes | temperature: 39.0}
+        | symptomes: %Symptoms{questionnaire.symptomes | temperature: 39.0}
       }
 
       assert Conditions.au_moins_39_de_temperature(questionnaire)
@@ -177,7 +177,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
   } do
     questionnaire = %Questionnaire{
       questionnaire
-      | symptomes: %Symptomes{
+      | symptomes: %Symptoms{
           questionnaire.symptomes
           | temperature: 39.0,
             feeding: true,
@@ -191,7 +191,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
   test "calcule le nombre de facteurs de gravité mineurs", %{questionnaire: questionnaire} do
     questionnaire = %Questionnaire{
       questionnaire
-      | symptomes: %Symptomes{
+      | symptomes: %Symptoms{
           questionnaire.symptomes
           | temperature: 39.0,
             feeding: true,
@@ -205,7 +205,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
   test "calcule le nombre de facteurs de gravité majeurs", %{questionnaire: questionnaire} do
     questionnaire = %Questionnaire{
       questionnaire
-      | symptomes: %Symptomes{
+      | symptomes: %Symptoms{
           questionnaire.symptomes
           | temperature: 39.0,
             feeding: true,

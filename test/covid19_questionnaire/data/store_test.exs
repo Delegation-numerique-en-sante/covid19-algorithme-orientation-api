@@ -9,7 +9,7 @@ defmodule Covid19Questionnaire.Data.StoreTest do
     Patient,
     Pronostiques,
     Questionnaire,
-    Symptomes
+    Symptoms
   }
 
   test "stores & retrieves data" do
@@ -17,7 +17,7 @@ defmodule Covid19Questionnaire.Data.StoreTest do
       %Questionnaire{
         metadata: %Metadata{},
         patient: %Patient{age_more_70: true},
-        symptomes: %Symptomes{temperature: 39.0},
+        symptomes: %Symptoms{temperature: 39.0},
         pronostiques: %Pronostiques{}
       }
       |> EvaluateQuestionnaire.call()

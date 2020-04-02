@@ -5,13 +5,13 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.L15AnsTest do
 
   use ExUnit.Case, async: true
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptoms}
 
   test "STOP si < 15 ans" do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_15: true},
-        symptomes: %Symptomes{},
+        symptomes: %Symptoms{},
         pronostiques: %Pronostiques{}
       }
       |> EvaluateQuestionnaire.call()

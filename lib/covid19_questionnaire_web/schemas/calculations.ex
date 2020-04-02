@@ -40,7 +40,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Calculations do
       :gravity_factors,
       :gravity_factors_minor,
       :gravity_factors_major,
-      :risk_factors,
+      :risk_factors
     ],
     example: %{
       "bmi_more_30" => true,

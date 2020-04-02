@@ -25,7 +25,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
       symptoms: Symptoms,
       risk_factors: RiskFactors,
       calculations: Calculations,
-      orientation: Orientation,
+      orientation: Orientation
     },
     required: [:metadata, :patient, :symptoms, :risk_factors],
     example: %{
@@ -65,7 +65,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "immunosuppressant_disease" => true,
         "immunosuppressant_drug" => true,
         "cancer" => true,
-        "pregnant" => "1",
+        "pregnant" => "1"
       },
       "calculations" => %{
         "bmi_more_30" => true,

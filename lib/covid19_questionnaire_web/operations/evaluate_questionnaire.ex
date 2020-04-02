@@ -7,8 +7,8 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire do
   alias Covid19Questionnaire.Trees.{FlattenTree, TraverseTree, Tree}
 
   alias Covid19QuestionnaireWeb.Operations.{
-    PopulateOrientation,
-    PopulateCalculations
+    PopulateCalculations,
+    PopulateOrientation
   }
 
   alias Covid19QuestionnaireWeb.Schemas.Questionnaire

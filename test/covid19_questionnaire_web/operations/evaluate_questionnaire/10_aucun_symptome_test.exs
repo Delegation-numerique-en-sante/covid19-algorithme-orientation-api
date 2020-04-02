@@ -6,13 +6,13 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AucunSymptome
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptoms}
 
   test "patient avec aucun symtôme" do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{},
-        symptomes: %Symptomes{temperature: 36.6},
+        symptomes: %Symptoms{temperature: 36.6},
         pronostiques: %Pronostiques{heart_disease: false}
       }
       |> EvaluateQuestionnaire.call()
@@ -21,6 +21,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AucunSymptome
     assert Conditions.facteurs_pronostique(questionnaire) == 0
     assert Conditions.facteurs_gravite_mineurs(questionnaire) == 0
     assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
-    assert questionnaire.conclusion.code == "FIN9" # FIXME
+    # FIXME
+    assert questionnaire.conclusion.code == "FIN9"
   end
 end

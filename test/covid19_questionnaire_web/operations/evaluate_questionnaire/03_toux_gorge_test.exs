@@ -6,13 +6,13 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptomes}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
        patient: %Patient{},
-       symptomes: %Symptomes{
+       symptomes: %Symptoms{
          temperature: 36.6,
          cough: true,
          sore_throat_aches: true
@@ -56,7 +56,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | symptomes: %Symptomes{questionnaire.symptomes | tiredness: true}
+          | symptomes: %Symptoms{questionnaire.symptomes | tiredness: true}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -88,7 +88,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | symptomes: %Symptomes{questionnaire.symptomes | tiredness: true},
+          | symptomes: %Symptoms{questionnaire.symptomes | tiredness: true},
             pronostiques: %Pronostiques{questionnaire.pronostiques | heart_disease: true}
         }
         |> EvaluateQuestionnaire.call()
@@ -104,7 +104,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | symptomes: %Symptomes{questionnaire.symptomes | temperature: 39.0, tiredness: true},
+          | symptomes: %Symptoms{questionnaire.symptomes | temperature: 39.0, tiredness: true},
             pronostiques: %Pronostiques{questionnaire.pronostiques | heart_disease: true}
         }
         |> EvaluateQuestionnaire.call()
@@ -122,7 +122,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
     {:ok, questionnaire} =
       %Questionnaire{
         questionnaire
-        | symptomes: %Symptomes{questionnaire.symptomes | breathlessness: true}
+        | symptomes: %Symptoms{questionnaire.symptomes | breathlessness: true}
       }
       |> EvaluateQuestionnaire.call()
 
