@@ -15,7 +15,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Conclusion do
       code: %Schema{
         type: :string,
         enum: [
-          "questionnaire_SAMU",
+          "orientation_SAMU",
           "FIN2",
           "FIN3",
           "FIN4",
@@ -31,7 +31,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Conclusion do
     },
     required: [:code],
     example: %{
-      "code" => "questionnaire_SAMU"
+      "code" => "orientation_SAMU"
     }
   })
 end

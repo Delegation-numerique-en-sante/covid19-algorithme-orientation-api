@@ -17,6 +17,9 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
     required: [:questionnaire],
     example: %{
       "questionnaire" => %{
+        "metadata" => %{
+          "duration" => 3600
+        },
         "symptomes" => %{
           "temperature" => 37.5,
           "cough" => true,

@@ -7,13 +7,12 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
 
   alias Covid19QuestionnaireWeb.Schemas.{
     Conclusion,
+    Metadata,
     Pronostiques,
     Statistiques,
     Supplementaires,
     Symptomes
   }
-
-  alias OpenApiSpex.Schema
 
   OpenApiSpex.schema(%{
     title: "Questionnaire",
@@ -21,22 +20,21 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
       "[Algorithme d'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
     type: :object,
     properties: %{
-      date: %Schema{
-        type: :string,
-        description: "Date du test d'orientation",
-        format: :"date-time"
-      },
-      uuid: %Schema{type: :string, description: "Id du test d'orientation", format: :uuid1},
+      metadata: Metadata,
       symptomes: Symptomes,
       pronostiques: Pronostiques,
       supplementaires: Supplementaires,
       conclusion: Conclusion,
       statistiques: Statistiques
     },
-    required: [:symptomes, :pronostiques, :supplementaires],
+    required: [:metadata, :symptomes, :pronostiques, :supplementaires],
     example: %{
-      "date" => "2020-03-29 15:20:11.875767Z",
-      "uuid" => "5976423a-ee35-11e3-8569-14109ff1a304",
+      "metadata" => %{
+        "form_version" => "2020-03-29 15:20:11.875767Z",
+        "algo_version" => "2020-03-29 15:20:11.875767Z",
+        "date" => "2020-03-29 15:20:11.875767Z",
+        "duration" => 3600
+      },
       "symptomes" => %{
         "temperature" => 37.5,
         "cough" => true,
@@ -81,7 +79,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "postal_code" => "75000"
       },
       "conclusion" => %{
-        "code" => "questionnaire_SAMU"
+        "code" => "orientation_SAMU"
       }
     }
   })

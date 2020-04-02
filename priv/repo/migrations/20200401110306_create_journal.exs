@@ -7,7 +7,6 @@ defmodule Covid19Questionnaire.Data.Repo.Migrations.CreateJournal do
     execute """
     CREATE TABLE journal (
         date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
-        uuid VARCHAR NOT NULL,
         data JSONB NOT NULL
     );
     """
@@ -17,3 +16,4 @@ defmodule Covid19Questionnaire.Data.Repo.Migrations.CreateJournal do
     execute "drop table journal;"
   end
 end
+

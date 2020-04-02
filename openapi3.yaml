@@ -59,170 +59,36 @@ components:
       title: Conclusion
       type: object
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Conclusion
-    Questionnaire:
+    Metadata:
       description: >-
-        [Algorithme d'orientation du
-        Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)
+        [Caractéristiques du
+        questionnaire](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)
       example:
-        conclusion:
-          code: questionnaire_SAMU
+        algo_version: '2020-03-29 15:20:11.875767Z'
         date: '2020-03-29 15:20:11.875767Z'
-        pronostiques:
-          age: 70
-          breathing_disease: true
-          cancer: true
-          diabetes: true
-          heart_disease: true
-          height: 1.73
-          immunodeprime: true
-          immunosuppressant_drug: true
-          kidney_disease: true
-          liver_disease: true
-          pregnant: true
-          weight: 65.5
-        statistiques:
-          au_moins_30_imc: true
-          au_moins_39_de_temperature: true
-          au_moins_50_ans: false
-          au_moins_70_ans: true
-          entre_50_et_69_ans: false
-          facteurs_gravite: 3
-          facteurs_gravite_majeurs: 1
-          facteurs_gravite_mineurs: 2
-          facteurs_pronostique: 1
-          fever: true
-          heart_disease: true
-          moins_de_15_ans: false
-          moins_de_50_ans: false
-          moins_de_70_ans: false
-        supplementaires:
-          postal_code: '75000'
-        symptomes:
-          agueusia_anosmia: true
-          breathlessness: true
-          cough: true
-          diarrhea: true
-          feeding: true
-          sore_throat_aches: true
-          temperature: 37.5
-          tiredness: true
-        uuid: 5976423a-ee35-11e3-8569-14109ff1a304
+        duration: 3600
+        form_version: '2020-03-29 15:20:11.875767Z'
       properties:
-        conclusion:
-          $ref: '#/components/schemas/Conclusion'
-        date:
-          description: Date du test d'orientation
+        algo_version:
+          description: Version de l'algorithme médical
           format: date-time
           type: string
-        pronostiques:
-          $ref: '#/components/schemas/Pronostiques'
-        statistiques:
-          $ref: '#/components/schemas/Statistiques'
-        supplementaires:
-          $ref: '#/components/schemas/Supplementaires'
-        symptomes:
-          $ref: '#/components/schemas/Symptomes'
-        uuid:
-          description: Id du test d'orientation
-          format: uuid1
+        date:
+          description: Date de fin de remplissage du questionnaire
+          format: date-time
+          type: string
+        duration:
+          description: Durée de remplissage du questionnaire (seconds)
+          type: integer
+        form_version:
+          description: Version du questionnaire
+          format: date-time
           type: string
       required:
-        - symptomes
-        - pronostiques
-        - supplementaires
-      title: Questionnaire
+        - duration
+      title: Metadata
       type: object
-      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Questionnaire
-    QuestionnaireRequest:
-      description: Corps de la requête POST pour lancer l'algorithme d'orientation
-      example:
-        questionnaire:
-          pronostiques:
-            age: 70
-            breathing_disease: true
-            cancer: true
-            diabetes: true
-            heart_disease: true
-            height: 1.73
-            immunodeprime: true
-            immunosuppressant_drug: true
-            kidney_disease: true
-            liver_disease: true
-            pregnant: true
-            weight: 65.5
-          supplementaires:
-            postal_code: '75000'
-          symptomes:
-            agueusia_anosmia: true
-            breathlessness: true
-            cough: true
-            diarrhea: true
-            feeding: true
-            sore_throat_aches: true
-            temperature: 37.5
-            tiredness: true
-      properties:
-        questionnaire:
-          anyOf:
-            - $ref: '#/components/schemas/Questionnaire'
-      required:
-        - questionnaire
-      title: QuestionnaireRequest
-      type: object
-      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest
-    QuestionnaireResponse:
-      description: Réponse de l'algorithme d'orientation
-      example:
-        data:
-          conclusion:
-            code: questionnaire_SAMU
-          date: '2020-03-29 15:20:11.875767Z'
-          pronostiques:
-            age: 70
-            breathing_disease: true
-            cancer: true
-            diabetes: true
-            heart_disease: true
-            height: 1.73
-            immunodeprime: true
-            immunosuppressant_drug: true
-            kidney_disease: true
-            liver_disease: true
-            pregnant: true
-            weight: 65.5
-          statistiques:
-            au_moins_30_imc: true
-            au_moins_39_de_temperature: true
-            au_moins_50_ans: false
-            au_moins_70_ans: true
-            entre_50_et_69_ans: false
-            facteurs_gravite: 3
-            facteurs_gravite_majeurs: 1
-            facteurs_gravite_mineurs: 2
-            facteurs_pronostique: 1
-            fever: true
-            heart_disease: true
-            moins_de_15_ans: false
-            moins_de_50_ans: false
-            moins_de_70_ans: false
-          supplementaires:
-            postal_code: '75000'
-          symptomes:
-            agueusia_anosmia: true
-            breathlessness: true
-            cough: true
-            diarrhea: true
-            feeding: true
-            sore_throat_aches: true
-            temperature: 37.5
-            tiredness: true
-          uuid: 5976423a-ee35-11e3-8569-14109ff1a304
-      properties:
-        data:
-          $ref: '#/components/schemas/Questionnaire'
-      title: QuestionnaireResponse
-      type: object
-      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse
+      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Metadata
     Pronostiques:
       description: >-
         [Questions sur les facteurs pronostiques défavorables au
@@ -287,6 +153,175 @@ components:
       title: Pronostiques
       type: object
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Pronostiques
+    Questionnaire:
+      description: >-
+        [Algorithme d'orientation du
+        Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)
+      example:
+        conclusion:
+          code: questionnaire_SAMU
+        metadata:
+          algo_version: '2020-03-29 15:20:11.875767Z'
+          date: '2020-03-29 15:20:11.875767Z'
+          duration: 3600
+          form_version: '2020-03-29 15:20:11.875767Z'
+        pronostiques:
+          age: 70
+          breathing_disease: true
+          cancer: true
+          diabetes: true
+          heart_disease: true
+          height: 1.73
+          immunodeprime: true
+          immunosuppressant_drug: true
+          kidney_disease: true
+          liver_disease: true
+          pregnant: true
+          weight: 65.5
+        statistiques:
+          au_moins_30_imc: true
+          au_moins_39_de_temperature: true
+          au_moins_50_ans: false
+          au_moins_70_ans: true
+          entre_50_et_69_ans: false
+          facteurs_gravite: 3
+          facteurs_gravite_majeurs: 1
+          facteurs_gravite_mineurs: 2
+          facteurs_pronostique: 1
+          fever: true
+          heart_disease: true
+          moins_de_15_ans: false
+          moins_de_50_ans: false
+          moins_de_70_ans: false
+        supplementaires:
+          postal_code: '75000'
+        symptomes:
+          agueusia_anosmia: true
+          breathlessness: true
+          cough: true
+          diarrhea: true
+          feeding: true
+          sore_throat_aches: true
+          temperature: 37.5
+          tiredness: true
+      properties:
+        conclusion:
+          $ref: '#/components/schemas/Conclusion'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        pronostiques:
+          $ref: '#/components/schemas/Pronostiques'
+        statistiques:
+          $ref: '#/components/schemas/Statistiques'
+        supplementaires:
+          $ref: '#/components/schemas/Supplementaires'
+        symptomes:
+          $ref: '#/components/schemas/Symptomes'
+      required:
+        - metadata
+        - symptomes
+        - pronostiques
+        - supplementaires
+        - statistiques
+        - conclusion
+      title: Questionnaire
+      type: object
+      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Questionnaire
+    QuestionnaireRequest:
+      description: Corps de la requête POST pour lancer l'algorithme d'orientation
+      example:
+        questionnaire:
+          metadata:
+            duration: 3600
+          pronostiques:
+            age: 70
+            breathing_disease: true
+            cancer: true
+            diabetes: true
+            heart_disease: true
+            height: 1.73
+            immunodeprime: true
+            immunosuppressant_drug: true
+            kidney_disease: true
+            liver_disease: true
+            pregnant: true
+            weight: 65.5
+          supplementaires:
+            postal_code: '75000'
+          symptomes:
+            agueusia_anosmia: true
+            breathlessness: true
+            cough: true
+            diarrhea: true
+            feeding: true
+            sore_throat_aches: true
+            temperature: 37.5
+            tiredness: true
+      properties:
+        questionnaire:
+          anyOf:
+            - $ref: '#/components/schemas/Questionnaire'
+      required:
+        - questionnaire
+      title: QuestionnaireRequest
+      type: object
+      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest
+    QuestionnaireResponse:
+      description: Réponse de l'algorithme d'orientation
+      example:
+        data:
+          conclusion:
+            code: questionnaire_SAMU
+          metadata:
+            algo_version: '2020-03-29 15:20:11.875767Z'
+            date: '2020-03-29 15:20:11.875767Z'
+            duration: 3600
+            form_version: '2020-03-29 15:20:11.875767Z'
+          pronostiques:
+            age: 70
+            breathing_disease: true
+            cancer: true
+            diabetes: true
+            heart_disease: true
+            height: 1.73
+            immunodeprime: true
+            immunosuppressant_drug: true
+            kidney_disease: true
+            liver_disease: true
+            pregnant: true
+            weight: 65.5
+          statistiques:
+            au_moins_30_imc: true
+            au_moins_39_de_temperature: true
+            au_moins_50_ans: false
+            au_moins_70_ans: true
+            entre_50_et_69_ans: false
+            facteurs_gravite: 3
+            facteurs_gravite_majeurs: 1
+            facteurs_gravite_mineurs: 2
+            facteurs_pronostique: 1
+            fever: true
+            heart_disease: true
+            moins_de_15_ans: false
+            moins_de_50_ans: false
+            moins_de_70_ans: false
+          supplementaires:
+            postal_code: '75000'
+          symptomes:
+            agueusia_anosmia: true
+            breathlessness: true
+            cough: true
+            diarrhea: true
+            feeding: true
+            sore_throat_aches: true
+            temperature: 37.5
+            tiredness: true
+      properties:
+        data:
+          $ref: '#/components/schemas/Questionnaire'
+      title: QuestionnaireResponse
+      type: object
+      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse
     Statistiques:
       description: >-
         [Statistiques](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)

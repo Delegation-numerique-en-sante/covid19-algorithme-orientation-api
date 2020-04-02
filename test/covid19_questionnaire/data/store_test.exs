@@ -2,11 +2,10 @@ defmodule Covid19Questionnaire.Data.StoreTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Data.Store
 
-  alias Covid19QuestionnaireWeb.Operations.{
-    EvaluateQuestionnaire,
-  }
+  alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
 
   alias Covid19QuestionnaireWeb.Schemas.{
+    Metadata,
     Pronostiques,
     Questionnaire,
     Supplementaires,
@@ -16,6 +15,7 @@ defmodule Covid19Questionnaire.Data.StoreTest do
   test "stores & retrieves data" do
     {:ok, questionnaire} =
       %Questionnaire{
+        metadata: %Metadata{},
         symptomes: %Symptomes{temperature: 39.0},
         pronostiques: %Pronostiques{age: 70},
         supplementaires: %Supplementaires{postal_code: "75000"}
@@ -28,6 +28,6 @@ defmodule Covid19Questionnaire.Data.StoreTest do
 
     :timer.sleep(Store.tick_interval())
 
-    assert [data |> Jason.encode!() |> Jason.decode!()] == Store.read({date, uuid})
+    assert [data |> Jason.encode!() |> Jason.decode!()] == Store.read(date)
   end
 end

@@ -20,8 +20,8 @@ defmodule Covid19Orientation.Data.Store do
     data
   end
 
-  def read({date, uuid}) do
-    select(date, uuid)
+  def read(date) do
+    select(date)
   end
 
   def tick_interval, do: @tick_interval
@@ -67,18 +67,18 @@ defmodule Covid19Orientation.Data.Store do
   #
   defp tick, do: Process.send_after(__MODULE__, :tick, @tick_interval)
 
-  defp select("" <> date, uuid) do
+  defp select("" <> date) do
     date
     |> DateTime.from_iso8601()
     |> case do
-      {:ok, utc, _} -> select(utc, uuid)
+      {:ok, utc, _} -> select(utc)
       {:error, error} -> {:error, error}
     end
   end
 
-  defp select(date, uuid) do
+  defp select(date) do
     Repo
-    |> SQL.query!("SELECT data FROM journal WHERE date = $1 AND uuid = $2", [date, uuid])
+    |> SQL.query!("SELECT data FROM journal WHERE date = $1", [date])
     |> Map.get(:rows)
     |> Enum.find(&([_data] = &1))
   end
