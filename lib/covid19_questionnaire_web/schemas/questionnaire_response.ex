@@ -62,7 +62,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "risk_factors" => 1
         },
         "orientation" => %{
-          "code" => "FIN5"
+          "code" => "orientation_SAMU"
         }
       }
     }

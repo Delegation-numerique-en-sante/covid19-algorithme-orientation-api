@@ -15,14 +15,14 @@ defmodule Covid19QuestionnaireWeb.Schemas.Orientation do
       code: %Schema{
         type: :string,
         enum: [
-          "FIN1",
-          "FIN2",
-          "FIN3",
-          "FIN4",
+          "orientation_moins_de_15_ans",
+          "orientation_domicile_surveillance_1",
+          "orientation_consultation_surveillance_1",
+          "orientation_consultation_surveillance_2",
           "orientation_SAMU",
-          "FIN6",
-          "FIN7",
-          "FIN8"
+          "orientation_consultation_surveillance_3",
+          "orientation_consultation_surveillance_4",
+          "orientation_surveillance"
         ],
         description:
           "[Orientations possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)"
