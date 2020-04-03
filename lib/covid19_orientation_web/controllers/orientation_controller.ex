@@ -6,8 +6,6 @@ defmodule Covid19OrientationWeb.OrientationController do
   alias Covid19OrientationWeb.Operations.{
     CreateOrientation,
     EvaluateOrientation,
-    SetDate,
-    SetUUID
   }
 
   alias Covid19OrientationWeb.Schemas.OrientationRequest
@@ -18,20 +16,18 @@ defmodule Covid19OrientationWeb.OrientationController do
   plug CastAndValidate
 
   def create(conn = %{body_params: %OrientationRequest{orientation: params}}, _params) do
-    {:ok, orientation} =
-      params
-      |> EvaluateOrientation.call()
+    with [token] when not is_nil(token) <- get_req_header(conn, "x-token"),
+         date <- DateTime.utc_now(),
+         {:ok, orientation} <- EvaluateOrientation.call(params),
+         stored_orientation <- Store.write({date, token}, orientation),
+         {:ok, json} <- Jason.encode(stored_orientation) do
 
-    orientation =
-      %{date: date, uuid: uuid} =
-      orientation
-      |> SetDate.call()
-      |> SetUUID.call()
-
-    body =
-      %{data: orientation}
-      |> (&Store.write({date, uuid}, &1)).()
-      |> Jason.encode!()
-      |> (&send_resp(conn, 201, &1)).()
+        send_resp(conn, 201, json)
+    else
+      _ ->
+        conn
+        |> put_status(400)
+        |> halt()
+    end
   end
 end

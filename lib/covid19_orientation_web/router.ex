@@ -17,6 +17,7 @@ defmodule Covid19OrientationWeb.Router do
 
     get "/", BienvenueController, :index
     post "/orientation", OrientationController, :create
+    post "/token", TokenController, :create
   end
 
   scope "/" do

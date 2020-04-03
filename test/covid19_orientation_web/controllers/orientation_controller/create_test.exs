@@ -35,9 +35,12 @@ defmodule Covid19OrientationWeb.OrientationController.CreateOrientation do
       }
     }
 
+    token = "faketoken"
+
     body =
       conn
       |> put_req_header("content-type", "application/json")
+      |> put_req_header("x-token", token)
       |> post("/orientation", payload)
       |> response(201)
       |> Jason.decode!()
