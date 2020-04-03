@@ -4,8 +4,6 @@ defmodule Covid19Orientation.Data.StoreTest do
 
   alias Covid19OrientationWeb.Operations.{
     EvaluateOrientation,
-    SetDate,
-    SetUUID
   }
 
   alias Covid19OrientationWeb.Schemas.{
@@ -24,13 +22,9 @@ defmodule Covid19Orientation.Data.StoreTest do
       }
       |> EvaluateOrientation.call()
 
-    orientation =
-      orientation
-      |> SetDate.call()
-      |> SetUUID.call()
-
-    %{date: date, uuid: uuid} = orientation
-    data = Store.write({date, uuid}, %{data: orientation})
+    date = DateTime.utc_now()
+    uuid = "faketoken"
+    data = Store.write({date, uuid}, orientation)
 
     :timer.sleep(Store.tick_interval())
 

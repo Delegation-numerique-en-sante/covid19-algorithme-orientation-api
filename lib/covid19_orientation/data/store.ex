@@ -11,7 +11,11 @@ defmodule Covid19Orientation.Data.Store do
   @tick_interval 1000
   @chunk_size 100
 
-  def write({date, uuid}, data = %{}) do
+  def write({date, uuid}, orientation = %{}) do
+    data = %{
+      data: %{orientation | date: date, uuid: uuid}
+    }
+
     GenServer.cast(__MODULE__, {:write, %{date: date, uuid: uuid, data: data}})
     data
   end
