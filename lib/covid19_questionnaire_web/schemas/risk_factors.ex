@@ -1,6 +1,6 @@
 defmodule Covid19QuestionnaireWeb.Schemas.RiskFactors do
   @moduledoc """
-  Schéma des questions sur les facteurs pronostiques défavorables au terrain.
+  Schéma des questions sur les facteurs risk_factors défavorables au terrain.
   """
 
   require OpenApiSpex
@@ -9,7 +9,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.RiskFactors do
   OpenApiSpex.schema(%{
     title: "RiskFactors",
     description:
-      "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
+      "[Questions sur les facteurs risk_factors défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-risk_factors-d%C3%A9favorables-au-terrain)",
     type: :object,
     properties: %{
       breathing_disease: %Schema{

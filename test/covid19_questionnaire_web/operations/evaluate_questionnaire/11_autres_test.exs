@@ -6,54 +6,58 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
 
   test "Bastien Guerry #1" do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
-        symptomes: %Symptoms{temperature: 36.6, agueusia_anosmia: true, tiredness: true},
-        pronostiques: %Pronostiques{heart_disease: false}
+        symptoms: %Symptoms{
+          temperature_cat: "[35.5, 37.7]",
+          agueusia_anosmia: true,
+          tiredness_details: true
+        },
+        risk_factors: %RiskFactors{heart_disease: false}
       }
       |> EvaluateQuestionnaire.call()
 
-    assert Conditions.symptomes3(questionnaire)
-    assert Conditions.facteurs_pronostique(questionnaire) == 0
-    assert Conditions.facteurs_gravite_mineurs(questionnaire) == 1
-    assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
-    assert questionnaire.conclusion.code == "FIN2"
+    assert Conditions.symptoms3(questionnaire)
+    assert Conditions.risk_factors(questionnaire) == 0
+    assert Conditions.gravity_factors_minor(questionnaire) == 1
+    assert Conditions.gravity_factors_major(questionnaire) == 0
+    assert questionnaire.orientation.code == "orientation_domicile_surveillance_1"
   end
 
   test "Bastien Guerry #2" do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
-        symptomes: %Symptoms{temperature: 36.6, cough: true, tiredness: true},
-        pronostiques: %Pronostiques{heart_disease: true}
+        symptoms: %Symptoms{temperature_cat: "[35.5, 37.7]", cough: true, tiredness_details: true},
+        risk_factors: %RiskFactors{heart_disease: true}
       }
       |> EvaluateQuestionnaire.call()
 
-    assert Conditions.symptomes3(questionnaire)
-    assert Conditions.facteurs_pronostique(questionnaire) == 1
-    assert Conditions.facteurs_gravite_mineurs(questionnaire) == 1
-    assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
-    assert questionnaire.conclusion.code == "FIN7"
+    assert Conditions.symptoms3(questionnaire)
+    assert Conditions.risk_factors(questionnaire) == 1
+    assert Conditions.gravity_factors_minor(questionnaire) == 1
+    assert Conditions.gravity_factors_major(questionnaire) == 0
+    assert questionnaire.orientation.code == "orientation_consultation_surveillance_4"
   end
 
   test "Mauko Quiroga #1" do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
-        symptomes: %Symptoms{temperature: 36.6, tiredness: true},
-        pronostiques: %Pronostiques{heart_disease: false}
+        symptoms: %Symptoms{temperature_cat: "[35.5, 37.7]", tiredness_details: true},
+        risk_factors: %RiskFactors{heart_disease: false}
       }
       |> EvaluateQuestionnaire.call()
 
-    assert Conditions.symptomes4(questionnaire)
-    assert Conditions.facteurs_pronostique(questionnaire) == 0
-    assert Conditions.facteurs_gravite_mineurs(questionnaire) == 1
-    assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
+    assert Conditions.symptoms4(questionnaire)
+    assert Conditions.risk_factors(questionnaire) == 0
+    assert Conditions.gravity_factors_minor(questionnaire) == 1
+    assert Conditions.gravity_factors_major(questionnaire) == 0
     # FIXME
-    assert questionnaire.conclusion.code == "FIN9"
+    assert questionnaire.orientation.code == "orientation_surveillance"
   end
 end

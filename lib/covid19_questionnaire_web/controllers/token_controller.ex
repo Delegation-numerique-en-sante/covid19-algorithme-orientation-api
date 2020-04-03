@@ -4,12 +4,13 @@ defmodule Covid19QuestionnaireWeb.TokenController do
 
   def create(conn, _params) do
     case Token.create() do
-        {:ok, token} ->
-            send_resp(conn, 201, token.id)
-        {:error, error} ->
-            conn
-            |> put_status(500)
-            |> halt()
+      {:ok, token} ->
+        send_resp(conn, 201, token.uuid)
+
+      {:error, _} ->
+        conn
+        |> put_status(409)
+        |> halt()
     end
   end
 end

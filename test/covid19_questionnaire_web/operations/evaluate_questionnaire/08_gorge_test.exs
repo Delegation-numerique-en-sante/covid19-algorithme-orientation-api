@@ -6,17 +6,17 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.MalDeGorgeTes
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Pronostiques, Questionnaire, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
        patient: %Patient{},
-       symptomes: %Symptoms{
-         temperature: 36.6,
+       symptoms: %Symptoms{
+         temperature_cat: "[35.5, 37.7]",
          sore_throat_aches: true
        },
-       pronostiques: %Pronostiques{heart_disease: false}
+       risk_factors: %RiskFactors{heart_disease: false}
      }}
   end
 
@@ -25,40 +25,40 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.MalDeGorgeTes
       questionnaire
       |> EvaluateQuestionnaire.call()
 
-    assert Conditions.symptomes3(questionnaire)
-    assert Conditions.facteurs_pronostique(questionnaire) == 0
-    assert Conditions.facteurs_gravite_mineurs(questionnaire) == 0
-    assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
-    assert questionnaire.conclusion.code == "FIN2"
+    assert Conditions.symptoms3(questionnaire)
+    assert Conditions.risk_factors(questionnaire) == 0
+    assert Conditions.gravity_factors_minor(questionnaire) == 0
+    assert Conditions.gravity_factors_major(questionnaire) == 0
+    assert questionnaire.orientation.code == "orientation_domicile_surveillance_1"
   end
 
   test "avec au moins un facteur de gravité", %{questionnaire: questionnaire} do
     {:ok, questionnaire} =
       %Questionnaire{
         questionnaire
-        | symptomes: %Symptoms{questionnaire.symptomes | tiredness: true}
+        | symptoms: %Symptoms{questionnaire.symptoms | tiredness_details: true}
       }
       |> EvaluateQuestionnaire.call()
 
-    assert Conditions.symptomes3(questionnaire)
-    assert Conditions.facteurs_pronostique(questionnaire) == 0
-    assert Conditions.facteurs_gravite_mineurs(questionnaire) >= 1
-    assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
-    assert questionnaire.conclusion.code == "FIN2"
+    assert Conditions.symptoms3(questionnaire)
+    assert Conditions.risk_factors(questionnaire) == 0
+    assert Conditions.gravity_factors_minor(questionnaire) >= 1
+    assert Conditions.gravity_factors_major(questionnaire) == 0
+    assert questionnaire.orientation.code == "orientation_domicile_surveillance_1"
   end
 
   test "avec au moins un facteur pronostique", %{questionnaire: questionnaire} do
     {:ok, questionnaire} =
       %Questionnaire{
         questionnaire
-        | pronostiques: %Pronostiques{questionnaire.pronostiques | heart_disease: true}
+        | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
       }
       |> EvaluateQuestionnaire.call()
 
-    assert Conditions.symptomes3(questionnaire)
-    assert Conditions.facteurs_pronostique(questionnaire) >= 1
-    assert Conditions.facteurs_gravite_mineurs(questionnaire) == 0
-    assert Conditions.facteurs_gravite_majeurs(questionnaire) == 0
-    assert questionnaire.conclusion.code == "FIN7"
+    assert Conditions.symptoms3(questionnaire)
+    assert Conditions.risk_factors(questionnaire) >= 1
+    assert Conditions.gravity_factors_minor(questionnaire) == 0
+    assert Conditions.gravity_factors_major(questionnaire) == 0
+    assert questionnaire.orientation.code == "orientation_consultation_surveillance_4"
   end
 end

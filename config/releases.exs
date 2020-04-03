@@ -14,7 +14,7 @@ config :covid19_questionnaire, Covid19QuestionnaireWeb.Endpoint,
     ],
     protocol_options: [{:max_keepalive, 20_000_000}, {:timeout, 2000}]
   ],
-  url: [scheme: "https", host: "covid19-algorithme-questionnaire.osc-fr1.scalingo.io", port: 443],
+  url: [scheme: "https", host: System.get_env("PROXY_HOST"), port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   server: true
@@ -26,7 +26,7 @@ config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
   username: System.get_env("PG_USER"),
   password: System.get_env("PG_PASSWORD"),
   database: System.get_env("PG_DATABASE"),
-  pool_size: System.get_env("PG_POOL_SIZE") |> String.trim() |> String.to_integer()
+  pool_size: System.get_env("PG_POOL_SIZE") |> String.to_integer()
 
 # Do not print debug messages in production
 config :logger,

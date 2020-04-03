@@ -22,7 +22,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Symptoms do
       },
       temperature_cat: %Schema{
         type: :string,
-        enum: ["(−∞, 35.4]", "[35.5, 35.7]", "[37.8, 38.9]", "[39, +∞)", "DNK"],
+        enum: ["(−∞, 35.4]", "[35.5, 37.7]", "[37.8, 38.9]", "[39, +∞)", "DNK"],
         description: "Quelle est votre température ?"
       },
       agueusia_anosmia: %Schema{
@@ -63,7 +63,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Symptoms do
     example: %{
       "sore_throat_aches" => true,
       "fever" => false,
-      "temperature_cat" => "[35.5, 35.7]",
+      "temperature_cat" => "[35.5, 37.7]",
       "agueusia_anosmia" => true,
       "breathlessness" => true,
       "cough" => true,

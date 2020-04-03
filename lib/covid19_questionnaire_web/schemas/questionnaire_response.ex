@@ -15,10 +15,14 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
     },
     example: %{
       "data" => %{
+        "token" => %{
+          "uuid" => "c9e77845-83cf-4891-88d6-804d659e81c5",
+          "date" => "2020-03-29 15:20:11.875767Z"
+        },
         "metadata" => %{
-          "form_version" => "2020-03-30 20:01:39.836837Z",
-          "algo_version" => "2020-03-30 20:01:39.836837Z",
-          "date" => "2020-03-29 15:20:11.875767Z",
+          "form_version" => "2020-04-04T13:24:44.389249Z",
+          "algo_version" => "2020-04-04T13:24:44.389249Z",
+          "date" => "2020-04-04T13:24:44.389249Z",
           "duration" => 3600
         },
         "patient" => %{
@@ -33,7 +37,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
         "symptoms" => %{
           "sore_throat_aches" => true,
           "fever" => false,
-          "temperature_cat" => "[35.5, 35.7]",
+          "temperature_cat" => "[35.5, 37.7]",
           "agueusia_anosmia" => true,
           "breathlessness" => true,
           "cough" => true,
@@ -54,12 +58,12 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "pregnant" => "1"
         },
         "calculations" => %{
-          "bmi_more_30" => true,
-          "fever" => true,
+          "bmi_more_30" => false,
+          "fever" => false,
           "gravity_factors" => 3,
-          "gravity_factors_minor" => 2,
-          "gravity_factors_major" => 1,
-          "risk_factors" => 1
+          "gravity_factors_minor" => 1,
+          "gravity_factors_major" => 2,
+          "risk_factors" => 9
         },
         "orientation" => %{
           "code" => "orientation_SAMU"

@@ -3,36 +3,37 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   Conditions du test d'orientation du COVID19.
   """
 
-  @type symptomes :: struct
-  @type pronostiques :: struct
+  @type symptoms :: struct
+  @type risk_factors :: struct
   @type questionnaire :: %{
           :__struct__ => atom(),
-          :symptomes => symptomes,
-          :pronostiques => pronostiques,
+          :symptoms => symptoms,
+          :risk_factors => risk_factors,
           optional(atom()) => any()
         }
 
-  @seuil_imc 30.0
-  @seuil_fever 37.8
-  @seuil_au_moins_39_de_temperature 39.0
+  @bmi_threshold 30.0
+  @fever_threshold ["[37.8, 38.9]", "[39, +∞)", "DNK"]
+  @temperature_more_39 "[39, +∞)"
+  @pregnant "1"
 
-  @spec symptomes1(questionnaire) :: boolean
+  @spec symptoms1(questionnaire) :: boolean
 
   @doc """
   Fièvre ET toux.
   """
-  def symptomes1(questionnaire = %{symptomes: %{cough: cough}}) do
+  def symptoms1(questionnaire = %{symptoms: %{cough: cough}}) do
     fever(questionnaire) && cough
   end
 
-  @spec symptomes2(questionnaire) :: boolean
+  @spec symptoms2(questionnaire) :: boolean
 
   @doc """
   Fièvre OU (pas de fièvre et (diarrhée OU (toux ET douleurs) OU (toux ET anosmie)).
   """
-  def symptomes2(
+  def symptoms2(
         questionnaire = %{
-          symptomes: %{
+          symptoms: %{
             cough: cough,
             sore_throat_aches: sore_throat_aches,
             agueusia_anosmia: agueusia_anosmia,
@@ -48,10 +49,10 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   @doc """
   Toux OU douleurs OU anosmie.
   """
-  @spec symptomes3(questionnaire) :: boolean
+  @spec symptoms3(questionnaire) :: boolean
 
-  def symptomes3(%{
-        symptomes: %{
+  def symptoms3(%{
+        symptoms: %{
           cough: cough,
           sore_throat_aches: sore_throat_aches,
           agueusia_anosmia: agueusia_anosmia
@@ -63,9 +64,9 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   @doc """
   NI toux NI douleurs NI anosmie.
   """
-  @spec symptomes4(questionnaire) :: boolean
+  @spec symptoms4(questionnaire) :: boolean
 
-  def symptomes4(questionnaire), do: !symptomes3(questionnaire)
+  def symptoms4(questionnaire), do: !symptoms3(questionnaire)
 
   ## Statistiques
 
@@ -83,47 +84,49 @@ defmodule Covid19Questionnaire.Tests.Conditions do
     !age_less_50(questionnaire)
   end
 
-  @spec au_moins_30_imc(questionnaire) :: boolean
+  @spec bmi_more_30(questionnaire) :: boolean
 
-  def au_moins_30_imc(%{patient: %{weight: nil}}), do: false
+  def bmi_more_30(%{patient: %{weight: nil}}), do: false
 
-  def au_moins_30_imc(%{patient: %{height: nil}}), do: false
+  def bmi_more_30(%{patient: %{height: nil}}), do: false
 
-  def au_moins_30_imc(%{patient: %{weight: weight, height: height}}) do
+  def bmi_more_30(%{patient: %{weight: weight, height: height}}) do
     weight
     |> Kernel./(:math.pow(height / 100, 2))
-    |> Kernel.>=(@seuil_imc)
+    |> Kernel.>=(@bmi_threshold)
   end
 
   @spec fever(questionnaire) :: boolean
 
-  def fever(%{symptomes: %{temperature: nil}}), do: true
+  def fever(%{symptoms: %{temperature_cat: nil}}), do: false
 
-  def fever(%{symptomes: %{temperature: temperature}}) do
-    temperature >= @seuil_fever
+  def fever(%{symptoms: %{temperature_cat: temperature_cat}}) do
+    temperature_cat in @fever_threshold
   end
 
-  @spec au_moins_39_de_temperature(questionnaire) :: boolean
+  @spec temperature_more_39(questionnaire) :: boolean
 
-  def au_moins_39_de_temperature(%{symptomes: %{temperature: nil}}), do: false
+  def temperature_more_39(%{symptoms: %{temperature_cat: nil}}), do: false
 
-  def au_moins_39_de_temperature(%{symptomes: %{temperature: temperature}}) do
-    temperature >= @seuil_au_moins_39_de_temperature
+  def temperature_more_39(%{symptoms: %{temperature_cat: temperature}}) do
+    temperature == @temperature_more_39
   end
 
-  @spec heart_disease(questionnaire) :: boolean
+  @spec pregnant(questionnaire) :: boolean
 
-  def heart_disease(%{pronostiques: %{heart_disease: nil}}), do: true
+  def pregnant(%{risk_factors: %{pregnant: nil}}), do: false
 
-  def heart_disease(%{pronostiques: %{heart_disease: heart_disease}}), do: heart_disease
+  def pregnant(%{risk_factors: %{pregnant: pregnant}}) do
+    pregnant == @pregnant
+  end
 
   @doc """
   Facteurs de gravité mineurs + majeurs.
   """
-  @spec facteurs_gravite(questionnaire) :: integer
+  @spec gravity_factors(questionnaire) :: integer
 
-  def facteurs_gravite(questionnaire) do
-    facteurs_gravite_mineurs(questionnaire) + facteurs_gravite_majeurs(questionnaire)
+  def gravity_factors(questionnaire) do
+    gravity_factors_minor(questionnaire) + gravity_factors_major(questionnaire)
   end
 
   @doc """
@@ -132,12 +135,12 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   - Fièvre >= 39°C
   - Fatigue : alitement > 50% du temps diurne
   """
-  @spec facteurs_gravite_mineurs(questionnaire) :: integer
+  @spec gravity_factors_minor(questionnaire) :: integer
 
-  def facteurs_gravite_mineurs(questionnaire = %{symptomes: symptomes}) do
-    symptomes
-    |> Map.take([:tiredness])
-    |> Map.put(:au_moins_39_de_temperature, au_moins_39_de_temperature(questionnaire))
+  def gravity_factors_minor(questionnaire = %{symptoms: symptoms}) do
+    symptoms
+    |> Map.take([:tiredness_details])
+    |> Map.put(:temperature_more_39, temperature_more_39(questionnaire))
     |> Enum.reduce(0, &count/2)
   end
 
@@ -147,11 +150,11 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   - Gêne respiratoire
   - Difficultés importantes pour s’alimenter ou boire depuis plus de 24h
   """
-  @spec facteurs_gravite_majeurs(questionnaire) :: integer
+  @spec gravity_factors_major(questionnaire) :: integer
 
-  def facteurs_gravite_majeurs(%{symptomes: symptomes}) do
-    symptomes
-    |> Map.take([:breathlessness, :feeding])
+  def gravity_factors_major(%{symptoms: symptoms}) do
+    symptoms
+    |> Map.take([:breathlessness, :feeding_day])
     |> Enum.reduce(0, &count/2)
   end
 
@@ -170,16 +173,17 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   - Si OUI pour maladie qui diminue les défenses immunitaires
   - Si OUI pour traitement immunosuppresseur
   """
-  @spec facteurs_pronostique(questionnaire) :: integer
+  @spec risk_factors(questionnaire) :: integer
 
-  def facteurs_pronostique(
-        questionnaire = %{patient: %{age_more_70: age_more_70}, pronostiques: pronostiques}
+  def risk_factors(
+        questionnaire = %{patient: %{age_more_70: age_more_70}, risk_factors: risk_factors}
       ) do
-    pronostiques
+    risk_factors
     |> Map.from_struct()
     |> Map.put(:age_more_70, age_more_70)
-    |> Map.put(:au_moins_30_imc, au_moins_30_imc(questionnaire))
-    |> Map.put(:heart_disease, heart_disease(questionnaire))
+    |> Map.put(:bmi_more_30, bmi_more_30(questionnaire))
+    |> Map.put(:pregnant, pregnant(questionnaire))
+    |> Map.delete(:pregnant)
     |> Enum.reduce(0, &count/2)
   end
 

@@ -1,13 +1,16 @@
 defmodule Covid19Questionnaire.Data.Token do
-    use Ecto.Schema
-    import Ecto.Changeset
-    alias Covid19Questionnaire.Data.Repo
+  @moduledoc false
 
-    @primary_key {:id, :binary_id, autogenerate: true}
+  use Ecto.Schema
+  alias Covid19Questionnaire.Data.Repo
 
-    schema "token" do
-        timestamps()
-    end
+  @derive {Jason.Encoder, except: [:__meta__, :__struct__]}
+  @primary_key {:uuid, :binary_id, autogenerate: true}
 
-    def create(), do: Repo.insert(%__MODULE__{})
+  schema "token" do
+    field(:date, :utc_datetime_usec)
+  end
+
+  def create, do: Repo.insert(%__MODULE__{date: DateTime.utc_now()})
+  def find(uuid), do: Repo.get(__MODULE__, uuid)
 end

@@ -32,11 +32,11 @@ defmodule Covid19QuestionnaireWeb.Schemas.Metadata do
         description: "Durée de remplissage du questionnaire (seconds)"
       }
     },
-    required: [:duration],
+    required: [:form_version, :algo_version, :duration],
     example: %{
-      "form_version" => "2020-03-29 15:20:11.875767Z",
-      "algo_version" => "2020-03-29 15:20:11.875767Z",
-      "date" => "2020-03-29 15:20:11.875767Z",
+      "form_version" => "2020-04-04T13:24:44.389249Z",
+      "algo_version" => "2020-04-04T13:24:44.389249Z",
+      "date" => "2020-04-04T13:24:44.389249Z",
       "duration" => 3600
     }
   })

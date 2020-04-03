@@ -53,10 +53,10 @@
       "Metadata": {
         "description": "[Caractéristiques du questionnaire](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
         "example": {
-          "algo_version": "2020-03-29 15:20:11.875767Z",
-          "date": "2020-03-29 15:20:11.875767Z",
+          "algo_version": "2020-04-04T13:24:44.389249Z",
+          "date": "2020-04-04T13:24:44.389249Z",
           "duration": 3600,
-          "form_version": "2020-03-29 15:20:11.875767Z"
+          "form_version": "2020-04-04T13:24:44.389249Z"
         },
         "properties": {
           "algo_version": {
@@ -80,6 +80,8 @@
           }
         },
         "required": [
+          "form_version",
+          "algo_version",
           "duration"
         ],
         "title": "Metadata",
@@ -95,14 +97,14 @@
           "code": {
             "description": "[Orientations possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
             "enum": [
-              "FIN1",
-              "FIN2",
-              "FIN3",
-              "FIN4",
+              "orientation_moins_de_15_ans",
+              "orientation_domicile_surveillance_1",
+              "orientation_consultation_surveillance_1",
+              "orientation_consultation_surveillance_2",
               "orientation_SAMU",
-              "FIN6",
-              "FIN7",
-              "FIN8"
+              "orientation_consultation_surveillance_3",
+              "orientation_consultation_surveillance_4",
+              "orientation_surveillance"
             ],
             "type": "string"
           }
@@ -171,10 +173,10 @@
             "risk_factors": 1
           },
           "metadata": {
-            "algo_version": "2020-03-29 15:20:11.875767Z",
-            "date": "2020-03-29 15:20:11.875767Z",
+            "algo_version": "2020-04-04T13:24:44.389249Z",
+            "date": "2020-04-04T13:24:44.389249Z",
             "duration": 3600,
-            "form_version": "2020-03-29 15:20:11.875767Z"
+            "form_version": "2020-04-04T13:24:44.389249Z"
           },
           "orientation": {
             "code": "orientation_SAMU"
@@ -207,9 +209,13 @@
             "feeding_day": true,
             "fever": false,
             "sore_throat_aches": true,
-            "temperature_cat": "[35.5, 35.7]",
+            "temperature_cat": "[35.5, 37.7]",
             "tiredness": true,
             "tiredness_details": true
+          },
+          "token": {
+            "date": "2020-03-29 15:20:11.875767Z",
+            "uuid": "c9e77845-83cf-4891-88d6-804d659e81c5"
           }
         },
         "properties": {
@@ -230,6 +236,9 @@
           },
           "symptoms": {
             "$ref": "#/components/schemas/Symptoms"
+          },
+          "token": {
+            "$ref": "#/components/schemas/Token"
           }
         },
         "required": [
@@ -247,7 +256,9 @@
         "example": {
           "questionnaire": {
             "metadata": {
-              "duration": 3600
+              "algo_version": "2020-04-04T13:24:44.389249Z",
+              "duration": 3600,
+              "form_version": "2020-04-04T13:24:44.389249Z"
             },
             "patient": {
               "age_less_15": false,
@@ -277,7 +288,7 @@
               "feeding_day": true,
               "fever": false,
               "sore_throat_aches": true,
-              "temperature_cat": "[35.5, 35.7]",
+              "temperature_cat": "[35.5, 37.7]",
               "tiredness": true,
               "tiredness_details": true
             }
@@ -304,21 +315,21 @@
         "example": {
           "data": {
             "calculations": {
-              "bmi_more_30": true,
-              "fever": true,
+              "bmi_more_30": false,
+              "fever": false,
               "gravity_factors": 3,
-              "gravity_factors_major": 1,
-              "gravity_factors_minor": 2,
-              "risk_factors": 1
+              "gravity_factors_major": 2,
+              "gravity_factors_minor": 1,
+              "risk_factors": 9
             },
             "metadata": {
-              "algo_version": "2020-03-30 20:01:39.836837Z",
-              "date": "2020-03-29 15:20:11.875767Z",
+              "algo_version": "2020-04-04T13:24:44.389249Z",
+              "date": "2020-04-04T13:24:44.389249Z",
               "duration": 3600,
-              "form_version": "2020-03-30 20:01:39.836837Z"
+              "form_version": "2020-04-04T13:24:44.389249Z"
             },
             "orientation": {
-              "code": "FIN5"
+              "code": "orientation_SAMU"
             },
             "patient": {
               "age_less_15": false,
@@ -348,9 +359,13 @@
               "feeding_day": true,
               "fever": false,
               "sore_throat_aches": true,
-              "temperature_cat": "[35.5, 35.7]",
+              "temperature_cat": "[35.5, 37.7]",
               "tiredness": true,
               "tiredness_details": true
+            },
+            "token": {
+              "date": "2020-03-29 15:20:11.875767Z",
+              "uuid": "c9e77845-83cf-4891-88d6-804d659e81c5"
             }
           }
         },
@@ -364,7 +379,7 @@
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse"
       },
       "RiskFactors": {
-        "description": "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
+        "description": "[Questions sur les facteurs risk_factors défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-risk_factors-d%C3%A9favorables-au-terrain)",
         "example": {
           "breathing_disease": true,
           "cancer": true,
@@ -433,7 +448,7 @@
           "feeding_day": true,
           "fever": false,
           "sore_throat_aches": true,
-          "temperature_cat": "[35.5, 35.7]",
+          "temperature_cat": "[35.5, 37.7]",
           "tiredness": true,
           "tiredness_details": true
         },
@@ -470,7 +485,7 @@
             "description": "Quelle est votre température ?",
             "enum": [
               "(−∞, 35.4]",
-              "[35.5, 35.7]",
+              "[35.5, 37.7]",
               "[37.8, 38.9]",
               "[39, +∞)",
               "DNK"
@@ -489,6 +504,28 @@
         "title": "Symptoms",
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Symptoms"
+      },
+      "Token": {
+        "description": "Token",
+        "example": {
+          "date": "2020-04-04T13:24:44.389249Z",
+          "uuid": "c9e77845-83cf-4891-88d6-804d659e81c5"
+        },
+        "properties": {
+          "date": {
+            "description": "Date de crátion du token",
+            "format": "date-time",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "UUID du token",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "Token",
+        "type": "object",
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Token"
       }
     }
   },

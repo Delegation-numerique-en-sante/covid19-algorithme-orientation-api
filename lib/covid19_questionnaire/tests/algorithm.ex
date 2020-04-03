@@ -12,54 +12,84 @@ defmodule Covid19Questionnaire.Tests.Algorithm do
 
   def call(module) do
     [
-      struct(module, key: &fin1/0, operation: &age_less_15/1),
-      struct(module, key: &fin5/0, operation: &(facteurs_gravite_majeurs(&1) >= 1)),
+      struct(module, key: &orientation_moins_de_15_ans/0, operation: &age_less_15/1),
+      struct(module, key: &orientation_SAMU/0, operation: &(gravity_factors_major(&1) >= 1)),
       struct(module,
-        operation: &symptomes1/1,
+        operation: &symptoms1/1,
         children: [
-          struct(module, key: &fin6/0, operation: &(facteurs_pronostique(&1) == 0)),
           struct(module,
-            operation: &(facteurs_pronostique(&1) >= 1),
+            key: &orientation_consultation_surveillance_3/0,
+            operation: &(risk_factors(&1) == 0)
+          ),
+          struct(module,
+            operation: &(risk_factors(&1) >= 1),
             children: [
-              struct(module, key: &fin6/0, operation: &(facteurs_gravite_mineurs(&1) < 2)),
-              struct(module, key: &fin4/0, operation: &(facteurs_gravite_mineurs(&1) >= 2))
+              struct(module,
+                key: &orientation_consultation_surveillance_3/0,
+                operation: &(gravity_factors_minor(&1) < 2)
+              ),
+              struct(module,
+                key: &orientation_consultation_surveillance_2/0,
+                operation: &(gravity_factors_minor(&1) >= 2)
+              )
             ]
           )
         ]
       ),
       struct(module,
-        operation: &symptomes2/1,
+        operation: &symptoms2/1,
         children: [
           struct(module,
-            operation: &(facteurs_pronostique(&1) == 0),
+            operation: &(risk_factors(&1) == 0),
             children: [
               struct(module,
-                operation: &(facteurs_gravite_mineurs(&1) == 0),
+                operation: &(gravity_factors_minor(&1) == 0),
                 children: [
-                  struct(module, key: &fin2/0, operation: &age_less_50/1),
-                  struct(module, key: &fin3/0, operation: &age_more_50/1)
+                  struct(module,
+                    key: &orientation_domicile_surveillance_1/0,
+                    operation: &age_less_50/1
+                  ),
+                  struct(module,
+                    key: &orientation_consultation_surveillance_1/0,
+                    operation: &age_more_50/1
+                  )
                 ]
               ),
-              struct(module, key: &fin3/0, operation: &(facteurs_gravite_mineurs(&1) >= 1))
+              struct(module,
+                key: &orientation_consultation_surveillance_1/0,
+                operation: &(gravity_factors_minor(&1) >= 1)
+              )
             ]
           ),
           struct(module,
-            operation: &(facteurs_pronostique(&1) >= 1),
+            operation: &(risk_factors(&1) >= 1),
             children: [
-              struct(module, key: &fin3/0, operation: &(facteurs_gravite_mineurs(&1) < 2)),
-              struct(module, key: &fin4/0, operation: &(facteurs_gravite_mineurs(&1) >= 2))
+              struct(module,
+                key: &orientation_consultation_surveillance_1/0,
+                operation: &(gravity_factors_minor(&1) < 2)
+              ),
+              struct(module,
+                key: &orientation_consultation_surveillance_2/0,
+                operation: &(gravity_factors_minor(&1) >= 2)
+              )
             ]
           )
         ]
       ),
       struct(module,
-        operation: &symptomes3/1,
+        operation: &symptoms3/1,
         children: [
-          struct(module, key: &fin2/0, operation: &(facteurs_pronostique(&1) == 0)),
-          struct(module, key: &fin7/0, operation: &(facteurs_pronostique(&1) >= 1))
+          struct(module,
+            key: &orientation_domicile_surveillance_1/0,
+            operation: &(risk_factors(&1) == 0)
+          ),
+          struct(module,
+            key: &orientation_consultation_surveillance_4/0,
+            operation: &(risk_factors(&1) >= 1)
+          )
         ]
       ),
-      struct(module, key: &fin9/0, operation: &symptomes4/1)
+      struct(module, key: &orientation_surveillance/0, operation: &symptoms4/1)
     ]
   end
 end

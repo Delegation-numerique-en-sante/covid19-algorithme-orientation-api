@@ -42,6 +42,7 @@ defmodule Covid19Questionnaire.MixProject do
       {:open_api_spex, "~> 3.6"},
       {:phoenix, "~> 1.4.16"},
       {:phoenix_pubsub, "~> 1.1"},
+      {:plug_attack, "~> 0.3.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, "~> 0.15.3"},

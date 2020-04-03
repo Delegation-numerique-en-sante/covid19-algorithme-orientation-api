@@ -18,6 +18,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
     example: %{
       "questionnaire" => %{
         "metadata" => %{
+          "form_version" => "2020-04-04T13:24:44.389249Z",
+          "algo_version" => "2020-04-04T13:24:44.389249Z",
           "duration" => 3600
         },
         "patient" => %{
@@ -32,7 +34,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
         "symptoms" => %{
           "sore_throat_aches" => true,
           "fever" => false,
-          "temperature_cat" => "[35.5, 35.7]",
+          "temperature_cat" => "[35.5, 37.7]",
           "agueusia_anosmia" => true,
           "breathlessness" => true,
           "cough" => true,

@@ -6,13 +6,22 @@ defmodule Covid19Questionnaire.Tests.Codes do
   @type name :: atom
   @type code :: String.t()
 
-  @codes ~w|fin1 fin2 fin3 fin4 fin5 fin6 fin7 fin8 fin9|a
+  @codes [
+    :orientation_moins_de_15_ans,
+    :orientation_domicile_surveillance_1,
+    :orientation_consultation_surveillance_1,
+    :orientation_consultation_surveillance_2,
+    :orientation_SAMU,
+    :orientation_consultation_surveillance_3,
+    :orientation_consultation_surveillance_4,
+    :orientation_surveillance
+  ]
 
   @codes
   |> Enum.each(fn name ->
     @spec unquote(name)() :: code
     def unquote(name)() do
-      unquote(name) |> Atom.to_string() |> String.upcase()
+      unquote(name) |> Atom.to_string()
     end
   end)
 end

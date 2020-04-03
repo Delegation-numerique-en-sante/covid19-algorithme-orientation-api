@@ -3,7 +3,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire do
   Evaluate questionnaire test.
   """
 
-  alias Covid19Questionnaire.Tests.{Algorithm, Codes}
+  alias Covid19Questionnaire.Tests.Algorithm
   alias Covid19Questionnaire.Trees.{FlattenTree, TraverseTree, Tree}
 
   alias Covid19QuestionnaireWeb.Operations.{
@@ -25,7 +25,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire do
     |> TraverseTree.call(questionnaire)
     |> case do
       {:ok, %{key: key}} -> {:ok, populate(questionnaire, key.())}
-      {:error, :done} -> {:ok, populate(questionnaire, Codes.fin9())}
+      {:error, :done} -> {:ok, :not_oriented}
     end
   end
 

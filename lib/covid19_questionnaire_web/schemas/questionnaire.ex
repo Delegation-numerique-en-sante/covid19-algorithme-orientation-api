@@ -11,7 +11,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
     Orientation,
     Patient,
     RiskFactors,
-    Symptoms
+    Symptoms,
+    Token
   }
 
   OpenApiSpex.schema(%{
@@ -20,6 +21,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
       "[Algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
     type: :object,
     properties: %{
+      token: Token,
       metadata: Metadata,
       patient: Patient,
       symptoms: Symptoms,
@@ -29,10 +31,14 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
     },
     required: [:metadata, :patient, :symptoms, :risk_factors],
     example: %{
+      "token" => %{
+        "uuid" => "c9e77845-83cf-4891-88d6-804d659e81c5",
+        "date" => "2020-03-29 15:20:11.875767Z"
+      },
       "metadata" => %{
-        "form_version" => "2020-03-29 15:20:11.875767Z",
-        "algo_version" => "2020-03-29 15:20:11.875767Z",
-        "date" => "2020-03-29 15:20:11.875767Z",
+        "form_version" => "2020-04-04T13:24:44.389249Z",
+        "algo_version" => "2020-04-04T13:24:44.389249Z",
+        "date" => "2020-04-04T13:24:44.389249Z",
         "duration" => 3600
       },
       "patient" => %{
@@ -47,7 +53,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
       "symptoms" => %{
         "sore_throat_aches" => true,
         "fever" => false,
-        "temperature_cat" => "[35.5, 35.7]",
+        "temperature_cat" => "[35.5, 37.7]",
         "agueusia_anosmia" => true,
         "breathlessness" => true,
         "cough" => true,
