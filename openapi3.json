@@ -620,11 +620,11 @@
         "operationId": "QuestionnaireController.create",
         "parameters": [
           {
+            "description": "Token to send the questionnaire",
             "in": "header",
             "name": "x-token",
             "required": true,
             "schema": {
-              "description": "Token required to send the questionnaire",
               "type": "string"
             }
           }

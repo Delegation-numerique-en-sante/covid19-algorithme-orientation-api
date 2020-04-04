@@ -10,7 +10,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
   }
 
   alias Covid19QuestionnaireWeb.Plugs.{Authenticate, Authorize}
-  alias Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest
+  alias Covid19QuestionnaireWeb.Schemas.{Error, QuestionnaireRequest}
   alias OpenApiSpex.Plug.CastAndValidate
 
   defdelegate open_api_operation(action), to: CreateQuestionnaire
@@ -26,16 +26,35 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
          {:ok, questionnaire} <- ValidateQuestionnaire.call(questionnaire),
          {:ok, data} <- Store.write({date, token}, questionnaire),
          {:ok, json} <- Jason.encode(data) do
-      send_resp(conn, 201, json)
+      conn
+      |> put_resp_header("content-type", "application/json")
+      |> send_resp(201, json)
     else
       {:error, :age_less_15} ->
         conn
-        |> put_status(451)
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(
+          451,
+          Jason.encode!(%Error{
+            code: 451,
+            info: "We can't collect that data",
+            action: "There's nothing to do on your side, all good :)."
+          })
+        )
         |> halt()
 
       _ ->
         conn
-        |> put_status(400)
+        |> put_resp_header("content-type", "application/json")
+        |> send_resp(
+          400,
+          Jason.encode!(%Error{
+            code: 400,
+            info: "We don't know what happened",
+            action:
+              "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new."
+          })
+        )
         |> halt()
     end
   end

@@ -5,6 +5,7 @@ defmodule Covid19QuestionnaireWeb.Plugs.Authorize do
 
   import Plug.Conn
   use PlugAttack
+  alias Covid19QuestionnaireWeb.Schemas.Error
 
   rule "authorize", conn do
     conn
@@ -16,7 +17,11 @@ defmodule Covid19QuestionnaireWeb.Plugs.Authorize do
 
   def block_action(conn, _data, _opts) do
     conn
-    |> put_status(401)
+    |> put_resp_header("content-type", "application/json")
+    |> send_resp(
+      401,
+      Jason.encode!(%Error{code: 401, info: "Token missing", action: "Please create a token."})
+    )
     |> halt()
   end
 end

@@ -34,7 +34,8 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateQuestionnaire do
           name: :"x-token",
           in: :header,
           required: true,
-          schema: %Schema{type: :string, description: "Token required to send the questionnaire"}
+          description: "Token to send the questionnaire",
+          schema: %Schema{type: :string}
         }
       ],
       requestBody:
