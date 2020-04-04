@@ -259,7 +259,7 @@
             "immunosuppressant_drug": true,
             "kidney_disease": true,
             "liver_disease": true,
-            "pregnant": "1"
+            "pregnant": 1
           },
           "symptoms": {
             "agueusia_anosmia": true,
@@ -338,7 +338,7 @@
               "immunosuppressant_drug": true,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": "1"
+              "pregnant": 1
             },
             "symptoms": {
               "agueusia_anosmia": true,
@@ -409,7 +409,7 @@
               "immunosuppressant_drug": true,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": "1"
+              "pregnant": 1
             },
             "symptoms": {
               "agueusia_anosmia": true,
@@ -449,7 +449,7 @@
           "immunosuppressant_drug": true,
           "kidney_disease": true,
           "liver_disease": true,
-          "pregnant": "1"
+          "pregnant": 1
         },
         "properties": {
           "breathing_disease": {
@@ -487,11 +487,11 @@
           "pregnant": {
             "description": "Êtes-vous enceinte ?",
             "enum": [
-              "1",
-              "0",
-              "DNK"
+              0,
+              1,
+              888
             ],
-            "type": "string"
+            "type": "integer"
           }
         },
         "title": "RiskFactors",

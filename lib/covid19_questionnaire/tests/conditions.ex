@@ -15,7 +15,7 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   @bmi_threshold 30.0
   @fever_threshold ["37.7-38.9", "sup_39", "NSP"]
   @temperature_more_39 "sup_39"
-  @pregnant "1"
+  @pregnant 1
 
   @spec symptoms1(questionnaire) :: boolean
 
