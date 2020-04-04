@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Test d'orientation du COVID19
-  version: '2020-03-30 20:01:39.836837Z'
+  version: '2020-04-04T21:23:52.742194Z'
 servers:
   - url: 'http://localhost:4000'
     variables: {}

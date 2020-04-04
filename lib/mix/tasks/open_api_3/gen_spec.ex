@@ -8,6 +8,6 @@ defmodule Mix.Tasks.Covid19Questionnaire.OpenApi3.GenSpec do
 
     Covid19QuestionnaireWeb.ApiSpec.spec()
     |> Jason.encode!(pretty: true, maps: :strict)
-    |> (&File.write!("openapi3.json", &1)).()
+    |> (&File.write!("covid19-algorithme-orientation-openapi.json", &1)).()
   end
 end
