@@ -1,12 +1,15 @@
 defmodule Covid19QuestionnaireWeb.TokenController.CreateTest do
   use Covid19QuestionnaireWeb.ConnCase, async: true
 
-  test "Creation d'un token", %{conn: conn} do
+  test "création d'un token", %{conn: conn, spec: spec} do
     body =
       conn
       |> post("/token")
       |> response(201)
+      |> Jason.decode!()
 
-    assert String.length(body) == 36
+    assert_schema(body, "TokenResponse", spec)
+    assert body["data"]["uuid"] |> Ecto.UUID.cast()
+    assert body["data"]["date"] |> DateTime.from_iso8601()
   end
 end

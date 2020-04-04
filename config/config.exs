@@ -7,19 +7,11 @@
 # General application configuration
 use Mix.Config
 
-config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
-  database: "covid19_questionnaire_repo",
-  username: "user",
-  password: "pass",
-  hostname: "localhost"
-
 # Configures the endpoint
 config :covid19_questionnaire, Covid19QuestionnaireWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "v0VEXqMoyB/o5vDkIEXW1/bPRK1DYFCtx7n15FHTpHn2P2CB6poIHmoNugyH9X3e",
-  render_errors: [view: Covid19QuestionnaireWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Covid19Questionnaire.PubSub, adapter: Phoenix.PubSub.PG2],
-  live_view: [signing_salt: "l4VrGh9y"]
+  render_errors: [view: Covid19QuestionnaireWeb.ErrorView, accepts: ~w(json)]
 
 # Use Poison for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
