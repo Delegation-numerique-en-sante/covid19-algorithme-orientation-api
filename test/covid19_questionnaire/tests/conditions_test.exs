@@ -85,7 +85,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si IMC moins 30 non", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | weight: 67.4, height: 150}
+        | patient: %Patient{questionnaire.patient | weight: 67.0, height: 150}
       }
 
       assert !Conditions.bmi_more_30(questionnaire)

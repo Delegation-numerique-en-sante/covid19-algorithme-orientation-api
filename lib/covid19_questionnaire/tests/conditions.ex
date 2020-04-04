@@ -90,11 +90,25 @@ defmodule Covid19Questionnaire.Tests.Conditions do
 
   def bmi_more_30(%{patient: %{height: nil}}), do: false
 
-  def bmi_more_30(%{patient: %{weight: weight, height: height}}) do
+  def bmi_more_30(questionnaire) do
+    bmi(questionnaire) >= @bmi_threshold
+  end
+
+  @spec bmi(questionnaire) :: float
+
+  def bmi(%{patient: %{weight: nil}}), do: nil
+
+  def bmi(%{patient: %{height: nil}}), do: nil
+
+  def bmi(%{patient: %{weight: weight, height: height}}) do
     weight
     |> Kernel./(:math.pow(height / 100, 2))
-    |> Kernel.>=(@bmi_threshold)
+    |> Float.round(1)
   end
+
+  @spec imc(questionnaire) :: float
+
+  def imc(questionnaire), do: bmi(questionnaire)
 
   @spec fever(questionnaire) :: boolean
 
