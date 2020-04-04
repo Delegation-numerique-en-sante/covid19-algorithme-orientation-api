@@ -30,4 +30,13 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
     assert response == body
     assert Journal.find(date).data == body
   end
+
+  test "rejects requests without token", %{conn: conn} do
+    conn =
+      conn
+      |> put_req_header("content-type", "application/json")
+      |> post("/questionnaire", %{})
+
+    assert conn.status == 401
+  end
 end

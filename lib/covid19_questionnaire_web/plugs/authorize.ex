@@ -9,7 +9,7 @@ defmodule Covid19QuestionnaireWeb.Plugs.Authorize do
   rule "authorize", conn do
     conn
     |> get_req_header("x-token")
-    |> hd
+    |> Enum.at(0)
     |> is_nil
     |> block
   end
