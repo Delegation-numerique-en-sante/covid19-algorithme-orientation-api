@@ -59,4 +59,18 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
 
     assert conn.status == 403
   end
+
+  test "doesn't store questionnaires of < 15y", %{conn: conn} do
+    request = QuestionnaireRequest.schema().example
+    request = Kernel.put_in(request, ["questionnaire", "patient", "age_less_15"], true)
+    {:ok, token} = Token.create()
+
+    conn =
+      conn
+      |> put_req_header("content-type", "application/json")
+      |> put_req_header("x-token", token.uuid)
+      |> post("/questionnaire", request)
+
+    assert conn.status == 451
+  end
 end

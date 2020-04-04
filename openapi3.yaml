@@ -16,6 +16,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/QuestionnaireResponse'
           description: Questionnaire
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Questionnaire
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Questionnaire
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Questionnaire
+        '407':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Questionnaire
+        '451':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Questionnaire
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Questionnaire
       tags: []
       callbacks: {}
       deprecated: false
@@ -71,6 +107,55 @@ components:
       title: Calculations
       type: object
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Calculations
+    Error:
+      description: Something bad happened!
+      example:
+        info: 'Oopsie, we don''t know what happened!'
+        action: >-
+          Please open an issue
+          https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new
+        code: 500
+        stacktrace:
+          kind: 'Error, error!'
+          why: DKN! DKN!
+      properties:
+        info:
+          description: Explanation of what happened
+          type: string
+        action:
+          description: Recommended action to fix/solve the problem
+          type: string
+        code:
+          description: HTTP status code
+          type: integer
+        stacktrace:
+          description: Additional information for developers
+          type: object
+      required:
+        - code
+        - info
+        - action
+      title: Error
+      type: object
+      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Error
+    ErrorResponse:
+      description: Something bad happened!
+      example:
+        error:
+          info: 'Oopsie, we don''t know what happened!'
+          action: >-
+            Please open an issue
+            https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new
+          code: 500
+          stacktrace:
+            kind: 'Error, error!'
+            why: DKN! DKN!
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      title: ErrorResponse
+      type: object
+      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.ErrorResponse
     Metadata:
       description: >-
         [Caractéristiques du

@@ -4,7 +4,13 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateQuestionnaire do
   """
 
   import OpenApiSpex.Operation, only: [request_body: 4, response: 3]
-  alias Covid19QuestionnaireWeb.Schemas.{QuestionnaireRequest, QuestionnaireResponse}
+
+  alias Covid19QuestionnaireWeb.Schemas.{
+    ErrorResponse,
+    QuestionnaireRequest,
+    QuestionnaireResponse
+  }
+
   alias OpenApiSpex.Operation
 
   @type action :: :create
@@ -31,7 +37,13 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateQuestionnaire do
           required: true
         ),
       responses: %{
-        201 => response("Questionnaire", "application/json", QuestionnaireResponse)
+        201 => response("Questionnaire", "application/json", QuestionnaireResponse),
+        400 => response("Questionnaire", "application/json", ErrorResponse),
+        401 => response("Questionnaire", "application/json", ErrorResponse),
+        403 => response("Questionnaire", "application/json", ErrorResponse),
+        407 => response("Questionnaire", "application/json", ErrorResponse),
+        451 => response("Questionnaire", "application/json", ErrorResponse),
+        500 => response("Questionnaire", "application/json", ErrorResponse)
       }
     }
   end
