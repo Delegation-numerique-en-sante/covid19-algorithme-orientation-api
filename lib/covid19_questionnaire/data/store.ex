@@ -10,7 +10,10 @@ defmodule Covid19Questionnaire.Data.Store do
   @chunk_size 100
 
   def write({date, token}, questionnaire = %{metadata: metadata}) do
-    data = %{data: %{questionnaire | token: token, metadata: %{metadata | date: date}}}
+    duration = DateTime.diff(date, token.date)
+    metadata = %{metadata | date: date, duration: duration}
+    questionnaire = %{questionnaire | token: token, metadata: metadata}
+    data = %{data: questionnaire}
 
     GenServer.cast(__MODULE__, {:write, %{date: date, data: data}})
     {:ok, data}

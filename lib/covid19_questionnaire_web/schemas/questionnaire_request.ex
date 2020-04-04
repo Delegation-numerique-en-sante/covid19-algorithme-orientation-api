@@ -19,8 +19,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
       "questionnaire" => %{
         "metadata" => %{
           "form_version" => "2020-04-04T13:24:44.389249Z",
-          "algo_version" => "2020-04-04T13:24:44.389249Z",
-          "duration" => 3600
+          "algo_version" => "2020-04-04T13:24:44.389249Z"
         },
         "patient" => %{
           "age_range" => "sup_70",
