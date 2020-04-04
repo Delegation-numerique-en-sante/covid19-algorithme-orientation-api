@@ -14,5 +14,8 @@ config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
   password: "test",
   database: "test"
 
+# Configure Connive
+config :covid19_questionnaire, Covid19QuestionnaireWeb.Plugs.Connive, whitelist: ["127.0.0.0/8"]
+
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :warn, compile_time_purge_matching: [[application: :remote_ip]]

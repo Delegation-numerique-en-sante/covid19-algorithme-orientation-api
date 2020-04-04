@@ -28,10 +28,13 @@ config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
   database: System.get_env("PG_DATABASE"),
   pool_size: System.get_env("PG_POOL_SIZE") |> String.to_integer()
 
+config :covid19_questionnaire, Covid19QuestionnaireWeb.Plugs.Connive,
+  whitelist: ["127.0.0.0/8" | System.get_env("WHITELIST") |> String.split(",")]
+
 # Do not print debug messages in production
 config :logger,
   level: :error,
-  compile_time_purge_matching: [[level_lower_than: :error]]
+  compile_time_purge_matching: [[application: :remote_ip], [level_lower_than: :error]]
 
 # ## Using releases (Elixir v1.9+)
 #

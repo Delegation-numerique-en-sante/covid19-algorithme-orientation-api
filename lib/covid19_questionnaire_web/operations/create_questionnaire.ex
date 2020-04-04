@@ -47,6 +47,7 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateQuestionnaire do
         ),
       responses: %{
         201 => response("Questionnaire", "application/json", QuestionnaireResponse),
+        305 => response("Questionnaire", "application/json", ErrorResponse),
         400 => response("Questionnaire", "application/json", ErrorResponse),
         401 => response("Questionnaire", "application/json", ErrorResponse),
         403 => response("Questionnaire", "application/json", ErrorResponse),

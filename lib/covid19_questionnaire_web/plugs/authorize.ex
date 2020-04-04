@@ -20,7 +20,13 @@ defmodule Covid19QuestionnaireWeb.Plugs.Authorize do
     |> put_resp_header("content-type", "application/json")
     |> send_resp(
       401,
-      Jason.encode!(%Error{code: 401, info: "Token missing", action: "Please create a token."})
+      Jason.encode!(%{
+        error: %Error{
+          code: 401,
+          info: "Token missing",
+          action: "Please create a token."
+        }
+      })
     )
     |> halt()
   end
