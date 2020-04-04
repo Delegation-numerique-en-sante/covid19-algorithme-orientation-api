@@ -259,7 +259,7 @@
             "immunosuppressant_drug": true,
             "kidney_disease": true,
             "liver_disease": true,
-            "pregnant": "1"
+            "pregnant": 1
           },
           "symptoms": {
             "agueusia_anosmia": true,
@@ -269,7 +269,7 @@
             "feeding_day": true,
             "fever": false,
             "sore_throat_aches": true,
-            "temperature_cat": "[35.5, 37.7]",
+            "temperature_cat": "35.5-37.7",
             "tiredness": true,
             "tiredness_details": true
           },
@@ -338,7 +338,7 @@
               "immunosuppressant_drug": true,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": "1"
+              "pregnant": 1
             },
             "symptoms": {
               "agueusia_anosmia": true,
@@ -348,7 +348,7 @@
               "feeding_day": true,
               "fever": false,
               "sore_throat_aches": true,
-              "temperature_cat": "[35.5, 37.7]",
+              "temperature_cat": "35.5-37.7",
               "tiredness": true,
               "tiredness_details": true
             }
@@ -409,7 +409,7 @@
               "immunosuppressant_drug": true,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": "1"
+              "pregnant": 1
             },
             "symptoms": {
               "agueusia_anosmia": true,
@@ -419,7 +419,7 @@
               "feeding_day": true,
               "fever": false,
               "sore_throat_aches": true,
-              "temperature_cat": "[35.5, 37.7]",
+              "temperature_cat": "35.5-37.7",
               "tiredness": true,
               "tiredness_details": true
             },
@@ -449,7 +449,7 @@
           "immunosuppressant_drug": true,
           "kidney_disease": true,
           "liver_disease": true,
-          "pregnant": "1"
+          "pregnant": 1
         },
         "properties": {
           "breathing_disease": {
@@ -487,11 +487,11 @@
           "pregnant": {
             "description": "Êtes-vous enceinte ?",
             "enum": [
-              "1",
-              "0",
-              "DNK"
+              0,
+              1,
+              888
             ],
-            "type": "string"
+            "type": "integer"
           }
         },
         "title": "RiskFactors",
@@ -508,7 +508,7 @@
           "feeding_day": true,
           "fever": false,
           "sore_throat_aches": true,
-          "temperature_cat": "[35.5, 37.7]",
+          "temperature_cat": "35.5-37.7",
           "tiredness": true,
           "tiredness_details": true
         },
@@ -544,11 +544,11 @@
           "temperature_cat": {
             "description": "Quelle est votre température ?",
             "enum": [
-              "(−∞, 35.4]",
-              "[35.5, 37.7]",
-              "[37.8, 38.9]",
-              "[39, +∞)",
-              "DNK"
+              "inf_35.5",
+              "35.5-37.7",
+              "37.7-38.9",
+              "sup_39",
+              "NSP"
             ],
             "type": "string"
           },

@@ -41,8 +41,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.RiskFactors do
       },
       cancer: %Schema{type: :boolean, description: "Avez-vous ou avez-vous eu un cancer ?"},
       pregnant: %Schema{
-        type: :string,
-        enum: ["1", "0", "DNK"],
+        type: :integer,
+        enum: [0, 1, 888],
         description: "Êtes-vous enceinte ?"
       }
     },
@@ -55,7 +55,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.RiskFactors do
       "immunosuppressant_disease" => true,
       "immunosuppressant_drug" => true,
       "cancer" => true,
-      "pregnant" => "1"
+      "pregnant" => 1
     }
   })
 end
