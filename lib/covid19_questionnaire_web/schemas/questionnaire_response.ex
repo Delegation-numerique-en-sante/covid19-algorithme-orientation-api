@@ -17,13 +17,13 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
       "data" => %{
         "token" => %{
           "uuid" => "c9e77845-83cf-4891-88d6-804d659e81c5",
-          "date" => "2020-03-29 15:20:11.875767Z"
+          "date" => "2020-04-04T13:24:44.389249Z"
         },
         "metadata" => %{
           "form_version" => "2020-04-04T13:24:44.389249Z",
           "algo_version" => "2020-04-04T13:24:44.389249Z",
           "date" => "2020-04-04T13:24:44.389249Z",
-          "duration" => 3600
+          "duration" => 1
         },
         "patient" => %{
           "age_range" => "sup_70",

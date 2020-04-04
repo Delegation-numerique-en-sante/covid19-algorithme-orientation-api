@@ -8,6 +8,8 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
     response = QuestionnaireResponse.schema().example
     {:ok, token} = Token.create()
 
+    :timer.sleep(Store.tick_interval())
+
     body =
       conn
       |> put_req_header("content-type", "application/json")

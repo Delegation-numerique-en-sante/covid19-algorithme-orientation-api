@@ -22,12 +22,19 @@ defmodule Covid19Questionnaire.Data.StoreTest do
       }
       |> EvaluateQuestionnaire.call()
 
-    date = DateTime.utc_now()
+    date_tokn = DateTime.utc_now()
+    date_quiz = date_tokn |> DateTime.add(3600, :second)
     uuid = "faketoken"
-    {:ok, data} = Store.write({date, %{uuid: uuid, date: date}}, questionnaire)
+    {:ok, data} = Store.write({date_quiz, %{uuid: uuid, date: date_tokn}}, questionnaire)
+
+    data =
+      data
+      |> Jason.encode!()
+      |> Jason.decode!()
+      |> Kernel.put_in(["data", "metadata", "duration"], 3600)
 
     :timer.sleep(Store.tick_interval())
 
-    assert data |> Jason.encode!() |> Jason.decode!() == Journal.find(date).data
+    assert data == Journal.find(date_quiz).data
   end
 end
