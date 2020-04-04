@@ -1,4 +1,4 @@
-defmodule Covid19OrientationWeb.ConnCase do
+defmodule Covid19QuestionnaireWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule Covid19OrientationWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Covid19OrientationWeb.ConnCase, async: true`, although
+  by setting `use Covid19QuestionnaireWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -21,15 +21,15 @@ defmodule Covid19OrientationWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias Covid19OrientationWeb.Router.Helpers, as: Routes
+      alias Covid19QuestionnaireWeb.Router.Helpers, as: Routes
       import OpenApiSpex.TestAssertions
 
       # The default endpoint for testing
-      @endpoint Covid19OrientationWeb.Endpoint
+      @endpoint Covid19QuestionnaireWeb.Endpoint
     end
   end
 
   setup _tags do
-    {:ok, conn: Phoenix.ConnTest.build_conn(), spec: Covid19OrientationWeb.ApiSpec.spec()}
+    {:ok, conn: Phoenix.ConnTest.build_conn(), spec: Covid19QuestionnaireWeb.ApiSpec.spec()}
   end
 end

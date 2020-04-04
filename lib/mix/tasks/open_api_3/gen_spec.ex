@@ -1,12 +1,12 @@
-defmodule Mix.Tasks.Covid19Orientation.OpenApi3.GenSpec do
+defmodule Mix.Tasks.Covid19Questionnaire.OpenApi3.GenSpec do
   @moduledoc """
   Generates the OpenAPI 3.0 spec.
   """
 
   def run([]) do
-    Covid19OrientationWeb.Endpoint.start_link()
+    Covid19QuestionnaireWeb.Endpoint.start_link()
 
-    Covid19OrientationWeb.ApiSpec.spec()
+    Covid19QuestionnaireWeb.ApiSpec.spec()
     |> Jason.encode!(pretty: true, maps: :strict)
     |> (&File.write!("openapi3.json", &1)).()
   end

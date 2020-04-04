@@ -1,9 +1,9 @@
-defmodule Covid19Orientation.MixProject do
+defmodule Covid19Questionnaire.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :covid19_orientation,
+      app: :covid19_questionnaire,
       version: "0.1.0",
       elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -11,7 +11,7 @@ defmodule Covid19Orientation.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       releases: [
-        covid19_orientation: [
+        covid19_questionnaire: [
           include_executables_for: [:unix],
           steps: [:assemble, :tar]
         ]
@@ -24,7 +24,7 @@ defmodule Covid19Orientation.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Covid19Orientation.Application, []},
+      mod: {Covid19Questionnaire.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -38,11 +38,11 @@ defmodule Covid19Orientation.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:elixir_uuid, "~> 1.2"},
       {:jason, "~> 1.2.0"},
       {:open_api_spex, "~> 3.6"},
       {:phoenix, "~> 1.4.16"},
       {:phoenix_pubsub, "~> 1.1"},
+      {:plug_attack, "~> 0.3.0"},
       {:plug_cowboy, "~> 2.0"},
       {:ecto_sql, "~> 3.0"},
       {:postgrex, "~> 0.15.3"},

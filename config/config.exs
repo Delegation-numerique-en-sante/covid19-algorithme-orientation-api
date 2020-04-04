@@ -7,18 +7,18 @@
 # General application configuration
 use Mix.Config
 
-config :covid19_orientation, Covid19Orientation.Data.Repo,
-  database: "covid19_orientation_repo",
+config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
+  database: "covid19_questionnaire_repo",
   username: "user",
   password: "pass",
   hostname: "localhost"
 
 # Configures the endpoint
-config :covid19_orientation, Covid19OrientationWeb.Endpoint,
+config :covid19_questionnaire, Covid19QuestionnaireWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "v0VEXqMoyB/o5vDkIEXW1/bPRK1DYFCtx7n15FHTpHn2P2CB6poIHmoNugyH9X3e",
-  render_errors: [view: Covid19OrientationWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Covid19Orientation.PubSub, adapter: Phoenix.PubSub.PG2],
+  render_errors: [view: Covid19QuestionnaireWeb.ErrorView, accepts: ~w(json)],
+  pubsub: [name: Covid19Questionnaire.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "l4VrGh9y"]
 
 # Use Poison for JSON parsing in Phoenix
@@ -29,7 +29,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :covid19_orientation, ecto_repos: [Covid19Orientation.Data.Repo]
+config :covid19_questionnaire, ecto_repos: [Covid19Questionnaire.Data.Repo]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

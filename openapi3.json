@@ -2,24 +2,109 @@
   "components": {
     "responses": {},
     "schemas": {
-      "Conclusion": {
-        "description": "[Conclusion de l'orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles)",
+      "Calculations": {
+        "description": "[Calculations](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
         "example": {
-          "code": "FIN1"
+          "bmi_more_30": true,
+          "fever": true,
+          "gravity_factors": 3,
+          "gravity_factors_major": 1,
+          "gravity_factors_minor": 2,
+          "risk_factors": 1
+        },
+        "properties": {
+          "bmi_more_30": {
+            "description": "Si la personne a au moins 30 d'IMC en kg/(cm/100)2",
+            "type": "boolean"
+          },
+          "fever": {
+            "description": "Indicateur de fièvre",
+            "type": "boolean"
+          },
+          "gravity_factors": {
+            "description": "Facteurs de gravité mineurs + majeurs",
+            "type": "integer"
+          },
+          "gravity_factors_major": {
+            "description": "Facteurs de gravité majeurs",
+            "type": "integer"
+          },
+          "gravity_factors_minor": {
+            "description": "Facteurs de gravité mineurs",
+            "type": "integer"
+          },
+          "risk_factors": {
+            "description": "Facteurs pronostique défavorables liés au terrain",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "bmi_more_30",
+          "fever",
+          "gravity_factors",
+          "gravity_factors_minor",
+          "gravity_factors_major",
+          "risk_factors"
+        ],
+        "title": "Calculations",
+        "type": "object",
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Calculations"
+      },
+      "Metadata": {
+        "description": "[Caractéristiques du questionnaire](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
+        "example": {
+          "algo_version": "2020-04-04T13:24:44.389249Z",
+          "date": "2020-04-04T13:24:44.389249Z",
+          "duration": 3600,
+          "form_version": "2020-04-04T13:24:44.389249Z"
+        },
+        "properties": {
+          "algo_version": {
+            "description": "Version de l'algorithme médical",
+            "format": "date-time",
+            "type": "string"
+          },
+          "date": {
+            "description": "Date de fin de remplissage du questionnaire",
+            "format": "date-time",
+            "type": "string"
+          },
+          "duration": {
+            "description": "Durée de remplissage du questionnaire (seconds)",
+            "type": "integer"
+          },
+          "form_version": {
+            "description": "Version du questionnaire",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "form_version",
+          "algo_version",
+          "duration"
+        ],
+        "title": "Metadata",
+        "type": "object",
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Metadata"
+      },
+      "Orientation": {
+        "description": "[Orientation du questionnaire COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
+        "example": {
+          "code": "orientation_SAMU"
         },
         "properties": {
           "code": {
-            "description": "[Conclusions possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#conclusions-possibles)",
+            "description": "[Orientations possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
             "enum": [
-              "FIN1",
-              "FIN2",
-              "FIN3",
-              "FIN4",
-              "FIN5",
-              "FIN6",
-              "FIN7",
-              "FIN8",
-              "FIN9"
+              "orientation_moins_de_15_ans",
+              "orientation_domicile_surveillance_1",
+              "orientation_consultation_surveillance_1",
+              "orientation_consultation_surveillance_2",
+              "orientation_SAMU",
+              "orientation_consultation_surveillance_3",
+              "orientation_consultation_surveillance_4",
+              "orientation_surveillance"
             ],
             "type": "string"
           }
@@ -27,461 +112,441 @@
         "required": [
           "code"
         ],
-        "title": "Conclusion",
+        "title": "Orientation",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Conclusion"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Orientation"
       },
-      "Orientation": {
-        "description": "[Algorithme d’orientation du Covid-19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dorientation-covid19)",
+      "Patient": {
+        "description": "[Caractéristiques du patient](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
         "example": {
-          "conclusion": {
-            "code": "FIN1"
-          },
-          "date": "2020-03-29 15:20:11.875767Z",
-          "pronostiques": {
-            "age": 70,
-            "cancer": true,
-            "cardiaque": true,
-            "diabetique": true,
-            "enceinte": true,
-            "immunodeprime": true,
-            "insuffisance_renale": true,
-            "maladie_chronique_foie": true,
-            "poids": 65.5,
-            "respiratoire": true,
-            "taille": 1.73,
-            "traitement_immunosuppresseur": true
-          },
-          "statistiques": {
-            "au_moins_30_imc": true,
-            "au_moins_39_de_temperature": true,
-            "au_moins_50_ans": false,
-            "au_moins_70_ans": true,
-            "cardiaque": true,
-            "entre_50_et_69_ans": false,
-            "facteurs_gravite": 3,
-            "facteurs_gravite_majeurs": 1,
-            "facteurs_gravite_mineurs": 2,
-            "facteurs_pronostique": 1,
-            "fievre": true,
-            "moins_de_15_ans": false,
-            "moins_de_50_ans": false,
-            "moins_de_70_ans": false
-          },
-          "supplementaires": {
-            "code_postal": "75000"
-          },
-          "symptomes": {
-            "anosmie": true,
-            "diarrhee": true,
-            "diffs_alim_boire": true,
-            "essoufle": true,
-            "fatigue": true,
-            "mal_de_gorge": true,
-            "temperature": 37.5,
-            "toux": true
-          },
-          "uuid": "5976423a-ee35-11e3-8569-14109ff1a304"
+          "age_less_15": false,
+          "age_less_50": false,
+          "age_less_70": false,
+          "age_more_70": true,
+          "height": 173,
+          "postal_code": "75000",
+          "weight": 65.5
         },
         "properties": {
-          "conclusion": {
-            "$ref": "#/components/schemas/Conclusion"
+          "age_less_15": {
+            "description": "Si la personne a moins de 15 ans",
+            "type": "boolean"
           },
-          "date": {
-            "description": "Date du test d'orientation",
-            "format": "date-time",
+          "age_less_50": {
+            "description": "Si la personne a moins de 50 ans",
+            "type": "boolean"
+          },
+          "age_less_70": {
+            "description": "Si la personne a moins de 70 ans",
+            "type": "boolean"
+          },
+          "age_more_70": {
+            "description": "Si la personne a au moins 70 ans",
+            "type": "boolean"
+          },
+          "height": {
+            "description": "Quelle est votre taille en centimètres ?",
+            "type": "integer"
+          },
+          "postal_code": {
+            "description": "Code postal",
             "type": "string"
           },
-          "pronostiques": {
-            "$ref": "#/components/schemas/Pronostiques"
+          "weight": {
+            "description": "Quel est votre poids en kilogrammes ?",
+            "type": "number"
+          }
+        },
+        "title": "Patient",
+        "type": "object",
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Patient"
+      },
+      "Questionnaire": {
+        "description": "[Algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
+        "example": {
+          "calculations": {
+            "bmi_more_30": true,
+            "fever": true,
+            "gravity_factors": 3,
+            "gravity_factors_major": 1,
+            "gravity_factors_minor": 2,
+            "risk_factors": 1
           },
-          "statistiques": {
-            "$ref": "#/components/schemas/Statistiques"
+          "metadata": {
+            "algo_version": "2020-04-04T13:24:44.389249Z",
+            "date": "2020-04-04T13:24:44.389249Z",
+            "duration": 3600,
+            "form_version": "2020-04-04T13:24:44.389249Z"
           },
-          "supplementaires": {
-            "$ref": "#/components/schemas/Supplementaires"
+          "orientation": {
+            "code": "orientation_SAMU"
           },
-          "symptomes": {
-            "$ref": "#/components/schemas/Symptomes"
+          "patient": {
+            "age_less_15": false,
+            "age_less_50": false,
+            "age_less_70": false,
+            "age_more_70": true,
+            "height": 173,
+            "postal_code": "75000",
+            "weight": 65.5
           },
-          "uuid": {
-            "description": "Id du test d'orientation",
-            "format": "uuid1",
-            "type": "string"
+          "risk_factors": {
+            "breathing_disease": true,
+            "cancer": true,
+            "diabetes": true,
+            "heart_disease": true,
+            "immunosuppressant_disease": true,
+            "immunosuppressant_drug": true,
+            "kidney_disease": true,
+            "liver_disease": true,
+            "pregnant": "1"
+          },
+          "symptoms": {
+            "agueusia_anosmia": true,
+            "breathlessness": true,
+            "cough": true,
+            "diarrhea": true,
+            "feeding_day": true,
+            "fever": false,
+            "sore_throat_aches": true,
+            "temperature_cat": "[35.5, 37.7]",
+            "tiredness": true,
+            "tiredness_details": true
+          },
+          "token": {
+            "date": "2020-03-29 15:20:11.875767Z",
+            "uuid": "c9e77845-83cf-4891-88d6-804d659e81c5"
+          }
+        },
+        "properties": {
+          "calculations": {
+            "$ref": "#/components/schemas/Calculations"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          "orientation": {
+            "$ref": "#/components/schemas/Orientation"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "risk_factors": {
+            "$ref": "#/components/schemas/RiskFactors"
+          },
+          "symptoms": {
+            "$ref": "#/components/schemas/Symptoms"
+          },
+          "token": {
+            "$ref": "#/components/schemas/Token"
           }
         },
         "required": [
-          "symptomes",
-          "pronostiques",
-          "supplementaires"
+          "metadata",
+          "patient",
+          "symptoms",
+          "risk_factors"
         ],
-        "title": "Orientation",
+        "title": "Questionnaire",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Orientation"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Questionnaire"
       },
-      "OrientationRequest": {
+      "QuestionnaireRequest": {
         "description": "Corps de la requête POST pour lancer l'algorithme d'orientation",
         "example": {
-          "orientation": {
-            "pronostiques": {
-              "age": 70,
+          "questionnaire": {
+            "metadata": {
+              "algo_version": "2020-04-04T13:24:44.389249Z",
+              "duration": 3600,
+              "form_version": "2020-04-04T13:24:44.389249Z"
+            },
+            "patient": {
+              "age_less_15": false,
+              "age_less_50": false,
+              "age_less_70": false,
+              "age_more_70": true,
+              "height": 173,
+              "postal_code": "75000",
+              "weight": 65.5
+            },
+            "risk_factors": {
+              "breathing_disease": true,
               "cancer": true,
-              "cardiaque": true,
-              "diabetique": true,
-              "enceinte": true,
-              "immunodeprime": true,
-              "insuffisance_renale": true,
-              "maladie_chronique_foie": true,
-              "poids": 65.5,
-              "respiratoire": true,
-              "taille": 1.73,
-              "traitement_immunosuppresseur": true
+              "diabetes": true,
+              "heart_disease": true,
+              "immunosuppressant_disease": true,
+              "immunosuppressant_drug": true,
+              "kidney_disease": true,
+              "liver_disease": true,
+              "pregnant": "1"
             },
-            "supplementaires": {
-              "code_postal": "75000"
-            },
-            "symptomes": {
-              "anosmie": true,
-              "diarrhee": true,
-              "diffs_alim_boire": true,
-              "essoufle": true,
-              "fatigue": true,
-              "mal_de_gorge": true,
-              "temperature": 37.5,
-              "toux": true
+            "symptoms": {
+              "agueusia_anosmia": true,
+              "breathlessness": true,
+              "cough": true,
+              "diarrhea": true,
+              "feeding_day": true,
+              "fever": false,
+              "sore_throat_aches": true,
+              "temperature_cat": "[35.5, 37.7]",
+              "tiredness": true,
+              "tiredness_details": true
             }
           }
         },
         "properties": {
-          "orientation": {
+          "questionnaire": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Orientation"
+                "$ref": "#/components/schemas/Questionnaire"
               }
             ]
           }
         },
         "required": [
-          "orientation"
+          "questionnaire"
         ],
-        "title": "OrientationRequest",
+        "title": "QuestionnaireRequest",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.OrientationRequest"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest"
       },
-      "OrientationResponse": {
+      "QuestionnaireResponse": {
         "description": "Réponse de l'algorithme d'orientation",
         "example": {
           "data": {
-            "conclusion": {
-              "code": "FIN1"
+            "calculations": {
+              "bmi_more_30": false,
+              "fever": false,
+              "gravity_factors": 3,
+              "gravity_factors_major": 2,
+              "gravity_factors_minor": 1,
+              "risk_factors": 9
             },
-            "date": "2020-03-29 15:20:11.875767Z",
-            "pronostiques": {
-              "age": 70,
+            "metadata": {
+              "algo_version": "2020-04-04T13:24:44.389249Z",
+              "date": "2020-04-04T13:24:44.389249Z",
+              "duration": 3600,
+              "form_version": "2020-04-04T13:24:44.389249Z"
+            },
+            "orientation": {
+              "code": "orientation_SAMU"
+            },
+            "patient": {
+              "age_less_15": false,
+              "age_less_50": false,
+              "age_less_70": false,
+              "age_more_70": true,
+              "height": 173,
+              "postal_code": "75000",
+              "weight": 65.5
+            },
+            "risk_factors": {
+              "breathing_disease": true,
               "cancer": true,
-              "cardiaque": true,
-              "diabetique": true,
-              "enceinte": true,
-              "immunodeprime": true,
-              "insuffisance_renale": true,
-              "maladie_chronique_foie": true,
-              "poids": 65.5,
-              "respiratoire": true,
-              "taille": 1.73,
-              "traitement_immunosuppresseur": true
+              "diabetes": true,
+              "heart_disease": true,
+              "immunosuppressant_disease": true,
+              "immunosuppressant_drug": true,
+              "kidney_disease": true,
+              "liver_disease": true,
+              "pregnant": "1"
             },
-            "statistiques": {
-              "au_moins_30_imc": true,
-              "au_moins_39_de_temperature": true,
-              "au_moins_50_ans": false,
-              "au_moins_70_ans": true,
-              "cardiaque": true,
-              "entre_50_et_69_ans": false,
-              "facteurs_gravite": 3,
-              "facteurs_gravite_majeurs": 1,
-              "facteurs_gravite_mineurs": 2,
-              "facteurs_pronostique": 1,
-              "fievre": true,
-              "moins_de_15_ans": false,
-              "moins_de_50_ans": false,
-              "moins_de_70_ans": false
+            "symptoms": {
+              "agueusia_anosmia": true,
+              "breathlessness": true,
+              "cough": true,
+              "diarrhea": true,
+              "feeding_day": true,
+              "fever": false,
+              "sore_throat_aches": true,
+              "temperature_cat": "[35.5, 37.7]",
+              "tiredness": true,
+              "tiredness_details": true
             },
-            "supplementaires": {
-              "code_postal": "75000"
-            },
-            "symptomes": {
-              "anosmie": true,
-              "diarrhee": true,
-              "diffs_alim_boire": true,
-              "essoufle": true,
-              "fatigue": true,
-              "mal_de_gorge": true,
-              "temperature": 37.5,
-              "toux": true
-            },
-            "uuid": "5976423a-ee35-11e3-8569-14109ff1a304"
+            "token": {
+              "date": "2020-03-29 15:20:11.875767Z",
+              "uuid": "c9e77845-83cf-4891-88d6-804d659e81c5"
+            }
           }
         },
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Orientation"
+            "$ref": "#/components/schemas/Questionnaire"
           }
         },
-        "title": "OrientationResponse",
+        "title": "QuestionnaireResponse",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.OrientationResponse"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse"
       },
-      "Pronostiques": {
-        "description": "[Questions sur les facteurs pronostiques défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-facteurs-pronostiques-d%C3%A9favorables-au-terrain)",
+      "RiskFactors": {
+        "description": "[Questions sur les facteurs risk_factors défavorables au terrain](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-facteurs-risk_factors-d%C3%A9favorables-au-terrain)",
         "example": {
-          "age": 70,
+          "breathing_disease": true,
           "cancer": true,
-          "cardiaque": true,
-          "diabetique": true,
-          "enceinte": true,
-          "immunodeprime": true,
-          "insuffisance_renale": true,
-          "maladie_chronique_foie": true,
-          "poids": 65.5,
-          "respiratoire": true,
-          "taille": 1.73,
-          "traitement_immunosuppresseur": true
+          "diabetes": true,
+          "heart_disease": true,
+          "immunosuppressant_disease": true,
+          "immunosuppressant_drug": true,
+          "kidney_disease": true,
+          "liver_disease": true,
+          "pregnant": "1"
         },
         "properties": {
-          "age": {
-            "description": "Quel est votre âge ?",
-            "type": "integer"
+          "breathing_disease": {
+            "description": "Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?",
+            "type": "boolean"
           },
           "cancer": {
             "description": "Avez-vous ou avez-vous eu un cancer ?",
             "type": "boolean"
           },
-          "cardiaque": {
-            "description": "Avez-vous une tension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?",
-            "type": "boolean"
-          },
-          "diabetique": {
+          "diabetes": {
             "description": "Êtes-vous diabétique ?",
             "type": "boolean"
           },
-          "enceinte": {
-            "description": "Êtes-vous enceinte ?",
+          "heart_disease": {
+            "description": "Avez-vous une tension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?",
             "type": "boolean"
           },
-          "immunodeprime": {
+          "immunosuppressant_disease": {
             "description": "Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?",
             "type": "boolean"
           },
-          "insuffisance_renale": {
+          "immunosuppressant_drug": {
+            "description": "Prenez-vous un traitement immunosuppresseur ?",
+            "type": "boolean"
+          },
+          "kidney_disease": {
             "description": "Avez-vous une insuffisance rénale chronique dialysée ?",
             "type": "boolean"
           },
-          "maladie_chronique_foie": {
+          "liver_disease": {
             "description": "Avez-vous une maladie chronique du foie ?",
             "type": "boolean"
           },
-          "poids": {
-            "description": "Quel est votre poids en kilogrammes ?",
-            "type": "number"
-          },
-          "respiratoire": {
-            "description": "Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?",
-            "type": "boolean"
-          },
-          "taille": {
-            "description": "Quelle est votre taille en mètres ?",
-            "type": "number"
-          },
-          "traitement_immunosuppresseur": {
-            "description": "Prenez-vous un traitement immunosuppresseur ?",
-            "type": "boolean"
-          }
-        },
-        "title": "Pronostiques",
-        "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Pronostiques"
-      },
-      "Statistiques": {
-        "description": "[Statistiques](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
-        "example": {
-          "au_moins_30_imc": true,
-          "au_moins_39_de_temperature": true,
-          "au_moins_50_ans": false,
-          "au_moins_70_ans": true,
-          "cardiaque": true,
-          "entre_50_et_69_ans": false,
-          "facteurs_gravite": 3,
-          "facteurs_gravite_majeurs": 1,
-          "facteurs_gravite_mineurs": 2,
-          "facteurs_pronostique": 1,
-          "fievre": true,
-          "moins_de_15_ans": false,
-          "moins_de_50_ans": false,
-          "moins_de_70_ans": false
-        },
-        "properties": {
-          "au_moins_30_imc": {
-            "description": "Si la personne a au moins 30 d'IMC en kg/m2",
-            "type": "boolean"
-          },
-          "au_moins_39_de_temperature": {
-            "description": "Si la personne a au moins 39°C de température",
-            "type": "boolean"
-          },
-          "au_moins_50_ans": {
-            "description": "Si la personne a au moins 50 ans",
-            "type": "boolean"
-          },
-          "au_moins_70_ans": {
-            "description": "Si la personne a au moins de 70 ans",
-            "type": "boolean"
-          },
-          "cardiaque": {
-            "description": "Si la personne a des problèms hypertension / cardiaques",
-            "type": "boolean"
-          },
-          "entre_50_et_69_ans": {
-            "description": "Si la personne a entre 50 et 69 ans",
-            "type": "boolean"
-          },
-          "facteurs_gravite": {
-            "description": "Facteurs de gravité mineurs + majeurs",
-            "type": "integer"
-          },
-          "facteurs_gravite_majeurs": {
-            "description": "Facteurs de gravité majeurs",
-            "type": "integer"
-          },
-          "facteurs_gravite_mineurs": {
-            "description": "Facteurs de gravité mineurs",
-            "type": "integer"
-          },
-          "facteurs_pronostique": {
-            "description": "Facteurs pronostique défavorables liés au terrain",
-            "type": "integer"
-          },
-          "fievre": {
-            "description": "Indicateur de fièvre",
-            "type": "boolean"
-          },
-          "moins_de_15_ans": {
-            "description": "Si la personne a moins de 15 ans",
-            "type": "boolean"
-          },
-          "moins_de_50_ans": {
-            "description": "Si la personne a moins de 50 ans",
-            "type": "boolean"
-          },
-          "moins_de_70_ans": {
-            "description": "Si la personne a moins de 70 ans",
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "moins_de_15_ans",
-          "moins_de_50_ans",
-          "au_moins_50_ans",
-          "entre_50_et_69_ans",
-          "moins_de_70_ans",
-          "au_moins_70_ans",
-          "au_moins_30_imc",
-          "fievre",
-          "au_moins_39_de_temperature",
-          "cardiaque",
-          "facteurs_gravite",
-          "facteurs_gravite_mineurs",
-          "facteurs_gravite_majeurs",
-          "facteurs_pronostique"
-        ],
-        "title": "Statistiques",
-        "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Statistiques"
-      },
-      "Supplementaires": {
-        "description": "[Questions supplémentaires](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#question-suppl%C3%A9mentaire)",
-        "example": {
-          "code_postal": "75000"
-        },
-        "properties": {
-          "code_postal": {
-            "description": "Code postal",
+          "pregnant": {
+            "description": "Êtes-vous enceinte ?",
+            "enum": [
+              "1",
+              "0",
+              "DNK"
+            ],
             "type": "string"
           }
         },
-        "title": "Supplementaires",
+        "title": "RiskFactors",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Supplementaires"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.RiskFactors"
       },
-      "Symptomes": {
-        "description": "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",
+      "Symptoms": {
+        "description": "[Questions sur les symptômes](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#questions-sur-les-sympt%C3%B4mes)",
         "example": {
-          "anosmie": true,
-          "diarrhee": true,
-          "diffs_alim_boire": true,
-          "essoufle": true,
-          "fatigue": true,
-          "mal_de_gorge": true,
-          "temperature": 37.5,
-          "toux": true
+          "agueusia_anosmia": true,
+          "breathlessness": true,
+          "cough": true,
+          "diarrhea": true,
+          "feeding_day": true,
+          "fever": false,
+          "sore_throat_aches": true,
+          "temperature_cat": "[35.5, 37.7]",
+          "tiredness": true,
+          "tiredness_details": true
         },
         "properties": {
-          "anosmie": {
+          "agueusia_anosmia": {
             "description": "Avez-vous noté une forte diminution de votre goût ou de l’odorat ces derniers jours ?",
             "type": "boolean"
           },
-          "diarrhee": {
-            "description": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
-            "type": "boolean"
-          },
-          "diffs_alim_boire": {
-            "description": "Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
-            "type": "boolean"
-          },
-          "essoufle": {
+          "breathlessness": {
             "description": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
             "type": "boolean"
           },
-          "fatigue": {
-            "description": "Avez-vous une fatigue inhabituelle ces derniers jours ? Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
+          "cough": {
+            "description": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
             "type": "boolean"
           },
-          "mal_de_gorge": {
+          "diarrhea": {
+            "description": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
+            "type": "boolean"
+          },
+          "feeding_day": {
+            "description": "Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
+            "type": "boolean"
+          },
+          "fever": {
+            "description": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?",
+            "type": "boolean"
+          },
+          "sore_throat_aches": {
             "description": "Avez-vous un mal de gorge apparu ces derniers jours ?",
             "type": "boolean"
           },
-          "temperature": {
-            "description": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ? Quelle est votre température ?",
-            "type": "number"
+          "temperature_cat": {
+            "description": "Quelle est votre température ?",
+            "enum": [
+              "(−∞, 35.4]",
+              "[35.5, 37.7]",
+              "[37.8, 38.9]",
+              "[39, +∞)",
+              "DNK"
+            ],
+            "type": "string"
           },
-          "toux": {
-            "description": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
+          "tiredness": {
+            "description": "Avez-vous une fatigue inhabituelle ces derniers jours ?",
+            "type": "boolean"
+          },
+          "tiredness_details": {
+            "description": "Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
             "type": "boolean"
           }
         },
-        "title": "Symptomes",
+        "title": "Symptoms",
         "type": "object",
-        "x-struct": "Elixir.Covid19OrientationWeb.Schemas.Symptomes"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Symptoms"
+      },
+      "Token": {
+        "description": "Token",
+        "example": {
+          "date": "2020-04-04T13:24:44.389249Z",
+          "uuid": "c9e77845-83cf-4891-88d6-804d659e81c5"
+        },
+        "properties": {
+          "date": {
+            "description": "Date de crátion du token",
+            "format": "date-time",
+            "type": "string"
+          },
+          "uuid": {
+            "description": "UUID du token",
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "title": "Token",
+        "type": "object",
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Token"
       }
     }
   },
   "info": {
-    "title": "Test d'orientation du Covid-19",
+    "title": "Test d'orientation du COVID19",
     "version": "2020-03-30 20:01:39.836837Z"
   },
   "openapi": "3.0.0",
   "paths": {
-    "/orientation": {
+    "/questionnaire": {
       "post": {
         "callbacks": {},
         "deprecated": false,
-        "description": "Évaluer le test d'orientation du Covid-19",
-        "operationId": "OrientationController.create",
+        "description": "Évaluer le test d'orientation du COVID19",
+        "operationId": "QuestionnaireController.create",
         "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/OrientationRequest"
+                "$ref": "#/components/schemas/QuestionnaireRequest"
               }
             }
           },
@@ -493,14 +558,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OrientationResponse"
+                  "$ref": "#/components/schemas/QuestionnaireResponse"
                 }
               }
             },
-            "description": "Orientation"
+            "description": "Questionnaire"
           }
         },
-        "summary": "Évaluer le test d'orientation du Covid-19",
+        "summary": "Évaluer le test d'orientation du COVID19",
         "tags": []
       }
     }

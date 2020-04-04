@@ -5,5 +5,5 @@
 /.fetch
 erl_crash.dump
 *.ez
-covid19_orientation-*.tar
+covid19_questionnaire-*.tar
 /priv/static/

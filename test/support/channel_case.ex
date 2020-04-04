@@ -1,9 +1,9 @@
-defmodule Covid19OrientationWeb.ChannelCase do
+defmodule Covid19QuestionnaireWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
 
-  Such tests rely on `Phoenix.ChannelOrientation` and also
+  Such tests rely on `Phoenix.ChannelQuestionnaire` and also
   import other functionality to make it easier
   to build common data structures and query the data layer.
 
@@ -11,7 +11,7 @@ defmodule Covid19OrientationWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Covid19OrientationWeb.ChannelCase, async: true`, although
+  by setting `use Covid19QuestionnaireWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -23,7 +23,7 @@ defmodule Covid19OrientationWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint Covid19OrientationWeb.Endpoint
+      @endpoint Covid19QuestionnaireWeb.Endpoint
     end
   end
 

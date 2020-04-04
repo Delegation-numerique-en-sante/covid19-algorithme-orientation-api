@@ -1,4 +1,4 @@
-defmodule Covid19OrientationWeb.SchemaCase do
+defmodule Covid19QuestionnaireWeb.SchemaCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require validating schemas.
@@ -14,6 +14,6 @@ defmodule Covid19OrientationWeb.SchemaCase do
   end
 
   setup _tags do
-    {:ok, spec: Covid19OrientationWeb.ApiSpec.spec()}
+    {:ok, spec: Covid19QuestionnaireWeb.ApiSpec.spec()}
   end
 end
