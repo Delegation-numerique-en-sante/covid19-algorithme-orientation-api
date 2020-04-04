@@ -267,26 +267,19 @@ components:
         [Caractéristiques du
         patient](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)
       example:
-        age_less_15: false
-        age_less_50: false
-        age_less_70: false
-        age_more_70: true
+        age_range: sup_70
         height: 173
         postal_code: '75000'
         weight: 65.5
       properties:
-        age_less_15:
-          description: Si la personne a moins de 15 ans
-          type: boolean
-        age_less_50:
-          description: Si la personne a moins de 50 ans
-          type: boolean
-        age_less_70:
-          description: Si la personne a moins de 70 ans
-          type: boolean
-        age_more_70:
-          description: Si la personne a au moins 70 ans
-          type: boolean
+        age_range:
+          description: Âge de la personne
+          enum:
+            - inf_15
+            - from_15_to_49
+            - from_50_to_69
+            - sup_70
+          type: string
         height:
           description: Quelle est votre taille en centimètres ?
           type: integer
@@ -321,10 +314,7 @@ components:
         orientation:
           code: orientation_SAMU
         patient:
-          age_less_15: false
-          age_less_50: false
-          age_less_70: false
-          age_more_70: true
+          age_range: sup_70
           height: 173
           postal_code: '75000'
           weight: 65.5
@@ -384,10 +374,7 @@ components:
             duration: 3600
             form_version: '2020-04-04T13:24:44.389249Z'
           patient:
-            age_less_15: false
-            age_less_50: false
-            age_less_70: false
-            age_more_70: true
+            age_range: sup_70
             height: 173
             postal_code: '75000'
             weight: 65.5
@@ -442,10 +429,7 @@ components:
           orientation:
             code: orientation_SAMU
           patient:
-            age_less_15: false
-            age_less_50: false
-            age_less_70: false
-            age_more_70: true
+            age_range: sup_70
             height: 173
             postal_code: '75000'
             weight: 65.5

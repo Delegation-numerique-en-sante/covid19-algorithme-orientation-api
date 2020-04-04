@@ -16,7 +16,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a moins de 15 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_less_15: true}
+        | patient: %Patient{questionnaire.patient | age_range: "inf_15"}
       }
 
       assert Conditions.age_less_15(questionnaire)
@@ -25,7 +25,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a au moins 15 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_less_15: false}
+        | patient: %Patient{questionnaire.patient | age_range: "from_15_to_49"}
       }
 
       assert !Conditions.age_less_15(questionnaire)
@@ -36,7 +36,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a moins de 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_less_50: true}
+        | patient: %Patient{questionnaire.patient | age_range: "from_15_to_49"}
       }
 
       assert Conditions.age_less_50(questionnaire)
@@ -45,7 +45,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a au moins 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_less_50: false}
+        | patient: %Patient{questionnaire.patient | age_range: "from_50_to_69"}
       }
 
       assert !Conditions.age_less_50(questionnaire)
@@ -56,7 +56,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a moins de 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_less_50: true}
+        | patient: %Patient{questionnaire.patient | age_range: "from_15_to_49"}
       }
 
       assert !Conditions.age_more_50(questionnaire)
@@ -65,7 +65,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a au moins 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_less_50: false}
+        | patient: %Patient{questionnaire.patient | age_range: "from_50_to_69"}
       }
 
       assert Conditions.age_more_50(questionnaire)
@@ -199,7 +199,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
   test "calcule le nombre de facteurs pronostique", %{questionnaire: questionnaire} do
     questionnaire = %Questionnaire{
       questionnaire
-      | patient: %Patient{questionnaire.patient | age_more_70: true, weight: 67.5, height: 150},
+      | patient: %Patient{questionnaire.patient | age_range: "sup_70", weight: 67.5, height: 150},
         risk_factors: %RiskFactors{
           questionnaire.risk_factors
           | heart_disease: true,

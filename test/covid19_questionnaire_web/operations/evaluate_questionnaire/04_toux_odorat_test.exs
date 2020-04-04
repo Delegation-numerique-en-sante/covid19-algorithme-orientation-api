@@ -26,7 +26,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTes
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | patient: %Patient{questionnaire.patient | age_less_50: true}
+          | patient: %Patient{questionnaire.patient | age_range: "from_15_to_49"}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -41,7 +41,10 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTes
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | patient: %Patient{questionnaire.patient | age_less_50: false, age_less_70: true}
+          | patient: %Patient{
+              questionnaire.patient
+              | age_range: "from_50_to_69"
+            }
         }
         |> EvaluateQuestionnaire.call()
 
