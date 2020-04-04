@@ -59,6 +59,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
         },
         "calculations" => %{
           "bmi_more_30" => false,
+          "bmi" => 21.9,
+          "imc" => 21.9,
           "fever" => false,
           "gravity_factors" => 3,
           "gravity_factors_minor" => 1,

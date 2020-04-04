@@ -16,6 +16,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.Calculations do
         type: :boolean,
         description: "Si la personne a au moins 30 d'IMC en kg/(cm/100)2"
       },
+      bmi: %Schema{type: :number, description: "BMI"},
+      imc: %Schema{type: :number, description: "IMC"},
       fever: %Schema{type: :boolean, description: "Indicateur de fièvre"},
       gravity_factors: %Schema{
         type: :integer,
@@ -44,6 +46,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.Calculations do
     ],
     example: %{
       "bmi_more_30" => true,
+      "bmi" => 21.9,
+      "imc" => 21.9,
       "fever" => true,
       "gravity_factors" => 3,
       "gravity_factors_minor" => 2,

@@ -5,14 +5,20 @@
       "Calculations": {
         "description": "[Calculations](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
         "example": {
+          "bmi": 21.9,
           "bmi_more_30": true,
           "fever": true,
           "gravity_factors": 3,
           "gravity_factors_major": 1,
           "gravity_factors_minor": 2,
+          "imc": 21.9,
           "risk_factors": 1
         },
         "properties": {
+          "bmi": {
+            "description": "BMI",
+            "type": "number"
+          },
           "bmi_more_30": {
             "description": "Si la personne a au moins 30 d'IMC en kg/(cm/100)2",
             "type": "boolean"
@@ -32,6 +38,10 @@
           "gravity_factors_minor": {
             "description": "Facteurs de gravité mineurs",
             "type": "integer"
+          },
+          "imc": {
+            "description": "IMC",
+            "type": "number"
           },
           "risk_factors": {
             "description": "Facteurs pronostique défavorables liés au terrain",
@@ -225,11 +235,13 @@
         "description": "[Algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
         "example": {
           "calculations": {
+            "bmi": 21.9,
             "bmi_more_30": true,
             "fever": true,
             "gravity_factors": 3,
             "gravity_factors_major": 1,
             "gravity_factors_minor": 2,
+            "imc": 21.9,
             "risk_factors": 1
           },
           "metadata": {
@@ -375,11 +387,13 @@
         "example": {
           "data": {
             "calculations": {
+              "bmi": 21.9,
               "bmi_more_30": false,
               "fever": false,
               "gravity_factors": 3,
               "gravity_factors_major": 2,
               "gravity_factors_minor": 1,
+              "imc": 21.9,
               "risk_factors": 9
             },
             "metadata": {
