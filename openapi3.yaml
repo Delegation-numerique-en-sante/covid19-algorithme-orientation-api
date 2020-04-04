@@ -336,7 +336,7 @@ components:
           feeding_day: true
           fever: false
           sore_throat_aches: true
-          temperature_cat: '[35.5, 37.7]'
+          temperature_cat: 35.5-37.7
           tiredness: true
           tiredness_details: true
         token:
@@ -399,7 +399,7 @@ components:
             feeding_day: true
             fever: false
             sore_throat_aches: true
-            temperature_cat: '[35.5, 37.7]'
+            temperature_cat: 35.5-37.7
             tiredness: true
             tiredness_details: true
       properties:
@@ -455,7 +455,7 @@ components:
             feeding_day: true
             fever: false
             sore_throat_aches: true
-            temperature_cat: '[35.5, 37.7]'
+            temperature_cat: 35.5-37.7
             tiredness: true
             tiredness_details: true
           token:
@@ -535,7 +535,7 @@ components:
         feeding_day: true
         fever: false
         sore_throat_aches: true
-        temperature_cat: '[35.5, 37.7]'
+        temperature_cat: 35.5-37.7
         tiredness: true
         tiredness_details: true
       properties:
@@ -575,11 +575,11 @@ components:
         temperature_cat:
           description: Quelle est votre température ?
           enum:
-            - '(−∞, 35.4]'
-            - '[35.5, 37.7]'
-            - '[37.8, 38.9]'
-            - '[39, +∞)'
-            - DNK
+            - inf_35.5
+            - 35.5-37.7
+            - 37.7-38.9
+            - sup_39
+            - NSP
           type: string
         tiredness:
           description: Avez-vous une fatigue inhabituelle ces derniers jours ?
