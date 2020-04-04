@@ -35,4 +35,6 @@ release:
 
 gen-spec:
 	mix covid19_questionnaire.open_api_3.gen_spec
-	api-spec-converter --from=openapi_3 --to=openapi_3 --syntax=yaml --check openapi3.json > openapi3.yaml
+	api-spec-converter \
+		--from=openapi_3 --to=openapi_3 --syntax=yaml --check \
+		covid19-algorithme-orientation-openapi.json > covid19-algorithme-orientation-openapi.yaml
