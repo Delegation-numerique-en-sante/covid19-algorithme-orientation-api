@@ -10,7 +10,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.L15AnsTest do
   test "STOP si < 15 ans" do
     {:ok, questionnaire} =
       %Questionnaire{
-        patient: %Patient{age_less_15: true},
+        patient: %Patient{age_range: "inf_15"},
         symptoms: %Symptoms{},
         risk_factors: %RiskFactors{}
       }

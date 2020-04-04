@@ -16,7 +16,7 @@ defmodule Covid19Questionnaire.Data.StoreTest do
     {:ok, questionnaire} =
       %Questionnaire{
         metadata: %Metadata{},
-        patient: %Patient{age_more_70: true},
+        patient: %Patient{age_range: "sup_70"},
         symptoms: %Symptoms{temperature_cat: "sup_39"},
         risk_factors: %RiskFactors{}
       }

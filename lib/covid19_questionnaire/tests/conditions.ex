@@ -12,9 +12,12 @@ defmodule Covid19Questionnaire.Tests.Conditions do
           optional(atom()) => any()
         }
 
+  @age_15_threshold "inf_15"
+  @age_50_threshold ["from_15_to_49" | [@age_15_threshold]]
+  @age_70_threshold ["from_50_to_69" | @age_50_threshold]
   @bmi_threshold 30.0
-  @fever_threshold ["37.7-38.9", "sup_39", "NSP"]
   @temperature_more_39 "sup_39"
+  @fever_threshold ["37.7-38.9", "NSP" | [@temperature_more_39]]
   @pregnant 1
 
   @spec symptoms1(questionnaire) :: boolean
@@ -72,17 +75,33 @@ defmodule Covid19Questionnaire.Tests.Conditions do
 
   @spec age_less_15(questionnaire) :: boolean
 
-  def age_less_15(%{patient: %{age_less_15: age_less_15}}), do: age_less_15
+  def age_less_15(%{patient: %{age_range: nil}}), do: false
+
+  def age_less_15(%{patient: %{age_range: age_range}}), do: age_range == @age_15_threshold
 
   @spec age_less_50(questionnaire) :: boolean
 
-  def age_less_50(%{patient: %{age_less_50: age_less_50}}), do: age_less_50
+  def age_less_50(%{patient: %{age_range: nil}}), do: false
+
+  def age_less_50(%{patient: %{age_range: age_range}}), do: age_range in @age_50_threshold
 
   @spec age_more_50(questionnaire) :: boolean
 
-  def age_more_50(questionnaire) do
-    !age_less_50(questionnaire)
-  end
+  def age_more_50(%{patient: %{age_range: nil}}), do: false
+
+  def age_more_50(questionnaire), do: !age_less_50(questionnaire)
+
+  @spec age_less_70(questionnaire) :: boolean
+
+  def age_less_70(%{patient: %{age_range: nil}}), do: false
+
+  def age_less_70(%{patient: %{age_range: age_range}}), do: age_range in @age_70_threshold
+
+  @spec age_more_70(questionnaire) :: boolean
+
+  def age_more_70(%{patient: %{age_range: nil}}), do: false
+
+  def age_more_70(questionnaire), do: !age_less_70(questionnaire)
 
   @spec bmi_more_30(questionnaire) :: boolean
 
@@ -189,12 +208,10 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   """
   @spec risk_factors(questionnaire) :: integer
 
-  def risk_factors(
-        questionnaire = %{patient: %{age_more_70: age_more_70}, risk_factors: risk_factors}
-      ) do
+  def risk_factors(questionnaire = %{risk_factors: risk_factors}) do
     risk_factors
     |> Map.from_struct()
-    |> Map.put(:age_more_70, age_more_70)
+    |> Map.put(:age_more_70, age_more_70(questionnaire))
     |> Map.put(:bmi_more_30, bmi_more_30(questionnaire))
     |> Map.put(:pregnant, pregnant(questionnaire))
     |> Map.delete(:pregnant)

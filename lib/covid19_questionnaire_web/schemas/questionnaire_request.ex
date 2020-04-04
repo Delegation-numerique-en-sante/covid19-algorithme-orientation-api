@@ -23,10 +23,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
           "duration" => 3600
         },
         "patient" => %{
-          "age_less_15" => false,
-          "age_less_50" => false,
-          "age_less_70" => false,
-          "age_more_70" => true,
+          "age_range" => "sup_70",
           "height" => 173,
           "weight" => 65.5,
           "postal_code" => "75000"

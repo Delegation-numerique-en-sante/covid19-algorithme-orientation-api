@@ -11,7 +11,11 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   test "Bastien Guerry #1" do
     {:ok, questionnaire} =
       %Questionnaire{
-        patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
+        patient: %Patient{
+          age_range: "from_50_to_69",
+          height: 120,
+          weight: 40.0
+        },
         symptoms: %Symptoms{
           temperature_cat: "35.5-37.7",
           agueusia_anosmia: true,
@@ -31,7 +35,11 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   test "Bastien Guerry #2" do
     {:ok, questionnaire} =
       %Questionnaire{
-        patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
+        patient: %Patient{
+          age_range: "from_50_to_69",
+          height: 120,
+          weight: 40.0
+        },
         symptoms: %Symptoms{temperature_cat: "35.5-37.7", cough: true, tiredness_details: true},
         risk_factors: %RiskFactors{heart_disease: true}
       }
@@ -47,7 +55,11 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   test "Mauko Quiroga #1" do
     {:ok, questionnaire} =
       %Questionnaire{
-        patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
+        patient: %Patient{
+          age_range: "from_50_to_69",
+          height: 120,
+          weight: 40.0
+        },
         symptoms: %Symptoms{temperature_cat: "35.5-37.7", tiredness_details: true},
         risk_factors: %RiskFactors{heart_disease: false}
       }
