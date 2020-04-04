@@ -37,8 +37,8 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
           451,
           Jason.encode!(%Error{
             code: 451,
-            info: "We can't collect that data",
-            action: "There's nothing to do on your side, all good :)."
+            info: "We won't collect that data",
+            action: "But don;t worry, there's nothing to do on your side, it's all good :)."
           })
         )
         |> halt()
