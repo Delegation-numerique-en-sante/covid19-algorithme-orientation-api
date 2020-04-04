@@ -12,5 +12,11 @@ defmodule Covid19Questionnaire.Data.Token do
   end
 
   def create, do: Repo.insert(%__MODULE__{date: DateTime.utc_now()})
-  def find(uuid), do: Repo.get(__MODULE__, uuid)
+
+  def find(uuid) do
+    case Ecto.UUID.cast(uuid) do
+      :error -> nil
+      _ -> Repo.get(__MODULE__, uuid)
+    end
+  end
 end

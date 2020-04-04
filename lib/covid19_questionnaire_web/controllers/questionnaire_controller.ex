@@ -39,6 +39,4 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
         |> halt()
     end
   end
-
-  defexception plug_status: 500, message: "no route found", conn: nil, router: nil
 end
