@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AnosmieTest d
      questionnaire: %Questionnaire{
        patient: %Patient{},
        symptoms: %Symptoms{
-         temperature_cat: "[35.5, 37.7]",
+         temperature_cat: "35.5-37.7",
          agueusia_anosmia: true
        },
        risk_factors: %RiskFactors{heart_disease: false}

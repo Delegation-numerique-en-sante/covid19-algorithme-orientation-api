@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTes
      questionnaire: %Questionnaire{
        patient: %Patient{},
        symptoms: %Symptoms{
-         temperature_cat: "[35.5, 37.7]",
+         temperature_cat: "35.5-37.7",
          cough: true,
          agueusia_anosmia: true
        },
@@ -106,7 +106,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTes
           questionnaire
           | symptoms: %Symptoms{
               questionnaire.symptoms
-              | temperature_cat: "[39, +∞)",
+              | temperature_cat: "sup_39",
                 tiredness_details: true
             },
             risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}

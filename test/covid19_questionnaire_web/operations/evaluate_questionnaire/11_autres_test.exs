@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
         symptoms: %Symptoms{
-          temperature_cat: "[35.5, 37.7]",
+          temperature_cat: "35.5-37.7",
           agueusia_anosmia: true,
           tiredness_details: true
         },
@@ -32,7 +32,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
-        symptoms: %Symptoms{temperature_cat: "[35.5, 37.7]", cough: true, tiredness_details: true},
+        symptoms: %Symptoms{temperature_cat: "35.5-37.7", cough: true, tiredness_details: true},
         risk_factors: %RiskFactors{heart_disease: true}
       }
       |> EvaluateQuestionnaire.call()
@@ -48,7 +48,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
     {:ok, questionnaire} =
       %Questionnaire{
         patient: %Patient{age_less_50: false, age_less_70: true, height: 120, weight: 40.0},
-        symptoms: %Symptoms{temperature_cat: "[35.5, 37.7]", tiredness_details: true},
+        symptoms: %Symptoms{temperature_cat: "35.5-37.7", tiredness_details: true},
         risk_factors: %RiskFactors{heart_disease: false}
       }
       |> EvaluateQuestionnaire.call()

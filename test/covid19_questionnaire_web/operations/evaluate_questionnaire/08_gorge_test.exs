@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.MalDeGorgeTes
      questionnaire: %Questionnaire{
        patient: %Patient{},
        symptoms: %Symptoms{
-         temperature_cat: "[35.5, 37.7]",
+         temperature_cat: "35.5-37.7",
          sore_throat_aches: true
        },
        risk_factors: %RiskFactors{heart_disease: false}
