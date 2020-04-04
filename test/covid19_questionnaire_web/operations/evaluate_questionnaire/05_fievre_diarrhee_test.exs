@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievreDiarrhe
      questionnaire: %Questionnaire{
        patient: %Patient{},
        symptoms: %Symptoms{
-         temperature_cat: "[37.8, 38.9]",
+         temperature_cat: "37.7-38.9",
          diarrhea: true
        },
        risk_factors: %RiskFactors{heart_disease: false}
@@ -105,7 +105,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievreDiarrhe
           questionnaire
           | symptoms: %Symptoms{
               questionnaire.symptoms
-              | temperature_cat: "[39, +∞)",
+              | temperature_cat: "sup_39",
                 tiredness_details: true
             },
             risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
