@@ -43,12 +43,6 @@ Visitez http://localhost:4000/openapi pour avoir le json brut
 
 Visitez http://localhost:4000/swagger pour Swagger
 
-### Instance de test
-
-Une instance de test est disponible.
-
-Visitez https://covid19-questionnaire.herokuapp.com/swagger
-
 ## Lancer les tests
 
 ```sh
