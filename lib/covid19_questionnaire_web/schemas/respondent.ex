@@ -1,15 +1,15 @@
-defmodule Covid19QuestionnaireWeb.Schemas.Patient do
+defmodule Covid19QuestionnaireWeb.Schemas.Respondent do
   @moduledoc """
-  Caractéristiques du patient.
+  Caractéristiques du respondent.
   """
 
   require OpenApiSpex
   alias OpenApiSpex.Schema
 
   OpenApiSpex.schema(%{
-    title: "Patient",
+    title: "Respondent",
     description:
-      "[Caractéristiques du patient](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
+      "[Caractéristiques du respondent](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
     type: :object,
     properties: %{
       age_range: %Schema{

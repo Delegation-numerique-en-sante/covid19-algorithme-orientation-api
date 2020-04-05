@@ -1,17 +1,17 @@
 defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTest do
   @moduledoc """
-  Patient avec toux + anosmie.
+  Respondent avec toux + anosmie.
   """
 
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Questionnaire, Respondent, RiskFactors, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
-       patient: %Patient{},
+       respondent: %Respondent{},
        symptoms: %Symptoms{
          temperature_cat: "35.5-37.7",
          cough: true,
@@ -21,12 +21,12 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTes
      }}
   end
 
-  describe "tout patient sans facteur pronostique" do
+  describe "tout respondent sans facteur pronostique" do
     test "sans facteur de gravité & < 50 ans", %{questionnaire: questionnaire} do
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | patient: %Patient{questionnaire.patient | age_range: "from_15_to_49"}
+          | respondent: %Respondent{questionnaire.respondent | age_range: "from_15_to_49"}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -41,8 +41,8 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTes
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | patient: %Patient{
-              questionnaire.patient
+          | respondent: %Respondent{
+              questionnaire.respondent
               | age_range: "from_50_to_69"
             }
         }
@@ -71,7 +71,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTes
     end
   end
 
-  describe "tout patient avec un facteur pronostique ou plus" do
+  describe "tout respondent avec un facteur pronostique ou plus" do
     test "aucun facteur de gravité ", %{questionnaire: questionnaire} do
       {:ok, questionnaire} =
         %Questionnaire{
@@ -125,7 +125,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxOdoratTes
     end
   end
 
-  test "tout patient avec ou sans facteur pronostique avec au moins un facteur de gravité majeur",
+  test "tout respondent avec ou sans facteur pronostique avec au moins un facteur de gravité majeur",
        %{questionnaire: questionnaire} do
     {:ok, questionnaire} =
       %Questionnaire{

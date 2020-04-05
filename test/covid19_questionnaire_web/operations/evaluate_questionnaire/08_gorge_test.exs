@@ -1,17 +1,17 @@
 defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.MalDeGorgeTest do
   @moduledoc """
-  Patient avec seulement mal de gorge.
+  Respondent avec seulement mal de gorge.
   """
 
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Questionnaire, Respondent, RiskFactors, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
-       patient: %Patient{},
+       respondent: %Respondent{},
        symptoms: %Symptoms{
          temperature_cat: "35.5-37.7",
          sore_throat_aches: true

@@ -9,7 +9,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
     Calculations,
     Metadata,
     Orientation,
-    Patient,
+    Respondent,
     RiskFactors,
     Symptoms,
     Token
@@ -23,13 +23,13 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
     properties: %{
       token: Token,
       metadata: Metadata,
-      patient: Patient,
+      respondent: Respondent,
       symptoms: Symptoms,
       risk_factors: RiskFactors,
       calculations: Calculations,
       orientation: Orientation
     },
-    required: [:metadata, :patient, :symptoms, :risk_factors],
+    required: [:metadata, :respondent, :symptoms, :risk_factors],
     example: %{
       "token" => %{
         "uuid" => "c9e77845-83cf-4891-88d6-804d659e81c5",
@@ -41,7 +41,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "date" => "2020-04-04T13:24:44.389249Z",
         "duration" => 3600
       },
-      "patient" => %{
+      "respondent" => %{
         "age_range" => "sup_70",
         "height" => 173,
         "weight" => 65.5,

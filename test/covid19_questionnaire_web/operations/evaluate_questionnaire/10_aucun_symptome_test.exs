@@ -1,17 +1,17 @@
 defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AucunSymptomeTest do
   @moduledoc """
-  Patient avec aucun symtôme.
+  Respondent avec aucun symtôme.
   """
 
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Questionnaire, Respondent, RiskFactors, Symptoms}
 
-  test "patient avec aucun symtôme" do
+  test "respondent avec aucun symtôme" do
     {:ok, questionnaire} =
       %Questionnaire{
-        patient: %Patient{},
+        respondent: %Respondent{},
         symptoms: %Symptoms{temperature_cat: "35.5-37.7"},
         risk_factors: %RiskFactors{heart_disease: 0}
       }

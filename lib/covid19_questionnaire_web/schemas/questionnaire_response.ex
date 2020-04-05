@@ -25,7 +25,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "date" => "2020-04-04T13:24:44.389249Z",
           "duration" => 1
         },
-        "patient" => %{
+        "respondent" => %{
           "age_range" => "sup_70",
           "height" => 173,
           "weight" => 65.5,

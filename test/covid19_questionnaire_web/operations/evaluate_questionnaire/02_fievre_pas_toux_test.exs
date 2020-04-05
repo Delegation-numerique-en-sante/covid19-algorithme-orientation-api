@@ -1,17 +1,17 @@
 defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievrePasTouxTest do
   @moduledoc """
-  Patient avec fièvre et pas toux.
+  Respondent avec fièvre et pas toux.
   """
 
   use ExUnit.Case
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Questionnaire, Respondent, RiskFactors, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
-       patient: %Patient{},
+       respondent: %Respondent{},
        symptoms: %Symptoms{
          temperature_cat: "NSP",
          fever: 999
@@ -20,7 +20,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievrePasToux
      }}
   end
 
-  describe "tout patient sans facteur pronostique" do
+  describe "tout respondent sans facteur pronostique" do
     test "avec au moins un facteur de gravité mineur", %{questionnaire: questionnaire} do
       {:ok, questionnaire} =
         %Questionnaire{
@@ -37,7 +37,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievrePasToux
     end
   end
 
-  describe "tout patient avec un facteur pronostique ou plus" do
+  describe "tout respondent avec un facteur pronostique ou plus" do
     test "un seul facteur de gravité mineur", %{questionnaire: questionnaire} do
       {:ok, questionnaire} =
         %Questionnaire{
@@ -74,7 +74,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievrePasToux
     end
   end
 
-  test "tout patient avec ou sans facteur pronostique avec au moins un facteur de gravité majeur",
+  test "tout respondent avec ou sans facteur pronostique avec au moins un facteur de gravité majeur",
        %{questionnaire: questionnaire} do
     {:ok, questionnaire} =
       %Questionnaire{

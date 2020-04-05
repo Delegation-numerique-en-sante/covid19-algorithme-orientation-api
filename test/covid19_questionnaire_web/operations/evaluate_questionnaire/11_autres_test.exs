@@ -6,12 +6,12 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Questionnaire, Respondent, RiskFactors, Symptoms}
 
   test "Bastien Guerry #1" do
     {:ok, questionnaire} =
       %Questionnaire{
-        patient: %Patient{
+        respondent: %Respondent{
           age_range: "from_50_to_69",
           height: 120,
           weight: 40.0
@@ -35,7 +35,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   test "Bastien Guerry #2" do
     {:ok, questionnaire} =
       %Questionnaire{
-        patient: %Patient{
+        respondent: %Respondent{
           age_range: "from_50_to_69",
           height: 120,
           weight: 40.0
@@ -55,7 +55,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
   test "Mauko Quiroga #1" do
     {:ok, questionnaire} =
       %Questionnaire{
-        patient: %Patient{
+        respondent: %Respondent{
           age_range: "from_50_to_69",
           height: 120,
           weight: 40.0

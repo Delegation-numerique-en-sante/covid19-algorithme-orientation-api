@@ -3,60 +3,60 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   Conditions du test d'orientation du COVID19.
   """
 
-  @type patient :: struct
+  @type respondent :: struct
   @type symptoms :: struct
   @type risk_factors :: struct
-  @type questionnaire :: %{patient: patient, symptoms: symptoms, risk_factors: risk_factors}
+  @type questionnaire :: %{respondent: respondent, symptoms: symptoms, risk_factors: risk_factors}
 
   ## Age range
 
   @spec age_less_15(questionnaire) :: boolean
-  def age_less_15(%{patient: %{age_range: "inf_15"}}), do: true
-  def age_less_15(%{patient: %{age_range: _age_range}}), do: false
+  def age_less_15(%{respondent: %{age_range: "inf_15"}}), do: true
+  def age_less_15(%{respondent: %{age_range: _age_range}}), do: false
 
   @spec age_less_50(questionnaire) :: boolean
-  def age_less_50(%{patient: %{age_range: "from_15_to_49"}}), do: true
-  def age_less_50(%{patient: %{age_range: "inf_15"}}), do: true
-  def age_less_50(%{patient: %{age_range: _age_range}}), do: false
+  def age_less_50(%{respondent: %{age_range: "from_15_to_49"}}), do: true
+  def age_less_50(%{respondent: %{age_range: "inf_15"}}), do: true
+  def age_less_50(%{respondent: %{age_range: _age_range}}), do: false
 
   @spec age_less_70(questionnaire) :: boolean
-  def age_less_70(%{patient: %{age_range: "from_50_to_69"}}), do: true
-  def age_less_70(%{patient: %{age_range: "from_15_to_49"}}), do: true
-  def age_less_70(%{patient: %{age_range: "inf_15"}}), do: true
-  def age_less_70(%{patient: %{age_range: _age_range}}), do: false
+  def age_less_70(%{respondent: %{age_range: "from_50_to_69"}}), do: true
+  def age_less_70(%{respondent: %{age_range: "from_15_to_49"}}), do: true
+  def age_less_70(%{respondent: %{age_range: "inf_15"}}), do: true
+  def age_less_70(%{respondent: %{age_range: _age_range}}), do: false
 
   @spec age_more_15(questionnaire) :: boolean
-  def age_more_15(%{patient: %{age_range: "from_15_to_49"}}), do: true
-  def age_more_15(%{patient: %{age_range: "from_50_to_69"}}), do: true
-  def age_more_15(%{patient: %{age_range: "sup_70"}}), do: true
-  def age_more_15(%{patient: %{age_range: _age_range}}), do: false
+  def age_more_15(%{respondent: %{age_range: "from_15_to_49"}}), do: true
+  def age_more_15(%{respondent: %{age_range: "from_50_to_69"}}), do: true
+  def age_more_15(%{respondent: %{age_range: "sup_70"}}), do: true
+  def age_more_15(%{respondent: %{age_range: _age_range}}), do: false
 
   @spec age_more_50(questionnaire) :: boolean
-  def age_more_50(%{patient: %{age_range: "from_50_to_69"}}), do: true
-  def age_more_50(%{patient: %{age_range: "sup_70"}}), do: true
-  def age_more_50(%{patient: %{age_range: _age_range}}), do: false
+  def age_more_50(%{respondent: %{age_range: "from_50_to_69"}}), do: true
+  def age_more_50(%{respondent: %{age_range: "sup_70"}}), do: true
+  def age_more_50(%{respondent: %{age_range: _age_range}}), do: false
 
   @spec age_more_70(questionnaire) :: boolean
-  def age_more_70(%{patient: %{age_range: "sup_70"}}), do: true
-  def age_more_70(%{patient: %{age_range: _age_range}}), do: false
+  def age_more_70(%{respondent: %{age_range: "sup_70"}}), do: true
+  def age_more_70(%{respondent: %{age_range: _age_range}}), do: false
 
   ## BMI/IMC algo
 
   @spec bmi_less_30(questionnaire) :: boolean
-  def bmi_less_30(%{patient: %{weight: nil}}), do: false
-  def bmi_less_30(%{patient: %{height: nil}}), do: false
+  def bmi_less_30(%{respondent: %{weight: nil}}), do: false
+  def bmi_less_30(%{respondent: %{height: nil}}), do: false
   def bmi_less_30(questionnaire), do: bmi(questionnaire) < 30
 
   @spec bmi_more_30(questionnaire) :: boolean
-  def bmi_more_30(%{patient: %{weight: nil}}), do: false
-  def bmi_more_30(%{patient: %{height: nil}}), do: false
+  def bmi_more_30(%{respondent: %{weight: nil}}), do: false
+  def bmi_more_30(%{respondent: %{height: nil}}), do: false
   def bmi_more_30(questionnaire), do: bmi(questionnaire) >= 30
 
   @spec bmi(questionnaire) :: float
-  def bmi(%{patient: %{weight: nil}}), do: nil
-  def bmi(%{patient: %{height: nil}}), do: nil
+  def bmi(%{respondent: %{weight: nil}}), do: nil
+  def bmi(%{respondent: %{height: nil}}), do: nil
 
-  def bmi(%{patient: %{weight: weight, height: height}}) do
+  def bmi(%{respondent: %{weight: weight, height: height}}) do
     weight
     |> Kernel./(:math.pow(height / 100, 2))
     |> Float.round(1)
