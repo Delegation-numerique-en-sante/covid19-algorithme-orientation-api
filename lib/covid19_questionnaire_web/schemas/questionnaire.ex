@@ -8,7 +8,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
   alias Covid19QuestionnaireWeb.Schemas.{
     Calculations,
     Metadata,
-    Orientation,
     Respondent,
     RiskFactors,
     Symptoms,
@@ -26,10 +25,9 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
       respondent: Respondent,
       symptoms: Symptoms,
       risk_factors: RiskFactors,
-      calculations: Calculations,
-      orientation: Orientation
+      calculations: Calculations
     },
-    required: [:metadata, :respondent, :symptoms, :risk_factors, :calculations, :orientation],
+    required: [:metadata, :respondent, :symptoms, :risk_factors, :calculations],
     example: %{
       "token" => %{
         "uuid" => "c9e77845-83cf-4891-88d6-804d659e81c5",
@@ -39,7 +37,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "form_version" => "2020-04-04",
         "algo_version" => "2020-04-04",
         "date" => "2020-04-04T13:24:44.389249Z",
-        "duration" => 3600
+        "duration" => 3600,
+        "orientation" => "orientation_SAMU"
       },
       "respondent" => %{
         "age_range" => "sup_70",
@@ -74,9 +73,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "heart_disease_algo" => true,
         "immunosuppressant_disease_algo" => true,
         "immunosuppressant_drug_algo" => true
-      },
-      "orientation" => %{
-        "code" => "orientation_SAMU"
       }
     }
   })

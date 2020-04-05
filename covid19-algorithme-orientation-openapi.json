@@ -95,15 +95,16 @@
       "Metadata": {
         "description": "[Caractéristiques du questionnaire](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
         "example": {
-          "algo_version": "2020-04-04T13:24:44.389249Z",
+          "algo_version": "2020-04-04",
           "date": "2020-04-04T13:24:44.389249Z",
           "duration": 3600,
-          "form_version": "2020-04-04T13:24:44.389249Z"
+          "form_version": "2020-04-04",
+          "orientation": "orientation_SAMU"
         },
         "properties": {
           "algo_version": {
             "description": "Version de l’algorithme",
-            "format": "date-time",
+            "format": "date",
             "type": "string"
           },
           "date": {
@@ -117,25 +118,10 @@
           },
           "form_version": {
             "description": "Version du formulaire",
-            "format": "date-time",
+            "format": "date",
             "type": "string"
-          }
-        },
-        "required": [
-          "form_version",
-          "algo_version"
-        ],
-        "title": "Metadata",
-        "type": "object",
-        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Metadata"
-      },
-      "Orientation": {
-        "description": "[Orientation du questionnaire COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
-        "example": {
-          "code": "orientation_SAMU"
-        },
-        "properties": {
-          "code": {
+          },
+          "orientation": {
             "description": "[Orientations possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)",
             "enum": [
               "orientation_moins_de_15_ans",
@@ -151,11 +137,12 @@
           }
         },
         "required": [
-          "code"
+          "form_version",
+          "algo_version"
         ],
-        "title": "Orientation",
+        "title": "Metadata",
         "type": "object",
-        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Orientation"
+        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Metadata"
       },
       "Questionnaire": {
         "description": "[Algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
@@ -167,13 +154,11 @@
             "immunosuppressant_drug_algo": true
           },
           "metadata": {
-            "algo_version": "2020-04-04T13:24:44.389249Z",
+            "algo_version": "2020-04-04",
             "date": "2020-04-04T13:24:44.389249Z",
             "duration": 3600,
-            "form_version": "2020-04-04T13:24:44.389249Z"
-          },
-          "orientation": {
-            "code": "orientation_SAMU"
+            "form_version": "2020-04-04",
+            "orientation": "orientation_SAMU"
           },
           "respondent": {
             "age_range": "sup_70",
@@ -215,9 +200,6 @@
           "metadata": {
             "$ref": "#/components/schemas/Metadata"
           },
-          "orientation": {
-            "$ref": "#/components/schemas/Orientation"
-          },
           "respondent": {
             "$ref": "#/components/schemas/Respondent"
           },
@@ -236,8 +218,7 @@
           "respondent",
           "symptoms",
           "risk_factors",
-          "calculations",
-          "orientation"
+          "calculations"
         ],
         "title": "Questionnaire",
         "type": "object",
@@ -254,11 +235,9 @@
               "immunosuppressant_drug_algo": true
             },
             "metadata": {
-              "algo_version": "2020-04-04T13:24:44.389249Z",
-              "form_version": "2020-04-04T13:24:44.389249Z"
-            },
-            "orientation": {
-              "code": "orientation_SAMU"
+              "algo_version": "2020-04-04",
+              "form_version": "2020-04-04",
+              "orientation": "orientation_SAMU"
             },
             "respondent": {
               "age_range": "sup_70",
@@ -317,13 +296,11 @@
               "immunosuppressant_drug_algo": true
             },
             "metadata": {
-              "algo_version": "2020-04-04T13:24:44.389249Z",
+              "algo_version": "2020-04-04",
               "date": "2020-04-04T13:24:44.389249Z",
               "duration": 1,
-              "form_version": "2020-04-04T13:24:44.389249Z"
-            },
-            "orientation": {
-              "code": "orientation_SAMU"
+              "form_version": "2020-04-04",
+              "orientation": "orientation_SAMU"
             },
             "respondent": {
               "age_range": "sup_70",
@@ -588,8 +565,8 @@
     }
   },
   "info": {
-    "title": "Test d'orientation du COVID19",
-    "version": "2020-04-04T21:23:52.742194Z"
+    "title": "API d'orientation COVID19",
+    "version": "2020-04-04"
   },
   "openapi": "3.0.0",
   "paths": {

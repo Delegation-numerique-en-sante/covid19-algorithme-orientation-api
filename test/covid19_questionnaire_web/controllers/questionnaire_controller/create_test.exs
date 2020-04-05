@@ -68,7 +68,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
     request =
       Kernel.put_in(
         request,
-        ["questionnaire", "orientation", "code"],
+        ["questionnaire", "metadata", "orientation"],
         "orientation_moins_de_15_ans"
       )
 
