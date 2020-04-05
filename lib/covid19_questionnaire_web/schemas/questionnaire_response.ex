@@ -62,7 +62,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "gravity_factors" => 3,
           "gravity_factors_minor" => 1,
           "gravity_factors_major" => 2,
-          "risk_factors" => 9
+          "risk_factors" => 10
         },
         "orientation" => %{
           "code" => "orientation_SAMU"

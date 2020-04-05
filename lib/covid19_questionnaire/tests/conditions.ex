@@ -211,10 +211,10 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   def risk_factors(questionnaire = %{risk_factors: risk_factors}) do
     risk_factors
     |> Map.from_struct()
+    |> Map.delete(:pregnant)
     |> Map.put(:age_more_70, age_more_70(questionnaire))
     |> Map.put(:bmi_more_30, bmi_more_30(questionnaire))
     |> Map.put(:pregnant, pregnant(questionnaire))
-    |> Map.delete(:pregnant)
     |> Enum.reduce(0, &count/2)
   end
 
