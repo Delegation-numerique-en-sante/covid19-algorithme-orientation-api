@@ -22,10 +22,10 @@ defmodule Covid19QuestionnaireWeb.Plugs.Connive do
     conn
     |> put_resp_header("content-type", "application/json")
     |> send_resp(
-      305,
+      407,
       Jason.encode!(%{
         error: %Error{
-          code: 305,
+          code: 407,
           info: "Use proxy",
           action: "Please use the proxy available at #{Endpoint.url()}."
         }

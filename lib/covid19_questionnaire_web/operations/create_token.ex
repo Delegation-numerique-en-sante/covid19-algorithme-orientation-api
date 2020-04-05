@@ -26,8 +26,8 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateToken do
       operationId: "TokenController.create",
       responses: %{
         201 => response("Questionnaire", "application/json", TokenResponse),
-        305 => response("Questionnaire", "application/json", ErrorResponse),
         400 => response("Questionnaire", "application/json", ErrorResponse),
+        407 => response("Questionnaire", "application/json", ErrorResponse),
         409 => response("Questionnaire", "application/json", ErrorResponse),
         500 => response("Questionnaire", "application/json", ErrorResponse)
       }

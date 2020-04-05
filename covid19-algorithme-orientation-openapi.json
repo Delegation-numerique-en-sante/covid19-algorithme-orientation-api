@@ -377,7 +377,7 @@
               "gravity_factors_major": 2,
               "gravity_factors_minor": 1,
               "imc": 21.9,
-              "risk_factors": 9
+              "risk_factors": 10
             },
             "metadata": {
               "algo_version": "2020-04-04T13:24:44.389249Z",
@@ -645,16 +645,6 @@
             },
             "description": "Questionnaire"
           },
-          "305": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description": "Questionnaire"
-          },
           "400": {
             "content": {
               "application/json": {
@@ -738,7 +728,7 @@
             },
             "description": "Questionnaire"
           },
-          "305": {
+          "400": {
             "content": {
               "application/json": {
                 "schema": {
@@ -748,7 +738,7 @@
             },
             "description": "Questionnaire"
           },
-          "400": {
+          "407": {
             "content": {
               "application/json": {
                 "schema": {
