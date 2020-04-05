@@ -64,7 +64,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
 
   test "doesn't store questionnaires of < 15y", %{conn: conn} do
     request = QuestionnaireRequest.schema().example
-    request = Kernel.put_in(request, ["questionnaire", "patient", "age_range"], "inf_15")
+    request = Kernel.put_in(request, ["questionnaire", "respondent", "age_range"], "inf_15")
     {:ok, token} = Token.create()
 
     conn =

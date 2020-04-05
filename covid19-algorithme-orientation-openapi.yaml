@@ -356,36 +356,6 @@ components:
       title: Orientation
       type: object
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Orientation
-    Patient:
-      description: >-
-        [Caractéristiques du
-        patient](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)
-      example:
-        age_range: sup_70
-        height: 173
-        postal_code: '75000'
-        weight: 65.5
-      properties:
-        age_range:
-          description: Tranche d’âge
-          enum:
-            - inf_15
-            - from_15_to_49
-            - from_50_to_69
-            - sup_70
-          type: string
-        height:
-          description: Quelle est votre taille en centimètres ?
-          type: integer
-        postal_code:
-          description: Le code postal
-          type: string
-        weight:
-          description: Quel est votre poids en kilogrammes ?
-          type: number
-      title: Patient
-      type: object
-      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Patient
     Questionnaire:
       description: >-
         [Algorithme d'orientation du
@@ -424,7 +394,7 @@ components:
           form_version: '2020-04-04T13:24:44.389249Z'
         orientation:
           code: orientation_SAMU
-        patient:
+        respondent:
           age_range: sup_70
           height: 173
           postal_code: '75000'
@@ -460,8 +430,8 @@ components:
           $ref: '#/components/schemas/Metadata'
         orientation:
           $ref: '#/components/schemas/Orientation'
-        patient:
-          $ref: '#/components/schemas/Patient'
+        respondent:
+          $ref: '#/components/schemas/Respondent'
         risk_factors:
           $ref: '#/components/schemas/RiskFactors'
         symptoms:
@@ -470,7 +440,7 @@ components:
           $ref: '#/components/schemas/Token'
       required:
         - metadata
-        - patient
+        - respondent
         - symptoms
         - risk_factors
       title: Questionnaire
@@ -483,7 +453,7 @@ components:
           metadata:
             algo_version: '2020-04-04T13:24:44.389249Z'
             form_version: '2020-04-04T13:24:44.389249Z'
-          patient:
+          respondent:
             age_range: sup_70
             height: 173
             postal_code: '75000'
@@ -555,7 +525,7 @@ components:
             form_version: '2020-04-04T13:24:44.389249Z'
           orientation:
             code: orientation_SAMU
-          patient:
+          respondent:
             age_range: sup_70
             height: 173
             postal_code: '75000'
@@ -590,6 +560,36 @@ components:
       title: QuestionnaireResponse
       type: object
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse
+    Respondent:
+      description: >-
+        [Caractéristiques du
+        respondent](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)
+      example:
+        age_range: sup_70
+        height: 173
+        postal_code: '75000'
+        weight: 65.5
+      properties:
+        age_range:
+          description: Tranche d’âge
+          enum:
+            - inf_15
+            - from_15_to_49
+            - from_50_to_69
+            - sup_70
+          type: string
+        height:
+          description: Quelle est votre taille en centimètres ?
+          type: integer
+        postal_code:
+          description: Le code postal
+          type: string
+        weight:
+          description: Quel est votre poids en kilogrammes ?
+          type: number
+      title: Respondent
+      type: object
+      x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Respondent
     RiskFactors:
       description: >-
         [Questions sur les facteurs risk_factors défavorables au

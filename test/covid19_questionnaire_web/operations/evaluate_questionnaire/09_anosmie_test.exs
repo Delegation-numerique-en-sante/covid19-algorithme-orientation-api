@@ -1,17 +1,17 @@
 defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AnosmieTest do
   @moduledoc """
-  Patient avec seulement anosmie.
+  Respondent avec seulement anosmie.
   """
 
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
   alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Questionnaire, Respondent, RiskFactors, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
-       patient: %Patient{},
+       respondent: %Respondent{},
        symptoms: %Symptoms{
          temperature_cat: "35.5-37.7",
          agueusia_anosmia: true

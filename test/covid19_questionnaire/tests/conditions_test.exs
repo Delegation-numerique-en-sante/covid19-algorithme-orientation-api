@@ -1,12 +1,12 @@
 defmodule Covid19Questionnaire.Tests.ConditionsTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Tests.Conditions
-  alias Covid19QuestionnaireWeb.Schemas.{Patient, Questionnaire, RiskFactors, Symptoms}
+  alias Covid19QuestionnaireWeb.Schemas.{Questionnaire, Respondent, RiskFactors, Symptoms}
 
   setup do
     {:ok,
      questionnaire: %Questionnaire{
-       patient: %Patient{},
+       respondent: %Respondent{},
        symptoms: %Symptoms{},
        risk_factors: %RiskFactors{}
      }}
@@ -16,7 +16,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a moins de 15 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_range: "inf_15"}
+        | respondent: %Respondent{questionnaire.respondent | age_range: "inf_15"}
       }
 
       assert Conditions.age_less_15(questionnaire)
@@ -25,7 +25,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a au moins 15 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_range: "from_15_to_49"}
+        | respondent: %Respondent{questionnaire.respondent | age_range: "from_15_to_49"}
       }
 
       assert !Conditions.age_less_15(questionnaire)
@@ -36,7 +36,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a moins de 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_range: "from_15_to_49"}
+        | respondent: %Respondent{questionnaire.respondent | age_range: "from_15_to_49"}
       }
 
       assert Conditions.age_less_50(questionnaire)
@@ -45,7 +45,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a au moins 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_range: "from_50_to_69"}
+        | respondent: %Respondent{questionnaire.respondent | age_range: "from_50_to_69"}
       }
 
       assert !Conditions.age_less_50(questionnaire)
@@ -56,7 +56,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a moins de 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_range: "from_15_to_49"}
+        | respondent: %Respondent{questionnaire.respondent | age_range: "from_15_to_49"}
       }
 
       assert !Conditions.age_more_50(questionnaire)
@@ -65,7 +65,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "a au moins 50 ans", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | age_range: "from_50_to_69"}
+        | respondent: %Respondent{questionnaire.respondent | age_range: "from_50_to_69"}
       }
 
       assert Conditions.age_more_50(questionnaire)
@@ -76,7 +76,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si IMC au moins 30 oui", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | weight: 67.5, height: 150}
+        | respondent: %Respondent{questionnaire.respondent | weight: 67.5, height: 150}
       }
 
       assert Conditions.bmi_more_30(questionnaire)
@@ -85,7 +85,7 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si IMC moins 30 non", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | patient: %Patient{questionnaire.patient | weight: 67.0, height: 150}
+        | respondent: %Respondent{questionnaire.respondent | weight: 67.0, height: 150}
       }
 
       assert !Conditions.bmi_more_30(questionnaire)
@@ -174,7 +174,12 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
   test "calcule le nombre de facteurs pronostique", %{questionnaire: questionnaire} do
     questionnaire = %Questionnaire{
       questionnaire
-      | patient: %Patient{questionnaire.patient | age_range: "sup_70", weight: 67.5, height: 150},
+      | respondent: %Respondent{
+          questionnaire.respondent
+          | age_range: "sup_70",
+            weight: 67.5,
+            height: 150
+        },
         risk_factors: %RiskFactors{
           questionnaire.risk_factors
           | heart_disease: 1,
