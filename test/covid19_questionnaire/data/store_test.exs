@@ -1,26 +1,12 @@
 defmodule Covid19Questionnaire.Data.StoreTest do
   use ExUnit.Case, async: true
   alias Covid19Questionnaire.Data.{Journal, Store}
-
-  alias Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire
-
-  alias Covid19QuestionnaireWeb.Schemas.{
-    Metadata,
-    Questionnaire,
-    Respondent,
-    RiskFactors,
-    Symptoms
-  }
+  alias Covid19QuestionnaireWeb.Schemas.{Metadata, Questionnaire}
 
   test "stores data" do
-    {:ok, questionnaire} =
-      %Questionnaire{
-        metadata: %Metadata{},
-        respondent: %Respondent{age_range: "sup_70"},
-        symptoms: %Symptoms{temperature_cat: "sup_39"},
-        risk_factors: %RiskFactors{}
-      }
-      |> EvaluateQuestionnaire.call()
+    questionnaire = %Questionnaire{
+      metadata: %Metadata{}
+    }
 
     date_tokn = DateTime.utc_now()
     date_quiz = date_tokn |> DateTime.add(3600, :second)

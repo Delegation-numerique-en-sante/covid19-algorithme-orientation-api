@@ -23,8 +23,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
         },
         "respondent" => %{
           "age_range" => "sup_70",
-          "height" => 173,
-          "weight" => 65.5,
+          "imc" => 21.9,
           "postal_code" => "75000"
         },
         "symptoms" => %{
@@ -49,6 +48,15 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
           "immunosuppressant_drug" => 1,
           "cancer" => true,
           "pregnant" => 1
+        },
+        "calculations" => %{
+          "fever_algo" => true,
+          "heart_disease_algo" => true,
+          "immunosuppressant_disease_algo" => true,
+          "immunosuppressant_drug_algo" => true
+        },
+        "orientation" => %{
+          "code" => "orientation_SAMU"
         }
       }
     }
