@@ -29,7 +29,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
         },
         "symptoms" => %{
           "sore_throat_aches" => true,
-          "fever" => false,
+          "fever" => 999,
           "temperature_cat" => "35.5-37.7",
           "agueusia_anosmia" => true,
           "breathlessness" => true,
@@ -41,12 +41,12 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
         },
         "risk_factors" => %{
           "breathing_disease" => true,
-          "heart_disease" => true,
+          "heart_disease" => 1,
           "kidney_disease" => true,
           "liver_disease" => true,
           "diabetes" => true,
-          "immunosuppressant_disease" => true,
-          "immunosuppressant_drug" => true,
+          "immunosuppressant_disease" => 1,
+          "immunosuppressant_drug" => 1,
           "cancer" => true,
           "pregnant" => 1
         }

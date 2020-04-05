@@ -16,7 +16,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.MalDeGorgeTes
          temperature_cat: "35.5-37.7",
          sore_throat_aches: true
        },
-       risk_factors: %RiskFactors{heart_disease: false}
+       risk_factors: %RiskFactors{heart_disease: 0}
      }}
   end
 
@@ -51,7 +51,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.MalDeGorgeTes
     {:ok, questionnaire} =
       %Questionnaire{
         questionnaire
-        | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
+        | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: 1}
       }
       |> EvaluateQuestionnaire.call()
 

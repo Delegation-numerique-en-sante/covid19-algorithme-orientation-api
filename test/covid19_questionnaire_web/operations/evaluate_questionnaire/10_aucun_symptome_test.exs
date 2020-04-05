@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AucunSymptome
       %Questionnaire{
         patient: %Patient{},
         symptoms: %Symptoms{temperature_cat: "35.5-37.7"},
-        risk_factors: %RiskFactors{heart_disease: false}
+        risk_factors: %RiskFactors{heart_disease: 0}
       }
       |> EvaluateQuestionnaire.call()
 

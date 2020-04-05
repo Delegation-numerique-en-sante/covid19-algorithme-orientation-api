@@ -14,23 +14,16 @@ defmodule Covid19QuestionnaireWeb.Schemas.Metadata do
     properties: %{
       form_version: %Schema{
         type: :string,
-        description: "Version du questionnaire",
+        description: "Version du formulaire",
         format: :"date-time"
       },
       algo_version: %Schema{
         type: :string,
-        description: "Version de l'algorithme médical",
+        description: "Version de l’algorithme",
         format: :"date-time"
       },
-      date: %Schema{
-        type: :string,
-        description: "Date de fin de remplissage du questionnaire",
-        format: :"date-time"
-      },
-      duration: %Schema{
-        type: :integer,
-        description: "Durée de remplissage du questionnaire (seconds)"
-      }
+      date: %Schema{type: :string, description: "Date de saisie", format: :"date-time"},
+      duration: %Schema{type: :integer, description: "Durée de saisie en secondes"}
     },
     required: [:form_version, :algo_version],
     example: %{

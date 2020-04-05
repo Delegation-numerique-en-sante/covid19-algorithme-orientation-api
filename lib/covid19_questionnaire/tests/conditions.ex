@@ -3,37 +3,119 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   Conditions du test d'orientation du COVID19.
   """
 
+  @type patient :: struct
   @type symptoms :: struct
   @type risk_factors :: struct
-  @type questionnaire :: %{
-          :__struct__ => atom(),
-          :symptoms => symptoms,
-          :risk_factors => risk_factors,
-          optional(atom()) => any()
-        }
+  @type questionnaire :: %{patient: patient, symptoms: symptoms, risk_factors: risk_factors}
 
-  @age_15_threshold "inf_15"
-  @age_50_threshold ["from_15_to_49" | [@age_15_threshold]]
-  @age_70_threshold ["from_50_to_69" | @age_50_threshold]
-  @bmi_threshold 30.0
-  @temperature_more_39 "sup_39"
-  @fever_threshold ["37.7-38.9", "NSP" | [@temperature_more_39]]
-  @pregnant 1
+  ## Age range
 
-  @spec symptoms1(questionnaire) :: boolean
+  @spec age_less_15(questionnaire) :: boolean
+  def age_less_15(%{patient: %{age_range: "inf_15"}}), do: true
+  def age_less_15(%{patient: %{age_range: _age_range}}), do: false
+
+  @spec age_less_50(questionnaire) :: boolean
+  def age_less_50(%{patient: %{age_range: "from_15_to_49"}}), do: true
+  def age_less_50(%{patient: %{age_range: "inf_15"}}), do: true
+  def age_less_50(%{patient: %{age_range: _age_range}}), do: false
+
+  @spec age_less_70(questionnaire) :: boolean
+  def age_less_70(%{patient: %{age_range: "from_50_to_69"}}), do: true
+  def age_less_70(%{patient: %{age_range: "from_15_to_49"}}), do: true
+  def age_less_70(%{patient: %{age_range: "inf_15"}}), do: true
+  def age_less_70(%{patient: %{age_range: _age_range}}), do: false
+
+  @spec age_more_15(questionnaire) :: boolean
+  def age_more_15(%{patient: %{age_range: "from_15_to_49"}}), do: true
+  def age_more_15(%{patient: %{age_range: "from_50_to_69"}}), do: true
+  def age_more_15(%{patient: %{age_range: "sup_70"}}), do: true
+  def age_more_15(%{patient: %{age_range: _age_range}}), do: false
+
+  @spec age_more_50(questionnaire) :: boolean
+  def age_more_50(%{patient: %{age_range: "from_50_to_69"}}), do: true
+  def age_more_50(%{patient: %{age_range: "sup_70"}}), do: true
+  def age_more_50(%{patient: %{age_range: _age_range}}), do: false
+
+  @spec age_more_70(questionnaire) :: boolean
+  def age_more_70(%{patient: %{age_range: "sup_70"}}), do: true
+  def age_more_70(%{patient: %{age_range: _age_range}}), do: false
+
+  ## BMI/IMC algo
+
+  @spec bmi_less_30(questionnaire) :: boolean
+  def bmi_less_30(%{patient: %{weight: nil}}), do: false
+  def bmi_less_30(%{patient: %{height: nil}}), do: false
+  def bmi_less_30(questionnaire), do: bmi(questionnaire) < 30
+
+  @spec bmi_more_30(questionnaire) :: boolean
+  def bmi_more_30(%{patient: %{weight: nil}}), do: false
+  def bmi_more_30(%{patient: %{height: nil}}), do: false
+  def bmi_more_30(questionnaire), do: bmi(questionnaire) >= 30
+
+  @spec bmi(questionnaire) :: float
+  def bmi(%{patient: %{weight: nil}}), do: nil
+  def bmi(%{patient: %{height: nil}}), do: nil
+
+  def bmi(%{patient: %{weight: weight, height: height}}) do
+    weight
+    |> Kernel./(:math.pow(height / 100, 2))
+    |> Float.round(1)
+  end
+
+  defdelegate imc(questionnaire), to: __MODULE__, as: :bmi
+  defdelegate imc_algo(questionnaire), to: __MODULE__, as: :bmi
+  defdelegate bmi_algo(questionnaire), to: __MODULE__, as: :bmi
+
+  ## Fever algo
+
+  @spec fever_algo(questionnaire) :: boolean
+  def fever_algo(%{symptoms: %{fever: 0}}), do: false
+  def fever_algo(%{symptoms: %{fever: 1, temperature_cat: "inf_35.5"}}), do: true
+  def fever_algo(%{symptoms: %{fever: 1, temperature_cat: "sup_39"}}), do: true
+  def fever_algo(%{symptoms: %{fever: 1, temperature_cat: "NSP"}}), do: true
+  def fever_algo(%{symptoms: %{fever: 999}}), do: true
+  def fever_algo(%{symptoms: %{fever: _, temperature_cat: _}}), do: false
+
+  ## Heart disease algo
+
+  @spec heart_disease_algo(questionnaire) :: boolean
+  def heart_disease_algo(%{risk_factors: %{heart_disease: 999}}), do: true
+  def heart_disease_algo(%{risk_factors: %{heart_disease: 1}}), do: true
+  def heart_disease_algo(%{risk_factors: %{heart_disease: _}}), do: false
+
+  ## Immunosuppressant disease algo
+
+  @spec immunosuppressant_disease_algo(questionnaire) :: boolean
+  def immunosuppressant_disease_algo(%{risk_factors: %{immunosuppressant_disease: 1}}), do: true
+  def immunosuppressant_disease_algo(%{risk_factors: %{immunosuppressant_disease: _}}), do: false
+
+  ## Immunosuppressant drug algo
+
+  @spec immunosuppressant_drug_algo(questionnaire) :: boolean
+  def immunosuppressant_drug_algo(%{risk_factors: %{immunosuppressant_drug: 1}}), do: true
+  def immunosuppressant_drug_algo(%{risk_factors: %{immunosuppressant_drug: _}}), do: false
+
+  ##  Pregnant algo
+
+  @spec pregnant_algo(questionnaire) :: boolean
+  def pregnant_algo(%{risk_factors: %{pregnant: 0}}), do: false
+  def pregnant_algo(%{risk_factors: %{pregnant: 1}}), do: true
+  def pregnant_algo(%{risk_factors: %{pregnant: _}}), do: false
+
+  ## Symptoms
 
   @doc """
   Fièvre ET toux.
   """
-  def symptoms1(questionnaire = %{symptoms: %{cough: cough}}) do
-    fever(questionnaire) && cough
-  end
-
-  @spec symptoms2(questionnaire) :: boolean
+  @spec symptoms1(questionnaire) :: boolean
+  def symptoms1(questionnaire = %{symptoms: %{cough: true}}), do: fever_algo(questionnaire)
+  def symptoms1(_questionnaire), do: false
 
   @doc """
   Fièvre OU (pas de fièvre et (diarrhée OU (toux ET douleurs) OU (toux ET anosmie)).
   """
+  @spec symptoms2(questionnaire) :: boolean
+
   def symptoms2(
         questionnaire = %{
           symptoms: %{
@@ -44,8 +126,8 @@ defmodule Covid19Questionnaire.Tests.Conditions do
           }
         }
       ) do
-    fever(questionnaire) ||
-      (!fever(questionnaire) &&
+    fever_algo(questionnaire) ||
+      (!fever_algo(questionnaire) &&
          (diarrhea || (cough && sore_throat_aches) || (cough && agueusia_anosmia)))
   end
 
@@ -53,105 +135,18 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   Toux OU douleurs OU anosmie.
   """
   @spec symptoms3(questionnaire) :: boolean
-
-  def symptoms3(%{
-        symptoms: %{
-          cough: cough,
-          sore_throat_aches: sore_throat_aches,
-          agueusia_anosmia: agueusia_anosmia
-        }
-      }) do
-    cough || sore_throat_aches || agueusia_anosmia
-  end
+  def symptoms3(%{symptoms: %{cough: true}}), do: true
+  def symptoms3(%{symptoms: %{sore_throat_aches: true}}), do: true
+  def symptoms3(%{symptoms: %{agueusia_anosmia: true}}), do: true
+  def symptoms3(_questionnaire), do: false
 
   @doc """
   NI toux NI douleurs NI anosmie.
   """
   @spec symptoms4(questionnaire) :: boolean
-
   def symptoms4(questionnaire), do: !symptoms3(questionnaire)
 
-  ## Statistiques
-
-  @spec age_less_15(questionnaire) :: boolean
-
-  def age_less_15(%{patient: %{age_range: nil}}), do: false
-
-  def age_less_15(%{patient: %{age_range: age_range}}), do: age_range == @age_15_threshold
-
-  @spec age_less_50(questionnaire) :: boolean
-
-  def age_less_50(%{patient: %{age_range: nil}}), do: false
-
-  def age_less_50(%{patient: %{age_range: age_range}}), do: age_range in @age_50_threshold
-
-  @spec age_more_50(questionnaire) :: boolean
-
-  def age_more_50(%{patient: %{age_range: nil}}), do: false
-
-  def age_more_50(questionnaire), do: !age_less_50(questionnaire)
-
-  @spec age_less_70(questionnaire) :: boolean
-
-  def age_less_70(%{patient: %{age_range: nil}}), do: false
-
-  def age_less_70(%{patient: %{age_range: age_range}}), do: age_range in @age_70_threshold
-
-  @spec age_more_70(questionnaire) :: boolean
-
-  def age_more_70(%{patient: %{age_range: nil}}), do: false
-
-  def age_more_70(questionnaire), do: !age_less_70(questionnaire)
-
-  @spec bmi_more_30(questionnaire) :: boolean
-
-  def bmi_more_30(%{patient: %{weight: nil}}), do: false
-
-  def bmi_more_30(%{patient: %{height: nil}}), do: false
-
-  def bmi_more_30(questionnaire) do
-    bmi(questionnaire) >= @bmi_threshold
-  end
-
-  @spec bmi(questionnaire) :: float
-
-  def bmi(%{patient: %{weight: nil}}), do: nil
-
-  def bmi(%{patient: %{height: nil}}), do: nil
-
-  def bmi(%{patient: %{weight: weight, height: height}}) do
-    weight
-    |> Kernel./(:math.pow(height / 100, 2))
-    |> Float.round(1)
-  end
-
-  @spec imc(questionnaire) :: float
-
-  def imc(questionnaire), do: bmi(questionnaire)
-
-  @spec fever(questionnaire) :: boolean
-
-  def fever(%{symptoms: %{temperature_cat: nil}}), do: false
-
-  def fever(%{symptoms: %{temperature_cat: temperature_cat}}) do
-    temperature_cat in @fever_threshold
-  end
-
-  @spec temperature_more_39(questionnaire) :: boolean
-
-  def temperature_more_39(%{symptoms: %{temperature_cat: nil}}), do: false
-
-  def temperature_more_39(%{symptoms: %{temperature_cat: temperature}}) do
-    temperature == @temperature_more_39
-  end
-
-  @spec pregnant(questionnaire) :: boolean
-
-  def pregnant(%{risk_factors: %{pregnant: nil}}), do: false
-
-  def pregnant(%{risk_factors: %{pregnant: pregnant}}) do
-    pregnant == @pregnant
-  end
+  ## Gravity factors
 
   @doc """
   Facteurs de gravité mineurs + majeurs.
@@ -165,7 +160,9 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   @doc """
   Facteur de gravité mineurs.
 
+  - Fièvre < 35,5°C
   - Fièvre >= 39°C
+  - A indiqué de la fièvre sans renseigner de la température
   - Fatigue : alitement > 50% du temps diurne
   """
   @spec gravity_factors_minor(questionnaire) :: integer
@@ -173,7 +170,7 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   def gravity_factors_minor(questionnaire = %{symptoms: symptoms}) do
     symptoms
     |> Map.take([:tiredness_details])
-    |> Map.put(:temperature_more_39, temperature_more_39(questionnaire))
+    |> Map.put(:fever_algo, fever_algo(questionnaire))
     |> Enum.reduce(0, &count/2)
   end
 
@@ -190,6 +187,8 @@ defmodule Covid19Questionnaire.Tests.Conditions do
     |> Map.take([:breathlessness, :feeding_day])
     |> Enum.reduce(0, &count/2)
   end
+
+  ## Risk factors
 
   @doc """
   Facteurs pronostique défavorable lié au terrain.
@@ -211,10 +210,13 @@ defmodule Covid19Questionnaire.Tests.Conditions do
   def risk_factors(questionnaire = %{risk_factors: risk_factors}) do
     risk_factors
     |> Map.from_struct()
-    |> Map.delete(:pregnant)
+    |> Map.take([:breathing_disease, :kidney_disease, :liver_disease, :diabetes, :cancer])
     |> Map.put(:age_more_70, age_more_70(questionnaire))
     |> Map.put(:bmi_more_30, bmi_more_30(questionnaire))
-    |> Map.put(:pregnant, pregnant(questionnaire))
+    |> Map.put(:pregnant_algo, pregnant_algo(questionnaire))
+    |> Map.put(:heart_disease_algo, heart_disease_algo(questionnaire))
+    |> Map.put(:immunosuppressant_disease_algo, immunosuppressant_disease_algo(questionnaire))
+    |> Map.put(:immunosuppressant_drug_algo, immunosuppressant_drug_algo(questionnaire))
     |> Enum.reduce(0, &count/2)
   end
 

@@ -13,26 +13,15 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievreTouxTes
      questionnaire: %Questionnaire{
        patient: %Patient{},
        symptoms: %Symptoms{
-         temperature_cat: "37.7-38.9",
+         fever: 999,
+         temperature_cat: "NSP",
          cough: true
        },
-       risk_factors: %RiskFactors{heart_disease: false}
+       risk_factors: %RiskFactors{heart_disease: 0}
      }}
   end
 
   describe "tout patient sans facteur pronostique" do
-    test "sans facteur de gravité", %{questionnaire: questionnaire} do
-      {:ok, questionnaire} =
-        questionnaire
-        |> EvaluateQuestionnaire.call()
-
-      assert Conditions.symptoms2(questionnaire)
-      assert Conditions.risk_factors(questionnaire) == 0
-      assert Conditions.gravity_factors_minor(questionnaire) == 0
-      assert Conditions.gravity_factors_major(questionnaire) == 0
-      assert questionnaire.orientation.code == "orientation_consultation_surveillance_3"
-    end
-
     test "avec au moins un facteur de gravité mineur sans facteur de gravité majeur", %{
       questionnaire: questionnaire
     } do
@@ -52,27 +41,11 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievreTouxTes
   end
 
   describe "tout patient avec un facteur pronostique ou plus" do
-    test "aucun facteur de gravité", %{questionnaire: questionnaire} do
-      {:ok, questionnaire} =
-        %Questionnaire{
-          questionnaire
-          | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
-        }
-        |> EvaluateQuestionnaire.call()
-
-      assert Conditions.symptoms2(questionnaire)
-      assert Conditions.risk_factors(questionnaire) >= 1
-      assert Conditions.gravity_factors_minor(questionnaire) == 0
-      assert Conditions.gravity_factors_major(questionnaire) == 0
-      assert questionnaire.orientation.code == "orientation_consultation_surveillance_3"
-    end
-
     test "un seul facteur de gravité mineur", %{questionnaire: questionnaire} do
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | symptoms: %Symptoms{questionnaire.symptoms | tiredness_details: true},
-            risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
+          | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: 1}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -92,7 +65,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievreTouxTes
               | temperature_cat: "sup_39",
                 tiredness_details: true
             },
-            risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
+            risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: 1}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -115,7 +88,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.FievreTouxTes
 
     assert Conditions.symptoms2(questionnaire)
     assert Conditions.risk_factors(questionnaire) == 0
-    assert Conditions.gravity_factors_minor(questionnaire) == 0
+    assert Conditions.gravity_factors_minor(questionnaire) == 1
     assert Conditions.gravity_factors_major(questionnaire) >= 1
     assert questionnaire.orientation.code == "orientation_SAMU"
   end
