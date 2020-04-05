@@ -20,8 +20,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "date" => "2020-04-04T13:24:44.389249Z"
         },
         "metadata" => %{
-          "form_version" => "2020-04-04T13:24:44.389249Z",
-          "algo_version" => "2020-04-04T13:24:44.389249Z",
+          "form_version" => "2020-04-04",
+          "algo_version" => "2020-04-04",
           "date" => "2020-04-04T13:24:44.389249Z",
           "duration" => 1
         },

@@ -15,20 +15,20 @@ defmodule Covid19QuestionnaireWeb.Schemas.Metadata do
       form_version: %Schema{
         type: :string,
         description: "Version du formulaire",
-        format: :"date-time"
+        format: :date
       },
       algo_version: %Schema{
         type: :string,
         description: "Version de l’algorithme",
-        format: :"date-time"
+        format: :date
       },
       date: %Schema{type: :string, description: "Date de saisie", format: :"date-time"},
       duration: %Schema{type: :integer, description: "Durée de saisie en secondes"}
     },
     required: [:form_version, :algo_version],
     example: %{
-      "form_version" => "2020-04-04T13:24:44.389249Z",
-      "algo_version" => "2020-04-04T13:24:44.389249Z",
+      "form_version" => "2020-04-04",
+      "algo_version" => "2020-04-04",
       "date" => "2020-04-04T13:24:44.389249Z",
       "duration" => 3600
     }
