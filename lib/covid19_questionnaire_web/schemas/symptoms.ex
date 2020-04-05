@@ -17,7 +17,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.Symptoms do
         description: "Avez-vous un mal de gorge apparu ces derniers jours ?"
       },
       fever: %Schema{
-        type: :boolean,
+        type: :integer,
+        enum: [0, 1, 999],
         description: "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?"
       },
       temperature_cat: %Schema{
@@ -62,7 +63,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Symptoms do
     },
     example: %{
       "sore_throat_aches" => true,
-      "fever" => false,
+      "fever" => 999,
       "temperature_cat" => "35.5-37.7",
       "agueusia_anosmia" => true,
       "breathlessness" => true,

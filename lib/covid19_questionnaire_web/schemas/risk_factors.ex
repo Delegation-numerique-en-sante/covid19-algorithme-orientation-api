@@ -32,11 +32,13 @@ defmodule Covid19QuestionnaireWeb.Schemas.RiskFactors do
       },
       diabetes: %Schema{type: :boolean, description: "Êtes-vous diabétique ?"},
       immunosuppressant_disease: %Schema{
-        type: :boolean,
+        type: :integer,
+        enum: [0, 1, 999],
         description: "Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?"
       },
       immunosuppressant_drug: %Schema{
-        type: :boolean,
+        type: :integer,
+        enum: [0, 1, 999],
         description: "Prenez-vous un traitement immunosuppresseur ?"
       },
       cancer: %Schema{type: :boolean, description: "Avez-vous ou avez-vous eu un cancer ?"},
@@ -52,8 +54,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.RiskFactors do
       "kidney_disease" => true,
       "liver_disease" => true,
       "diabetes" => true,
-      "immunosuppressant_disease" => true,
-      "immunosuppressant_drug" => true,
+      "immunosuppressant_disease" => 1,
+      "immunosuppressant_drug" => 1,
       "cancer" => true,
       "pregnant" => 1
     }

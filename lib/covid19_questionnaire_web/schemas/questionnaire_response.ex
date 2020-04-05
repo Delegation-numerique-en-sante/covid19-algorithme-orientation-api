@@ -33,7 +33,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
         },
         "symptoms" => %{
           "sore_throat_aches" => true,
-          "fever" => false,
+          "fever" => 999,
           "temperature_cat" => "35.5-37.7",
           "agueusia_anosmia" => true,
           "breathlessness" => true,
@@ -49,20 +49,23 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "kidney_disease" => true,
           "liver_disease" => true,
           "diabetes" => true,
-          "immunosuppressant_disease" => true,
-          "immunosuppressant_drug" => true,
+          "immunosuppressant_disease" => 1,
+          "immunosuppressant_drug" => 1,
           "cancer" => true,
           "pregnant" => 1
         },
         "calculations" => %{
-          "bmi_more_30" => false,
+          "bmi_more_30" => true,
           "bmi" => 21.9,
           "imc" => 21.9,
-          "fever" => false,
+          "fever_algo" => true,
+          "hearth_desease_algo" => true,
+          "immunosuppressant_disease_algo" => true,
+          "immunosuppressant_drug_algo" => true,
           "gravity_factors" => 3,
-          "gravity_factors_minor" => 1,
-          "gravity_factors_major" => 2,
-          "risk_factors" => 10
+          "gravity_factors_minor" => 2,
+          "gravity_factors_major" => 1,
+          "risk_factors" => 1
         },
         "orientation" => %{
           "code" => "orientation_SAMU"

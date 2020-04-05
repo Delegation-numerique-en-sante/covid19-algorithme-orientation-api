@@ -18,7 +18,19 @@ defmodule Covid19QuestionnaireWeb.Schemas.Calculations do
       },
       bmi: %Schema{type: :number, description: "BMI"},
       imc: %Schema{type: :number, description: "IMC"},
-      fever: %Schema{type: :boolean, description: "Indicateur de fièvre"},
+      fever_algo: %Schema{type: :boolean, description: "Indicateur de fièvre"},
+      hearth_desease_algo: %Schema{
+        type: :boolean,
+        description: "Indicateur de problèmes cardiaques"
+      },
+      immunosuppressant_disease_algo: %Schema{
+        type: :boolean,
+        description: "Indicateur de maladie immuno-déprimante"
+      },
+      immunosuppressant_drug_algo: %Schema{
+        type: :boolean,
+        description: "Indicateur de traiment immuno-déprimant"
+      },
       gravity_factors: %Schema{
         type: :integer,
         description: "Facteurs de gravité mineurs + majeurs"
@@ -38,7 +50,12 @@ defmodule Covid19QuestionnaireWeb.Schemas.Calculations do
     },
     required: [
       :bmi_more_30,
-      :fever,
+      :bmi,
+      :imc,
+      :fever_algo,
+      :hearth_desease_algo,
+      :immunosuppressant_disease_algo,
+      :immunosuppressant_drug_algo,
       :gravity_factors,
       :gravity_factors_minor,
       :gravity_factors_major,
@@ -48,7 +65,10 @@ defmodule Covid19QuestionnaireWeb.Schemas.Calculations do
       "bmi_more_30" => true,
       "bmi" => 21.9,
       "imc" => 21.9,
-      "fever" => true,
+      "fever_algo" => true,
+      "hearth_desease_algo" => true,
+      "immunosuppressant_disease_algo" => true,
+      "immunosuppressant_drug_algo" => true,
       "gravity_factors" => 3,
       "gravity_factors_minor" => 2,
       "gravity_factors_major" => 1,

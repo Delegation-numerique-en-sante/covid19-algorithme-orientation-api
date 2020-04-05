@@ -120,11 +120,14 @@ components:
       example:
         bmi: 21.9
         bmi_more_30: true
-        fever: true
+        fever_algo: true
         gravity_factors: 3
         gravity_factors_major: 1
         gravity_factors_minor: 2
+        hearth_desease_algo: true
         imc: 21.9
+        immunosuppressant_disease_algo: true
+        immunosuppressant_drug_algo: true
         risk_factors: 1
       properties:
         bmi:
@@ -133,7 +136,7 @@ components:
         bmi_more_30:
           description: Si la personne a au moins 30 d'IMC en kg/(cm/100)2
           type: boolean
-        fever:
+        fever_algo:
           description: Indicateur de fièvre
           type: boolean
         gravity_factors:
@@ -145,15 +148,29 @@ components:
         gravity_factors_minor:
           description: Facteurs de gravité mineurs
           type: integer
+        hearth_desease_algo:
+          description: Indicateur de problèmes cardiaques
+          type: boolean
         imc:
           description: IMC
           type: number
+        immunosuppressant_disease_algo:
+          description: Indicateur de maladie immuno-déprimante
+          type: boolean
+        immunosuppressant_drug_algo:
+          description: Indicateur de traiment immuno-déprimant
+          type: boolean
         risk_factors:
           description: Facteurs pronostique défavorables liés au terrain
           type: integer
       required:
         - bmi_more_30
-        - fever
+        - bmi
+        - imc
+        - fever_algo
+        - hearth_desease_algo
+        - immunosuppressant_disease_algo
+        - immunosuppressant_drug_algo
         - gravity_factors
         - gravity_factors_minor
         - gravity_factors_major
@@ -305,11 +322,14 @@ components:
         calculations:
           bmi: 21.9
           bmi_more_30: true
-          fever: true
+          fever_algo: true
           gravity_factors: 3
           gravity_factors_major: 1
           gravity_factors_minor: 2
+          hearth_desease_algo: true
           imc: 21.9
+          immunosuppressant_disease_algo: true
+          immunosuppressant_drug_algo: true
           risk_factors: 1
         metadata:
           algo_version: '2020-04-04T13:24:44.389249Z'
@@ -328,8 +348,8 @@ components:
           cancer: true
           diabetes: true
           heart_disease: true
-          immunosuppressant_disease: true
-          immunosuppressant_drug: true
+          immunosuppressant_disease: 1
+          immunosuppressant_drug: 1
           kidney_disease: true
           liver_disease: true
           pregnant: 1
@@ -339,7 +359,7 @@ components:
           cough: true
           diarrhea: true
           feeding_day: true
-          fever: false
+          fever: 999
           sore_throat_aches: true
           temperature_cat: 35.5-37.7
           tiredness: true
@@ -387,8 +407,8 @@ components:
             cancer: true
             diabetes: true
             heart_disease: true
-            immunosuppressant_disease: true
-            immunosuppressant_drug: true
+            immunosuppressant_disease: 1
+            immunosuppressant_drug: 1
             kidney_disease: true
             liver_disease: true
             pregnant: 1
@@ -398,7 +418,7 @@ components:
             cough: true
             diarrhea: true
             feeding_day: true
-            fever: false
+            fever: 999
             sore_throat_aches: true
             temperature_cat: 35.5-37.7
             tiredness: true
@@ -418,13 +438,16 @@ components:
         data:
           calculations:
             bmi: 21.9
-            bmi_more_30: false
-            fever: false
+            bmi_more_30: true
+            fever_algo: true
             gravity_factors: 3
-            gravity_factors_major: 2
-            gravity_factors_minor: 1
+            gravity_factors_major: 1
+            gravity_factors_minor: 2
+            hearth_desease_algo: true
             imc: 21.9
-            risk_factors: 10
+            immunosuppressant_disease_algo: true
+            immunosuppressant_drug_algo: true
+            risk_factors: 1
           metadata:
             algo_version: '2020-04-04T13:24:44.389249Z'
             date: '2020-04-04T13:24:44.389249Z'
@@ -442,8 +465,8 @@ components:
             cancer: true
             diabetes: true
             heart_disease: true
-            immunosuppressant_disease: true
-            immunosuppressant_drug: true
+            immunosuppressant_disease: 1
+            immunosuppressant_drug: 1
             kidney_disease: true
             liver_disease: true
             pregnant: 1
@@ -453,7 +476,7 @@ components:
             cough: true
             diarrhea: true
             feeding_day: true
-            fever: false
+            fever: 999
             sore_throat_aches: true
             temperature_cat: 35.5-37.7
             tiredness: true
@@ -476,8 +499,8 @@ components:
         cancer: true
         diabetes: true
         heart_disease: true
-        immunosuppressant_disease: true
-        immunosuppressant_drug: true
+        immunosuppressant_disease: 1
+        immunosuppressant_drug: 1
         kidney_disease: true
         liver_disease: true
         pregnant: 1
@@ -503,10 +526,18 @@ components:
           description: >-
             Avez-vous une maladie connue pour diminuer vos défenses immunitaires
             ?
-          type: boolean
+          enum:
+            - 0
+            - 1
+            - 999
+          type: integer
         immunosuppressant_drug:
           description: Prenez-vous un traitement immunosuppresseur ?
-          type: boolean
+          enum:
+            - 0
+            - 1
+            - 999
+          type: integer
         kidney_disease:
           description: Avez-vous une insuffisance rénale chronique dialysée ?
           type: boolean
@@ -533,7 +564,7 @@ components:
         cough: true
         diarrhea: true
         feeding_day: true
-        fever: false
+        fever: 999
         sore_throat_aches: true
         temperature_cat: 35.5-37.7
         tiredness: true
@@ -568,7 +599,11 @@ components:
           description: >-
             Pensez-vous avoir eu de la fièvre ces derniers jours (frissons,
             sueurs) ?
-          type: boolean
+          enum:
+            - 0
+            - 1
+            - 999
+          type: integer
         sore_throat_aches:
           description: Avez-vous un mal de gorge apparu ces derniers jours ?
           type: boolean
