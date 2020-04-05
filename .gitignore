@@ -1,3 +1,5 @@
+# Elixir
+
 /_build/
 /cover/
 /deps/
@@ -7,3 +9,8 @@ erl_crash.dump
 *.ez
 covid19_questionnaire-*.tar
 /priv/static/
+
+# Node
+
+/node_modules/
+package*.json
