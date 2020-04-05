@@ -23,7 +23,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "form_version" => "2020-04-04",
           "algo_version" => "2020-04-04",
           "date" => "2020-04-04T13:24:44.389249Z",
-          "duration" => 1
+          "duration" => 1,
+          "orientation" => "orientation_SAMU"
         },
         "respondent" => %{
           "age_range" => "sup_70",
@@ -58,9 +59,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "heart_disease_algo" => true,
           "immunosuppressant_disease_algo" => true,
           "immunosuppressant_drug_algo" => true
-        },
-        "orientation" => %{
-          "code" => "orientation_SAMU"
         }
       }
     }

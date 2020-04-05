@@ -23,14 +23,30 @@ defmodule Covid19QuestionnaireWeb.Schemas.Metadata do
         format: :date
       },
       date: %Schema{type: :string, description: "Date de saisie", format: :"date-time"},
-      duration: %Schema{type: :integer, description: "Durée de saisie en secondes"}
+      duration: %Schema{type: :integer, description: "Durée de saisie en secondes"},
+      orientation: %Schema{
+        type: :string,
+        enum: [
+          "orientation_moins_de_15_ans",
+          "orientation_domicile_surveillance_1",
+          "orientation_consultation_surveillance_1",
+          "orientation_consultation_surveillance_2",
+          "orientation_SAMU",
+          "orientation_consultation_surveillance_3",
+          "orientation_consultation_surveillance_4",
+          "orientation_surveillance"
+        ],
+        description:
+          "[Orientations possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#conclusions-possibles)"
+      }
     },
     required: [:form_version, :algo_version],
     example: %{
       "form_version" => "2020-04-04",
       "algo_version" => "2020-04-04",
       "date" => "2020-04-04T13:24:44.389249Z",
-      "duration" => 3600
+      "duration" => 3600,
+      "orientation" => "orientation_SAMU"
     }
   })
 end
