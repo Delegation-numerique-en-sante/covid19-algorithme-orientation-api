@@ -17,7 +17,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
          cough: true,
          sore_throat_aches: true
        },
-       risk_factors: %RiskFactors{heart_disease: false}
+       risk_factors: %RiskFactors{heart_disease: 0}
      }}
   end
 
@@ -73,7 +73,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
       {:ok, questionnaire} =
         %Questionnaire{
           questionnaire
-          | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
+          | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: 1}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -89,7 +89,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
         %Questionnaire{
           questionnaire
           | symptoms: %Symptoms{questionnaire.symptoms | tiredness_details: true},
-            risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
+            risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: 1}
         }
         |> EvaluateQuestionnaire.call()
 
@@ -106,10 +106,11 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxGorgeTest
           questionnaire
           | symptoms: %Symptoms{
               questionnaire.symptoms
-              | temperature_cat: "sup_39",
+              | fever: 1,
+                temperature_cat: "sup_39",
                 tiredness_details: true
             },
-            risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
+            risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: 1}
         }
         |> EvaluateQuestionnaire.call()
 

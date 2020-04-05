@@ -45,7 +45,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
         },
         "risk_factors" => %{
           "breathing_disease" => true,
-          "heart_disease" => true,
+          "heart_disease" => 1,
           "kidney_disease" => true,
           "liver_disease" => true,
           "diabetes" => true,
@@ -55,17 +55,31 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse do
           "pregnant" => 1
         },
         "calculations" => %{
-          "bmi_more_30" => true,
+          "age_less_15" => false,
+          "age_less_50" => false,
+          "age_less_70" => false,
+          "age_more_15" => true,
+          "age_more_50" => true,
+          "age_more_70" => true,
+          "bmi_less_30" => true,
+          "bmi_more_30" => false,
           "bmi" => 21.9,
+          "bmi_algo" => 21.9,
           "imc" => 21.9,
+          "imc_algo" => 21.9,
+          "pregnant_algo" => true,
           "fever_algo" => true,
-          "hearth_desease_algo" => true,
+          "heart_disease_algo" => true,
           "immunosuppressant_disease_algo" => true,
           "immunosuppressant_drug_algo" => true,
-          "gravity_factors" => 3,
+          "symptoms1" => true,
+          "symptoms2" => true,
+          "symptoms3" => true,
+          "symptoms4" => false,
+          "gravity_factors" => 4,
           "gravity_factors_minor" => 2,
-          "gravity_factors_major" => 1,
-          "risk_factors" => 1
+          "gravity_factors_major" => 2,
+          "risk_factors" => 10
         },
         "orientation" => %{
           "code" => "orientation_SAMU"

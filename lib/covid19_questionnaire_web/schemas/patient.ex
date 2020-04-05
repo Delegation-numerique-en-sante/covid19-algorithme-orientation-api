@@ -15,11 +15,11 @@ defmodule Covid19QuestionnaireWeb.Schemas.Patient do
       age_range: %Schema{
         type: :string,
         enum: ["inf_15", "from_15_to_49", "from_50_to_69", "sup_70"],
-        description: "Âge de la personne"
+        description: "Tranche d’âge"
       },
       height: %Schema{type: :integer, description: "Quelle est votre taille en centimètres ?"},
       weight: %Schema{type: :number, description: "Quel est votre poids en kilogrammes ?"},
-      postal_code: %Schema{type: :string, description: "Code postal"}
+      postal_code: %Schema{type: :string, description: "Le code postal"}
     },
     example: %{
       "age_range" => "sup_70",

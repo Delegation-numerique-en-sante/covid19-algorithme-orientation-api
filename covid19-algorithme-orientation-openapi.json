@@ -5,29 +5,75 @@
       "Calculations": {
         "description": "[Calculations](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
         "example": {
+          "age_less_15": true,
+          "age_less_50": true,
+          "age_less_70": true,
+          "age_more_15": true,
+          "age_more_50": true,
+          "age_more_70": true,
           "bmi": 21.9,
+          "bmi_algo": 21.9,
+          "bmi_less_30": true,
           "bmi_more_30": true,
           "fever_algo": true,
           "gravity_factors": 3,
           "gravity_factors_major": 1,
           "gravity_factors_minor": 2,
-          "hearth_desease_algo": true,
+          "heart_disease_algo": true,
           "imc": 21.9,
+          "imc_algo": 21.9,
           "immunosuppressant_disease_algo": true,
           "immunosuppressant_drug_algo": true,
-          "risk_factors": 1
+          "pregnant_algo": true,
+          "risk_factors": 1,
+          "symptoms1": true,
+          "symptoms2": true,
+          "symptoms3": true,
+          "symptoms4": true
         },
         "properties": {
+          "age_less_15": {
+            "description": "Si la personne a age_less_15",
+            "type": "boolean"
+          },
+          "age_less_50": {
+            "description": "Si la personne a age_less_50",
+            "type": "boolean"
+          },
+          "age_less_70": {
+            "description": "Si la personne a age_less_70",
+            "type": "boolean"
+          },
+          "age_more_15": {
+            "description": "Si la personne a age_more_15",
+            "type": "boolean"
+          },
+          "age_more_50": {
+            "description": "Si la personne a age_more_50",
+            "type": "boolean"
+          },
+          "age_more_70": {
+            "description": "Si la personne a age_more_70",
+            "type": "boolean"
+          },
           "bmi": {
-            "description": "BMI",
+            "description": "BMI de la personne en kg/(cm/100)2",
             "type": "number"
           },
+          "bmi_algo": {
+            "description": "BMI de la personne en kg/(cm/100)2",
+            "type": "number"
+          },
+          "bmi_less_30": {
+            "description": "Moins 30 d'IMC en kg/(cm/100)2",
+            "type": "boolean"
+          },
           "bmi_more_30": {
-            "description": "Si la personne a au moins 30 d'IMC en kg/(cm/100)2",
+            "description": "Au moins 30 d'IMC en kg/(cm/100)2",
             "type": "boolean"
           },
           "fever_algo": {
-            "description": "Indicateur de fièvre",
+            "description": "Si la personne a de la fièvre",
             "type": "boolean"
           },
           "gravity_factors": {
@@ -42,35 +88,73 @@
             "description": "Facteurs de gravité mineurs",
             "type": "integer"
           },
-          "hearth_desease_algo": {
-            "description": "Indicateur de problèmes cardiaques",
+          "heart_disease_algo": {
+            "description": "Maladie cardiaque",
             "type": "boolean"
           },
           "imc": {
-            "description": "IMC",
+            "description": "IMC de la personne en kg/(cm/100)2",
+            "type": "number"
+          },
+          "imc_algo": {
+            "description": "IMC de la personne en kg/(cm/100)2",
             "type": "number"
           },
           "immunosuppressant_disease_algo": {
-            "description": "Indicateur de maladie immuno-déprimante",
+            "description": "Maladie défenses immunitaires",
             "type": "boolean"
           },
           "immunosuppressant_drug_algo": {
-            "description": "Indicateur de traiment immuno-déprimant",
+            "description": "Traitement immunodépresseur",
+            "type": "boolean"
+          },
+          "pregnant_algo": {
+            "description": "Si la personne est enceinte",
             "type": "boolean"
           },
           "risk_factors": {
             "description": "Facteurs pronostique défavorables liés au terrain",
             "type": "integer"
+          },
+          "symptoms1": {
+            "description": "Fièvre ET toux",
+            "type": "boolean"
+          },
+          "symptoms2": {
+            "description": "Fièvre OU (pas de fièvre et (diarrhée OU (toux ET douleurs) OU (toux ET anosmie))",
+            "type": "boolean"
+          },
+          "symptoms3": {
+            "description": "Toux OU douleurs OU anosmie",
+            "type": "boolean"
+          },
+          "symptoms4": {
+            "description": "NI toux NI douleurs NI anosmie",
+            "type": "boolean"
           }
         },
         "required": [
+          "age_less_15",
+          "age_less_50",
+          "age_less_70",
+          "age_more_15",
+          "age_more_50",
+          "age_more_70",
+          "bmi_less_30",
           "bmi_more_30",
           "bmi",
+          "bmi_algo",
           "imc",
+          "imc_algo",
+          "pregnant_algo",
           "fever_algo",
-          "hearth_desease_algo",
+          "heart_disease_algo",
           "immunosuppressant_disease_algo",
           "immunosuppressant_drug_algo",
+          "symptoms1",
+          "symptoms2",
+          "symptoms3",
+          "symptoms4",
           "gravity_factors",
           "gravity_factors_minor",
           "gravity_factors_major",
@@ -150,21 +234,21 @@
         },
         "properties": {
           "algo_version": {
-            "description": "Version de l'algorithme médical",
+            "description": "Version de l’algorithme",
             "format": "date-time",
             "type": "string"
           },
           "date": {
-            "description": "Date de fin de remplissage du questionnaire",
+            "description": "Date de saisie",
             "format": "date-time",
             "type": "string"
           },
           "duration": {
-            "description": "Durée de remplissage du questionnaire (seconds)",
+            "description": "Durée de saisie en secondes",
             "type": "integer"
           },
           "form_version": {
-            "description": "Version du questionnaire",
+            "description": "Version du formulaire",
             "format": "date-time",
             "type": "string"
           }
@@ -215,7 +299,7 @@
         },
         "properties": {
           "age_range": {
-            "description": "Âge de la personne",
+            "description": "Tranche d’âge",
             "enum": [
               "inf_15",
               "from_15_to_49",
@@ -229,7 +313,7 @@
             "type": "integer"
           },
           "postal_code": {
-            "description": "Code postal",
+            "description": "Le code postal",
             "type": "string"
           },
           "weight": {
@@ -245,17 +329,31 @@
         "description": "[Algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
         "example": {
           "calculations": {
+            "age_less_15": true,
+            "age_less_50": true,
+            "age_less_70": true,
+            "age_more_15": true,
+            "age_more_50": true,
+            "age_more_70": true,
             "bmi": 21.9,
+            "bmi_algo": 21.9,
+            "bmi_less_30": true,
             "bmi_more_30": true,
             "fever_algo": true,
             "gravity_factors": 3,
             "gravity_factors_major": 1,
             "gravity_factors_minor": 2,
-            "hearth_desease_algo": true,
+            "heart_disease_algo": true,
             "imc": 21.9,
+            "imc_algo": 21.9,
             "immunosuppressant_disease_algo": true,
             "immunosuppressant_drug_algo": true,
-            "risk_factors": 1
+            "pregnant_algo": true,
+            "risk_factors": 1,
+            "symptoms1": true,
+            "symptoms2": true,
+            "symptoms3": true,
+            "symptoms4": true
           },
           "metadata": {
             "algo_version": "2020-04-04T13:24:44.389249Z",
@@ -276,7 +374,7 @@
             "breathing_disease": true,
             "cancer": true,
             "diabetes": true,
-            "heart_disease": true,
+            "heart_disease": 1,
             "immunosuppressant_disease": 1,
             "immunosuppressant_drug": 1,
             "kidney_disease": true,
@@ -351,7 +449,7 @@
               "breathing_disease": true,
               "cancer": true,
               "diabetes": true,
-              "heart_disease": true,
+              "heart_disease": 1,
               "immunosuppressant_disease": 1,
               "immunosuppressant_drug": 1,
               "kidney_disease": true,
@@ -393,17 +491,31 @@
         "example": {
           "data": {
             "calculations": {
+              "age_less_15": false,
+              "age_less_50": false,
+              "age_less_70": false,
+              "age_more_15": true,
+              "age_more_50": true,
+              "age_more_70": true,
               "bmi": 21.9,
-              "bmi_more_30": true,
+              "bmi_algo": 21.9,
+              "bmi_less_30": true,
+              "bmi_more_30": false,
               "fever_algo": true,
-              "gravity_factors": 3,
-              "gravity_factors_major": 1,
+              "gravity_factors": 4,
+              "gravity_factors_major": 2,
               "gravity_factors_minor": 2,
-              "hearth_desease_algo": true,
+              "heart_disease_algo": true,
               "imc": 21.9,
+              "imc_algo": 21.9,
               "immunosuppressant_disease_algo": true,
               "immunosuppressant_drug_algo": true,
-              "risk_factors": 1
+              "pregnant_algo": true,
+              "risk_factors": 10,
+              "symptoms1": true,
+              "symptoms2": true,
+              "symptoms3": true,
+              "symptoms4": false
             },
             "metadata": {
               "algo_version": "2020-04-04T13:24:44.389249Z",
@@ -424,7 +536,7 @@
               "breathing_disease": true,
               "cancer": true,
               "diabetes": true,
-              "heart_disease": true,
+              "heart_disease": 1,
               "immunosuppressant_disease": 1,
               "immunosuppressant_drug": 1,
               "kidney_disease": true,
@@ -464,7 +576,7 @@
           "breathing_disease": true,
           "cancer": true,
           "diabetes": true,
-          "heart_disease": true,
+          "heart_disease": 1,
           "immunosuppressant_disease": 1,
           "immunosuppressant_drug": 1,
           "kidney_disease": true,
@@ -473,23 +585,28 @@
         },
         "properties": {
           "breathing_disease": {
-            "description": "Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?",
+            "description": "Maladie respiratoire",
             "type": "boolean"
           },
           "cancer": {
-            "description": "Avez-vous ou avez-vous eu un cancer ?",
+            "description": "Cancer actuel ou < moins de 3 ans",
             "type": "boolean"
           },
           "diabetes": {
-            "description": "Êtes-vous diabétique ?",
+            "description": "Diabète",
             "type": "boolean"
           },
           "heart_disease": {
-            "description": "Avez-vous une tension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?",
-            "type": "boolean"
+            "description": "Maladie cardiaque",
+            "enum": [
+              0,
+              1,
+              999
+            ],
+            "type": "integer"
           },
           "immunosuppressant_disease": {
-            "description": "Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?",
+            "description": "Maladie défenses immunitaires",
             "enum": [
               0,
               1,
@@ -498,7 +615,7 @@
             "type": "integer"
           },
           "immunosuppressant_drug": {
-            "description": "Prenez-vous un traitement immunosuppresseur ?",
+            "description": "Traitement immunodépresseur",
             "enum": [
               0,
               1,
@@ -507,15 +624,15 @@
             "type": "integer"
           },
           "kidney_disease": {
-            "description": "Avez-vous une insuffisance rénale chronique dialysée ?",
+            "description": "Insuffisance rénale",
             "type": "boolean"
           },
           "liver_disease": {
-            "description": "Avez-vous une maladie chronique du foie ?",
+            "description": "Maladie chronique du foie",
             "type": "boolean"
           },
           "pregnant": {
-            "description": "Êtes-vous enceinte ?",
+            "description": "Enceinte",
             "enum": [
               0,
               1,
@@ -544,27 +661,27 @@
         },
         "properties": {
           "agueusia_anosmia": {
-            "description": "Avez-vous noté une forte diminution de votre goût ou de l’odorat ces derniers jours ?",
+            "description": "Perte de goût et d’odorat",
             "type": "boolean"
           },
           "breathlessness": {
-            "description": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
+            "description": "Essoufflement",
             "type": "boolean"
           },
           "cough": {
-            "description": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
+            "description": "Toux",
             "type": "boolean"
           },
           "diarrhea": {
-            "description": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
+            "description": "Diarrhée",
             "type": "boolean"
           },
           "feeding_day": {
-            "description": "Êtes-vous dans l’impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
+            "description": "Difficulté pour manger/boire",
             "type": "boolean"
           },
           "fever": {
-            "description": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?",
+            "description": "Fièvre",
             "enum": [
               0,
               1,
@@ -573,11 +690,11 @@
             "type": "integer"
           },
           "sore_throat_aches": {
-            "description": "Avez-vous un mal de gorge apparu ces derniers jours ?",
+            "description": "Mal de gorge ou douleurs",
             "type": "boolean"
           },
           "temperature_cat": {
-            "description": "Quelle est votre température ?",
+            "description": "Catégorie de température",
             "enum": [
               "inf_35.5",
               "35.5-37.7",
@@ -588,11 +705,11 @@
             "type": "string"
           },
           "tiredness": {
-            "description": "Avez-vous une fatigue inhabituelle ces derniers jours ?",
+            "description": "Fatigue",
             "type": "boolean"
           },
           "tiredness_details": {
-            "description": "Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
+            "description": "Alitement >=50% du temps diurne",
             "type": "boolean"
           }
         },

@@ -21,7 +21,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
           agueusia_anosmia: true,
           tiredness_details: true
         },
-        risk_factors: %RiskFactors{heart_disease: false}
+        risk_factors: %RiskFactors{heart_disease: 0}
       }
       |> EvaluateQuestionnaire.call()
 
@@ -41,7 +41,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
           weight: 40.0
         },
         symptoms: %Symptoms{temperature_cat: "35.5-37.7", cough: true, tiredness_details: true},
-        risk_factors: %RiskFactors{heart_disease: true}
+        risk_factors: %RiskFactors{heart_disease: 1}
       }
       |> EvaluateQuestionnaire.call()
 
@@ -61,7 +61,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.AutresTest do
           weight: 40.0
         },
         symptoms: %Symptoms{temperature_cat: "35.5-37.7", tiredness_details: true},
-        risk_factors: %RiskFactors{heart_disease: false}
+        risk_factors: %RiskFactors{heart_disease: 0}
       }
       |> EvaluateQuestionnaire.call()
 

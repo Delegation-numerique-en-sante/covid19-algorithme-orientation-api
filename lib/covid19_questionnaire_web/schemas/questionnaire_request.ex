@@ -41,7 +41,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
         },
         "risk_factors" => %{
           "breathing_disease" => true,
-          "heart_disease" => true,
+          "heart_disease" => 1,
           "kidney_disease" => true,
           "liver_disease" => true,
           "diabetes" => true,

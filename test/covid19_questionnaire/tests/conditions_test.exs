@@ -96,19 +96,21 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     test "si la température n'est pas renseignée, alors fièvre", %{questionnaire: questionnaire} do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptoms: %Symptoms{questionnaire.symptoms | temperature_cat: "NSP"}
+        | symptoms: %Symptoms{questionnaire.symptoms | fever: 1, temperature_cat: "NSP"}
       }
 
-      assert Conditions.fever(questionnaire)
+      assert Conditions.fever_algo(questionnaire)
     end
 
-    test "si la température est >= 37,8 la personne a fièvre", %{questionnaire: questionnaire} do
+    test "si la température est >= 37,8 la personne n'a pas fièvre", %{
+      questionnaire: questionnaire
+    } do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptoms: %Symptoms{questionnaire.symptoms | temperature_cat: "37.7-38.9"}
+        | symptoms: %Symptoms{questionnaire.symptoms | fever: 1, temperature_cat: "37.7-38.9"}
       }
 
-      assert Conditions.fever(questionnaire)
+      assert !Conditions.fever_algo(questionnaire)
     end
 
     test "si la température est < 37,8 la personne n'a pas fièvre", %{
@@ -116,39 +118,10 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
     } do
       questionnaire = %Questionnaire{
         questionnaire
-        | symptoms: %Symptoms{questionnaire.symptoms | temperature_cat: "35.5-37.7"}
+        | symptoms: %Symptoms{questionnaire.symptoms | fever: 1, temperature_cat: "35.5-37.7"}
       }
 
-      assert !Conditions.fever(questionnaire)
-    end
-  end
-
-  describe "calcule si la personne a au moins 39°C de température" do
-    test "si la température n'est pas renseignée non", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | symptoms: %Symptoms{questionnaire.symptoms | temperature_cat: "NSP"}
-      }
-
-      assert !Conditions.temperature_more_39(questionnaire)
-    end
-
-    test "si la température est < 39,0°C non", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | symptoms: %Symptoms{questionnaire.symptoms | temperature_cat: "37.7-38.9"}
-      }
-
-      assert !Conditions.temperature_more_39(questionnaire)
-    end
-
-    test "si la température est >= 39,8°C oui", %{questionnaire: questionnaire} do
-      questionnaire = %Questionnaire{
-        questionnaire
-        | symptoms: %Symptoms{questionnaire.symptoms | temperature_cat: "sup_39"}
-      }
-
-      assert Conditions.temperature_more_39(questionnaire)
+      assert !Conditions.fever_algo(questionnaire)
     end
   end
 
@@ -159,7 +132,8 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
       questionnaire
       | symptoms: %Symptoms{
           questionnaire.symptoms
-          | temperature_cat: "sup_39",
+          | fever: 1,
+            temperature_cat: "sup_39",
             feeding_day: true,
             breathlessness: true
         }
@@ -173,7 +147,8 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
       questionnaire
       | symptoms: %Symptoms{
           questionnaire.symptoms
-          | temperature_cat: "sup_39",
+          | fever: 1,
+            temperature_cat: "sup_39",
             feeding_day: true,
             breathlessness: true
         }
@@ -202,10 +177,10 @@ defmodule Covid19Questionnaire.Tests.ConditionsTest do
       | patient: %Patient{questionnaire.patient | age_range: "sup_70", weight: 67.5, height: 150},
         risk_factors: %RiskFactors{
           questionnaire.risk_factors
-          | heart_disease: true,
+          | heart_disease: 1,
             cancer: nil,
-            pregnant: false,
-            immunosuppressant_disease: true
+            pregnant: 0,
+            immunosuppressant_disease: 1
         }
     }
 

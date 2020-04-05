@@ -16,7 +16,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxTest do
          temperature_cat: "35.5-37.7",
          cough: true
        },
-       risk_factors: %RiskFactors{heart_disease: false}
+       risk_factors: %RiskFactors{heart_disease: 0}
      }}
   end
 
@@ -51,7 +51,7 @@ defmodule Covid19QuestionnaireWeb.Operations.EvaluateQuestionnaire.TouxTest do
     {:ok, questionnaire} =
       %Questionnaire{
         questionnaire
-        | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: true}
+        | risk_factors: %RiskFactors{questionnaire.risk_factors | heart_disease: 1}
       }
       |> EvaluateQuestionnaire.call()
 
