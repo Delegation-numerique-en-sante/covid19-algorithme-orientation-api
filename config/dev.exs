@@ -21,6 +21,12 @@ config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
   password: "test",
   database: "test"
 
+# Configure Connive
+config :covid19_questionnaire, Covid19QuestionnaireWeb.Plugs.Connive, whitelist: ["127.0.0.0/8"]
+
+# Print debug messages in dev
+config :logger, level: :debug, compile_time_purge_matching: [[application: :remote_ip]]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

@@ -645,6 +645,16 @@
             },
             "description": "Questionnaire"
           },
+          "305": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Questionnaire"
+          },
           "400": {
             "content": {
               "application/json": {
@@ -723,6 +733,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            },
+            "description": "Questionnaire"
+          },
+          "305": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             },

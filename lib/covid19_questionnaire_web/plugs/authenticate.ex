@@ -24,7 +24,13 @@ defmodule Covid19QuestionnaireWeb.Plugs.Authenticate do
     |> put_resp_header("content-type", "application/json")
     |> send_resp(
       403,
-      Jason.encode!(%Error{code: 403, info: "Token invalid", action: "Please create a new token."})
+      Jason.encode!(%{
+        error: %Error{
+          code: 403,
+          info: "Token invalid",
+          action: "Please create a new token."
+        }
+      })
     )
     |> halt()
   end

@@ -3,13 +3,7 @@ defmodule Covid19QuestionnaireWeb.BienvenueController do
 
   def index(conn, _params) do
     {:ok, body} =
-      %{
-        bienvenue: """
-        Bienvenue à l'API d'orientation du COVID19, \
-        consultez notre documentation interactive : \
-        https://covid19-auto-evaluation.sante.gouv.fr/swagger.
-        """
-      }
+      %{bienvenue: "Bienvenue à l'API d'orientation du COVID19 !"}
       |> Jason.encode()
 
     conn

@@ -35,10 +35,12 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
         |> put_resp_header("content-type", "application/json")
         |> send_resp(
           451,
-          Jason.encode!(%Error{
-            code: 451,
-            info: "We won't collect that data",
-            action: "But don;t worry, there's nothing to do on your side, it's all good :)."
+          Jason.encode!(%{
+            error: %Error{
+              code: 451,
+              info: "We won't collect that data",
+              action: "But don;t worry, there's nothing to do on your side, it's all good :)."
+            }
           })
         )
         |> halt()
@@ -48,11 +50,13 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
         |> put_resp_header("content-type", "application/json")
         |> send_resp(
           400,
-          Jason.encode!(%Error{
-            code: 400,
-            info: "We don't know what happened",
-            action:
-              "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new."
+          Jason.encode!(%{
+            error: %Error{
+              code: 400,
+              info: "We don't know what happened",
+              action:
+                "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new."
+            }
           })
         )
         |> halt()

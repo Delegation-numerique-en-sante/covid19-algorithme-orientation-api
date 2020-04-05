@@ -18,10 +18,12 @@ defmodule Covid19QuestionnaireWeb.TokenController do
         |> put_resp_header("content-type", "application/json")
         |> send_resp(
           409,
-          Jason.encode!(%Error{
-            code: 403,
-            info: "We couldn't create a token",
-            action: "Please try again."
+          Jason.encode!(%{
+            error: %Error{
+              code: 403,
+              info: "We couldn't create a token",
+              action: "Please try again."
+            }
           })
         )
         |> halt()
@@ -31,11 +33,13 @@ defmodule Covid19QuestionnaireWeb.TokenController do
         |> put_resp_header("content-type", "application/json")
         |> send_resp(
           400,
-          Jason.encode!(%Error{
-            code: 400,
-            info: "We don't know what happened",
-            action:
-              "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new."
+          Jason.encode!(%{
+            error: %Error{
+              code: 400,
+              info: "We don't know what happened",
+              action:
+                "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new."
+            }
           })
         )
         |> halt()
