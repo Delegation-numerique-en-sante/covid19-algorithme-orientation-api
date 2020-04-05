@@ -3,11 +3,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
 
   alias Covid19Questionnaire.Data.Store
 
-  alias Covid19QuestionnaireWeb.Operations.{
-    CreateQuestionnaire,
-    EvaluateQuestionnaire,
-    ValidateQuestionnaire
-  }
+  alias Covid19QuestionnaireWeb.Operations.{CreateQuestionnaire, ValidateQuestionnaire}
 
   alias Covid19QuestionnaireWeb.Plugs.{Authenticate, Authorize}
   alias Covid19QuestionnaireWeb.Schemas.{Error, QuestionnaireRequest}
@@ -22,8 +18,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
   def create(conn = %{body_params: %QuestionnaireRequest{questionnaire: params}}, _params) do
     with date <- DateTime.utc_now(),
          %{token: token} <- conn.assigns,
-         {:ok, questionnaire} <- EvaluateQuestionnaire.call(params),
-         {:ok, questionnaire} <- ValidateQuestionnaire.call(questionnaire),
+         {:ok, questionnaire} <- ValidateQuestionnaire.call(params),
          {:ok, data} <- Store.write({date, token}, questionnaire),
          {:ok, json} <- Jason.encode(data) do
       conn

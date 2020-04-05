@@ -5,100 +5,19 @@
       "Calculations": {
         "description": "[Calculations](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/implementation.org#conseils-pour-limpl%C3%A9mentation-de-lalgorithme)",
         "example": {
-          "age_less_15": true,
-          "age_less_50": true,
-          "age_less_70": true,
-          "age_more_15": true,
-          "age_more_50": true,
-          "age_more_70": true,
-          "bmi": 21.9,
-          "bmi_algo": 21.9,
-          "bmi_less_30": true,
-          "bmi_more_30": true,
           "fever_algo": true,
-          "gravity_factors": 3,
-          "gravity_factors_major": 1,
-          "gravity_factors_minor": 2,
           "heart_disease_algo": true,
-          "imc": 21.9,
-          "imc_algo": 21.9,
           "immunosuppressant_disease_algo": true,
-          "immunosuppressant_drug_algo": true,
-          "pregnant_algo": true,
-          "risk_factors": 1,
-          "symptoms1": true,
-          "symptoms2": true,
-          "symptoms3": true,
-          "symptoms4": true
+          "immunosuppressant_drug_algo": true
         },
         "properties": {
-          "age_less_15": {
-            "description": "Si la personne a age_less_15",
-            "type": "boolean"
-          },
-          "age_less_50": {
-            "description": "Si la personne a age_less_50",
-            "type": "boolean"
-          },
-          "age_less_70": {
-            "description": "Si la personne a age_less_70",
-            "type": "boolean"
-          },
-          "age_more_15": {
-            "description": "Si la personne a age_more_15",
-            "type": "boolean"
-          },
-          "age_more_50": {
-            "description": "Si la personne a age_more_50",
-            "type": "boolean"
-          },
-          "age_more_70": {
-            "description": "Si la personne a age_more_70",
-            "type": "boolean"
-          },
-          "bmi": {
-            "description": "BMI de la personne en kg/(cm/100)2",
-            "type": "number"
-          },
-          "bmi_algo": {
-            "description": "BMI de la personne en kg/(cm/100)2",
-            "type": "number"
-          },
-          "bmi_less_30": {
-            "description": "Moins 30 d'IMC en kg/(cm/100)2",
-            "type": "boolean"
-          },
-          "bmi_more_30": {
-            "description": "Au moins 30 d'IMC en kg/(cm/100)2",
-            "type": "boolean"
-          },
           "fever_algo": {
             "description": "Si la personne a de la fièvre",
             "type": "boolean"
           },
-          "gravity_factors": {
-            "description": "Facteurs de gravité mineurs + majeurs",
-            "type": "integer"
-          },
-          "gravity_factors_major": {
-            "description": "Facteurs de gravité majeurs",
-            "type": "integer"
-          },
-          "gravity_factors_minor": {
-            "description": "Facteurs de gravité mineurs",
-            "type": "integer"
-          },
           "heart_disease_algo": {
             "description": "Maladie cardiaque",
             "type": "boolean"
-          },
-          "imc": {
-            "description": "IMC de la personne en kg/(cm/100)2",
-            "type": "number"
-          },
-          "imc_algo": {
-            "description": "IMC de la personne en kg/(cm/100)2",
-            "type": "number"
           },
           "immunosuppressant_disease_algo": {
             "description": "Maladie défenses immunitaires",
@@ -107,59 +26,8 @@
           "immunosuppressant_drug_algo": {
             "description": "Traitement immunodépresseur",
             "type": "boolean"
-          },
-          "pregnant_algo": {
-            "description": "Si la personne est enceinte",
-            "type": "boolean"
-          },
-          "risk_factors": {
-            "description": "Facteurs pronostique défavorables liés au terrain",
-            "type": "integer"
-          },
-          "symptoms1": {
-            "description": "Fièvre ET toux",
-            "type": "boolean"
-          },
-          "symptoms2": {
-            "description": "Fièvre OU (pas de fièvre et (diarrhée OU (toux ET douleurs) OU (toux ET anosmie))",
-            "type": "boolean"
-          },
-          "symptoms3": {
-            "description": "Toux OU douleurs OU anosmie",
-            "type": "boolean"
-          },
-          "symptoms4": {
-            "description": "NI toux NI douleurs NI anosmie",
-            "type": "boolean"
           }
         },
-        "required": [
-          "age_less_15",
-          "age_less_50",
-          "age_less_70",
-          "age_more_15",
-          "age_more_50",
-          "age_more_70",
-          "bmi_less_30",
-          "bmi_more_30",
-          "bmi",
-          "bmi_algo",
-          "imc",
-          "imc_algo",
-          "pregnant_algo",
-          "fever_algo",
-          "heart_disease_algo",
-          "immunosuppressant_disease_algo",
-          "immunosuppressant_drug_algo",
-          "symptoms1",
-          "symptoms2",
-          "symptoms3",
-          "symptoms4",
-          "gravity_factors",
-          "gravity_factors_minor",
-          "gravity_factors_major",
-          "risk_factors"
-        ],
         "title": "Calculations",
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.Calculations"
@@ -293,31 +161,10 @@
         "description": "[Algorithme d'orientation du COVID19](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-questionnaire/blob/master/pseudo-code.org#pr%C3%A9sentation-de-lalgorithme-dquestionnaire-covid19)",
         "example": {
           "calculations": {
-            "age_less_15": true,
-            "age_less_50": true,
-            "age_less_70": true,
-            "age_more_15": true,
-            "age_more_50": true,
-            "age_more_70": true,
-            "bmi": 21.9,
-            "bmi_algo": 21.9,
-            "bmi_less_30": true,
-            "bmi_more_30": true,
             "fever_algo": true,
-            "gravity_factors": 3,
-            "gravity_factors_major": 1,
-            "gravity_factors_minor": 2,
             "heart_disease_algo": true,
-            "imc": 21.9,
-            "imc_algo": 21.9,
             "immunosuppressant_disease_algo": true,
-            "immunosuppressant_drug_algo": true,
-            "pregnant_algo": true,
-            "risk_factors": 1,
-            "symptoms1": true,
-            "symptoms2": true,
-            "symptoms3": true,
-            "symptoms4": true
+            "immunosuppressant_drug_algo": true
           },
           "metadata": {
             "algo_version": "2020-04-04T13:24:44.389249Z",
@@ -330,9 +177,8 @@
           },
           "respondent": {
             "age_range": "sup_70",
-            "height": 173,
-            "postal_code": "75000",
-            "weight": 65.5
+            "imc": 21.9,
+            "postal_code": "75000"
           },
           "risk_factors": {
             "breathing_disease": true,
@@ -389,7 +235,9 @@
           "metadata",
           "respondent",
           "symptoms",
-          "risk_factors"
+          "risk_factors",
+          "calculations",
+          "orientation"
         ],
         "title": "Questionnaire",
         "type": "object",
@@ -399,15 +247,23 @@
         "description": "Corps de la requête POST pour lancer l'algorithme d'orientation",
         "example": {
           "questionnaire": {
+            "calculations": {
+              "fever_algo": true,
+              "heart_disease_algo": true,
+              "immunosuppressant_disease_algo": true,
+              "immunosuppressant_drug_algo": true
+            },
             "metadata": {
               "algo_version": "2020-04-04T13:24:44.389249Z",
               "form_version": "2020-04-04T13:24:44.389249Z"
             },
+            "orientation": {
+              "code": "orientation_SAMU"
+            },
             "respondent": {
               "age_range": "sup_70",
-              "height": 173,
-              "postal_code": "75000",
-              "weight": 65.5
+              "imc": 21.9,
+              "postal_code": "75000"
             },
             "risk_factors": {
               "breathing_disease": true,
@@ -455,31 +311,10 @@
         "example": {
           "data": {
             "calculations": {
-              "age_less_15": false,
-              "age_less_50": false,
-              "age_less_70": false,
-              "age_more_15": true,
-              "age_more_50": true,
-              "age_more_70": true,
-              "bmi": 21.9,
-              "bmi_algo": 21.9,
-              "bmi_less_30": true,
-              "bmi_more_30": false,
               "fever_algo": true,
-              "gravity_factors": 4,
-              "gravity_factors_major": 2,
-              "gravity_factors_minor": 2,
               "heart_disease_algo": true,
-              "imc": 21.9,
-              "imc_algo": 21.9,
               "immunosuppressant_disease_algo": true,
-              "immunosuppressant_drug_algo": true,
-              "pregnant_algo": true,
-              "risk_factors": 10,
-              "symptoms1": true,
-              "symptoms2": true,
-              "symptoms3": true,
-              "symptoms4": false
+              "immunosuppressant_drug_algo": true
             },
             "metadata": {
               "algo_version": "2020-04-04T13:24:44.389249Z",
@@ -492,9 +327,8 @@
             },
             "respondent": {
               "age_range": "sup_70",
-              "height": 173,
-              "postal_code": "75000",
-              "weight": 65.5
+              "imc": 21.9,
+              "postal_code": "75000"
             },
             "risk_factors": {
               "breathing_disease": true,
@@ -538,9 +372,8 @@
         "description": "[Caractéristiques du respondent](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
         "example": {
           "age_range": "sup_70",
-          "height": 173,
-          "postal_code": "75000",
-          "weight": 65.5
+          "imc": 21.9,
+          "postal_code": "75000"
         },
         "properties": {
           "age_range": {
@@ -553,17 +386,13 @@
             ],
             "type": "string"
           },
-          "height": {
-            "description": "Quelle est votre taille en centimètres ?",
-            "type": "integer"
+          "imc": {
+            "description": "IMC de la personne en kg/(cm/100)2",
+            "type": "number"
           },
           "postal_code": {
             "description": "Le code postal",
             "type": "string"
-          },
-          "weight": {
-            "description": "Quel est votre poids en kilogrammes ?",
-            "type": "number"
           }
         },
         "title": "Respondent",

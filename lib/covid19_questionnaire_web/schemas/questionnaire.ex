@@ -29,7 +29,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
       calculations: Calculations,
       orientation: Orientation
     },
-    required: [:metadata, :respondent, :symptoms, :risk_factors],
+    required: [:metadata, :respondent, :symptoms, :risk_factors, :calculations, :orientation],
     example: %{
       "token" => %{
         "uuid" => "c9e77845-83cf-4891-88d6-804d659e81c5",
@@ -43,8 +43,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
       },
       "respondent" => %{
         "age_range" => "sup_70",
-        "height" => 173,
-        "weight" => 65.5,
+        "imc" => 21.9,
         "postal_code" => "75000"
       },
       "symptoms" => %{
@@ -71,31 +70,10 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "pregnant" => 1
       },
       "calculations" => %{
-        "age_less_15" => true,
-        "age_less_50" => true,
-        "age_less_70" => true,
-        "age_more_15" => true,
-        "age_more_50" => true,
-        "age_more_70" => true,
-        "bmi_less_30" => true,
-        "bmi_more_30" => true,
-        "bmi" => 21.9,
-        "bmi_algo" => 21.9,
-        "imc" => 21.9,
-        "imc_algo" => 21.9,
-        "pregnant_algo" => true,
         "fever_algo" => true,
         "heart_disease_algo" => true,
         "immunosuppressant_disease_algo" => true,
-        "immunosuppressant_drug_algo" => true,
-        "symptoms1" => true,
-        "symptoms2" => true,
-        "symptoms3" => true,
-        "symptoms4" => true,
-        "gravity_factors" => 3,
-        "gravity_factors_minor" => 2,
-        "gravity_factors_major" => 1,
-        "risk_factors" => 1
+        "immunosuppressant_drug_algo" => true
       },
       "orientation" => %{
         "code" => "orientation_SAMU"

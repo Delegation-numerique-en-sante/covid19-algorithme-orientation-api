@@ -17,14 +17,12 @@ defmodule Covid19QuestionnaireWeb.Schemas.Respondent do
         enum: ["inf_15", "from_15_to_49", "from_50_to_69", "sup_70"],
         description: "Tranche d’âge"
       },
-      height: %Schema{type: :integer, description: "Quelle est votre taille en centimètres ?"},
-      weight: %Schema{type: :number, description: "Quel est votre poids en kilogrammes ?"},
+      imc: %Schema{type: :number, description: "IMC de la personne en kg/(cm/100)2"},
       postal_code: %Schema{type: :string, description: "Le code postal"}
     },
     example: %{
       "age_range" => "sup_70",
-      "height" => 173,
-      "weight" => 65.5,
+      "imc" => 21.9,
       "postal_code" => "75000"
     }
   })
