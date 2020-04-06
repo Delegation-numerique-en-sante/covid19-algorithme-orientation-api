@@ -82,4 +82,42 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
 
     assert conn.status == 451
   end
+
+  test "rejects requests without required parameters", %{conn: conn} do
+    request =
+      QuestionnaireRequest.schema().example
+      |> Kernel.put_in(["questionnaire", "metadata", "algo_version"], nil)
+
+    {:ok, token} = Token.create()
+
+    body =
+      conn
+      |> put_req_header("content-type", "application/json")
+      |> put_req_header("x-token", token.uuid)
+      |> post("/questionnaire", request)
+      |> response(422)
+      |> Jason.decode!()
+
+    assert %{"errors" => [%{"title" => "Invalid value"}]} = body
+  end
+
+  test "drops spurious data", %{conn: conn} do
+    request =
+      QuestionnaireRequest.schema().example
+      |> Kernel.put_in(["questionnaire", "respondent", "height"], 170)
+      |> Kernel.put_in(["questionnaire", "respondent", "weight"], 80.75)
+
+    {:ok, token} = Token.create()
+
+    body =
+      conn
+      |> put_req_header("content-type", "application/json")
+      |> put_req_header("x-token", token.uuid)
+      |> post("/questionnaire", request)
+      |> response(201)
+      |> Jason.decode!()
+
+    assert !body["data"]["respondent"]["height"]
+    assert !body["data"]["respondent"]["weight"]
+  end
 end
