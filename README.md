@@ -64,4 +64,4 @@ requests/.
 
 2020 Délégation ministérielle du numérique en santé et les contributeurs du dépôt.
 
-Le code source de cette application est publié sous licence AGPL-3.0.
+Le code source de cette application est publié sous licence MIT.
