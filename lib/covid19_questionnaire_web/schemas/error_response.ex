@@ -5,25 +5,24 @@ defmodule Covid19QuestionnaireWeb.Schemas.ErrorResponse do
 
   require OpenApiSpex
   alias Covid19QuestionnaireWeb.Schemas.Error
+  alias OpenApiSpex.Schema
 
   OpenApiSpex.schema(%{
     title: "ErrorResponse",
     description: "Something bad happened!",
     type: :object,
     properties: %{
-      error: Error
+      error: %Schema{type: :array, items: %Schema{anyOf: [Error]}}
     },
     example: %{
-      "error" => %{
-        "code" => 500,
-        "info" => "Oopsie, we don't know what happened!",
-        "action" =>
-          "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new",
-        "stacktrace" => %{
-          "kind" => "Error, error!",
-          "why" => "DKN! DKN!"
+      "errors" => [
+        %{
+          "message" =>
+            "Failed to cast value using any of: Schema(title: \"Questionnaire\", type: :object)",
+          "source" => %{"pointer" => "/questionnaire"},
+          "title" => "Invalid value"
         }
-      }
+      ]
     }
   })
 end

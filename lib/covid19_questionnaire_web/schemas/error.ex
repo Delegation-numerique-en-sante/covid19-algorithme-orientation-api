@@ -11,21 +11,16 @@ defmodule Covid19QuestionnaireWeb.Schemas.Error do
     description: "Something bad happened!",
     type: :object,
     properties: %{
-      code: %Schema{type: :integer, description: "HTTP status code"},
-      info: %Schema{type: :string, description: "Explanation of what happened"},
-      action: %Schema{type: :string, description: "Recommended action to fix/solve the problem"},
-      stacktrace: %Schema{type: :object, description: "Additional information for developers"}
+      title: %Schema{type: :string, description: "What happened"},
+      source: %Schema{type: :object, description: "Where did that happen"},
+      message: %Schema{type: :string, description: "Explanation of what happened"}
     },
-    required: [:code, :info, :action],
+    required: [:title, :source, :message],
     example: %{
-      "code" => 500,
-      "info" => "Oopsie, we don't know what happened!",
-      "action" =>
-        "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new",
-      "stacktrace" => %{
-        "kind" => "Error, error!",
-        "why" => "DKN! DKN!"
-      }
+      "message" =>
+        "Failed to cast value using any of: Schema(title: \"Questionnaire\", type: :object)",
+      "source" => %{"pointer" => "/questionnaire"},
+      "title" => "Invalid value"
     }
   })
 end

@@ -35,36 +35,30 @@
       "Error": {
         "description": "Something bad happened!",
         "example": {
-          "action": "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new",
-          "code": 500,
-          "info": "Oopsie, we don't know what happened!",
-          "stacktrace": {
-            "kind": "Error, error!",
-            "why": "DKN! DKN!"
-          }
+          "message": "Failed to cast value using any of: Schema(title: \"Questionnaire\", type: :object)",
+          "source": {
+            "pointer": "/questionnaire"
+          },
+          "title": "Invalid value"
         },
         "properties": {
-          "action": {
-            "description": "Recommended action to fix/solve the problem",
-            "type": "string"
-          },
-          "code": {
-            "description": "HTTP status code",
-            "type": "integer"
-          },
-          "info": {
+          "message": {
             "description": "Explanation of what happened",
             "type": "string"
           },
-          "stacktrace": {
-            "description": "Additional information for developers",
+          "source": {
+            "description": "Where did that happen",
             "type": "object"
+          },
+          "title": {
+            "description": "What happened",
+            "type": "string"
           }
         },
         "required": [
-          "code",
-          "info",
-          "action"
+          "title",
+          "source",
+          "message"
         ],
         "title": "Error",
         "type": "object",
@@ -73,19 +67,26 @@
       "ErrorResponse": {
         "description": "Something bad happened!",
         "example": {
-          "error": {
-            "action": "Please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-elixir/issues/new",
-            "code": 500,
-            "info": "Oopsie, we don't know what happened!",
-            "stacktrace": {
-              "kind": "Error, error!",
-              "why": "DKN! DKN!"
+          "errors": [
+            {
+              "message": "Failed to cast value using any of: Schema(title: \"Questionnaire\", type: :object)",
+              "source": {
+                "pointer": "/questionnaire"
+              },
+              "title": "Invalid value"
             }
-          }
+          ]
         },
         "properties": {
           "error": {
-            "$ref": "#/components/schemas/Error"
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Error"
+                }
+              ]
+            },
+            "type": "array"
           }
         },
         "title": "ErrorResponse",
@@ -640,6 +641,16 @@
             "description": "Questionnaire"
           },
           "407": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Questionnaire"
+          },
+          "422": {
             "content": {
               "application/json": {
                 "schema": {
