@@ -29,7 +29,8 @@ config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
   username: System.get_env("PG_USER"),
   password: System.get_env("PG_PASSWORD"),
   database: System.get_env("PG_DATABASE"),
-  pool_size: System.get_env("PG_POOL_SIZE") |> String.to_integer()
+  pool_size: System.get_env("PG_POOL_SIZE") |> String.to_integer(),
+  ssl: true
 
 # Configure Connive
 config :covid19_questionnaire, Covid19QuestionnaireWeb.Plugs.Connive,

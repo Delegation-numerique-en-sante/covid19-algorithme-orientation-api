@@ -44,14 +44,14 @@ defmodule Covid19Questionnaire.Data.Store do
 
   @impl true
   def handle_cast({:write, element}, to_write: to_write) do
-    spawn fn -> Journal.create_many([element | to_write]) end
+    spawn(fn -> Journal.create_many([element | to_write]) end)
 
     {:noreply, [to_write: []]}
   end
 
   @impl true
   def handle_info(:tick, to_write: to_write) do
-    spawn fn -> Journal.create_many(to_write) end
+    spawn(fn -> Journal.create_many(to_write) end)
 
     tick()
     {:noreply, [to_write: []]}
