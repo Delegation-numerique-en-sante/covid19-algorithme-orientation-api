@@ -13,9 +13,8 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateToken do
 
   @spec open_api_operation(action) :: operation
 
-  def open_api_operation(:create) do
-    call()
-  end
+  def open_api_operation(:create), do: call()
+  def open_api_operation(_), do: nil
 
   @spec call() :: operation
 

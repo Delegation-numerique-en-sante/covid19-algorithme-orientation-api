@@ -9,5 +9,6 @@ defmodule Covid19QuestionnaireWeb.Endpoint do
 
   plug RemoteIp
   plug Connive
+  plug CORSPlug
   plug Covid19QuestionnaireWeb.Router
 end
