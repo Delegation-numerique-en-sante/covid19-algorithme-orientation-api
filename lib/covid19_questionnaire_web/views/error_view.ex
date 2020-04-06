@@ -1,7 +1,7 @@
 defmodule Covid19QuestionnaireWeb.ErrorView do
   alias Covid19QuestionnaireWeb.Schemas.Error
 
-  def render("404.json", conn) do
+  def render("404.json", %{conn: conn}) do
     %{
       errors: [
         %Error{
@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.ErrorView do
     }
   end
 
-  def render("500.json", conn) do
+  def render("500.json", %{conn: conn}) do
     %{
       errors: [
         %Error{
