@@ -10,7 +10,7 @@ deps:
 
 install:
 	mix do deps.get, compile
-	[ `which api-spec-converter` ] || npm install api-spec-converter
+	[ `which api-spec-converter` ] || npm install -g api-spec-converter
 
 compile:
 	mix compile
@@ -36,6 +36,6 @@ release:
 gen-spec: SHELL:=/bin/bash
 gen-spec:
 	mix covid19_questionnaire.open_api_3.gen_spec
-	export PATH="$$(npm bin):$(PATH)" && \
-		api-spec-converter --from=openapi_3 --to=openapi_3 --syntax=yaml --check \
+	api-spec-converter \
+		--from=openapi_3 --to=openapi_3 --syntax=yaml --check \
 		covid19-algorithme-orientation-openapi.json > covid19-algorithme-orientation-openapi.yaml

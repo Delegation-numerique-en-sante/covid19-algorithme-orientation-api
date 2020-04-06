@@ -4,7 +4,6 @@ defmodule Covid19QuestionnaireWeb.Router do
   alias OpenApiSpex.Plug.{PutApiSpec, RenderSpec, SwaggerUI}
 
   pipeline :api do
-    plug CORSPlug, origin: "http://localhost:3000"
     plug :accepts, ["json"]
     plug PutApiSpec, module: ApiSpec
   end

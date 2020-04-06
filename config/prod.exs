@@ -32,6 +32,12 @@ config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
   pool_size: System.get_env("PG_POOL_SIZE") |> String.to_integer(),
   ssl: true
 
+# Configure CORS
+config :cors_plug,
+  origin: ["http://localhost:3000"],
+  headers: ["Accept", "Content-Type", "Origin", "X-CSRF-Token", "X-Token"],
+  methods: ["POST", "OPTIONS"]
+
 # Configure Connive
 config :covid19_questionnaire, Covid19QuestionnaireWeb.Plugs.Connive,
   whitelist: ["127.0.0.0/8" | System.get_env("WHITELIST") |> String.split(",")]
