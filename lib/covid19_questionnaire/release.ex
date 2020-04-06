@@ -14,7 +14,7 @@ defmodule Covid19Questionnaire.Release do
   end
 
   defp repos do
-    Application.load(@app)
+    Application.ensure_all_started(@app)
     Application.fetch_env!(@app, :ecto_repos)
   end
 end

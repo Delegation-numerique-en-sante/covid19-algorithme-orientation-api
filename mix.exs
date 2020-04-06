@@ -25,7 +25,7 @@ defmodule Covid19Questionnaire.MixProject do
   def application do
     [
       mod: {Covid19Questionnaire.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ssl]
     ]
   end
 
