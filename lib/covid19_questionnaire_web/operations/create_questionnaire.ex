@@ -30,7 +30,7 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateQuestionnaire do
           in: :header,
           required: true,
           description: "Token to send the questionnaire",
-          schema: %Schema{type: :string}
+          schema: %Schema{type: :string, format: :uuid}
         }
       ],
       requestBody:

@@ -14,6 +14,7 @@ paths:
           name: x-token
           required: true
           schema:
+            format: uuid
             type: string
       responses:
         '202':
@@ -88,39 +89,39 @@ paths:
     post:
       parameters: []
       responses:
-        '201':
+        '204':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TokenResponse'
-          description: Questionnaire
+          description: Token
         '400':
           content:
             application/json:
               schema:
                 description: Bad Request
                 type: string
-          description: Questionnaire
+          description: Token
         '407':
           content:
             application/json:
               schema:
                 description: Proxy Authentication Required
                 type: string
-          description: Questionnaire
+          description: Token
         '409':
           content:
             application/json:
               schema:
                 description: Conflict
                 type: string
-          description: Questionnaire
+          description: Token
         '500':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Questionnaire
+          description: Token
       tags: []
       callbacks: {}
       deprecated: false
@@ -523,15 +524,7 @@ components:
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.Token
     TokenResponse:
       description: TokenResponse
-      example:
-        data:
-          date: '2020-03-29 15:20:11.875767Z'
-          uuid: c9e77845-83cf-4891-88d6-804d659e81c5
-      properties:
-        data:
-          $ref: '#/components/schemas/Token'
       title: TokenResponse
-      type: object
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.TokenResponse
 security: []
 tags: []

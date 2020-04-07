@@ -6,12 +6,13 @@ defmodule Covid19QuestionnaireWeb.TokenController do
   defdelegate open_api_operation(action), to: CreateToken
 
   def create(conn, _params) do
-    with {:ok, token} <- Token.create(),
-         {:ok, json} <- Jason.encode(%{data: %{uuid: token.uuid}}) do
-      conn
-      |> put_resp_header("content-type", "application/json")
-      |> send_resp(201, json)
-    else
+    case Token.create() do
+      {:ok, token} ->
+        conn
+        |> put_resp_header("content-type", "application/json")
+        |> put_resp_header("x-token", token.uuid)
+        |> send_resp(204, "")
+
       {:error, _} ->
         conn
         |> put_resp_header("content-type", "application/json")

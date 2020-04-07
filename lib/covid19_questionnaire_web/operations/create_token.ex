@@ -24,23 +24,23 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateToken do
       description: "Create a token",
       operationId: "TokenController.create",
       responses: %{
-        201 => response("Questionnaire", "application/json", TokenResponse),
+        204 => response("Token", "application/json", TokenResponse),
         400 =>
-          response("Questionnaire", "application/json", %Schema{
+          response("Token", "application/json", %Schema{
             type: :string,
             description: "Bad Request"
           }),
         407 =>
-          response("Questionnaire", "application/json", %Schema{
+          response("Token", "application/json", %Schema{
             type: :string,
             description: "Proxy Authentication Required"
           }),
         409 =>
-          response("Questionnaire", "application/json", %Schema{
+          response("Token", "application/json", %Schema{
             type: :string,
             description: "Conflict"
           }),
-        500 => response("Questionnaire", "application/json", ErrorResponse)
+        500 => response("Token", "application/json", ErrorResponse)
       }
     }
   end

@@ -4,6 +4,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.SchemasTest do
   with {:ok, list} <- :application.get_key(:covid19_questionnaire, :modules) do
     list
     |> Enum.filter(&(&1 |> Module.split() |> Enum.at(1) == "Schemas"))
+    |> Enum.filter(&(!is_nil(&1.schema().example)))
     |> Enum.map(&{&1.schema().example, &1 |> Module.split() |> Enum.at(2)})
     |> Enum.each(fn {example, schema} ->
       test "#{schema} matches schemas", %{spec: spec} do
