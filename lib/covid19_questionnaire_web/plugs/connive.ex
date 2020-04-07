@@ -5,8 +5,6 @@ defmodule Covid19QuestionnaireWeb.Plugs.Connive do
 
   import Plug.Conn
   use PlugAttack
-  alias Covid19QuestionnaireWeb.Endpoint
-  alias Covid19QuestionnaireWeb.Schemas.Error
 
   rule "connive", conn do
     conn
@@ -24,8 +22,7 @@ defmodule Covid19QuestionnaireWeb.Plugs.Connive do
   end
 
   defp whitelist(%{remote_ip: remote_ip}) do
-    [{:whitelist, whitelist}] = config()
-    Enum.map(whitelist, &{&1, remote_ip})
+    config()[:whitelist] |> Enum.map(&{&1, remote_ip})
   end
 
   defp contains?({cidr, remote_ip}) do

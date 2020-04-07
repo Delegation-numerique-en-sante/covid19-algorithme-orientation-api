@@ -33,11 +33,15 @@ defmodule Covid19QuestionnaireWeb.ErrorView do
     }
   end
 
+  defp config do
+    Application.fetch_env!(:covid19_questionnaire, __MODULE__)
+  end
+
   defp doc do
-    Application.fetch_env!(:covid19_questionnaire, :documentation_url)
+    config()[:doc_url]
   end
 
   defp issue do
-    Application.fetch_env!(:covid19_questionnaire, :issue_url)
+    config()[:issue_url]
   end
 end

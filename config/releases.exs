@@ -31,12 +31,18 @@ config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
 
 # Configure CORS
 config :cors_plug,
-  origin: ["http://localhost:3000"],
-  headers: ["Accept", "Content-Type", "Origin", "X-CSRF-Token", "X-Token"],
+  origin: ["http://localhost:3000" | System.get_env("CORS_WHITELIST") |> String.split(",")],
+  headers: ["Accept", "Content-Type", "Origin", "X-Auth-Token", "X-CSRF-Token", "X-Token"],
   methods: ["POST", "OPTIONS"]
 
+# Configure Connive
 config :covid19_questionnaire, Covid19QuestionnaireWeb.Plugs.Connive,
-  whitelist: ["127.0.0.0/8" | System.get_env("WHITELIST") |> String.split(",")]
+  whitelist: ["127.0.0.0/8" | System.get_env("IP_WHITELIST") |> String.split(",")]
+
+# Configure Errors
+config :covid19_questionnaire, Covid19QuestionnaireWeb.ErrorView,
+  doc_url: System.get_env("DOC_URL"),
+  issue_url: System.get_env("ISSUE_URL")
 
 # Do not print debug messages in production
 config :logger,
