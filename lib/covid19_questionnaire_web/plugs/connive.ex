@@ -19,7 +19,7 @@ defmodule Covid19QuestionnaireWeb.Plugs.Connive do
   def block_action(conn, _data, _opts) do
     conn
     |> put_resp_header("content-type", "application/json")
-    |> send_resp(407, proxy_authentication_required(conn))
+    |> send_resp(407, "")
     |> halt()
   end
 
@@ -32,18 +32,6 @@ defmodule Covid19QuestionnaireWeb.Plugs.Connive do
     cidr
     |> InetCidr.parse()
     |> InetCidr.contains?(remote_ip)
-  end
-
-  defp proxy_authentication_required(conn) do
-    Jason.encode!(%{
-      errors: [
-        %Error{
-          title: "Proxy Authentication Required",
-          source: %{"pointer" => conn.request_path},
-          message: "Please use the proxy available at #{Endpoint.url()}."
-        }
-      ]
-    })
   end
 
   defp config do

@@ -10,6 +10,5 @@ defmodule Covid19QuestionnaireWeb.TokenController.CreateTest do
 
     assert_schema(body, "TokenResponse", spec)
     assert body["data"]["uuid"] |> Ecto.UUID.cast()
-    assert body["data"]["date"] |> DateTime.from_iso8601()
   end
 end

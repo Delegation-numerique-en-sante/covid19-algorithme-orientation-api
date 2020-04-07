@@ -6,7 +6,7 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateToken do
   import OpenApiSpex.Operation, only: [response: 3]
 
   alias Covid19QuestionnaireWeb.Schemas.{ErrorResponse, TokenResponse}
-  alias OpenApiSpex.Operation
+  alias OpenApiSpex.{Operation, Schema}
 
   @type action :: :create
   @type operation :: Operation.t()
@@ -25,9 +25,21 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateToken do
       operationId: "TokenController.create",
       responses: %{
         201 => response("Questionnaire", "application/json", TokenResponse),
-        400 => response("Questionnaire", "application/json", ErrorResponse),
-        407 => response("Questionnaire", "application/json", ErrorResponse),
-        409 => response("Questionnaire", "application/json", ErrorResponse),
+        400 =>
+          response("Questionnaire", "application/json", %Schema{
+            type: :string,
+            description: "Bad Request"
+          }),
+        407 =>
+          response("Questionnaire", "application/json", %Schema{
+            type: :string,
+            description: "Proxy Authentication Required"
+          }),
+        409 =>
+          response("Questionnaire", "application/json", %Schema{
+            type: :string,
+            description: "Conflict"
+          }),
         500 => response("Questionnaire", "application/json", ErrorResponse)
       }
     }

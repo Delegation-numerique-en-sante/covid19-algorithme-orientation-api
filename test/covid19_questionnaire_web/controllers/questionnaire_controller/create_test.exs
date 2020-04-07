@@ -1,36 +1,19 @@
 defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
   use Covid19QuestionnaireWeb.ConnCase, async: true
-  alias Covid19Questionnaire.Data.{Journal, Store, Token}
-  alias Covid19QuestionnaireWeb.Schemas.{QuestionnaireRequest, QuestionnaireResponse}
+  alias Covid19Questionnaire.Data.Token
+  alias Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest
 
-  test "donne un résultat à partir des paramètres", %{conn: conn, spec: spec} do
+  test "donne un résultat à partir des paramètres", %{conn: conn} do
     request = QuestionnaireRequest.schema().example
-    response = QuestionnaireResponse.schema().example
     {:ok, token} = Token.create()
 
-    :timer.sleep(Store.tick_interval())
-
-    body =
+    conn =
       conn
       |> put_req_header("content-type", "application/json")
       |> put_req_header("x-token", token.uuid)
       |> post("/questionnaire", request)
-      |> response(201)
-      |> Jason.decode!()
 
-    response =
-      response
-      |> Kernel.put_in(["data", "metadata", "date"], body["data"]["metadata"]["date"])
-      |> Kernel.put_in(["data", "token", "uuid"], body["data"]["token"]["uuid"])
-      |> Kernel.put_in(["data", "token", "date"], body["data"]["token"]["date"])
-
-    {:ok, date, _} = body["data"]["metadata"]["date"] |> DateTime.from_iso8601()
-
-    :timer.sleep(Store.tick_interval())
-
-    assert_schema(body, "QuestionnaireResponse", spec)
-    assert response == body
-    assert Journal.find(date).data == body
+    assert conn.status == 201
   end
 
   test "rejects requests without token", %{conn: conn} do
@@ -99,25 +82,5 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
       |> Jason.decode!()
 
     assert %{"errors" => [%{"title" => "Invalid value"}]} = body
-  end
-
-  test "drops spurious data", %{conn: conn} do
-    request =
-      QuestionnaireRequest.schema().example
-      |> Kernel.put_in(["questionnaire", "respondent", "height"], 170)
-      |> Kernel.put_in(["questionnaire", "respondent", "weight"], 80.75)
-
-    {:ok, token} = Token.create()
-
-    body =
-      conn
-      |> put_req_header("content-type", "application/json")
-      |> put_req_header("x-token", token.uuid)
-      |> post("/questionnaire", request)
-      |> response(201)
-      |> Jason.decode!()
-
-    assert !body["data"]["respondent"]["height"]
-    assert !body["data"]["respondent"]["weight"]
   end
 end
