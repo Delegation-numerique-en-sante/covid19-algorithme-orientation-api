@@ -540,11 +540,11 @@
           "required": true
         },
         "responses": {
-          "201": {
+          "202": {
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Created",
+                  "description": "Accepted",
                   "type": "string"
                 }
               }

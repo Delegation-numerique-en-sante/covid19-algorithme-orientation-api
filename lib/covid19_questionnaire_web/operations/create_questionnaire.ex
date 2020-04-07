@@ -41,10 +41,10 @@ defmodule Covid19QuestionnaireWeb.Operations.CreateQuestionnaire do
           required: true
         ),
       responses: %{
-        201 =>
+        202 =>
           response("Questionnaire", "application/json", %Schema{
             type: :string,
-            description: "Created"
+            description: "Accepted"
           }),
         400 =>
           response("Questionnaire", "application/json", %Schema{

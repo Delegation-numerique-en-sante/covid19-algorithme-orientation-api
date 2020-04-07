@@ -13,7 +13,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
       |> put_req_header("x-token", token.uuid)
       |> post("/questionnaire", request)
 
-    assert conn.status == 201
+    assert conn.status == 202
   end
 
   test "rejects requests without token", %{conn: conn} do

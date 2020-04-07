@@ -19,7 +19,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
          {:ok, _data} <- Store.write({date, token}, questionnaire) do
       conn
       |> put_resp_header("content-type", "application/json")
-      |> send_resp(201, "")
+      |> send_resp(202, "")
     else
       {:error, :age_less_15} ->
         conn
