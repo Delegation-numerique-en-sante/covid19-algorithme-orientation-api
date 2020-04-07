@@ -286,66 +286,6 @@
         "type": "object",
         "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest"
       },
-      "QuestionnaireResponse": {
-        "description": "Réponse de l'algorithme d'orientation",
-        "example": {
-          "data": {
-            "calculations": {
-              "fever_algo": true,
-              "heart_disease_algo": true,
-              "immunosuppressant_disease_algo": true,
-              "immunosuppressant_drug_algo": true
-            },
-            "metadata": {
-              "algo_version": "2020-04-04",
-              "date": "2020-04-04T13:24:44.389249Z",
-              "duration": 1,
-              "form_version": "2020-04-04",
-              "orientation": "orientation_SAMU"
-            },
-            "respondent": {
-              "age_range": "sup_70",
-              "imc": 21.9,
-              "postal_code": "75000"
-            },
-            "risk_factors": {
-              "breathing_disease": true,
-              "cancer": true,
-              "diabetes": true,
-              "heart_disease": 1,
-              "immunosuppressant_disease": 1,
-              "immunosuppressant_drug": 1,
-              "kidney_disease": true,
-              "liver_disease": true,
-              "pregnant": 1
-            },
-            "symptoms": {
-              "agueusia_anosmia": true,
-              "breathlessness": true,
-              "cough": true,
-              "diarrhea": true,
-              "feeding_day": true,
-              "fever": 999,
-              "sore_throat_aches": true,
-              "temperature_cat": "35.5-37.7",
-              "tiredness": true,
-              "tiredness_details": true
-            },
-            "token": {
-              "date": "2020-04-04T13:24:44.389249Z",
-              "uuid": "c9e77845-83cf-4891-88d6-804d659e81c5"
-            }
-          }
-        },
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/Questionnaire"
-          }
-        },
-        "title": "QuestionnaireResponse",
-        "type": "object",
-        "x-struct": "Elixir.Covid19QuestionnaireWeb.Schemas.QuestionnaireResponse"
-      },
       "Respondent": {
         "description": "[Caractéristiques du respondent](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
         "example": {
@@ -604,7 +544,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/QuestionnaireResponse"
+                  "description": "Created",
+                  "type": "string"
                 }
               }
             },
@@ -614,7 +555,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Bad Request",
+                  "type": "string"
                 }
               }
             },
@@ -624,7 +566,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Unauthorized",
+                  "type": "string"
                 }
               }
             },
@@ -634,7 +577,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Forbidden",
+                  "type": "string"
                 }
               }
             },
@@ -644,7 +588,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Proxy Authentication Required",
+                  "type": "string"
                 }
               }
             },
@@ -654,7 +599,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Unprocessable Entity",
+                  "type": "string"
                 }
               }
             },
@@ -664,7 +610,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Unavailable For Legal Reasons",
+                  "type": "string"
                 }
               }
             },
@@ -707,7 +654,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Bad Request",
+                  "type": "string"
                 }
               }
             },
@@ -717,7 +665,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Proxy Authentication Required",
+                  "type": "string"
                 }
               }
             },
@@ -727,7 +676,8 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "description": "Conflict",
+                  "type": "string"
                 }
               }
             },

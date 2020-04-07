@@ -2,6 +2,14 @@ defmodule Covid19QuestionnaireWeb.ErrorView do
   alias Covid19QuestionnaireWeb.Schemas.Error
 
   def render("404.json", %{conn: conn}) do
+    not_found(conn)
+  end
+
+  def render("500.json", %{conn: conn}) do
+    internal_server_error(conn)
+  end
+
+  defp not_found(conn) do
     %{
       errors: [
         %Error{
@@ -13,7 +21,7 @@ defmodule Covid19QuestionnaireWeb.ErrorView do
     }
   end
 
-  def render("500.json", %{conn: conn}) do
+  defp internal_server_error(conn) do
     %{
       errors: [
         %Error{

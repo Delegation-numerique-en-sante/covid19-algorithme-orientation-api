@@ -7,13 +7,6 @@
 # General application configuration
 use Mix.Config
 
-# Configure the app
-config :covid19_questionnaire,
-  documentation_url:
-    "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation",
-  issue_url:
-    "please open an issue https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-api/issues/new"
-
 # Configures the endpoint
 config :covid19_questionnaire, Covid19QuestionnaireWeb.Endpoint,
   url: [host: "localhost"],
