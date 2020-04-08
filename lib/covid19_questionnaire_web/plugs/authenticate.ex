@@ -8,13 +8,14 @@ defmodule Covid19QuestionnaireWeb.Plugs.Authenticate do
   alias Covid19Questionnaire.Data.Token
 
   rule "authenticate", conn do
-    conn
-    |> get_req_header("x-token")
-    |> hd
-    |> Token.find()
-    |> case do
-      nil -> block(true)
-      token -> allow(token)
+    token =
+      conn
+      |> get_req_header("x-token")
+      |> hd
+
+    case Token.decrypt(token) do
+      {:ok, start_datetime} -> allow(%{date: start_datetime, uuid: token})
+      _ -> block(true)
     end
   end
 

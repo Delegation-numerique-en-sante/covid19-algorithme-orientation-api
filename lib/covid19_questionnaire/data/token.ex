@@ -1,22 +1,32 @@
 defmodule Covid19Questionnaire.Data.Token do
   @moduledoc false
+  @endpoint Covid19QuestionnaireWeb.Endpoint
+  @max_age 3600
 
-  use Ecto.Schema
-  alias Covid19Questionnaire.Data.Repo
+  def create do
+    now = DateTime.utc_now()
+    dt = DateTime.to_unix(now, :microsecond)
 
-  @derive {Jason.Encoder, except: [:__meta__, :__struct__]}
-  @primary_key {:uuid, :binary_id, autogenerate: true}
-
-  schema "token" do
-    field(:date, :utc_datetime_usec)
+    {:ok,
+     %{
+       uuid: Phoenix.Token.encrypt(@endpoint, secret(), dt),
+       date: now
+     }}
   end
 
-  def create, do: Repo.insert(%__MODULE__{date: DateTime.utc_now()})
+  def decrypt(token) do
+    case Phoenix.Token.decrypt(@endpoint, secret(), token, max_age: @max_age) do
+      {:ok, dt} ->
+        DateTime.from_unix(dt, :microsecond)
 
-  def find(uuid) do
-    case Ecto.UUID.cast(uuid) do
-      :error -> nil
-      _ -> Repo.get(__MODULE__, uuid)
+      {:error, error} ->
+        {:error, error}
     end
+  end
+
+  defp secret do
+    :covid19_questionnaire
+    |> Application.get_env(@endpoint)
+    |> Keyword.get(:secret_key_base)
   end
 end
