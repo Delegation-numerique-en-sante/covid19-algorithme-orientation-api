@@ -9,8 +9,8 @@ defmodule Covid19Questionnaire.Data.Store do
   @tick_interval 1000
   @chunk_size 100
 
-  def write({date, token}, questionnaire = %{metadata: metadata}) do
-    duration = DateTime.diff(date, token.date)
+  def write({date, %{date: token_date} = token}, questionnaire = %{metadata: metadata}) do
+    duration = DateTime.diff(date, token_date)
     metadata = %{metadata | date: date, duration: duration}
     questionnaire = %{questionnaire | token: token, metadata: metadata}
     data = %{data: questionnaire}
