@@ -31,16 +31,20 @@ defmodule Covid19Questionnaire.Data.Export do
                     end,
                 fn _ -> :ok end
             )
-
+        
+        target_filename = root_export <> str_date <> ".export.json"    
+        part_filename = target_filename <> ".part"
         target_stream = SFTPClient.stream_file!(
             conn,
-            root_export <> str_date <> ".export.json"    
+            part_filename
         )
 
         source_stream
         |> Stream.map(& Jason.encode!(%{date: &1.date, data: &1.data}) <> "\n")
         |> Stream.into(target_stream)
         |> Stream.run()
+
+        SFTPClient.rename(conn, part_filename, target_filename)
 
         SFTPClient.disconnect(conn)
     end
