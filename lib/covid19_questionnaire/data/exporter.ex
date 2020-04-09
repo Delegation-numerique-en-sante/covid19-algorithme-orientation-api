@@ -1,18 +1,15 @@
-defmodule Covid19Questionnaire.Data.Export do
-    alias Covid19Questionnaire.Data.{Journal, Repo}
+defmodule Covid19Questionnaire.Data.Exporter do
+    alias Covid19Questionnaire.Data.{Export, Journal, Repo}
     import Ecto.Query
 
     @chunk_size 500
 
-    def export_yesterday(nil), do: true
-    def export_yesterday(false), do: true
-    def export_yesterday("false"), do: true
-    def export_yesterday(0), do: true
-    def export_yesterday(_) do
-        Date.utc_today() |> Date.add(-1) |> export()
-    end
+    def export(nil), do: :pass
+    def export(false), do: :pass
+    def export("false"), do: :pass
+    def export(0), do: :pass
 
-    def export(date) do
+    def export(%Date{} = date) do
         str_date = Date.to_iso8601(date)
         conn = sftp_connection()
 
@@ -47,6 +44,23 @@ defmodule Covid19Questionnaire.Data.Export do
         SFTPClient.rename(conn, part_filename, target_filename)
 
         SFTPClient.disconnect(conn)
+        Repo.insert(%Export{date: date})
+    end
+
+    def export(_) do
+        min_date =
+            case Repo.aggregate(Export, :min, :date) do
+                nil ->
+                    query = from j in Journal, select: min(fragment("date(?)", j.date))
+                    Repo.one(query)
+                min -> min
+            end
+            |> Date.add(1)
+
+        max_date = Date.utc_today() |> Date.add(-1)
+
+        date_range = Date.range(min_date, max_date)
+        Enum.each(date_range, &export/1)
     end
 
     defp sftp_connection do

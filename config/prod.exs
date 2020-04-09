@@ -50,7 +50,7 @@ config :covid19_questionnaire, Covid19QuestionnaireWeb.ErrorView,
 # Configure Scheduler
 config :covid19_questionnaire, Covid19Questionnaire.Scheduler,
       jobs: [
-        {"0 4 * * *", {Covid19Questionnaire.Data.Export, :export_yesterday, [System.get_env("EXPORT_DATA")]}}, # Every day at 4am
+        {"0 4 * * *", {Covid19Questionnaire.Data.Exporter, :export, [System.get_env("EXPORT_DATA")]}}, # Every day at 4am
       ]
 
 
