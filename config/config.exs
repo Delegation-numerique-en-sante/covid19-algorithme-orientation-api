@@ -31,7 +31,7 @@ config :logger, :console,
 
 config :covid19_questionnaire, ecto_repos: [Covid19Questionnaire.Data.Repo]
 
-config :covid19_questionnaire, Covid19Questionnaire.Data.Export,
+config :covid19_questionnaire, Covid19Questionnaire.Data.Exporter,
   sftp: [
     host: "localhost",
     port: 22,
