@@ -42,6 +42,12 @@ config :cors_plug,
 config :covid19_questionnaire, Covid19QuestionnaireWeb.Plugs.Connive,
   whitelist: ["127.0.0.0/8" | System.get_env("IP_WHITELIST") |> String.split(",")]
 
+# Configure Scheduler
+config :covid19_questionnaire, Covid19Questionnaire.Scheduler,
+      jobs: [
+        {"0 4 * * *", {Covid19Questionnaire.Data.Export, :export_yesterday, [System.get_env("EXPORT_DATA")]}}, # Every day at 4am
+      ]
+
 # Do not print debug messages in production
 config :logger,
   level: :error,

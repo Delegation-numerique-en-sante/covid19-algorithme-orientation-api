@@ -31,6 +31,15 @@ config :logger, :console,
 
 config :covid19_questionnaire, ecto_repos: [Covid19Questionnaire.Data.Repo]
 
+config :covid19_questionnaire, Covid19Questionnaire.Data.Export,
+  sftp: [
+    host: "localhost",
+    port: 22,
+    user: "foo",
+    password: "pass"
+  ],
+  root_export: "/upload/"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
