@@ -16,7 +16,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Symptoms do
       fever: %Schema{type: :integer, enum: [0, 1, 999], description: "Fièvre"},
       temperature_cat: %Schema{
         type: :string,
-        enum: ["inf_35.5", "35.5-37.7", "37.7-38.9", "sup_39", "NSP"],
+        enum: ["inf_35.5", "35.5-37.7", "37.8-38.9", "sup_39", "NSP"],
         description: "Catégorie de température"
       },
       agueusia_anosmia: %Schema{type: :boolean, description: "Perte de goût et d’odorat"},
