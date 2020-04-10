@@ -445,7 +445,7 @@
             "enum": [
               "inf_35.5",
               "35.5-37.7",
-              "37.7-38.9",
+              "37.8-38.9",
               "sup_39",
               "NSP"
             ],
@@ -507,7 +507,7 @@
   },
   "info": {
     "title": "API d'orientation COVID19",
-    "version": "2020-04-04"
+    "version": "2020-04-06"
   },
   "openapi": "3.0.0",
   "paths": {
