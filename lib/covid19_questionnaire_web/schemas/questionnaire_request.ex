@@ -29,7 +29,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
         },
         "symptoms" => %{
           "sore_throat_aches" => true,
-          "fever" => 999,
           "temperature_cat" => "35.5-37.7",
           "agueusia_anosmia" => true,
           "breathlessness" => true,

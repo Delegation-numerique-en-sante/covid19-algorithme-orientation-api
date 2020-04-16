@@ -12,7 +12,7 @@ defmodule Covid19QuestionnaireWeb.ApiSpec do
     %OpenApi{
       info: %Info{
         title: "API d'orientation COVID19",
-        version: "2020-04-06"
+        version: "2020-04-16"
       },
       paths: Paths.from_router(Router),
       servers: [Server.from_endpoint(Endpoint)]
