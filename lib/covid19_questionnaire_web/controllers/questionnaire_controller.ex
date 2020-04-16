@@ -1,6 +1,7 @@
 defmodule Covid19QuestionnaireWeb.QuestionnaireController do
   use Covid19QuestionnaireWeb, :controller
   alias Covid19Questionnaire.Data.Store
+  alias Covid19QuestionnaireWeb.ErrorView
   alias Covid19QuestionnaireWeb.Operations.{CreateQuestionnaire, ValidateQuestionnaire}
   alias Covid19QuestionnaireWeb.Plugs.{Authenticate, Authorize}
   alias Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest
@@ -10,7 +11,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController do
 
   plug Authorize
   plug Authenticate
-  plug CastAndValidate
+  plug CastAndValidate, render_error: ErrorView
 
   def create(conn = %{body_params: %QuestionnaireRequest{questionnaire: params}}, _params) do
     with date <- DateTime.utc_now(),

@@ -13,6 +13,14 @@ config :covid19_questionnaire, Covid19QuestionnaireWeb.Endpoint,
   secret_key_base: "v0VEXqMoyB/o5vDkIEXW1/bPRK1DYFCtx7n15FHTpHn2P2CB6poIHmoNugyH9X3e",
   render_errors: [view: Covid19QuestionnaireWeb.ErrorView, accepts: ~w(json)]
 
+# Configure Errors
+config :covid19_questionnaire, Covid19QuestionnaireWeb.ErrorView,
+  doc_url: "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation",
+  issue_url:
+    "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-api/issues/new",
+  schema_url:
+    "https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-schema-donnees"
+
 # Use Poison for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

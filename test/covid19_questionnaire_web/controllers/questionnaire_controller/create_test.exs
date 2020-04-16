@@ -81,6 +81,6 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
       |> response(422)
       |> Jason.decode!()
 
-    assert %{"errors" => [%{"title" => "Invalid value"}]} = body
+    assert %{"errors" => [%{"title" => "Unprocessable Entity"}]} = body
   end
 end
