@@ -495,7 +495,7 @@
   },
   "info": {
     "title": "API d'orientation COVID19",
-    "version": "2020-04-16"
+    "version": "2020-04-17"
   },
   "openapi": "3.0.0",
   "paths": {
