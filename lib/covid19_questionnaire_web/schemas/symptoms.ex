@@ -13,7 +13,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.Symptoms do
     type: :object,
     properties: %{
       sore_throat_aches: %Schema{type: :boolean, description: "Mal de gorge ou douleurs"},
-      fever: %Schema{type: :integer, enum: [0, 1, 999], description: "Fièvre"},
       temperature_cat: %Schema{
         type: :string,
         enum: ["inf_35.5", "35.5-37.7", "37.8-38.9", "sup_39", "NSP"],
@@ -29,7 +28,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.Symptoms do
     },
     example: %{
       "sore_throat_aches" => true,
-      "fever" => 999,
       "temperature_cat" => "35.5-37.7",
       "agueusia_anosmia" => true,
       "breathlessness" => true,

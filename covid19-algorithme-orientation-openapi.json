@@ -183,7 +183,6 @@
             "cough": true,
             "diarrhea": true,
             "feeding_day": true,
-            "fever": 999,
             "sore_throat_aches": true,
             "temperature_cat": "35.5-37.7",
             "tiredness": true,
@@ -262,7 +261,6 @@
               "cough": true,
               "diarrhea": true,
               "feeding_day": true,
-              "fever": 999,
               "sore_throat_aches": true,
               "temperature_cat": "35.5-37.7",
               "tiredness": true,
@@ -400,7 +398,6 @@
           "cough": true,
           "diarrhea": true,
           "feeding_day": true,
-          "fever": 999,
           "sore_throat_aches": true,
           "temperature_cat": "35.5-37.7",
           "tiredness": true,
@@ -426,15 +423,6 @@
           "feeding_day": {
             "description": "Difficulté pour manger/boire",
             "type": "boolean"
-          },
-          "fever": {
-            "description": "Fièvre",
-            "enum": [
-              0,
-              1,
-              999
-            ],
-            "type": "integer"
           },
           "sore_throat_aches": {
             "description": "Mal de gorge ou douleurs",
@@ -507,7 +495,7 @@
   },
   "info": {
     "title": "API d'orientation COVID19",
-    "version": "2020-04-06"
+    "version": "2020-04-17"
   },
   "openapi": "3.0.0",
   "paths": {

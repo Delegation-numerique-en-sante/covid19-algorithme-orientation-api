@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: API d'orientation COVID19
-  version: '2020-04-06'
+  version: '2020-04-17'
 servers:
   - url: 'http://localhost:4000'
     variables: {}
@@ -281,7 +281,6 @@ components:
           cough: true
           diarrhea: true
           feeding_day: true
-          fever: 999
           sore_throat_aches: true
           temperature_cat: 35.5-37.7
           tiredness: true
@@ -344,7 +343,6 @@ components:
             cough: true
             diarrhea: true
             feeding_day: true
-            fever: 999
             sore_throat_aches: true
             temperature_cat: 35.5-37.7
             tiredness: true
@@ -455,7 +453,6 @@ components:
         cough: true
         diarrhea: true
         feeding_day: true
-        fever: 999
         sore_throat_aches: true
         temperature_cat: 35.5-37.7
         tiredness: true
@@ -476,13 +473,6 @@ components:
         feeding_day:
           description: Difficulté pour manger/boire
           type: boolean
-        fever:
-          description: Fièvre
-          enum:
-            - 0
-            - 1
-            - 999
-          type: integer
         sore_throat_aches:
           description: Mal de gorge ou douleurs
           type: boolean
