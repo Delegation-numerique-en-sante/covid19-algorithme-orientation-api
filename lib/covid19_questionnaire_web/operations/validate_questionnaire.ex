@@ -11,7 +11,7 @@ defmodule Covid19QuestionnaireWeb.Operations.ValidateQuestionnaire do
   @spec call(questionnaire) :: boolean
 
   def call(questionnaire = %Questionnaire{metadata: %{orientation: orientation}}) do
-    case Codes.orientation_moins_de_15_ans() do
+    case Codes.less_15() do
       ^orientation -> {:error, :age_less_15}
       _ -> {:ok, questionnaire}
     end
