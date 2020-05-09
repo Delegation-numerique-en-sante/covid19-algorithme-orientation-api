@@ -7,14 +7,14 @@ defmodule Covid19Questionnaire.Tests.Codes do
   @type code :: String.t()
 
   @codes [
-    :orientation_moins_de_15_ans,
-    :orientation_domicile_surveillance_1,
-    :orientation_consultation_surveillance_1,
-    :orientation_consultation_surveillance_2,
-    :orientation_SAMU,
-    :orientation_consultation_surveillance_3,
-    :orientation_consultation_surveillance_4,
-    :orientation_surveillance
+    :less_15,
+    :home_surveillance,
+    :consultation_surveillance_1,
+    :consultation_surveillance_2,
+    :SAMU,
+    :consultation_surveillance_3,
+    :consultation_surveillance_4,
+    :surveillance
   ]
 
   @codes

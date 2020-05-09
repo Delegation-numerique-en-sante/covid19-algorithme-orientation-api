@@ -52,7 +52,7 @@ defmodule Covid19QuestionnaireWeb.QuestionnaireController.CreateQuestionnaire do
       Kernel.put_in(
         request,
         ["questionnaire", "metadata", "orientation"],
-        "orientation_moins_de_15_ans"
+        "less_15"
       )
 
     {:ok, token} = Token.create()

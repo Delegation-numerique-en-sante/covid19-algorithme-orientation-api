@@ -16,7 +16,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Token do
     },
     example: %{
       "uuid" => "c9e77845-83cf-4891-88d6-804d659e81c5",
-      "date" => "2020-04-04T13:24:44.389249Z"
+      "date" => "2020-04-29T13:24:44.389249Z"
     }
   })
 end
