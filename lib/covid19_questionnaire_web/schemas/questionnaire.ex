@@ -41,7 +41,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "orientation" => "SAMU"
       },
       "respondent" => %{
-        "age_range" => "sup_70",
+        "age_range" => "sup_65",
         "imc" => 21.9,
         "postal_code" => "75000"
       },

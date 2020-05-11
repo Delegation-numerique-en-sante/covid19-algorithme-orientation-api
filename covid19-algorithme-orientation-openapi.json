@@ -162,7 +162,7 @@
             "orientation": "SAMU"
           },
           "respondent": {
-            "age_range": "sup_70",
+            "age_range": "sup_65",
             "imc": 21.9,
             "postal_code": "75000"
           },
@@ -240,7 +240,7 @@
               "orientation": "SAMU"
             },
             "respondent": {
-              "age_range": "sup_70",
+              "age_range": "sup_65",
               "imc": 21.9,
               "postal_code": "75000"
             },
@@ -287,7 +287,7 @@
       "Respondent": {
         "description": "[Caractéristiques du respondent](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)",
         "example": {
-          "age_range": "sup_70",
+          "age_range": "sup_65",
           "imc": 21.9,
           "postal_code": "75000"
         },
@@ -297,8 +297,8 @@
             "enum": [
               "inf_15",
               "from_15_to_49",
-              "from_50_to_69",
-              "sup_70"
+              "from_50_to_64",
+              "sup_65"
             ],
             "type": "string"
           },
