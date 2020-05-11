@@ -34,8 +34,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.Questionnaire do
         "date" => "2020-03-29 15:20:11.875767Z"
       },
       "metadata" => %{
-        "form_version" => "2020-04-29",
-        "algo_version" => "2020-04-29",
+        "form_version" => "2020-05-10",
+        "algo_version" => "2020-05-10",
         "date" => "2020-04-29T13:24:44.389249Z",
         "duration" => 3600,
         "orientation" => "SAMU"

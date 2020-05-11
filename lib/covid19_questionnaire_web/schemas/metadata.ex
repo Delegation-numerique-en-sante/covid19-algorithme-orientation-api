@@ -28,7 +28,6 @@ defmodule Covid19QuestionnaireWeb.Schemas.Metadata do
         type: :string,
         enum: [
           "less_15",
-          "home_surveillance",
           "consultation_surveillance_1",
           "consultation_surveillance_2",
           "SAMU",
@@ -42,8 +41,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.Metadata do
     },
     required: [:form_version, :algo_version],
     example: %{
-      "form_version" => "2020-04-29",
-      "algo_version" => "2020-04-29",
+      "form_version" => "2020-05-10",
+      "algo_version" => "2020-05-10",
       "date" => "2020-04-29T13:24:44.389249Z",
       "duration" => 3600,
       "orientation" => "SAMU"

@@ -204,10 +204,10 @@ components:
         [Caractéristiques du
         questionnaire](https://docs.google.com/spreadsheets/d/1Ne7QEp_oMHRxxYhqT56AWugfTaywu-cNRZsWPrMGvkY/edit#gid=0)
       example:
-        algo_version: '2020-04-29'
+        algo_version: '2020-05-10'
         date: '2020-04-29T13:24:44.389249Z'
         duration: 3600
-        form_version: '2020-04-29'
+        form_version: '2020-05-10'
         orientation: SAMU
       properties:
         algo_version:
@@ -231,7 +231,6 @@ components:
             possibles](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e)
           enum:
             - less_15
-            - home_surveillance
             - consultation_surveillance_1
             - consultation_surveillance_2
             - SAMU
@@ -256,10 +255,10 @@ components:
           immunosuppressant_disease_algo: true
           immunosuppressant_drug_algo: true
         metadata:
-          algo_version: '2020-04-29'
+          algo_version: '2020-05-10'
           date: '2020-04-29T13:24:44.389249Z'
           duration: 3600
-          form_version: '2020-04-29'
+          form_version: '2020-05-10'
           orientation: SAMU
         respondent:
           age_range: sup_65
@@ -320,8 +319,8 @@ components:
             immunosuppressant_disease_algo: true
             immunosuppressant_drug_algo: true
           metadata:
-            algo_version: '2020-04-29'
-            form_version: '2020-04-29'
+            algo_version: '2020-05-10'
+            form_version: '2020-05-10'
             orientation: SAMU
           respondent:
             age_range: sup_65
