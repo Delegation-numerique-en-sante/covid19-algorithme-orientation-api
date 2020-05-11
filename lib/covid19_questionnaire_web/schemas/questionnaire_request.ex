@@ -18,8 +18,8 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
     example: %{
       "questionnaire" => %{
         "metadata" => %{
-          "form_version" => "2020-04-29",
-          "algo_version" => "2020-04-29",
+          "form_version" => "2020-05-10",
+          "algo_version" => "2020-05-10",
           "orientation" => "SAMU"
         },
         "respondent" => %{
