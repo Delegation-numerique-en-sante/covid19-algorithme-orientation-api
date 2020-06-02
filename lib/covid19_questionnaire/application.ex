@@ -12,7 +12,7 @@ defmodule Covid19Questionnaire.Application do
       Covid19QuestionnaireWeb.Endpoint,
       Covid19Questionnaire.Data.Repo,
       Covid19Questionnaire.Data.Store,
-      Covid19Questionnaire.Scheduler,
+      Covid19Questionnaire.Scheduler
       # Starts a worker by calling: Covid19Questionnaire.Worker.start_link(arg)
       # {Covid19Questionnaire.Worker, arg},
     ]
