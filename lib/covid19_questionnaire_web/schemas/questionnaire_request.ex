@@ -45,15 +45,13 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
           "liver_disease" => true,
           "diabetes" => true,
           "immunosuppressant_disease" => 1,
-          "immunosuppressant_drug" => 1,
-          "cancer" => true,
-          "pregnant" => 1
+          "pregnant" => 1,
+          "sickle_cell" => true
         },
         "calculations" => %{
           "fever_algo" => true,
           "heart_disease_algo" => true,
-          "immunosuppressant_disease_algo" => true,
-          "immunosuppressant_drug_algo" => true
+          "immunosuppressant_disease_algo" => true
         }
       }
     }
