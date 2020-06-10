@@ -137,7 +137,6 @@ components:
         fever_algo: true
         heart_disease_algo: true
         immunosuppressant_disease_algo: true
-        immunosuppressant_drug_algo: true
       properties:
         fever_algo:
           description: Si la personne a de la fièvre
@@ -147,9 +146,6 @@ components:
           type: boolean
         immunosuppressant_disease_algo:
           description: Maladie défenses immunitaires
-          type: boolean
-        immunosuppressant_drug_algo:
-          description: Traitement immunodépresseur
           type: boolean
       title: Calculations
       type: object
@@ -253,7 +249,6 @@ components:
           fever_algo: true
           heart_disease_algo: true
           immunosuppressant_disease_algo: true
-          immunosuppressant_drug_algo: true
         metadata:
           algo_version: '2020-05-10'
           date: '2020-04-29T13:24:44.389249Z'
@@ -270,10 +265,10 @@ components:
           diabetes: true
           heart_disease: 1
           immunosuppressant_disease: 1
-          immunosuppressant_drug: 1
           kidney_disease: true
           liver_disease: true
           pregnant: 1
+          sickle_cell: true
         symptoms:
           agueusia_anosmia: true
           breathlessness: true
@@ -317,7 +312,6 @@ components:
             fever_algo: true
             heart_disease_algo: true
             immunosuppressant_disease_algo: true
-            immunosuppressant_drug_algo: true
           metadata:
             algo_version: '2020-05-10'
             form_version: '2020-05-10'
@@ -332,10 +326,10 @@ components:
             diabetes: true
             heart_disease: 1
             immunosuppressant_disease: 1
-            immunosuppressant_drug: 1
             kidney_disease: true
             liver_disease: true
             pregnant: 1
+            sickle_cell: true
           symptoms:
             agueusia_anosmia: true
             breathlessness: true
@@ -390,11 +384,11 @@ components:
         cancer: true
         diabetes: true
         heart_disease: 1
-        immunosuppressant_disease: 1
-        immunosuppressant_drug: 1
+        immunosuppressant_disease_algo: true
         kidney_disease: true
         liver_disease: true
         pregnant: 1
+        sickle_cell: true
       properties:
         breathing_disease:
           description: Maladie respiratoire
@@ -419,13 +413,6 @@ components:
             - 1
             - 999
           type: integer
-        immunosuppressant_drug:
-          description: Traitement immunodépresseur
-          enum:
-            - 0
-            - 1
-            - 999
-          type: integer
         kidney_disease:
           description: Insuffisance rénale
           type: boolean
@@ -439,6 +426,9 @@ components:
             - 1
             - 888
           type: integer
+        sickle_cell:
+          description: Drépanocytose homozygote
+          type: boolean
       title: RiskFactors
       type: object
       x-struct: Elixir.Covid19QuestionnaireWeb.Schemas.RiskFactors

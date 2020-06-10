@@ -17,17 +17,12 @@ defmodule Covid19QuestionnaireWeb.Schemas.Calculations do
       immunosuppressant_disease_algo: %Schema{
         type: :boolean,
         description: "Maladie défenses immunitaires"
-      },
-      immunosuppressant_drug_algo: %Schema{
-        type: :boolean,
-        description: "Traitement immunodépresseur"
       }
     },
     example: %{
       "fever_algo" => true,
       "heart_disease_algo" => true,
-      "immunosuppressant_disease_algo" => true,
-      "immunosuppressant_drug_algo" => true
+      "immunosuppressant_disease_algo" => true
     }
   })
 end

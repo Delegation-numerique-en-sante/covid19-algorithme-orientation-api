@@ -7,8 +7,7 @@
         "example": {
           "fever_algo": true,
           "heart_disease_algo": true,
-          "immunosuppressant_disease_algo": true,
-          "immunosuppressant_drug_algo": true
+          "immunosuppressant_disease_algo": true
         },
         "properties": {
           "fever_algo": {
@@ -21,10 +20,6 @@
           },
           "immunosuppressant_disease_algo": {
             "description": "Maladie défenses immunitaires",
-            "type": "boolean"
-          },
-          "immunosuppressant_drug_algo": {
-            "description": "Traitement immunodépresseur",
             "type": "boolean"
           }
         },
@@ -150,8 +145,7 @@
           "calculations": {
             "fever_algo": true,
             "heart_disease_algo": true,
-            "immunosuppressant_disease_algo": true,
-            "immunosuppressant_drug_algo": true
+            "immunosuppressant_disease_algo": true
           },
           "metadata": {
             "algo_version": "2020-05-10",
@@ -171,10 +165,10 @@
             "diabetes": true,
             "heart_disease": 1,
             "immunosuppressant_disease": 1,
-            "immunosuppressant_drug": 1,
             "kidney_disease": true,
             "liver_disease": true,
-            "pregnant": 1
+            "pregnant": 1,
+            "sickle_cell": true
           },
           "symptoms": {
             "agueusia_anosmia": true,
@@ -230,8 +224,7 @@
             "calculations": {
               "fever_algo": true,
               "heart_disease_algo": true,
-              "immunosuppressant_disease_algo": true,
-              "immunosuppressant_drug_algo": true
+              "immunosuppressant_disease_algo": true
             },
             "metadata": {
               "algo_version": "2020-05-10",
@@ -249,10 +242,10 @@
               "diabetes": true,
               "heart_disease": 1,
               "immunosuppressant_disease": 1,
-              "immunosuppressant_drug": 1,
               "kidney_disease": true,
               "liver_disease": true,
-              "pregnant": 1
+              "pregnant": 1,
+              "sickle_cell": true
             },
             "symptoms": {
               "agueusia_anosmia": true,
@@ -321,11 +314,11 @@
           "cancer": true,
           "diabetes": true,
           "heart_disease": 1,
-          "immunosuppressant_disease": 1,
-          "immunosuppressant_drug": 1,
+          "immunosuppressant_disease_algo": true,
           "kidney_disease": true,
           "liver_disease": true,
-          "pregnant": 1
+          "pregnant": 1,
+          "sickle_cell": true
         },
         "properties": {
           "breathing_disease": {
@@ -358,15 +351,6 @@
             ],
             "type": "integer"
           },
-          "immunosuppressant_drug": {
-            "description": "Traitement immunodépresseur",
-            "enum": [
-              0,
-              1,
-              999
-            ],
-            "type": "integer"
-          },
           "kidney_disease": {
             "description": "Insuffisance rénale",
             "type": "boolean"
@@ -383,6 +367,10 @@
               888
             ],
             "type": "integer"
+          },
+          "sickle_cell": {
+            "description": "Drépanocytose homozygote",
+            "type": "boolean"
           }
         },
         "title": "RiskFactors",

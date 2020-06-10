@@ -22,13 +22,9 @@ defmodule Covid19QuestionnaireWeb.Schemas.RiskFactors do
         enum: [0, 1, 999],
         description: "Maladie défenses immunitaires"
       },
-      immunosuppressant_drug: %Schema{
-        type: :integer,
-        enum: [0, 1, 999],
-        description: "Traitement immunodépresseur"
-      },
       cancer: %Schema{type: :boolean, description: "Cancer actuel ou < moins de 3 ans"},
-      pregnant: %Schema{type: :integer, enum: [0, 1, 888], description: "Enceinte"}
+      pregnant: %Schema{type: :integer, enum: [0, 1, 888], description: "Enceinte"},
+      sickle_cell: %Schema{type: :boolean, description: "Drépanocytose homozygote"}
     },
     example: %{
       "breathing_disease" => true,
@@ -36,10 +32,10 @@ defmodule Covid19QuestionnaireWeb.Schemas.RiskFactors do
       "kidney_disease" => true,
       "liver_disease" => true,
       "diabetes" => true,
-      "immunosuppressant_disease" => 1,
-      "immunosuppressant_drug" => 1,
+      "immunosuppressant_disease_algo" => true,
       "cancer" => true,
-      "pregnant" => 1
+      "pregnant" => 1,
+      "sickle_cell" => true
     }
   })
 end
