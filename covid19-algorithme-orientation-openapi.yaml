@@ -322,6 +322,7 @@ components:
             postal_code: '75000'
           risk_factors:
             breathing_disease: true
+            cancer: true
             diabetes: true
             heart_disease: 1
             immunosuppressant_disease: 1

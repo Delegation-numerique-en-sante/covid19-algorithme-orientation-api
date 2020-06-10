@@ -45,6 +45,7 @@ defmodule Covid19QuestionnaireWeb.Schemas.QuestionnaireRequest do
           "liver_disease" => true,
           "diabetes" => true,
           "immunosuppressant_disease" => 1,
+          "cancer" => true,
           "pregnant" => 1,
           "sickle_cell" => true
         },
