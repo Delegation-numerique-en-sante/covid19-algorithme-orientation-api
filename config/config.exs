@@ -31,6 +31,15 @@ config :logger, :console,
 
 config :covid19_questionnaire, ecto_repos: [Covid19Questionnaire.Data.Repo]
 
+config :covid19_questionnaire, Covid19Questionnaire.Data.Exporter,
+  sftp: [
+    host: System.get_env("SFTP_HOST"),
+    port: 22,
+    user: System.get_env("SFTP_USER"),
+    password: System.get_env("SFTP_PASSWORD")
+  ],
+  root_export: System.get_env("SFTP_ROOT_EXPORT")
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

@@ -12,7 +12,7 @@ config :covid19_questionnaire, Covid19Questionnaire.Data.Repo,
   port: 5432,
   username: "test",
   password: "test",
-  database: "test"
+  database: "covid19_test"
 
 # Configure Connive
 config :covid19_questionnaire, Covid19QuestionnaireWeb.Plugs.Connive, whitelist: ["127.0.0.0/8"]

@@ -46,7 +46,9 @@ defmodule Covid19Questionnaire.MixProject do
       {:plug_attack, "~> 0.3.0"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, "~> 0.15.3"},
+      {:quantum, "~> 3.0-rc"},
       {:remote_ip, "~> 0.2.0"},
+      {:sftp_client, "~> 1.4"},
       {:credo, "~> 1.3.1", only: [:dev, :test], runtime: false}
     ]
   end

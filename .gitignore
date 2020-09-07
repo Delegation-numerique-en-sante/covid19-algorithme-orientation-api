@@ -14,3 +14,7 @@ covid19_questionnaire-*.tar
 
 /node_modules/
 package*.json
+
+# Misc
+
+.env
